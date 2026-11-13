@@ -134,6 +134,7 @@
   ],
   "personalEmail": "inigo@tosstheworld.org",
   "formKey": "e93033ec23190c41b3dc78908accf9e2",
+  "formEndpoint": "https://script.google.com/macros/s/AKfycbwfpmnEVhhz5BN1elhbPfnErhZvXo6H9sA_TkFAlFRkN9eUsEAn-sjWHl6yFjDiIUo_/exec",
   "heartApps": {
     "name": "Heart Apps",
     "url": "https://heartapps.github.io/",
