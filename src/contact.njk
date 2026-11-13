@@ -22,8 +22,8 @@ description: "How to reach Inigo Papu Vinodhan: email, the department at St. Jos
     </section>
     <section class="contact-form-wrap" aria-labelledby="form-title">
       <h2 id="form-title">Send me a message</h2>
-      {#- Sent by FormSubmit (formsubmit.co) to the personal email. The first message sent asks for a one-time confirmation in that inbox. -#}
-      <form class="contact-form" action="https://formsubmit.co/{{ site.personalEmail }}" method="POST" data-ajax="https://formsubmit.co/ajax/{{ site.personalEmail }}">
+      {#- Sent by FormSubmit (formsubmit.co) to the personal email. site.formKey is FormSubmit's random alias for that address, so the address itself is not in the form. -#}
+      <form class="contact-form" action="https://formsubmit.co/{{ site.formKey }}" method="POST" data-ajax="https://formsubmit.co/ajax/{{ site.formKey }}">
         <input type="hidden" name="_subject" value="New message from inigo.co.in">
         <input type="hidden" name="_template" value="table">
         <input type="hidden" name="_next" value="{{ site.url }}/contact/thanks/">
