@@ -21,6 +21,8 @@ layout: layouts/base.njk
         {% if link %}<a class="button ghost" href="{{ link }}" rel="noopener">{{ linkLabel or "Open link" }} ↗</a>{% endif %}
       </p>
     {% endif %}
+    {% set motif = { "Articles": "book", "Resources": "notes", "Blog": "bubble" }[section.label] or "book" %}
+    <span class="head-motif">{% include "motifs/" + motif + ".svg" %}</span>
   </header>
   {% if image or figure %}
   <div class="entry-media">{% set d = { image: image, imageAlt: imageAlt, imageW: imageW, imageH: imageH, figure: figure } %}{% set decor = false %}{% include "media.njk" %}</div>
