@@ -22,12 +22,17 @@ description: "How to reach Inigo Papu Vinodhan: email, the department at St. Jos
     </section>
     <section class="contact-form-wrap" aria-labelledby="form-title">
       <h2 id="form-title">Send me a message</h2>
-      {#- Sent by FormSubmit (formsubmit.co) to the personal email. site.formKey is FormSubmit's random alias for that address, so the address itself is not in the form. -#}
+      {%- if site.formEndpoint %}
+      {#- Sent by a Google Apps Script web app running under Inigo's own Google account (source: scripts/contact-form.gs). It emails the message to him and a confirmation to the sender. -#}
+      <form class="contact-form" action="{{ site.formEndpoint }}" method="POST" data-ajax="{{ site.formEndpoint }}" data-kind="gas">
+      {%- else %}
+      {#- Fallback: FormSubmit (formsubmit.co). site.formKey is its random alias for the personal email. -#}
       <form class="contact-form" action="https://formsubmit.co/{{ site.formKey }}" method="POST" data-ajax="https://formsubmit.co/ajax/{{ site.formKey }}">
         <input type="hidden" name="_subject" value="New message from inigo.co.in">
         <input type="hidden" name="_template" value="table">
         <input type="hidden" name="_autoresponse" value="Thank you for writing to me through inigo.co.in. Your message has reached me, and I will reply to this address soon. — J. Inigo Papu Vinodhan">
         <input type="hidden" name="_next" value="{{ site.url }}/contact/thanks/">
+      {%- endif %}
         <p class="hp" aria-hidden="true"><label>Leave this empty <input type="text" name="_honey" tabindex="-1" autocomplete="off"></label></p>
         <div class="field-row">
           <p class="field">
@@ -98,7 +103,11 @@ description: "How to reach Inigo Papu Vinodhan: email, the department at St. Jos
       if (data._honey) { form.reset(); return; }
       btn.disabled = true; btn.textContent = "Sending…"; status.textContent = ""; status.className = "form-status";
       try {
-        const res = await fetch(form.dataset.ajax, { method: "POST", headers: { "Content-Type": "application/json", Accept: "application/json" }, body: JSON.stringify(data) });
+        // Apps Script takes text/plain (no CORS preflight) and answers through a redirect fetch follows.
+        const gas = form.dataset.kind === "gas";
+        const res = await fetch(form.dataset.ajax, gas
+          ? { method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify({ ...data, _ajax: "1" }) }
+          : { method: "POST", headers: { "Content-Type": "application/json", Accept: "application/json" }, body: JSON.stringify(data) });
         const out = await res.json().catch(() => ({}));
         if (res.ok && String(out.success) === "true") {
           form.innerHTML = `<div class="form-done" tabindex="-1"><p class="form-done-title">Thank you, your message is on its way.</p><p>I'll write back to ${data.email.replace(/[<>&"]/g, "")}.</p></div>`;
