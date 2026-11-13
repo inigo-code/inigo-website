@@ -1,0 +1,111 @@
+---
+layout: layouts/base.njk
+title: Resources
+permalink: /resources/
+description: "Study notes, diagrams and a free network-analysis web app for B.B.A. students, from the papers Inigo Papu Vinodhan teaches at St. Joseph's College."
+---
+<div class="wrap page">
+  <header class="page-head">
+    <p class="eyebrow">For students</p>
+    <h1>Resources</h1>
+    <p class="lead">Study notes with diagrams, and a free web app for network analysis, from the B.B.A. papers I teach. Use them, print them and pass them on.</p>
+  </header>
+
+  <section class="notes-section" aria-labelledby="notes-title">
+    <div class="section-head">
+      <h2 id="notes-title">Study notes</h2>
+      <p class="section-note" id="notes-count" aria-live="polite">{{ collections.resources.length }} notes, newest first</p>
+    </div>
+    {#- Area filter: shown only when scripts run (without them every note is listed). The choice is kept in ?area= -#}
+    <div class="chips note-filter" role="group" aria-label="Show notes by area">
+      <button type="button" class="chip" data-area="all" aria-pressed="true">All <span>{{ collections.resources.length }}</span></button>
+      {% for a in cv.teaching %}{% set inArea = collections.resources | byArea(a) %}<button type="button" class="chip" data-area="{{ a.id }}" data-label="{{ a.area }}" aria-pressed="false"{% if not inArea.length %} disabled{% endif %}>{{ a.area }} <span>{{ inArea.length }}</span></button>{% endfor %}
+    </div>
+    <ul class="note-grid">
+      {% for item in collections.resources %}
+        {% set c = item.data.course | course(cv.teaching) %}
+        <li class="note-card" data-area="{{ c.areaId }}">
+          <div class="note-media">{% set d = item.data %}{% set decor = true %}{% include "media.njk" %}</div>
+          <div class="note-body">
+            <p class="card-meta"><span class="tag">{{ c.title }}</span>{% if c.sem %}<span>Semester {{ c.sem }}</span>{% endif %}</p>
+            <h3><a href="{{ item.url }}">{{ item.data.title }}</a></h3>
+            {% if item.data.description %}<p>{{ item.data.description }}</p>{% endif %}
+          </div>
+        </li>
+      {% endfor %}
+    </ul>
+  </section>
+
+  {% for t in cv.tools %}
+  <section class="tool-feature" aria-labelledby="tool-{{ loop.index }}">
+    <a class="tool-shot" href="{{ t.url }}" rel="noopener" tabindex="-1" aria-hidden="true">
+      <img src="{{ t.image }}" alt="" width="{{ t.w }}" height="{{ t.h }}" loading="lazy" decoding="async">
+    </a>
+    <div class="tool-text">
+      <p class="kicker">Free web app</p>
+      <h2 id="tool-{{ loop.index }}">{{ t.title }}</h2>
+      <p>{{ t.text }}</p>
+      <p class="actions">
+        <a class="button" href="{{ t.url }}" rel="noopener">Open the app ↗</a>
+        {% if t.source %}<a class="button ghost" href="{{ t.source }}" rel="noopener">Source code ↗</a>{% endif %}
+      </p>
+    </div>
+  </section>
+  {% endfor %}
+
+  <section class="syllabus" aria-labelledby="syllabus-title">
+    <div class="section-head">
+      <h2 id="syllabus-title">Papers I teach</h2>
+      <p class="section-note">{{ cv.teaching | courseCount }} B.B.A. papers in five areas</p>
+    </div>
+    <div class="area-grid">
+      {% for a in cv.teaching %}
+        <section class="area" id="{{ a.id }}" aria-labelledby="area-{{ a.id }}">
+          <h3 id="area-{{ a.id }}">{{ a.area }}</h3>
+          <ul class="area-courses">
+            {% for c in a.courses %}
+              {% set notes = collections.resources | byCourse(c.slug) %}
+              <li{% if notes.length %} class="has-notes"{% endif %}>
+                <span class="area-course">{{ c.title }}</span>
+                <span class="area-sem">Sem {{ c.sem }}</span>
+                {% for n in notes %}<a class="area-note" href="{{ n.url }}">{{ n.data.title }}</a>{% endfor %}
+              </li>
+            {% endfor %}
+          </ul>
+        </section>
+      {% endfor %}
+    </div>
+  </section>
+
+  {% set other = collections.resources | otherCourses(cv.teaching) %}
+  {% if other.length %}
+    <section class="cv-section">
+      <h2>More resources</h2>
+      {% set list = other %}{% include "entry-list.njk" %}
+    </section>
+  {% endif %}
+</div>
+
+<script>
+  // Study notes: filter the cards by teaching area, and keep the choice in the address (?area=numbers).
+  (() => {
+    const chips = [...document.querySelectorAll(".note-filter .chip")];
+    const cards = [...document.querySelectorAll(".note-grid > li")];
+    const count = document.getElementById("notes-count"), all = count.textContent;
+    const show = (area, push) => {
+      const chip = chips.find((c) => c.dataset.area === area && !c.disabled) || chips[0];
+      area = chip.dataset.area;
+      chips.forEach((c) => c.setAttribute("aria-pressed", String(c === chip)));
+      let n = 0;
+      cards.forEach((li) => { li.hidden = area !== "all" && li.dataset.area !== area; if (!li.hidden) n++; });
+      count.textContent = area === "all" ? all : `${n} ${n === 1 ? "note" : "notes"} in ${chip.dataset.label.toLowerCase()}`;
+      if (push) {
+        const url = new URL(location.href);
+        if (area === "all") url.searchParams.delete("area"); else url.searchParams.set("area", area);
+        history.replaceState(history.state, "", url);
+      }
+    };
+    chips.forEach((c) => c.addEventListener("click", () => show(c.dataset.area, true)));
+    show(new URL(location.href).searchParams.get("area") || "all", false);
+  })();
+</script>

@@ -1,0 +1,52 @@
+---
+layout: layouts/base.njk
+title: In the news
+permalink: /press/
+description: "Press coverage of Inigo Papu Vinodhan and TOSS Charitable Trust, which he founded, in The Hindu, The Times of India, Indian Express and Angusam since 2013."
+---
+<div class="wrap page">
+  <header class="page-head">
+    <p class="eyebrow">Press</p>
+    <h1>In the news</h1>
+    <p class="lead">Reports on my work and on TOSS Charitable Trust, the organisation I founded in 2009, from The Hindu, The Times of India, Indian Express and Angusam. Online reports link to the original; printed clippings open full size.</p>
+  </header>
+
+  <div class="section-head"><h2>Online</h2><p class="section-note">Newest first</p></div>
+  <ul class="clippings clippings-all">
+    {% for c in coverage.items %}{% include "clipping.njk" %}{% endfor %}
+  </ul>
+
+  {% if coverage.scans.length %}
+  <section class="scans" aria-labelledby="scans-title">
+    <div class="section-head">
+      <h2 id="scans-title">In print</h2>
+      <p class="section-note">Clippings from the printed papers</p>
+    </div>
+    <ul class="scan-grid">
+      {% for s in coverage.scans %}
+        <li class="scan{% if s.namesInigo %} names{% endif %}">
+          <a class="scan-img" href="{{ s.image }}" aria-label="Open the clipping full size">
+            <img src="{{ s.image }}" alt="{{ s.alt }}" width="{{ s.w }}" height="{{ s.h }}" loading="lazy" decoding="async">
+          </a>
+          <div class="scan-text">
+            <p class="clip-top"><span class="masthead">{{ s.outlet }}</span><time datetime="{{ s.date }}">{{ s.when }}</time></p>
+            <h3 lang="{{ s.lang }}">{{ s.headline }}</h3>
+            {% if s.english %}<p class="scan-english">{{ s.english }}</p>{% endif %}
+            <p class="clip-summary">{{ s.summary }}</p>
+            {% if s.namesInigo %}<p class="clip-foot"><span class="clip-flag">Names me</span></p>{% endif %}
+          </div>
+        </li>
+      {% endfor %}
+    </ul>
+  </section>
+  {% endif %}
+
+  <section class="cv-section">
+    <h2>Media contacts</h2>
+    <dl class="facts">
+      <div><dt>Email</dt><dd><a href="mailto:{{ site.personalEmail }}">{{ site.personalEmail }}</a></dd></div>
+      {% if site.email %}<div><dt>College email</dt><dd><a href="mailto:{{ site.email }}">{{ site.email }}</a></dd></div>{% endif %}
+      <div><dt>TOSS Charitable Trust</dt><dd><a href="mailto:team@tosstheworld.org">team@tosstheworld.org</a></dd></div>
+    </dl>
+  </section>
+</div>

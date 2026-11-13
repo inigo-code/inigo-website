@@ -1,0 +1,49 @@
+---
+layout: layouts/base.njk
+title: Articles
+permalink: /articles/
+description: "Essays on management, work and organisations by Inigo Papu Vinodhan, followed by his published research."
+---
+<div class="wrap page">
+  <header class="page-head">
+    <p class="eyebrow">Writing</p>
+    <h1>Articles</h1>
+    <p class="lead">Essays on management, work and running organisations, then my published research with links to read it.</p>
+  </header>
+
+  {% set lead = collections.articles | first %}
+  {% if lead %}
+  <article class="article-lead">
+    <div class="article-media">{% set d = lead.data %}{% set decor = true %}{% include "media.njk" %}</div>
+    <div class="article-lead-text">
+      <p class="card-meta"><time datetime="{{ lead.date | isoDate }}">{{ lead.date | readableDate }}</time><span>{{ lead.content | readingTime }} min read</span></p>
+      <h2><a href="{{ lead.url }}">{{ lead.data.title }}</a></h2>
+      <p>{{ lead.data.description }}</p>
+      <span class="feature-arrow" aria-hidden="true">→</span>
+    </div>
+  </article>
+  {% endif %}
+
+  {% set rest = collections.articles.slice(1) %}
+  {% if rest.length %}
+  <h2 class="sr-only">More articles</h2>
+  <ul class="article-grid">
+    {% for item in rest %}
+      <li class="article-card">
+        <div class="article-media">{% set d = item.data %}{% set decor = true %}{% include "media.njk" %}</div>
+        <p class="card-meta"><time datetime="{{ item.date | isoDate }}">{{ item.date | readableDate }}</time><span>{{ item.content | readingTime }} min read</span></p>
+        <h3><a href="{{ item.url }}">{{ item.data.title }}</a></h3>
+        <p>{{ item.data.description }}</p>
+      </li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+
+  <section class="pubs" aria-labelledby="pubs-title">
+    <div class="section-head">
+      <h2 id="pubs-title">Published research</h2>
+      <a class="more" href="/cv/#publications">Full citations →</a>
+    </div>
+    {% set pubs = cv.publications %}{% include "publication-list.njk" %}
+  </section>
+</div>

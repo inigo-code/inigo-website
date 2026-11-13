@@ -1,0 +1,25 @@
+<svg class="fig" viewBox="0 0 800 500" role="img" aria-label="Karasek's demand–control model as a two-by-two grid. Low demands with high control is a low-strain job; high demands with high control is an active job; low demands with low control is a passive job; high demands with low control is a high-strain job.">
+  <rect class="f-bg" width="800" height="500"/>
+  <rect class="f-box" x="170" y="40" width="285" height="195" rx="10"/>
+  <rect class="f-box" x="470" y="40" width="290" height="195" rx="10"/>
+  <rect class="f-box" x="170" y="250" width="285" height="195" rx="10"/>
+  <rect class="f-acc" x="470" y="250" width="290" height="195" rx="10"/>
+  <g class="f-big" text-anchor="middle">
+    <text x="312" y="148">Low strain</text>
+    <text x="615" y="132">Active</text>
+    <text x="312" y="358">Passive</text>
+    <text x="615" y="342">High strain</text>
+  </g>
+  <g class="f-small" text-anchor="middle">
+    <text x="615" y="170">room to learn</text>
+    <text x="615" y="380">heavy load, little say</text>
+  </g>
+  <g class="f-text" text-anchor="middle">
+    <text x="312" y="482">Low demands</text>
+    <text x="615" y="482">High demands</text>
+  </g>
+  <g class="f-text" text-anchor="end">
+    <text x="150" y="132">High</text><text x="150" y="160">control</text>
+    <text x="150" y="342">Low</text><text x="150" y="370">control</text>
+  </g>
+</svg>

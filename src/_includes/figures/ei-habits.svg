@@ -1,0 +1,18 @@
+<svg class="fig" viewBox="0 0 800 500" role="img" aria-label="Five habits for first-time managers, each matched to a component of emotional intelligence: name the feeling, self-awareness; wait before sending, self-regulation; connect the task to a reason, motivation; listen to understand, empathy; credit in public, social skill.">
+  <rect class="f-bg" width="800" height="500"/>
+  <g class="f-num"><text x="40" y="104">1</text><text x="40" y="190">2</text><text x="40" y="276">3</text><text x="40" y="362">4</text><text x="40" y="448">5</text></g>
+  <g class="f-big">
+    <text x="90" y="104">Name the feeling</text>
+    <text x="90" y="190">Wait before sending</text>
+    <text x="90" y="276">Give the reason</text>
+    <text x="90" y="362">Listen to understand</text>
+    <text x="90" y="448">Credit in public</text>
+  </g>
+  <g class="f-rule"><line x1="40" y1="137" x2="760" y2="137"/><line x1="40" y1="223" x2="760" y2="223"/><line x1="40" y1="309" x2="760" y2="309"/><line x1="40" y1="395" x2="760" y2="395"/></g>
+  <g class="f-acc">
+    <rect x="540" y="74" width="220" height="42" rx="21"/><rect x="540" y="160" width="220" height="42" rx="21"/><rect x="540" y="246" width="220" height="42" rx="21"/><rect x="540" y="332" width="220" height="42" rx="21"/><rect x="540" y="418" width="220" height="42" rx="21"/>
+  </g>
+  <g class="f-text f-on-acc" text-anchor="middle">
+    <text x="650" y="102">Self-awareness</text><text x="650" y="188">Self-regulation</text><text x="650" y="274">Motivation</text><text x="650" y="360">Empathy</text><text x="650" y="446">Social skill</text>
+  </g>
+</svg>

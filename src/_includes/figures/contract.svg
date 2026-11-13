@@ -1,0 +1,19 @@
+<svg class="fig" viewBox="0 0 800 500" role="img" aria-label="An agreement plus enforceability by law makes a contract. The essentials of a valid contract under the Indian Contract Act, 1872: offer and acceptance, intention to be legally bound, lawful consideration, capacity of parties, free consent, lawful object, not expressly declared void, certainty and possibility, and legal formalities.">
+  <rect class="f-bg" width="800" height="500"/>
+  <g class="f-big"><text x="40" y="92">Agreement</text><text x="226" y="92">+</text><text x="258" y="92">Enforceability</text><text x="532" y="92">=</text></g>
+  <rect class="f-acc" x="572" y="48" width="188" height="62" rx="10"/>
+  <text class="f-big f-on-acc" x="666" y="92" text-anchor="middle">Contract</text>
+  <text class="f-small" x="40" y="146">Indian Contract Act, 1872, sections 2(h) and 10</text>
+  <g class="f-rule"><line x1="40" y1="172" x2="760" y2="172"/></g>
+  <g class="f-acc">
+    <rect x="40" y="208" width="14" height="14"/><rect x="40" y="258" width="14" height="14"/><rect x="40" y="308" width="14" height="14"/><rect x="40" y="358" width="14" height="14"/><rect x="40" y="408" width="14" height="14"/>
+    <rect x="420" y="208" width="14" height="14"/><rect x="420" y="258" width="14" height="14"/><rect x="420" y="308" width="14" height="14"/><rect x="420" y="358" width="14" height="14"/>
+  </g>
+  <g class="f-text">
+    <text x="68" y="222">Offer and acceptance</text><text x="448" y="222">Lawful object</text>
+    <text x="68" y="272">Intention to be bound</text><text x="448" y="272">Not declared void</text>
+    <text x="68" y="322">Lawful consideration</text><text x="448" y="322">Certain and possible</text>
+    <text x="68" y="372">Capacity of parties</text><text x="448" y="372">Legal formalities</text>
+    <text x="68" y="422">Free consent</text>
+  </g>
+</svg>

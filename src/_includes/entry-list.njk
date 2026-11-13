@@ -1,0 +1,11 @@
+<ul class="entry-list">
+  {% for item in list %}
+    <li>
+      <time datetime="{{ item.date | isoDate }}">{{ item.date | readableDate }}</time>
+      <a href="{{ item.url }}">{{ item.data.title }}</a>
+      {% if item.data.description %}<p>{{ item.data.description }}</p>{% endif %}
+    </li>
+  {% else %}
+    <li class="empty">Nothing here yet.</li>
+  {% endfor %}
+</ul>

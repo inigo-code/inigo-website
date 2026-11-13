@@ -1,0 +1,182 @@
+---
+layout: layouts/base.njk
+---
+{% from "icons.njk" import icon %}
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div class="hero-text">
+      <p class="hero-eyebrow">{{ site.role }} of {{ site.subject }}, St. Joseph's College</p>
+      <h1 class="hero-name"><span>Inigo Papu</span> <span class="hl">Vinodhan</span></h1>
+      <p class="hero-lead">I teach management, research how work shapes people, and founded <a href="/community/">TOSS Charitable Trust</a>, a youth-led organisation that has served Tiruchirappalli since 2009.</p>
+      <p class="actions">
+        <a class="button" href="/about/">Read my story</a>
+        <a class="button ghost" href="/resources/">Student resources</a>
+      </p>
+    </div>
+    <div class="hero-portrait">
+      <img src="{{ site.photo }}" alt="{{ site.photoAlt }}" width="720" height="900" fetchpriority="high">
+      <svg class="seal" viewBox="0 0 120 120" aria-hidden="true">
+        <defs><path id="seal-path" d="M60 60 m-46 0 a46 46 0 1 1 92 0 a46 46 0 1 1 -92 0"/></defs>
+        <circle cx="60" cy="60" r="58"/>
+        <text><textPath href="#seal-path" textLength="286" lengthAdjust="spacing">TEACH · RESEARCH · SERVE · SINCE 2009 ·</textPath></text>
+        <path class="seal-heart" d="M60 74 C44 63 46 49 54 49 C57 49 59 51 60 53 C61 51 63 49 66 49 C74 49 76 63 60 74 Z"/>
+      </svg>
+    </div>
+  </div>
+  <div class="wrap hero-press">
+    <a href="/press/">
+      <span class="hero-press-label">In the news</span>
+      {% for o in coverage.outlets %}<span class="masthead">{{ o }}</span>{% endfor %}
+      <span class="hero-press-count">Reports from 2013 to 2026 →</span>
+    </a>
+  </div>
+</section>
+
+<section class="roles" aria-labelledby="roles-title">
+  <div class="wrap">
+    <h2 id="roles-title" class="kicker">What I do</h2>
+    <ul class="role-list">
+      {% for r in site.roles %}
+        <li>
+          <a href="{{ r.href }}">
+            <span class="role-word">{{ r.word }}</span>
+            <span class="role-text">{{ r.text }}</span>
+            <span class="role-cta">{{ r.cta }} <span aria-hidden="true">→</span></span>
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+</section>
+
+<section class="toss" aria-labelledby="toss-title">
+  <div class="wrap">
+    <div class="toss-head reveal">
+      <p class="kicker">Community</p>
+      <h2 id="toss-title">Seventeen years of <span class="hl">TOSS</span></h2>
+      <p class="toss-motto">{{ community.motto | replace(" We transform", "<br>We transform") | safe }}</p>
+    </div>
+    <div class="mosaic reveal">
+      <figure class="m-a"><img src="{{ community.photos.group.src }}" alt="{{ community.photos.group.alt }}" width="{{ community.photos.group.w }}" height="{{ community.photos.group.h }}" loading="lazy"></figure>
+      <figure class="m-b"><img src="{{ community.photos.stage.src }}" alt="{{ community.photos.stage.alt }}" width="{{ community.photos.stage.w }}" height="{{ community.photos.stage.h }}" loading="lazy"></figure>
+      <figure class="m-c"><img src="{{ community.photos.thanks.src }}" alt="{{ community.photos.thanks.alt }}" width="{{ community.photos.thanks.w }}" height="{{ community.photos.thanks.h }}" loading="lazy"></figure>
+      <div class="m-d toss-card">
+        <ul class="big-stats">
+          {% for s in community.stats %}<li><span class="big-num">{{ s.value }}</span><span>{{ s.label }}</span></li>{% endfor %}
+        </ul>
+        <a class="button dark" href="/community/">See the work</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="rail-section" aria-labelledby="rail-title">
+  <div class="wrap">
+    <h2 id="rail-title" class="rail-title">From a youth club to a trust</h2>
+    <ol class="rail">
+      {% for m in community.milestones %}
+        <li class="rail-item">
+          <span class="rail-year">{{ m.year }}</span>
+          <p>{{ m.text }}</p>
+        </li>
+      {% endfor %}
+    </ol>
+  </div>
+</section>
+
+<section class="news" aria-labelledby="news-title">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 id="news-title">In the news</h2>
+      <a class="more" href="/press/">All reports →</a>
+    </div>
+    <ul class="clippings">
+      {% for c in coverage.items %}{% if c.featured %}
+        {% include "clipping.njk" %}
+      {% endif %}{% endfor %}
+    </ul>
+  </div>
+</section>
+
+<section class="writing" aria-labelledby="writing-title">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 id="writing-title">Writing on management</h2>
+      <a class="more" href="/articles/">All articles →</a>
+    </div>
+    {% set featured = collections.articles | first %}
+    <div class="writing-grid">
+      {% if featured %}
+      <article class="feature-card">
+        <p class="card-meta"><span class="tag">Essay</span> {{ featured.content | readingTime }} min read</p>
+        <h3><a href="{{ featured.url }}">{{ featured.data.title }}</a></h3>
+        <p>{{ featured.data.description }}</p>
+        <span class="feature-arrow" aria-hidden="true">→</span>
+      </article>
+      {% endif %}
+      <ul class="entry-list">
+        {% for item in collections.articles.slice(1, 4) %}
+          <li>
+            <time datetime="{{ item.date | isoDate }}">{{ item.date | readableDate }} · {{ item.content | readingTime }} min read</time>
+            <a href="{{ item.url }}">{{ item.data.title }}</a>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="courses" aria-labelledby="courses-title">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 id="courses-title">For my students</h2>
+      <a class="more" href="/resources/">All resources →</a>
+    </div>
+    <ul class="course-rows">
+      {% for a in cv.teaching %}
+        {% set items = collections.resources | byArea(a) %}
+        <li>
+          <a href="/resources/#{{ a.id }}">
+            <span class="course-code">{{ a.courses.length }} papers</span>
+            <span class="course-title">{{ a.area }}</span>
+            <span class="course-count">{% if items.length == 1 %}1 study note{% elif items.length %}{{ items.length }} study notes{% else %}Notes coming{% endif %}</span>
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+    <div class="newest-notes">
+      <h3 class="newest-label">Newest notes</h3>
+      <ul>
+        {% for n in collections.resources | limit(3) %}{% set c = n.data.course | course(cv.teaching) %}
+          <li><a href="{{ n.url }}"><span class="nn-course">{{ c.title }}</span><span class="nn-title">{{ n.data.title }}</span></a></li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="brand" aria-labelledby="brand-title">
+  <p class="brand-giant" aria-hidden="true" translate="no">{{ site.seyalyst.name }}</p>
+  <div class="wrap brand-inner">
+    <div>
+      <h2 id="brand-title" class="kicker" translate="no">{{ site.seyalyst.name }}</h2>
+      <p class="brand-tagline">{{ site.seyalyst.tagline }}</p>
+      <p class="brand-about">{{ site.seyalyst.about }}</p>
+    </div>
+    <ul class="brand-socials">
+      {% for s in site.seyalyst.socials | filled %}
+        <li><a href="{{ s.url }}" rel="me noopener"><span class="with-icon">{{ icon(s.label) }}{{ s.label }}</span><span class="handle">{{ s.handle }}</span></a></li>
+      {% endfor %}
+    </ul>
+  </div>
+</section>
+
+<section class="closing">
+  <div class="wrap">
+    <h2>Invite me to speak, work with me on research, or volunteer with TOSS.</h2>
+    <p class="actions">
+      <a class="button" href="/contact/">Get in touch</a>
+      <a class="button ghost" href="/cv/">Read my CV</a>
+    </p>
+  </div>
+</section>

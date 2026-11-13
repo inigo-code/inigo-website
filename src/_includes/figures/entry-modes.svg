@@ -1,0 +1,28 @@
+<svg class="fig" viewBox="0 0 800 500" role="img" aria-label="Six modes of entering a foreign market compared on investment, control and risk. Exporting: low, low, low. Licensing: very low, low, low. Franchising: low, moderate, low. Contract manufacturing: low, moderate, moderate. Joint venture: moderate to high, shared, shared. Wholly owned subsidiary: high, full, high.">
+  <rect class="f-bg" width="800" height="500"/>
+  <g class="f-small f-strong" text-anchor="middle"><text x="408" y="52">Investment</text><text x="548" y="52">Control</text><text x="688" y="52">Risk</text></g>
+  <g class="f-text">
+    <text x="40" y="104">Exporting</text>
+    <text x="40" y="168">Licensing</text>
+    <text x="40" y="232">Franchising</text>
+    <text x="40" y="296">Contract</text><text x="40" y="320" class="f-small">manufacturing</text>
+    <text x="40" y="360">Joint venture</text>
+    <text x="40" y="414">Wholly owned</text><text x="40" y="440" class="f-small">subsidiary</text>
+  </g>
+  <g>
+    <rect class="f-l2" x="342" y="72" width="132" height="50" rx="8"/><rect class="f-l2" x="482" y="72" width="132" height="50" rx="8"/><rect class="f-l2" x="622" y="72" width="132" height="50" rx="8"/>
+    <rect class="f-l1" x="342" y="136" width="132" height="50" rx="8"/><rect class="f-l2" x="482" y="136" width="132" height="50" rx="8"/><rect class="f-l2" x="622" y="136" width="132" height="50" rx="8"/>
+    <rect class="f-l2" x="342" y="200" width="132" height="50" rx="8"/><rect class="f-l3" x="482" y="200" width="132" height="50" rx="8"/><rect class="f-l2" x="622" y="200" width="132" height="50" rx="8"/>
+    <rect class="f-l2" x="342" y="264" width="132" height="50" rx="8"/><rect class="f-l3" x="482" y="264" width="132" height="50" rx="8"/><rect class="f-l3" x="622" y="264" width="132" height="50" rx="8"/>
+    <rect class="f-l4" x="342" y="328" width="132" height="50" rx="8"/><rect class="f-l3" x="482" y="328" width="132" height="50" rx="8"/><rect class="f-l3" x="622" y="328" width="132" height="50" rx="8"/>
+    <rect class="f-l5" x="342" y="392" width="132" height="50" rx="8"/><rect class="f-l5" x="482" y="392" width="132" height="50" rx="8"/><rect class="f-l5" x="622" y="392" width="132" height="50" rx="8"/>
+  </g>
+  <g class="f-small f-on-acc" text-anchor="middle">
+    <text x="408" y="103">Low</text><text x="548" y="103">Low</text><text x="688" y="103">Low</text>
+    <text x="408" y="167">Very low</text><text x="548" y="167">Low</text><text x="688" y="167">Low</text>
+    <text x="408" y="231">Low</text><text x="548" y="231">Moderate</text><text x="688" y="231">Low</text>
+    <text x="408" y="295">Low</text><text x="548" y="295">Moderate</text><text x="688" y="295">Moderate</text>
+    <text x="408" y="359">Mod.–high</text><text x="548" y="359">Shared</text><text x="688" y="359">Shared</text>
+    <text x="408" y="423">High</text><text x="548" y="423">Full</text><text x="688" y="423">High</text>
+  </g>
+</svg>

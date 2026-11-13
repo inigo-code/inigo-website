@@ -1,0 +1,122 @@
+---
+layout: layouts/base.njk
+title: About
+permalink: /about/
+description: "Inigo Papu Vinodhan, engineer turned management teacher and researcher at St. Joseph's College, Tiruchirappalli, founder of TOSS Charitable Trust."
+---
+<div class="wrap page about-page">
+  <header class="about-head">
+    <div>
+      <p class="eyebrow">About me</p>
+      <h1>Teacher, researcher, and seventeen years a <span class="hl">volunteer</span>.</h1>
+      <p class="lead">{{ site.about.lead }}</p>
+      <p class="actions">
+        {% if site.cvPdf %}<a class="button" href="{{ site.cvPdf }}" download>Download CV (PDF)</a>{% endif %}
+        <a class="button ghost" href="/contact/">Get in touch</a>
+      </p>
+    </div>
+    <div class="about-photo-wrap">
+      <img class="about-photo" src="{{ site.aboutPhoto }}" alt="{{ site.photoAlt }}" width="720" height="900" fetchpriority="high">
+    </div>
+  </header>
+
+  <section class="about-trio" aria-label="What I do">
+    <ul>
+      <li><span class="trio-word">Teach</span><p>The core B.B.A. papers at St. Joseph's, from management and marketing to operations research and law.</p></li>
+      <li><span class="trio-word">Research</span><p>Occupational stress, quality of work life and green HRM, as a part-time Ph.D. scholar.</p></li>
+      <li><span class="trio-word">Serve</span><p>Founder of TOSS Charitable Trust, a youth-led trust working in Tiruchirappalli since 2009.</p></li>
+      <li><span class="trio-word">Build</span><p>Free apps for Android and Windows under the name Heart Apps.</p></li>
+    </ul>
+  </section>
+
+  <section class="about-story" aria-labelledby="story-title">
+    <h2 id="story-title">My path</h2>
+    <div class="prose">
+      {% for p in site.about.story %}<p>{{ p }}</p>{% endfor %}
+    </div>
+  </section>
+
+  <section class="about-stage" aria-labelledby="stage-title">
+    <div class="stage-side">
+      <h2 id="stage-title">On stage, recently</h2>
+      <a class="more" href="/cv/#talks">All invited lectures →</a>
+    </div>
+    <ul class="stage-talks">
+      {% for t in cv.talks %}{% if t.date %}
+        <li>
+          <div class="stage-text">
+            <p class="card-meta"><span class="tag">{{ t.role }}</span><span>{{ t.date }}</span></p>
+            <p class="what">{{ t.title }}</p>
+            <p class="where">{{ t.place }}</p>
+          </div>
+          {% if "Bishop Heber" in t.place %}
+          <ul class="stage-thumbs" aria-label="Photographs from the day">
+            {% for p in site.recentPhotos %}<li><a href="{{ p.src }}"><img src="{{ p.src }}" alt="{{ p.alt }}" width="{{ p.w }}" height="{{ p.h }}" loading="lazy" decoding="async"></a></li>{% endfor %}
+          </ul>
+          {% endif %}
+        </li>
+      {% endif %}{% endfor %}
+    </ul>
+  </section>
+
+  <section class="about-teaching" aria-labelledby="teach-title">
+    <div class="teach-side">
+      <h2 id="teach-title">How I teach</h2>
+    </div>
+    <ol class="principles">
+      {% for t in site.about.teaching %}
+        <li class="card">
+          <span class="principle-num" aria-hidden="true">{{ loop.index }}</span>
+          <h3>{{ t.title }}</h3>
+          <p>{{ t.text }}</p>
+        </li>
+      {% endfor %}
+    </ol>
+  </section>
+
+  <section class="heart-band" aria-labelledby="heart-title">
+    <div class="heart-intro">
+      <img class="heart-logo" src="{{ site.heartApps.logo }}" alt="" width="72" height="72">
+      <p class="kicker">Also by me</p>
+      <h2 id="heart-title">{{ site.heartApps.name }}</h2>
+      <p class="heart-line">{{ site.heartApps.line }}</p>
+      <p>{{ site.heartApps.text }}</p>
+      <p class="actions"><a class="button" href="{{ site.heartApps.url }}" rel="noopener">See all six apps ↗</a></p>
+    </div>
+    <ul class="heart-apps">
+      {% for a in site.heartApps.apps %}
+        <li>
+          <a href="{{ a.url }}" rel="noopener">
+            <img src="{{ a.icon }}" alt="" width="56" height="56" loading="lazy">
+            <span class="ha-text"><span class="ha-name">{{ a.name }}</span><span class="ha-tag">{{ a.tagline }}</span></span>
+            <span class="ha-platform">{{ a.platform }}</span>
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+  </section>
+
+  <section class="about-photo-row" aria-labelledby="beyond-title">
+    <figure><img src="{{ community.photos.stage.src }}" alt="{{ community.photos.stage.alt }}" width="{{ community.photos.stage.w }}" height="{{ community.photos.stage.h }}" loading="lazy"></figure>
+    <div>
+      <h2 id="beyond-title">Beyond the classroom</h2>
+      <p>{{ community.college }}</p>
+      <p class="actions"><a class="button" href="/community/">See my community work</a></p>
+    </div>
+  </section>
+
+  <section class="about-facts" aria-labelledby="facts-title">
+    <h2 id="facts-title">At a glance</h2>
+    <dl class="facts facts-grid">
+      <div><dt>Position</dt><dd>{{ site.role }}, {{ site.department }}</dd></div>
+      <div><dt>Institution</dt><dd>{{ site.institution }}, affiliated to Bharathidasan University</dd></div>
+      <div><dt>Qualifications</dt><dd>{{ site.credentials }}</dd></div>
+      <div><dt>Doctoral study</dt><dd>Ph.D. in Management Studies, part-time (ongoing)</dd></div>
+      <div><dt>Research interests</dt><dd>{{ site.researchAreas | join("; ") }}</dd></div>
+      <div><dt>Languages</dt><dd>{{ site.about.languages }}</dd></div>
+      <div><dt>Email</dt><dd><a href="mailto:{{ site.personalEmail }}">{{ site.personalEmail }}</a></dd></div>
+      <div><dt>Apps</dt><dd><a href="{{ site.heartApps.url }}" rel="noopener">heartapps.github.io</a></dd></div>
+    </dl>
+    <p class="actions"><a class="button ghost" href="/cv/">Read my full CV</a></p>
+  </section>
+</div>

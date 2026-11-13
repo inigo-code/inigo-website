@@ -1,0 +1,74 @@
+---
+layout: layouts/base.njk
+title: Community
+permalink: /community/
+description: "TOSS Charitable Trust, the youth-led organisation Inigo Papu Vinodhan founded in 2009: Talent Fest, Operation Oxygen, Clean Cauvery, libraries and more."
+image: /assets/community/talent-fest-2025-group.webp
+---
+<div class="wrap page community-page">
+  <header class="page-head">
+    <p class="eyebrow">Community · {{ community.expanded }}</p>
+    <h1>{{ community.name }}</h1>
+    <p class="lead">{{ community.intro }}</p>
+    <p class="actions">
+      <a class="button" href="{{ community.involveUrl }}" rel="noopener">Volunteer or donate ↗</a>
+      <a class="button ghost" href="{{ community.url }}" rel="noopener">Visit tosstheworld.org ↗</a>
+    </p>
+  </header>
+
+  <figure class="wide-photo"><img src="{{ community.photos.group.src }}" alt="{{ community.photos.group.alt }}" width="{{ community.photos.group.w }}" height="{{ community.photos.group.h }}" fetchpriority="high"></figure>
+
+  <ul class="big-stats big-stats-row">
+    {% for s in community.stats %}<li><span class="big-num">{{ s.value }}</span><span>{{ s.label }}</span></li>{% endfor %}
+  </ul>
+
+  <section class="campaigns">
+    <h2>What TOSS runs</h2>
+    <ul class="campaign-grid">
+      {% for c in community.campaigns %}
+        <li class="card">
+          <p class="card-meta"><span class="tag">{{ c.area }}</span></p>
+          <h3>{{ c.name }}</h3>
+          <p>{{ c.text }}</p>
+        </li>
+      {% endfor %}
+    </ul>
+  </section>
+
+  <section class="photo-pair" aria-label="Photographs">
+    <figure><img src="{{ community.photos.thanks.src }}" alt="{{ community.photos.thanks.alt }}" width="{{ community.photos.thanks.w }}" height="{{ community.photos.thanks.h }}" loading="lazy"></figure>
+    <figure><img src="{{ community.photos.trees.src }}" alt="{{ community.photos.trees.alt }}" width="{{ community.photos.trees.w }}" height="{{ community.photos.trees.h }}" loading="lazy"></figure>
+  </section>
+
+  <section class="cv-section">
+    <h2>Seventeen years</h2>
+    <ol class="timeline">
+      {% for m in community.milestones %}
+        <li><span class="when">{{ m.year }}</span><div><p>{{ m.text }}</p></div></li>
+      {% endfor %}
+    </ol>
+  </section>
+
+  <section class="cv-section">
+    <h2>In the news</h2>
+    <div>
+      <ul class="entry-list">
+        {% for c in coverage.items | limit(4) %}
+          <li>
+            <time datetime="{{ c.date }}">{{ c.outlet }} · {{ c.when }}</time>
+            <a href="{{ c.url }}" rel="noopener">{{ c.headline }}</a>
+          </li>
+        {% endfor %}
+      </ul>
+      <p class="after-list"><a class="more" href="/press/">All reports →</a></p>
+    </div>
+  </section>
+
+  <section class="cv-section">
+    <h2>In my teaching and research</h2>
+    <div class="cv-text">
+      <p>{{ community.college }}</p>
+      <p>The trust's street libraries and renovated school libraries are the subject of a paper I co-wrote for the G20 Library Summit at Pondicherry University in 2024 (see my <a href="/cv/#publications">publications</a>), and what TOSS has learned about running a volunteer organisation comes into my classes on management and entrepreneurship.</p>
+    </div>
+  </section>
+</div>

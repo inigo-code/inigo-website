@@ -1,0 +1,16 @@
+<ul class="entry-list pub-list">
+  {% for p in pubs %}
+    <li>
+      <time>{{ p.year }} · {{ p.type }}</time>
+      {% if p.url %}<a href="{{ p.url }}" rel="noopener">{{ p.title }}</a>{% else %}<span class="pub-title">{{ p.title }}</span>{% endif %}
+      <p>{{ p.venue }}</p>
+      {% if p.url or p.pdf or p.video %}
+      <p class="pub-links">
+        {% if p.url %}<a href="{{ p.url }}" rel="noopener">Read online ↗</a>{% endif %}
+        {% if p.pdf %}<a href="{{ p.pdf }}" rel="noopener">PDF ↗</a>{% endif %}
+        {% if p.video %}<a href="{{ p.video }}" rel="noopener">Watch the presentation ↗</a>{% endif %}
+      </p>
+      {% endif %}
+    </li>
+  {% endfor %}
+</ul>

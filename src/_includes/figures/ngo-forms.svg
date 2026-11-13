@@ -1,0 +1,19 @@
+<svg class="fig" viewBox="0 0 800 500" role="img" aria-label="The three legal forms for an NGO in India. A trust is set up by a trust deed, with a settlor and at least two trustees, and has the lightest compliance. A society registers under the Societies Registration Act, 1860, usually needs seven founders, is run by a governing body and has moderate compliance. A Section 8 company registers under the Companies Act, 2013, needs two directors, is run by a board and has the heaviest compliance.">
+  <rect class="f-bg" width="800" height="500"/>
+  <rect class="f-box" x="40" y="40" width="232" height="420" rx="12"/>
+  <rect class="f-box" x="284" y="40" width="232" height="420" rx="12"/>
+  <rect class="f-acc" x="528" y="40" width="232" height="420" rx="12"/>
+  <g class="f-big"><text x="64" y="102">Trust</text><text x="308" y="102">Society</text><text x="552" y="102" class="f-on-acc">Section 8</text><text x="552" y="140" class="f-on-acc">company</text></g>
+  <g class="f-small">
+    <text x="64" y="200">Trust deed</text><text x="64" y="232">Settlor, 2+ trustees</text><text x="64" y="264">Board of trustees</text>
+    <text x="308" y="200">Societies Act, 1860</text><text x="308" y="232">7 founders, usually</text><text x="308" y="264">Governing body</text>
+  </g>
+  <g class="f-small f-on-acc">
+    <text x="552" y="200">Companies Act, 2013</text><text x="552" y="232">2+ directors</text><text x="552" y="264">Board of directors</text>
+  </g>
+  <g class="f-small f-strong"><text x="64" y="390">Compliance</text><text x="308" y="390">Compliance</text></g>
+  <text class="f-small f-strong f-on-acc" x="552" y="390">Compliance</text>
+  <circle class="f-dot" cx="74" cy="420" r="10"/><circle class="f-hollow" cx="102" cy="420" r="10"/><circle class="f-hollow" cx="130" cy="420" r="10"/>
+  <circle class="f-dot" cx="318" cy="420" r="10"/><circle class="f-dot" cx="346" cy="420" r="10"/><circle class="f-hollow" cx="374" cy="420" r="10"/>
+  <circle class="f-dot-acc" cx="562" cy="420" r="10"/><circle class="f-dot-acc" cx="590" cy="420" r="10"/><circle class="f-dot-acc" cx="618" cy="420" r="10"/>
+</svg>

@@ -1,0 +1,143 @@
+{
+  "note": "Newspaper coverage found by searching Inigo's full name, TOSS and Team of Social Service on The Hindu, The Times of India, The New Indian Express, DT Next and Tamil outlets (November 2026), plus reports and clippings Inigo sent. items are online reports; scans are printed clippings. Add new ones at the top.",
+  "outlets": [
+    "The Hindu",
+    "The Times of India",
+    "Indian Express"
+  ],
+  "items": [
+    {
+      "outlet": "Angusam",
+      "date": "2026-09-24",
+      "when": "24 September 2026",
+      "headline": "Effective public speaking training camp at Bishop Heber College",
+      "summary": "A one-day public speaking camp for students by Bishop Heber College and JCI Rocktown. Inigo, as guest of honour, speaks on public speaking, leadership and communication in a career.",
+      "url": "https://angusam.com/effective-public-speaking-training-camp/",
+      "namesInigo": true,
+      "lang": "Tamil"
+    },
+    {
+      "outlet": "The Times of India",
+      "date": "2026-03",
+      "when": "March 2026",
+      "headline": "TOSS charitable trust celebrates anniversary",
+      "summary": "TOSS marks its 17th anniversary with trustees, volunteers, interns and neighbouring NGOs. K. Swathi is elected Trichy district secretary for 2026–28.",
+      "url": "https://timesofindia.indiatimes.com/city/trichy/toss-charitable-trust-celebrates-anniversary/articleshow/129786247.cms"
+    },
+    {
+      "outlet": "The Times of India",
+      "date": "2025-10",
+      "when": "October 2025",
+      "headline": "Trichy hosts talent festival for children with disabilities",
+      "summary": "A two-day TOSS talent festival for children with disabilities, with more than 700 taking part.",
+      "url": "https://timesofindia.indiatimes.com/city/trichy/trichy-hosts-talent-festival-for-children-with-disabilities/articleshow/124832993.cms",
+      "featured": true
+    },
+    {
+      "outlet": "The Times of India",
+      "date": "2024-08",
+      "when": "August 2024",
+      "headline": "300 special kids talent festival",
+      "summary": "Sports and cultural events for 300 special children at the eleventh TOSS Talent Fest in Trichy.",
+      "url": "https://timesofindia.indiatimes.com/city/trichy/300-special-kids-talent-festival/articleshow/112773156.cms"
+    },
+    {
+      "outlet": "The Hindu",
+      "date": "2019-08-15",
+      "when": "15 August 2019",
+      "headline": "300 saplings planted to mark I-Day",
+      "summary": "TOSS plants a Miyawaki forest: about 320 native saplings in 1,500 sq ft at the Golden Rock railway sewage plant, with the Railways and Bishop Heber College.",
+      "url": "https://www.thehindu.com/news/cities/Tiruchirapalli/300-saplings-planted-to-mark-i-day/article29103794.ece",
+      "featured": true
+    },
+    {
+      "outlet": "The Hindu",
+      "date": "2016-10-25",
+      "when": "25 October 2016",
+      "headline": "Meet for special students",
+      "summary": "A TOSS sports and cultural meet for special students. The report names J. Inigo Papu Vinodhan as president of TOSS.",
+      "url": "https://www.thehindu.com/news/cities/Tiruchirapalli/Meet-for-special-students/article16081231.ece",
+      "namesInigo": true,
+      "featured": true
+    },
+    {
+      "outlet": "The Hindu",
+      "date": "2014-09-14",
+      "when": "14 September 2014",
+      "headline": "TOSS gives a platform for special talent",
+      "summary": "More than 350 children from about 15 special schools take part in a two-day TOSS talent fest at Bishop Heber College.",
+      "url": "https://www.thehindu.com/news/cities/Tiruchirapalli/toss-gives-a-platform-for-special-talent/article6408152.ece"
+    },
+    {
+      "outlet": "The Hindu",
+      "date": "2014-09-01",
+      "when": "1 September 2014",
+      "headline": "TOSS launches eye donation campaign",
+      "summary": "Sixty TOSS volunteers start a door-to-door eye donation campaign across Tiruchi's residential areas with Joseph Eye Hospital.",
+      "url": "https://www.thehindu.com/news/cities/Tiruchirapalli/toss-launches-eye-donation-campaign-in-tiruchi/article6369133.ece"
+    },
+    {
+      "outlet": "The Hindu",
+      "date": "2013-08-19",
+      "when": "19 August 2013",
+      "headline": "Differently abled youth enthrall audience at Tiruchi cultural event",
+      "summary": "Youth Fest 2013, organised by TOSS at Bishop Heber College, puts differently-abled young performers on stage.",
+      "url": "https://www.thehindu.com/news/cities/Tiruchirapalli/differently-abled-youth-enthrall-audience-at-tiruchi-cultural-event/article5037967.ece"
+    }
+  ],
+  "scans": [
+    {
+      "date": "2026-10",
+      "when": "October 2026",
+      "outlet": "The Times of India",
+      "lang": "en",
+      "headline": "1,500 seed balls made with native tree seeds in Trichy",
+      "english": "",
+      "summary": "TOSS Charitable Trust, the B.B.A. department of St. Joseph's College and a residents' association make more than 1,500 seed balls from 19 native tree species at a corporation park in Subramaniyapuram.",
+      "image": "/assets/press/toi-seed-balls-2026.webp",
+      "w": 1600,
+      "h": 413,
+      "alt": "Times of India clipping headlined 1,500 seed balls made with native tree seeds in Trichy"
+    },
+    {
+      "date": "2026-10",
+      "when": "October 2026",
+      "outlet": "The Hindu",
+      "lang": "ta",
+      "headline": "திருச்சியில் 1,500 விதைப்பந்துகள் தயாரிப்பு",
+      "english": "1,500 seed balls made in Tiruchi",
+      "summary": "The same seed-ball day, reported in Tamil. It names J. Inigo Papu Vinodhan among the St. Joseph's College staff who took part with TOSS volunteers, students and residents.",
+      "image": "/assets/press/tamil-seed-balls-2026.webp",
+      "w": 736,
+      "h": 1286,
+      "alt": "Tamil newspaper clipping with a photograph of volunteers rolling seed balls in a park",
+      "namesInigo": true
+    },
+    {
+      "date": "2025-10-25",
+      "when": "25 October 2025",
+      "outlet": "The Hindu",
+      "lang": "ta",
+      "headline": "மாற்றுத்திறனாளிகளுக்கான விளையாட்டு போட்டிகள்",
+      "english": "Sports competitions for the differently-abled",
+      "summary": "More than 700 children from 30 special schools run the 100 m and the 200 m relay and throw the shot put and javelin at the Kallukuzhi railway ground, on the first day of the TOSS Talent Fest.",
+      "image": "/assets/press/tamil-sports-meet-2025.webp",
+      "w": 1200,
+      "h": 807,
+      "alt": "Newspaper clipping in Tamil with a photograph of young men sprinting on a sports ground"
+    },
+    {
+      "date": "2025-10-25",
+      "when": "25 October 2025",
+      "outlet": "Indian Express",
+      "lang": "ta",
+      "headline": "சிறப்புக் குழந்தைகளுக்கு திறன் வெளிப்பாடு போட்டிகள்",
+      "english": "Talent competitions for special children",
+      "summary": "Arts contests at Vestry School on the second day, opened by the district differently-abled welfare officer, for more than 700 children from 30 special schools.",
+      "image": "/assets/press/tamil-talent-contests-2025.webp",
+      "w": 1800,
+      "h": 492,
+      "alt": "Newspaper clipping in Tamil reporting the talent competitions"
+    }
+  ]
+}

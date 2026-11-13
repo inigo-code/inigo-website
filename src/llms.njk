@@ -1,0 +1,47 @@
+---
+permalink: /llms.txt
+eleventyExcludeFromCollections: true
+---
+# {{ site.formalName }}
+
+> {{ cv.summary }}
+
+{{ site.statement }} Research areas: {{ site.researchAreas | join("; ") }}. Languages: {{ site.about.languages }}.
+
+Preferred citation name: {{ site.formalName }} (also written Inigo Papu Vinodhan, J.). Contact: {{ site.personalEmail }}.
+
+## About and CV
+
+- [About]({{ site.url }}/about/): background, teaching approach, TOSS Charitable Trust and Heart Apps.
+- [CV]({{ site.url }}/cv/): positions, education, publications with citations, talks, training and service.
+- [Community work]({{ site.url }}/community/): TOSS Charitable Trust, founded in Tiruchirappalli on 19 March 2009.
+- [In the news]({{ site.url }}/press/): press coverage in The Hindu, The Times of India and Indian Express.
+- [Contact]({{ site.url }}/contact/)
+
+## Publications
+
+Full citations: [{{ site.url }}/cv/#publications]({{ site.url }}/cv/#publications)
+{% for p in cv.publications %}
+- {{ p.citation or (p.title + ", " + p.venue + " (" + p.year + ")") }}{% if p.url %} {{ p.url }}{% endif %}
+{%- endfor %}
+
+## Articles
+{% for e in collections.articles %}
+- [{{ e.data.title }}]({{ site.url }}{{ e.url }}): {{ e.data.description }}
+{%- endfor %}
+
+## Study notes for B.B.A. students
+{% for e in collections.resources %}{% set c = e.data.course | course(cv.teaching) %}
+- [{{ e.data.title }}]({{ site.url }}{{ e.url }}) ({{ c.title }}): {{ e.data.description }}
+{%- endfor %}
+
+## Papers taught
+{% for a in cv.teaching %}
+- {{ a.area }}: {% for c in a.courses %}{{ c.title }}{% if not loop.last %}, {% endif %}{% endfor %}
+{%- endfor %}
+
+## Optional
+
+- [Network Diagram Simulator](https://sjcbba-ns.streamlit.app/): a free web app for project network analysis (CPM, PERT, crashing, Gantt) written by Inigo.
+- [Atom feed]({{ site.url }}/feed.xml)
+- [Sitemap]({{ site.url }}/sitemap.xml)

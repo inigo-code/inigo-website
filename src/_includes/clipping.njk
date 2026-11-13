@@ -1,0 +1,6 @@
+<li class="clipping{% if c.namesInigo %} names{% endif %}">
+  <p class="clip-top"><span class="masthead">{{ c.outlet }}</span><time datetime="{{ c.date }}">{{ c.when }}</time></p>
+  <h3><a href="{{ c.url }}" rel="noopener">{{ c.headline }}</a></h3>
+  <p class="clip-summary">{{ c.summary }}</p>
+  <p class="clip-foot">{% if c.namesInigo %}<span class="clip-flag">Names me</span>{% endif %}<span class="clip-read">Read in {{ c.outlet }} ↗</span></p>
+</li>

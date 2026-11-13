@@ -1,0 +1,9 @@
+{#- A page's picture: its photograph (`image`) or its drawn figure (`figure`, a file in _includes/figures).
+    Set `decor = true` when a title right next to it already says what it is. -#}
+{%- if d.image -%}
+  <img src="{{ d.image }}" alt="{{ '' if decor else d.imageAlt }}" width="{{ d.imageW or 1280 }}" height="{{ d.imageH or 720 }}" loading="lazy" decoding="async">
+{%- elif d.figure -%}
+  {%- if decor %}<div class="fig-wrap" aria-hidden="true">{% else %}<div class="fig-wrap">{% endif -%}
+  {% include "figures/" + d.figure + ".svg" %}
+  </div>
+{%- endif -%}

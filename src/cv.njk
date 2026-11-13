@@ -1,0 +1,251 @@
+---
+layout: layouts/base.njk
+title: CV
+permalink: /cv/
+description: "CV of J. Inigo Papu Vinodhan, Assistant Professor of Business Administration, St. Joseph's College, Tiruchirappalli: publications, teaching and talks."
+---
+{% set sections = [
+  ["career", "Career"],
+  ["positions", "Positions"],
+  ["education", "Education"],
+  ["publications", "Publications"],
+  ["teaching", "Teaching"],
+  ["talks", "Invited lectures"],
+  ["service", "Responsibilities"],
+  ["development", "Training"],
+  ["memberships", "Memberships"],
+  ["community", "Community work"]
+] %}
+{% macro rows(list, limit) %}
+  <ol class="timeline{% if limit and list.length > limit %} is-collapsed{% endif %}">
+    {% for r in list %}
+      <li{% if limit and loop.index > limit %} class="extra"{% endif %}>
+        <span class="when">{{ r.years or r.year or "—" }}</span>
+        <div>
+          <p class="what">{{ r.title }}</p>
+          {% if r.place %}<p class="where">{{ r.place }}</p>{% endif %}
+          {% if r.note %}<p class="where">{{ r.note }}</p>{% endif %}
+        </div>
+      </li>
+    {% endfor %}
+  </ol>
+  {% if limit and list.length > limit %}
+    <button type="button" class="show-more" aria-expanded="false">Show all {{ list.length }}</button>
+  {% endif %}
+{% endmacro %}
+
+<div class="wrap page cv-page">
+  <header class="page-head cv-head">
+    <p class="eyebrow">Curriculum vitae</p>
+    <h1>{{ site.formalName }}</h1>
+    <p class="credentials">{{ site.credentials }}</p>
+    <p class="lead">{{ cv.summary }}</p>
+    <p class="actions">
+      {% if site.cvPdf %}<a class="button" href="{{ site.cvPdf }}" download>Download CV (PDF)</a>{% endif %}
+      <a class="button ghost" href="/contact/">Get in touch</a>
+    </p>
+  </header>
+
+  <div class="cv-layout">
+    <nav class="cv-nav" aria-label="CV sections">
+      <ol>
+        {% for s in sections %}<li><a href="#{{ s[0] }}">{{ s[1] }}</a></li>{% endfor %}
+      </ol>
+      {% if site.cvPdf %}<a class="cv-nav-pdf" href="{{ site.cvPdf }}" download>Download PDF ↓</a>{% endif %}
+    </nav>
+
+    <div class="cv-main">
+      <section class="cv-block" id="career" aria-labelledby="career-title">
+        <h2 id="career-title">Career at a glance</h2>
+        <p class="cv-hint">Select a bar for the details.</p>
+        {% set span = cv.career.to - cv.career.from + 1 %}
+        <div class="career">
+          <div class="career-scroll" tabindex="0" role="group" aria-label="Career timeline, {{ cv.career.from }} to {{ cv.career.to }}">
+            <div class="career-chart" style="--cols: {{ span }}">
+              <div class="career-years" aria-hidden="true">
+                {% for y in range(cv.career.from, cv.career.to + 1) %}<span>{{ y }}</span>{% endfor %}
+              </div>
+              {% for lane in cv.career.lanes %}
+                <div class="career-lane">
+                  <span class="lane-label">{{ lane.label }}</span>
+                  <div class="lane-track">
+                    {% for b in lane.bars %}
+                      {% set outside = (b.to - b.from == 1) and not b.mark %}
+                      <button type="button" class="bar{% if b.accent %} bar-acc{% endif %}{% if b.mark %} bar-mark{% endif %}{% if b.open %} bar-open{% endif %}{% if outside %} bar-out{% endif %}{% if b.labelLeft %} bar-left{% endif %}"{% if outside %} data-short="{{ b.short }}"{% endif %}
+                        style="grid-column: {{ b.from - cv.career.from + 1 }} / {{ b.to - cv.career.from + 1 }}; grid-row: {{ b.row or 1 }}"
+                        data-years="{{ b.years }}" data-title="{{ b.title }}" data-place="{{ b.place }}"
+                        aria-pressed="{{ 'true' if b.current else 'false' }}"
+                        aria-label="{{ b.title }}, {{ b.years }}">{% if not outside %}{{ b.short }}{% endif %}</button>
+                    {% endfor %}
+                  </div>
+                </div>
+              {% endfor %}
+            </div>
+          </div>
+          {% set now = cv.positions | first %}
+          <div class="career-detail" aria-live="polite">
+            <p class="cd-years">2020 to now</p>
+            <p class="cd-title">{{ now.title }}</p>
+            <p class="cd-place">{{ now.place }}</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="cv-block" id="positions" aria-labelledby="positions-title">
+        <h2 id="positions-title">Positions</h2>
+        {{ rows(cv.positions) }}
+      </section>
+
+      <section class="cv-block" id="education" aria-labelledby="education-title">
+        <h2 id="education-title">Education and qualifications</h2>
+        {{ rows(cv.education) }}
+      </section>
+
+      <section class="cv-block" id="publications" aria-labelledby="publications-title">
+        <h2 id="publications-title">Publications</h2>
+        <ol class="pub-cites">
+          {% for p in cv.publications %}
+            <li>
+              <p class="card-meta"><span class="tag">{{ p.type }}</span><span>{{ p.year }}</span></p>
+              <p class="citation">{{ p.citation }}</p>
+              <p class="pub-links">
+                {% if p.url %}<a href="{{ p.url }}" rel="noopener">Read online ↗</a>{% endif %}
+                {% if p.pdf %}<a href="{{ p.pdf }}" rel="noopener">PDF ↗</a>{% endif %}
+                {% if p.video %}<a href="{{ p.video }}" rel="noopener">Watch the presentation ↗</a>{% endif %}
+                <button type="button" class="copy-cite" data-copy="{{ p.citation }}">Copy citation</button>
+              </p>
+            </li>
+          {% endfor %}
+        </ol>
+        <p class="sr-only" aria-live="polite" id="copy-status"></p>
+      </section>
+
+      <section class="cv-block" id="teaching" aria-labelledby="teaching-title">
+        <h2 id="teaching-title">Teaching</h2>
+        <p class="cv-text">{{ cv.teachingNote }}</p>
+        <div class="chips" role="group" aria-label="Show papers by area">
+          <button type="button" class="chip" data-area="all" aria-pressed="true">All <span>{{ cv.teaching | courseCount }}</span></button>
+          {% for a in cv.teaching %}<button type="button" class="chip" data-area="{{ a.id }}" aria-pressed="false">{{ a.area }} <span>{{ a.courses.length }}</span></button>{% endfor %}
+        </div>
+        <ul class="course-grid">
+          {% for a in cv.teaching %}{% for c in a.courses %}
+            {% set notes = collections.resources | byCourse(c.slug) %}
+            <li data-area="{{ a.id }}">
+              <span class="cg-sem">Semester {{ c.sem }}</span>
+              <span class="cg-title">{{ c.title }}</span>
+              {% for n in notes %}<a class="cg-note" href="{{ n.url }}">Study notes</a>{% endfor %}
+            </li>
+          {% endfor %}{% endfor %}
+        </ul>
+        {% for t in cv.tools %}
+          <a class="cv-tool" href="{{ t.url }}" rel="noopener">
+            <img src="{{ t.image }}" alt="" width="{{ t.w }}" height="{{ t.h }}" loading="lazy" decoding="async">
+            <span><span class="kicker">Teaching tool I built</span><strong>{{ t.title }}</strong><span class="cv-tool-go">Open the app ↗</span></span>
+          </a>
+        {% endfor %}
+      </section>
+
+      <section class="cv-block" id="talks" aria-labelledby="talks-title">
+        <h2 id="talks-title">Invited lectures</h2>
+        <ul class="talk-cards">
+          {% for t in cv.talks %}{% if t.date %}
+            <li>
+              <p class="card-meta"><span class="tag">{{ t.role }}</span><span>{{ t.date }}</span></p>
+              <p class="what">{{ t.title }}</p>
+              <p class="where">{{ t.place }}</p>
+            </li>
+          {% endif %}{% endfor %}
+        </ul>
+        <ol class="timeline">
+          {% for t in cv.talks %}{% if not t.date %}
+            <li>
+              <span class="when">{{ t.years }}</span>
+              <div><p class="what">{{ t.title }}</p><p class="where">{{ t.role }} · {{ t.place }}</p></div>
+            </li>
+          {% endif %}{% endfor %}
+        </ol>
+      </section>
+
+      <section class="cv-block" id="service" aria-labelledby="service-title">
+        <h2 id="service-title">Responsibilities</h2>
+        {{ rows(cv.service) }}
+      </section>
+
+      <section class="cv-block" id="development" aria-labelledby="development-title">
+        <h2 id="development-title">Training and certification</h2>
+        {{ rows(cv.development, 5) }}
+      </section>
+
+      <section class="cv-block" id="memberships" aria-labelledby="memberships-title">
+        <h2 id="memberships-title">Memberships</h2>
+        {{ rows(cv.memberships) }}
+      </section>
+
+      <section class="cv-block" id="community" aria-labelledby="community-title">
+        <h2 id="community-title">Community work</h2>
+        <p class="cv-text">{{ cv.community }}</p>
+        <p class="actions"><a class="button ghost" href="/community/">About TOSS</a>{% if site.cvPdf %}<a class="button" href="{{ site.cvPdf }}" download>Download CV (PDF)</a>{% endif %}</p>
+      </section>
+    </div>
+  </div>
+</div>
+
+<script>
+  (() => {
+    // Career chart: selecting a bar shows its details underneath.
+    const bars = document.querySelectorAll(".career .bar");
+    const detail = document.querySelector(".career-detail");
+    const pick = (bar) => {
+      bars.forEach((b) => b.setAttribute("aria-pressed", String(b === bar)));
+      detail.querySelector(".cd-years").textContent = bar.dataset.years;
+      detail.querySelector(".cd-title").textContent = bar.dataset.title;
+      detail.querySelector(".cd-place").textContent = bar.dataset.place;
+    };
+    bars.forEach((b) => {
+      b.addEventListener("click", () => pick(b));
+      b.addEventListener("pointerenter", (e) => { if (e.pointerType === "mouse") pick(b); });
+    });
+
+    // Copy a citation.
+    const status = document.getElementById("copy-status");
+    document.querySelectorAll(".copy-cite").forEach((btn) => {
+      btn.addEventListener("click", async () => {
+        try { await navigator.clipboard.writeText(btn.dataset.copy); } catch { return; }
+        btn.textContent = "Copied";
+        btn.classList.add("done");
+        status.textContent = "Citation copied";
+        setTimeout(() => { btn.textContent = "Copy citation"; btn.classList.remove("done"); }, 2000);
+      });
+    });
+
+    // Teaching: show the papers of one area.
+    const chips = document.querySelectorAll(".chip");
+    const courses = document.querySelectorAll(".course-grid li");
+    chips.forEach((chip) => chip.addEventListener("click", () => {
+      chips.forEach((c) => c.setAttribute("aria-pressed", String(c === chip)));
+      courses.forEach((li) => { li.hidden = chip.dataset.area !== "all" && li.dataset.area !== chip.dataset.area; });
+    }));
+
+    // Long lists open in place.
+    document.querySelectorAll(".show-more").forEach((btn) => btn.addEventListener("click", () => {
+      const list = btn.previousElementSibling;
+      const open = list.classList.toggle("is-collapsed") === false;
+      btn.setAttribute("aria-expanded", String(open));
+      btn.textContent = open ? "Show fewer" : "Show all " + list.children.length;
+    }));
+
+    // Section links follow the reader down the page.
+    const links = new Map([...document.querySelectorAll(".cv-nav a[href^='#']")].map((a) => [a.hash.slice(1), a]));
+    if ("IntersectionObserver" in window) {
+      const spy = new IntersectionObserver((entries) => {
+        entries.forEach((en) => {
+          if (!en.isIntersecting) return;
+          links.forEach((a) => a.removeAttribute("aria-current"));
+          const a = links.get(en.target.id);
+          if (a) { a.setAttribute("aria-current", "true"); a.scrollIntoView({ block: "nearest", inline: "nearest" }); }
+        });
+      }, { rootMargin: "-20% 0px -70% 0px" });
+      document.querySelectorAll(".cv-block").forEach((s) => spy.observe(s));
+    }
+  })();
+</script>

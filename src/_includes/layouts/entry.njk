@@ -1,0 +1,78 @@
+---
+layout: layouts/base.njk
+---
+<article class="wrap entry">
+  <header class="entry-head">
+    <p class="back back-top"><a href="{{ section.url }}">← All {{ section.label | lower }}</a></p>
+    {% if course %}{% set c = course | course(cv.teaching) %}{% endif %}
+    <p class="eyebrow"><a href="{{ section.url }}">{{ section.label }}</a>{% if course %} · <a href="/resources/#{{ c.areaId }}">{{ c.title }}</a>{% endif %}</p>
+    <h1>{{ title }}</h1>
+    {% if description %}<p class="lead">{{ description }}</p>{% endif %}
+    <p class="meta">
+      <time datetime="{{ page.date | isoDate }}">{{ page.date | readableDate }}</time>
+      <span>By <a href="/about/" rel="author">{{ site.formalName }}</a></span>
+      <span>{{ content | readingTime }} min read</span>
+      {% if kind %}<span class="tag">{{ kind }}</span>{% endif %}
+      {% if published %}<span>Published in <em>{{ published }}</em></span>{% endif %}
+    </p>
+    {% if file or link %}
+      <p class="entry-actions">
+        {% if file %}<a class="button" href="{{ file }}" download>Download {{ kind or "file" }}</a>{% endif %}
+        {% if link %}<a class="button ghost" href="{{ link }}" rel="noopener">{{ linkLabel or "Open link" }} ↗</a>{% endif %}
+      </p>
+    {% endif %}
+  </header>
+  {% if image or figure %}
+  <div class="entry-media">{% set d = { image: image, imageAlt: imageAlt, imageW: imageW, imageH: imageH, figure: figure } %}{% set decor = false %}{% include "media.njk" %}</div>
+  {% endif %}
+  {% if takeaways %}
+  <aside class="takeaways" aria-labelledby="takeaways-title">
+    <h2 id="takeaways-title">{{ "In short" if section.label == "Articles" else "Key points" }}</h2>
+    <ul>{% for t in takeaways %}<li>{{ t | mdInline | safe }}</li>{% endfor %}</ul>
+  </aside>
+  {% endif %}
+  {% set sections = content | toc %}
+  {% if section.label == "Resources" and sections.length >= 4 %}
+  <nav class="toc" aria-labelledby="toc-title">
+    <details open>
+      <summary id="toc-title">On this page</summary>
+      <ol>{% for s in sections %}<li><a href="#{{ s.id }}">{{ s.text | safe }}</a></li>{% endfor %}</ol>
+    </details>
+  </nav>
+  {% endif %}
+  <div class="prose">
+    {{ content | safe }}
+  </div>
+  {% if faq %}
+  <section class="faq" aria-labelledby="faq-title">
+    <h2 id="faq-title">{{ "Questions students ask" if section.label == "Resources" else "Common questions" }}</h2>
+    {% for f in faq %}
+    <details{% if loop.first %} open{% endif %}>
+      <summary>{{ f.q }}</summary>
+      <p>{{ f.a }}</p>
+    </details>
+    {% endfor %}
+  </section>
+  {% endif %}
+  <aside class="author-box" aria-label="About the author">
+    <a class="author-photo" href="/about/" tabindex="-1" aria-hidden="true"><img src="{{ site.photo }}" alt="" width="96" height="96" loading="lazy" decoding="async"></a>
+    <div>
+      <p class="author-name"><a href="/about/" rel="author">{{ site.formalName }}</a></p>
+      <p>{{ site.role }} of {{ site.subject }} at {{ site.institution }}. {{ site.credentials }}. {% if section.label == "Resources" %}I write these notes for my B.B.A. students; you are welcome to use and share them with a link back.{% else %}I teach core B.B.A. papers and research occupational stress, quality of work life and green HRM.{% endif %}</p>
+    </div>
+  </aside>
+  {#- `related:` in front matter (a list of addresses) comes first, then the same section, same course first. -#}
+  {% set picked = collections.all | byUrls(related) %}
+  {% set more = (picked.concat((collections.resources if section.label == "Resources" else collections.articles) | related(page.url, course, 3) | without(picked))) | limit(3) %}
+  {% if more.length %}
+  <nav class="related" aria-labelledby="related-title">
+    <h2 id="related-title">Read next</h2>
+    <ul>
+      {% for r in more %}{% set rc = r.data.course | course(cv.teaching) if r.data.course else null %}
+      <li><a href="{{ r.url }}">{{ r.data.title }}</a><span>{% if rc %}{{ rc.title }}{% else %}{{ r.date | readableDate }}{% endif %}</span></li>
+      {% endfor %}
+    </ul>
+  </nav>
+  {% endif %}
+  <p class="back"><a href="{{ section.url }}">← All {{ section.label | lower }}</a></p>
+</article>

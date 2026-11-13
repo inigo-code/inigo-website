@@ -1,0 +1,21 @@
+<svg class="fig" viewBox="0 0 800 500" role="img" aria-label="Goleman's five components of emotional intelligence. Self-awareness, self-regulation and motivation are about managing yourself. Empathy and social skill are about managing relationships.">
+  <rect class="f-bg" width="800" height="500"/>
+  <rect class="f-box" x="40" y="50" width="405" height="400" rx="12"/>
+  <rect class="f-acc" x="460" y="50" width="300" height="400" rx="12"/>
+  <g class="f-text f-strong"><text x="72" y="104">Managing yourself</text><text x="490" y="104">Managing others</text></g>
+  <g class="f-rule"><line x1="72" y1="130" x2="413" y2="130"/><line x1="490" y1="130" x2="728" y2="130"/></g>
+  <g class="f-big">
+    <text x="72" y="210">Self-awareness</text>
+    <text x="72" y="300">Self-regulation</text>
+    <text x="72" y="390">Motivation</text>
+    <text x="490" y="210">Empathy</text>
+    <text x="490" y="300">Social skill</text>
+  </g>
+  <g class="f-small">
+    <text x="72" y="238">know your moods</text>
+    <text x="72" y="328">pause before acting</text>
+    <text x="72" y="418">work for its own reward</text>
+    <text x="490" y="238">read other people</text>
+    <text x="490" y="328">build relationships</text>
+  </g>
+</svg>

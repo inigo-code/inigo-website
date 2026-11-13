@@ -1,0 +1,164 @@
+---
+permalink: /cv/print/
+eleventyExcludeFromCollections: true
+---
+{#- The source of the downloadable PDF CV. Rebuild the PDF with `npm run cv-pdf` after changing cv.json or site.json. -#}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>CV · {{ site.formalName }}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@500..900&family=Red+Hat+Text:wght@400..600&display=block" rel="stylesheet">
+  <style>
+    @page { size: A4; margin: 11mm 0 10mm; }
+    @page :first { margin-top: 0; }
+    :root { --ink: #0d2a1c; --muted: #4f5d54; --line: #d9ddd5; --green: #0d2a1c; --yellow: #f6e016; --soft: #f3f3ee; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    body { font: 400 8.6pt/1.38 "Red Hat Text", sans-serif; color: var(--ink); background: #fff; width: 210mm; margin: 0 auto; }
+    a { color: inherit; text-decoration: none; }
+    h1, h2, h3, strong { font-family: "Red Hat Display", sans-serif; }
+
+    .head { background: var(--green); color: #f4f6f2; padding: 11mm 15mm 9mm; display: grid; grid-template-columns: 1fr 34mm; gap: 10mm; align-items: center; }
+    .head-kicker { font-weight: 600; font-size: 8.6pt; color: #a9b8ae; display: flex; align-items: center; gap: 2mm; }
+    .head-kicker::before { content: ""; width: 2.2mm; height: 2.2mm; border-radius: 50%; background: var(--yellow); }
+    h1 { font-size: 30pt; font-weight: 900; letter-spacing: -0.045em; line-height: .95; margin-top: 3mm; }
+    h1 span { color: var(--yellow); }
+    .head-role { margin-top: 3.5mm; font-size: 10.5pt; font-weight: 500; }
+    .head-cred { margin-top: 1mm; color: var(--yellow); font-weight: 600; font-size: 9pt; }
+    .head-contact { margin-top: 4.5mm; display: flex; flex-wrap: wrap; gap: 1mm 5mm; font-size: 8.4pt; color: #d6ded8; }
+    .head-contact b { color: #a9b8ae; font-weight: 600; margin-right: 1mm; }
+    .photo { position: relative; }
+    .photo::before { content: ""; position: absolute; inset: 2.5mm -2.5mm -2.5mm 2.5mm; background: var(--yellow); border-radius: 4mm; }
+    .photo img { position: relative; display: block; width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 4mm; background: var(--yellow); }
+
+    .summary { padding: 6mm 15mm 0; font-size: 9pt; line-height: 1.48; }
+    .cols { display: grid; grid-template-columns: minmax(0, 1fr) 60mm; gap: 9mm; padding: 5mm 15mm 0; }
+    section { margin-bottom: 5mm; }
+    h2 { font-size: 10.5pt; font-weight: 800; letter-spacing: -0.02em; display: flex; align-items: center; gap: 2.5mm; padding-bottom: 1.4mm; border-bottom: .5mm solid var(--ink); margin-bottom: 2.6mm; break-after: avoid; }
+    h2::before { content: ""; width: 3mm; height: 3mm; background: var(--yellow); border: .35mm solid var(--ink); border-radius: 50%; }
+    .row { display: grid; grid-template-columns: 17mm minmax(0, 1fr); gap: 3mm; margin-bottom: 2mm; break-inside: avoid; }
+    .side .row { grid-template-columns: 11mm minmax(0, 1fr); gap: 2mm; }
+    .yr { font-weight: 600; color: var(--muted); font-variant-numeric: tabular-nums; font-size: 8pt; padding-top: .3mm; }
+    .t { font-weight: 600; }
+    .p { color: var(--muted); font-size: 8pt; }
+    .tag { display: inline-block; font-size: 7.2pt; font-weight: 700; background: var(--yellow); padding: .5mm 1.6mm; border-radius: 3mm; margin-right: 1.5mm; vertical-align: .2mm; }
+    .cite { break-inside: avoid; margin-bottom: 2.2mm; padding-left: 3mm; border-left: .8mm solid var(--yellow); }
+    .cite .t { font-family: "Red Hat Display", sans-serif; font-weight: 700; line-height: 1.3; }
+    .cite .p a { font-weight: 600; color: var(--ink); border-bottom: .25mm solid var(--ink); }
+    .area { break-inside: avoid; margin-bottom: 2.2mm; }
+    .area strong { font-size: 8.8pt; }
+    .tool { break-inside: avoid; background: var(--soft); border-radius: 2mm; padding: 2.6mm 3mm; margin-top: 3mm; }
+    .side section { break-inside: auto; }
+    .plain { font-size: 8.2pt; }
+    .plain li { list-style: none; margin-bottom: 1.4mm; padding-left: 3mm; position: relative; break-inside: avoid; }
+    .plain li::before { content: ""; position: absolute; left: 0; top: 1.9mm; width: 1.3mm; height: 1.3mm; border-radius: 50%; background: var(--ink); }
+    .foot { margin: 2mm 15mm 0; padding-top: 3mm; border-top: .3mm solid var(--line); font-size: 7.8pt; color: var(--muted); display: flex; justify-content: space-between; }
+    @media screen { body { box-shadow: 0 0 0 1px var(--line); margin-block: 10mm; } }
+  </style>
+</head>
+<body>
+  <header class="head">
+    <div>
+      <p class="head-kicker">Curriculum vitae</p>
+      <h1>J. Inigo Papu <span>Vinodhan</span></h1>
+      <p class="head-role">{{ site.role }}, {{ site.department }}<br>{{ site.institution }}</p>
+      <p class="head-cred">{{ site.credentials }}</p>
+      <p class="head-contact">
+        <span><b>Email</b>{{ site.personalEmail }}</span>
+        {% if site.email %}<span><b>College</b>{{ site.email }}</span>{% endif %}
+        <span><b>Web</b>inigo.co.in</span>
+        <span><b>LinkedIn</b>linkedin.com/in/inigojoseph</span>
+      </p>
+    </div>
+    <div class="photo"><img src="/assets/files/inigo-print.jpg" alt=""></div>
+  </header>
+
+  <p class="summary">{{ cv.summary }}</p>
+
+  <div class="cols">
+    <div class="main">
+      <section>
+        <h2>Positions</h2>
+        {% for r in cv.positions %}<div class="row"><span class="yr">{{ r.years | replace("–present", "–now") }}</span><div><p class="t">{{ r.title }}</p><p class="p">{{ r.place }}</p></div></div>{% endfor %}
+      </section>
+
+      <section>
+        <h2>Publications</h2>
+        {% for p in cv.publications %}
+          <div class="cite">
+            <p class="t">{{ p.title }}</p>
+            <p class="p"><span class="tag">{{ p.type }}</span>{{ p.venue }}, {{ p.year }}{% if p.url %} · <a href="{{ p.url }}">Read online</a>{% endif %}</p>
+          </div>
+        {% endfor %}
+      </section>
+
+      <section>
+        <h2>Invited lectures</h2>
+        {% for t in cv.talks %}<div class="row"><span class="yr">{{ t.years }}</span><div><p class="t">{{ t.title }}</p><p class="p">{{ t.role }} · {{ t.place }}</p></div></div>{% endfor %}
+      </section>
+
+      <section>
+        <h2>Teaching</h2>
+        <p class="p" style="margin-bottom:2mm">Core B.B.A. papers I teach, by area:</p>
+        {% for a in cv.teaching %}
+          <p class="area"><strong>{{ a.area }}:</strong> {% for c in a.courses %}{{ c.title }}{% if not loop.last %}; {% endif %}{% endfor %}</p>
+        {% endfor %}
+        {% for t in cv.tools %}
+          <p class="area"><strong>Teaching tool:</strong> built the {{ t.title }}, a free web app for CPM network analysis used in Operations Research (sjcbba-ns.streamlit.app).</p>
+        {% endfor %}
+      </section>
+
+      <section>
+        <h2>Responsibilities</h2>
+        {% for r in cv.service %}<div class="row"><span class="yr">{{ r.years }}</span><div><p class="t">{{ r.title }}</p><p class="p">{{ r.place }}</p></div></div>{% endfor %}
+      </section>
+    </div>
+
+    <aside class="side">
+      <section>
+        <h2>Education</h2>
+        {% for r in cv.education %}<div class="row"><span class="yr">{{ r.years | replace("Ongoing", "Now") }}</span><div><p class="t">{{ r.title }}</p><p class="p">{{ r.place }}{% if r.note %}, {{ r.note | lower }}{% endif %}</p></div></div>{% endfor %}
+      </section>
+
+      <section>
+        <h2>Research</h2>
+        <ul class="plain">{% for a in site.researchAreas %}<li>{{ a }}</li>{% endfor %}</ul>
+      </section>
+
+      <section>
+        <h2>Training</h2>
+        {% for r in cv.development %}<div class="row"><span class="yr">{{ r.years }}</span><div><p class="t" style="font-weight:500">{{ r.title }}</p><p class="p">{{ r.place }}</p></div></div>{% endfor %}
+      </section>
+
+      <section>
+        <h2>Memberships</h2>
+        {% for r in cv.memberships %}<div class="row"><span class="yr">{{ r.years }}</span><div><p class="t">{{ r.title }}</p><p class="p">{{ r.place }}</p></div></div>{% endfor %}
+      </section>
+
+      <section>
+        <h2>Community</h2>
+        <p class="plain">Founded TOSS Charitable Trust in 2009: 150+ volunteers in three districts; the TOSS Talent Fest for differently-abled and special children, in its twelfth year; tree planting, river clean-ups and libraries.</p>
+      </section>
+
+      <section>
+        <h2>Languages</h2>
+        <p class="plain">{{ site.about.languages }}</p>
+      </section>
+
+      <section>
+        <h2>Online</h2>
+        <ul class="plain">
+          <li>heartapps.github.io</li>
+          <li>github.com/daprofezza</li>
+          <li>tosstheworld.org</li>
+        </ul>
+      </section>
+    </aside>
+  </div>
+</body>
+</html>

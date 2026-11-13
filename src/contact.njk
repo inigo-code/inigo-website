@@ -1,0 +1,118 @@
+---
+layout: layouts/base.njk
+title: Contact
+permalink: /contact/
+description: "How to reach Inigo Papu Vinodhan: email, the department at St. Joseph's College, Tiruchirappalli, and where to find him online."
+---
+<div class="wrap page">
+  <header class="page-head">
+    <p class="eyebrow">Get in touch</p>
+    <h1>Contact</h1>
+    <p class="lead">Write to my personal email for talks, research collaborations, student projects or volunteering with TOSS Charitable Trust.</p>
+  </header>
+  <div class="contact-grid">
+    <section>
+      <h2>Email and office</h2>
+      <dl class="facts">
+        <div><dt>Email</dt><dd><a href="mailto:{{ site.personalEmail }}">{{ site.personalEmail }}</a></dd></div>
+        {% if site.email %}<div><dt>College email</dt><dd><a href="mailto:{{ site.email }}">{{ site.email }}</a></dd></div>{% endif %}
+        <div><dt>Department</dt><dd>{% if site.office %}{{ site.office }}<br>{% endif %}{{ site.department }}<br>{{ site.institution }}</dd></div>
+        {% if site.officeHours %}<div><dt>Office hours</dt><dd>{{ site.officeHours }}</dd></div>{% endif %}
+      </dl>
+    </section>
+    <section class="contact-form-wrap" aria-labelledby="form-title">
+      <h2 id="form-title">Send me a message</h2>
+      {#- Sent by FormSubmit (formsubmit.co) to the personal email. The first message sent asks for a one-time confirmation in that inbox. -#}
+      <form class="contact-form" action="https://formsubmit.co/{{ site.personalEmail }}" method="POST" data-ajax="https://formsubmit.co/ajax/{{ site.personalEmail }}">
+        <input type="hidden" name="_subject" value="New message from inigo.co.in">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_next" value="{{ site.url }}/contact/thanks/">
+        <p class="hp" aria-hidden="true"><label>Leave this empty <input type="text" name="_honey" tabindex="-1" autocomplete="off"></label></p>
+        <div class="field-row">
+          <p class="field">
+            <label for="f-name">Your name</label>
+            <input id="f-name" name="name" type="text" autocomplete="name" required maxlength="120">
+          </p>
+          <p class="field">
+            <label for="f-email">Your email</label>
+            <input id="f-email" name="email" type="email" autocomplete="email" spellcheck="false" required maxlength="200" placeholder="name@example.com">
+          </p>
+        </div>
+        <p class="field">
+          <label for="f-topic">About</label>
+          <select id="f-topic" name="topic">
+            <option>An invitation to speak</option>
+            <option>Research collaboration</option>
+            <option>A student project or internship</option>
+            <option>Volunteering with TOSS</option>
+            <option>Something else</option>
+          </select>
+        </p>
+        <p class="field">
+          <label for="f-message">Message</label>
+          <textarea id="f-message" name="message" rows="6" required maxlength="5000"></textarea>
+        </p>
+        <p class="form-foot">
+          <button class="button" type="submit">Send message</button>
+          <span class="form-status" role="status" aria-live="polite"></span>
+        </p>
+      </form>
+    </section>
+  </div>
+
+  <section class="contact-map" aria-labelledby="map-title">
+    <div class="map-text">
+      <h2 id="map-title">Find the college</h2>
+      <p>{{ site.department }}, {{ site.institution }}, near Teppakulam in central Tiruchirappalli.</p>
+      <p class="actions">
+        <a class="button" href="https://www.google.com/maps/search/?api=1&query=St.+Joseph%27s+College+Tiruchirappalli" rel="noopener">Directions in Google Maps ↗</a>
+        <a class="button ghost" href="https://www.openstreetmap.org/?mlat=10.8300&amp;mlon=78.6914#map=17/10.8300/78.6914" rel="noopener">OpenStreetMap ↗</a>
+      </p>
+    </div>
+    <div class="map-frame">
+      <iframe title="Map of St. Joseph's College, Tiruchirappalli" src="https://www.openstreetmap.org/export/embed.html?bbox=78.6854%2C10.8255%2C78.6974%2C10.8345&amp;layer=mapnik&amp;marker=10.8300%2C78.6914" loading="lazy" referrerpolicy="no-referrer"></iframe>
+    </div>
+  </section>
+
+  <section class="contact-invite">
+    <figure><img src="/assets/photos/podium-2026.webp" alt="Inigo in a dark suit addressing an audience from a college lectern" width="720" height="900" loading="lazy" decoding="async"></figure>
+    <div>
+      <h2>Invite me to speak</h2>
+      <p>I speak to students and staff on management, marketing, public speaking and youth volunteering, in English and Tamil, in person or online.</p>
+      <p class="actions"><a class="button" href="mailto:{{ site.personalEmail }}?subject=Speaking%20invitation">Email an invitation</a><a class="button ghost" href="/cv/#talks">Past talks</a></p>
+    </div>
+  </section>
+</div>
+
+<script>
+  // Send the form in place, so the visitor stays on the page. Without JavaScript it posts normally and lands on /contact/thanks/.
+  (() => {
+    const form = document.querySelector(".contact-form");
+    if (!form || !window.fetch) return;
+    const status = form.querySelector(".form-status"), btn = form.querySelector("button[type=submit]");
+    const fallback = `Please email me directly at {{ site.personalEmail }}.`;
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const data = Object.fromEntries(new FormData(form));
+      if (data._honey) { form.reset(); return; }
+      btn.disabled = true; btn.textContent = "Sending…"; status.textContent = ""; status.className = "form-status";
+      try {
+        const res = await fetch(form.dataset.ajax, { method: "POST", headers: { "Content-Type": "application/json", Accept: "application/json" }, body: JSON.stringify(data) });
+        const out = await res.json().catch(() => ({}));
+        if (res.ok && String(out.success) === "true") {
+          form.innerHTML = `<div class="form-done" tabindex="-1"><p class="form-done-title">Thank you, your message is on its way.</p><p>I'll write back to ${data.email.replace(/[<>&"]/g, "")}.</p></div>`;
+          form.querySelector(".form-done").focus();
+          return;
+        }
+        status.textContent = (out.message && /activat/i.test(out.message))
+          ? "The form is being switched on. " + fallback
+          : "Sorry, the message didn't go through. " + fallback;
+        status.classList.add("is-error");
+      } catch {
+        status.textContent = "Sorry, the message didn't go through. " + fallback;
+        status.classList.add("is-error");
+      }
+      btn.disabled = false; btn.textContent = "Send message";
+    });
+  })();
+</script>

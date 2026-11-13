@@ -1,0 +1,213 @@
+{
+  "name": "Inigo",
+  "fullName": "Inigo Papu Vinodhan",
+  "formalName": "J. Inigo Papu Vinodhan",
+  "credentials": "B.Tech. (CSE), M.B.A., UGC-NET, TNSET",
+  "role": "Assistant Professor",
+  "subject": "Business Administration",
+  "department": "Department of Business Administration",
+  "institution": "St. Joseph's College (Autonomous), Tiruchirappalli",
+  "url": "https://inigo.co.in",
+  "description": "Assistant Professor of Business Administration at St. Joseph's College (Autonomous), Tiruchirappalli. CV, research, writing and course materials for students.",
+  "intro": "I teach the core B.B.A. papers, from management and marketing to operations research and international business, and research occupational stress, quality of work life and green HRM. Here you will find my CV, my writing and materials for students.",
+  "researchAreas": [
+    "Occupational stress and quality of work life",
+    "Green HRM",
+    "NGO management and community literacy"
+  ],
+  "photo": "/assets/inigo.webp",
+  "aboutPhoto": "/assets/inigo-about.webp",
+  "photoAlt": "Inigo Papu Vinodhan, smiling, in a dark jacket and white shirt against a golden background",
+  "email": "Inigopopuvinodhan_bu2@mail.sjctni.edu",
+  "office": "",
+  "officeHours": "",
+  "cvPdf": "/assets/files/inigo-papu-vinodhan-cv.pdf",
+  "academicLinks": [
+    {
+      "label": "College staff profile",
+      "url": "https://www.sjctni.edu/Department/StaffProfile/T20BU51.pdf"
+    },
+    {
+      "label": "LinkedIn",
+      "url": "https://www.linkedin.com/in/inigojoseph"
+    },
+    {
+      "label": "Facebook",
+      "url": "https://www.facebook.com/inigotheseyalyst/"
+    },
+    {
+      "label": "GitHub",
+      "url": "https://github.com/daprofezza"
+    },
+    {
+      "label": "TOSS Charitable Trust",
+      "url": "https://tosstheworld.org"
+    },
+    {
+      "label": "Google Scholar",
+      "url": ""
+    },
+    {
+      "label": "ORCID",
+      "url": ""
+    }
+  ],
+  "seyalyst": {
+    "name": "Seyalyst",
+    "tagline": "Marketing, entrepreneurship, and digital and AI skills for the classroom and beyond.",
+    "about": "Seyalyst is my public channel: short lessons and ideas on marketing, starting up, and using digital and AI tools well, for students, teachers and young professionals.",
+    "socials": [
+      {
+        "label": "YouTube",
+        "handle": "",
+        "url": ""
+      },
+      {
+        "label": "Instagram",
+        "handle": "@inigo_theseyalyst",
+        "url": "https://www.instagram.com/inigo_theseyalyst/"
+      },
+      {
+        "label": "Facebook",
+        "handle": "seyalyst",
+        "url": "https://www.facebook.com/seyalyst/"
+      },
+      {
+        "label": "LinkedIn",
+        "handle": "",
+        "url": ""
+      },
+      {
+        "label": "X",
+        "handle": "",
+        "url": ""
+      }
+    ]
+  },
+  "statement": "I study how work shapes people: the stress of knowledge work, the quality of working life, and what organisations can do better for the people in them.",
+  "about": {
+    "lead": "I'm an Assistant Professor in the Department of Business Administration at St. Joseph's College (Autonomous), Tiruchirappalli, a part-time Ph.D. scholar in Management Studies, and the founder of TOSS Charitable Trust.",
+    "story": [
+      "I came to management from engineering. After a B.Tech. in Computer Science and Engineering at Karunya University, I worked as a studio technical coordinator at Kalai Kaviri College of Fine Arts, then took an M.B.A. in Human Resource Management and Marketing at M.A.M. College of Engineering and Technology. I qualified the Tamil Nadu State Eligibility Test in 2017 and the UGC National Eligibility Test in 2019, both in Management.",
+      "I have taught in higher education since 2016: first at MASTeR Group of Institutions, where I was also a human resource executive, then at Sri Meenakshi Vidiyal Arts and Science College, and since 2020 at St. Joseph's. My research looks at occupational stress and quality of work life in knowledge-intensive sectors, green human resource management in higher education, and what non-governmental organisations contribute to community literacy.",
+      "Alongside teaching, I have spent seventeen years with TOSS Charitable Trust, the youth-led organisation I founded in 2009. Its work with differently-abled children, readers and the environment is where much of my research begins."
+    ],
+    "teaching": [
+      {
+        "title": "Learning by doing",
+        "text": "Management is a practice. My students plant trees with NGOs in government parks, volunteer at district sports meets for differently-abled children, and do their projects and internships with real organisations."
+      },
+      {
+        "title": "Digital-first classrooms",
+        "text": "As departmental in-charge for JosTEL, the college's learning management system, I designed the programme's first fully digital component test and build e-content for self-paced courses."
+      },
+      {
+        "title": "AI, used well",
+        "text": "I hold NPTEL certification in Artificial Intelligence in Human Resource Management and teach students to use AI tools and prompt engineering critically, as aids to thinking rather than replacements for it."
+      },
+      {
+        "title": "Tools I build",
+        "text": "I wrote the Network Diagram Simulator, a free web app my Operations Research students use to draw project networks, find the critical path and test crashing."
+      }
+    ],
+    "languages": "English and Tamil; basic Italian and Japanese"
+  },
+  "roles": [
+    {
+      "word": "Teach",
+      "text": "The core B.B.A. papers at St. Joseph's, from management and marketing to operations research, law and international business.",
+      "href": "/resources/",
+      "cta": "Course resources"
+    },
+    {
+      "word": "Research",
+      "text": "Occupational stress, quality of work life and green HRM, as a part-time Ph.D. scholar in Management Studies.",
+      "href": "/cv/#publications",
+      "cta": "Publications"
+    },
+    {
+      "word": "Serve",
+      "text": "Founder of TOSS Charitable Trust: seventeen years of work with differently-abled children, readers and the environment.",
+      "href": "/community/",
+      "cta": "Community work"
+    }
+  ],
+  "personalEmail": "inigo@tosstheworld.org",
+  "heartApps": {
+    "name": "Heart Apps",
+    "url": "https://heartapps.github.io/",
+    "logo": "/assets/heart-apps/heart-apps.svg",
+    "line": "Free apps, made with heart",
+    "text": "Outside the classroom I make free apps for Android and Windows under the name Heart Apps. No ads, nothing to buy, and your data stays on your own device. I build the apps I want on my own phone and computer.",
+    "apps": [
+      {
+        "name": "Prompt Heart",
+        "platform": "Android",
+        "tagline": "Your AI prompts, one tap away",
+        "icon": "/assets/heart-apps/prompt-heart.png",
+        "url": "https://heartapps.github.io/prompt-heart/"
+      },
+      {
+        "name": "Watch Heart",
+        "platform": "Android",
+        "tagline": "A diary for films, series and anime",
+        "icon": "/assets/heart-apps/watch-heart.png",
+        "url": "https://heartapps.github.io/watch-heart/"
+      },
+      {
+        "name": "Kural Heart",
+        "platform": "Android",
+        "tagline": "A private journal with Thiruvalluvar",
+        "icon": "/assets/heart-apps/kural-heart-144.png",
+        "url": "https://heartapps.github.io/kural-heart/"
+      },
+      {
+        "name": "Frame Heart",
+        "platform": "Windows",
+        "tagline": "Clean corner watermarks off AI pictures and video",
+        "icon": "/assets/heart-apps/frame-heart.svg",
+        "url": "https://heartapps.github.io/frame-heart/"
+      },
+      {
+        "name": "Still Heart",
+        "platform": "Windows",
+        "tagline": "Save a whole gallery, or just the pictures you pick",
+        "icon": "/assets/heart-apps/still-heart.svg",
+        "url": "https://heartapps.github.io/still-heart/"
+      },
+      {
+        "name": "Rush Heart",
+        "platform": "Windows",
+        "tagline": "Save public videos and audio to your own drive",
+        "icon": "/assets/heart-apps/rush-heart.svg",
+        "url": "https://heartapps.github.io/rush-heart/"
+      }
+    ]
+  },
+  "recentPhotos": [
+    {
+      "src": "/assets/photos/bhc-talk-2026.webp",
+      "w": 900,
+      "h": 430,
+      "alt": "Inigo speaking on leadership and social responsibility, with slides behind him, at Bishop Heber College, September 2026"
+    },
+    {
+      "src": "/assets/photos/podium-2026.webp",
+      "w": 720,
+      "h": 900,
+      "alt": "Inigo in a dark suit addressing an audience from a college lectern"
+    },
+    {
+      "src": "/assets/photos/bhc-memento-2026.webp",
+      "w": 1000,
+      "h": 586,
+      "alt": "Inigo receiving a framed memento from Bishop Heber College staff after the Effective Public Speaking programme, September 2026"
+    },
+    {
+      "src": "/assets/photos/bhc-memento-certificate-2026.webp",
+      "w": 720,
+      "h": 1057,
+      "alt": "Framed Memento of Honour from Bishop Heber College, presented to Mr. J. Inigo Papu Vinodhan as guest of honour and resource person, 23 September 2026"
+    }
+  ]
+}

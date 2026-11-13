@@ -1,0 +1,130 @@
+{
+  "name": "TOSS Charitable Trust",
+  "short": "TOSS",
+  "expanded": "Team of Social Service",
+  "url": "https://tosstheworld.org",
+  "involveUrl": "https://tosstheworld.org/get-involved",
+  "motto": "We believe. We change. We transform India.",
+  "intro": "I founded TOSS in Tiruchirappalli in 2009 as a youth initiative. Seventeen years later it is a registered charitable trust with more than 150 student and young-professional volunteers in Trichy, Chennai and Tuticorin, and its work has become the setting of much of my teaching and research.",
+  "stats": [
+    {
+      "value": "17",
+      "label": "years of service since 19 March 2009"
+    },
+    {
+      "value": "150+",
+      "label": "volunteers in Trichy, Chennai and Tuticorin"
+    },
+    {
+      "value": "12",
+      "label": "Talent Fests for differently-abled children"
+    },
+    {
+      "value": "700+",
+      "label": "taking part in the 2025 Talent Fest"
+    }
+  ],
+  "campaigns": [
+    {
+      "name": "TOSS Talent Fest",
+      "area": "Inclusion",
+      "text": "A district-level sports and cultural meet for differently-abled and special children, held every year since 2014. The 12th edition ran on 24 and 25 October 2025."
+    },
+    {
+      "name": "Limitless",
+      "area": "Education",
+      "text": "Learning support for hearing-impaired students and aspirants."
+    },
+    {
+      "name": "Operation Oxygen",
+      "area": "Environment",
+      "text": "Tree-planting drives in parks and public spaces, run by the trust's Green Wing."
+    },
+    {
+      "name": "Clean Cauvery",
+      "area": "Environment",
+      "text": "Riverbank clean-ups and water awareness along the Cauvery around Trichy."
+    },
+    {
+      "name": "Eyes Bucket Challenge",
+      "area": "Awareness",
+      "text": "A public campaign that encourages people to pledge their eyes for donation."
+    },
+    {
+      "name": "Social Thinking Carnival",
+      "area": "Awareness",
+      "text": "Campus events with NSS units that get students thinking about civic duty."
+    },
+    {
+      "name": "One Rupee One Nation",
+      "area": "Giving",
+      "text": "A small-giving habit: one rupee a day, saved and spent on a shared cause."
+    },
+    {
+      "name": "Street and school libraries",
+      "area": "Literacy",
+      "text": "Street libraries in neighbourhoods and renovated libraries in government schools."
+    }
+  ],
+  "milestones": [
+    {
+      "year": "2009",
+      "text": "TOSS starts on 19 March as a youth initiative in Tiruchirappalli."
+    },
+    {
+      "year": "2013",
+      "text": "Youth Fest 2013 at Bishop Heber College puts differently-abled young performers on stage. The Hindu covers it."
+    },
+    {
+      "year": "2014",
+      "text": "The first TOSS Talent Fest, with more than 350 children from about 15 special schools, and a door-to-door eye donation campaign."
+    },
+    {
+      "year": "2016",
+      "text": "I am president of TOSS when The Hindu reports on its sports and cultural meet for special students."
+    },
+    {
+      "year": "2019",
+      "text": "TOSS becomes a registered charitable trust and plants a Miyawaki forest of about 320 native saplings at Golden Rock."
+    },
+    {
+      "year": "2024",
+      "text": "Fifteen years of service. Our paper on the trust's street and school libraries goes to the G20 Library Summit."
+    },
+    {
+      "year": "2025",
+      "text": "The 12th Talent Fest brings more than 700 participants to St. John's Vestry School."
+    },
+    {
+      "year": "2026",
+      "text": "Seventeen years of TOSS."
+    }
+  ],
+  "college": "At St. Joseph's College I have brought the Department of Business Administration together with NGOs for tree-planting drives in government parks and for student volunteering at district sports and cultural meets for differently-abled children. These initiatives earned the Department a special appreciation from the Tiruchirappalli District Collectorate.",
+  "photos": {
+    "group": {
+      "src": "/assets/community/talent-fest-2025-group.webp",
+      "w": 1280,
+      "h": 853,
+      "alt": "Volunteers, families and guests gathered on stage under the TOSS Talent Fest 2025 banner"
+    },
+    "stage": {
+      "src": "/assets/community/talent-fest-2025-stage.webp",
+      "w": 1280,
+      "h": 853,
+      "alt": "A young performer waves the Indian flag on stage at TOSS Talent Fest 2025"
+    },
+    "thanks": {
+      "src": "/assets/community/talent-fest-2025-thanks.webp",
+      "w": 900,
+      "h": 600,
+      "alt": "Five boys in red sashes hold up a handmade sign reading Thank you TOSS"
+    },
+    "trees": {
+      "src": "/assets/community/tree-plantation-2025.webp",
+      "w": 1067,
+      "h": 600,
+      "alt": "Residents, children and TOSS volunteers with a TOSS banner at the Sundarraj Nagar Park tree-planting drive"
+    }
+  }
+}

@@ -1,0 +1,25 @@
+---
+permalink: /feed.xml
+eleventyExcludeFromCollections: true
+---
+{%- set entries = (collections.articles.concat(collections.resources)) | sort(true, false, "date") -%}
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en-IN">
+  <title>{{ site.fullName }}: articles and study notes</title>
+  <subtitle>{{ site.description }}</subtitle>
+  <link href="{{ site.url }}/feed.xml" rel="self"/>
+  <link href="{{ site.url }}/"/>
+  <id>{{ site.url }}/</id>
+  <updated>{{ entries[0].date | isoDate }}T00:00:00Z</updated>
+  <author><name>{{ site.formalName }}</name><uri>{{ site.url }}/about/</uri></author>
+  {%- for e in entries %}
+  <entry>
+    <title>{{ e.data.title }}</title>
+    <link href="{{ site.url }}{{ e.url }}"/>
+    <id>{{ site.url }}{{ e.url }}</id>
+    <updated>{{ e.date | isoDate }}T00:00:00Z</updated>
+    <category term="{{ e.data.section.label }}"/>
+    <summary>{{ e.data.description }}</summary>
+  </entry>
+  {%- endfor %}
+</feed>

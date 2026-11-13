@@ -1,0 +1,5 @@
+{
+  "layout": "layouts/entry.njk",
+  "permalink": "/articles/{{ page.fileSlug }}/",
+  "section": { "label": "Articles", "url": "/articles/" }
+}

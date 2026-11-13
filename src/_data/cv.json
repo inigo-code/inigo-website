@@ -1,0 +1,543 @@
+{
+  "summary": "Assistant Professor in the Department of Business Administration at St. Joseph's College (Autonomous), Tiruchirappalli, affiliated to Bharathidasan University, teaching in higher education since 2016. B.Tech. in Computer Science and Engineering, M.B.A. in Human Resource Management and Marketing, qualified UGC-NET and TNSET in Management, and a part-time Ph.D. scholar in Management Studies. Founder and trustee of TOSS Charitable Trust since 2009.",
+  "career": {
+    "from": 2009,
+    "to": 2026,
+    "lanes": [
+      {
+        "label": "Study",
+        "bars": [
+          {
+            "from": 2009,
+            "to": 2013,
+            "short": "B.Tech.",
+            "title": "B.Tech., Computer Science and Engineering",
+            "place": "Karunya University, Coimbatore",
+            "years": "Completed 2013"
+          },
+          {
+            "from": 2014,
+            "to": 2016,
+            "short": "M.B.A.",
+            "title": "M.B.A., Human Resource Management and Marketing",
+            "place": "M.A.M. College of Engineering and Technology, Anna University",
+            "years": "Completed 2016"
+          },
+          {
+            "from": 2017,
+            "to": 2018,
+            "short": "TNSET",
+            "title": "Tamil Nadu State Eligibility Test, Management",
+            "place": "Qualified",
+            "years": "2017",
+            "mark": true
+          },
+          {
+            "from": 2019,
+            "to": 2020,
+            "short": "NET",
+            "title": "UGC National Eligibility Test, Management",
+            "place": "Qualified",
+            "years": "2019",
+            "mark": true
+          },
+          {
+            "from": 2026,
+            "to": 2027,
+            "short": "Ph.D.",
+            "title": "Ph.D., Management Studies",
+            "place": "Part-time research scholar",
+            "years": "In progress",
+            "open": true,
+            "mark": true
+          }
+        ]
+      },
+      {
+        "label": "Work",
+        "bars": [
+          {
+            "from": 2013,
+            "to": 2014,
+            "short": "Studio",
+            "title": "Studio Technical Coordinator",
+            "place": "Kalai Kaviri College of Fine Arts, Tiruchirappalli",
+            "years": "2013–2014",
+            "labelLeft": true
+          },
+          {
+            "from": 2016,
+            "to": 2017,
+            "short": "MASTeR",
+            "title": "Human Resource Executive and Assistant Professor (M.B.A.)",
+            "place": "MASTeR Group of Institutions, Tiruchirappalli",
+            "years": "2016–2017",
+            "labelLeft": true
+          },
+          {
+            "from": 2018,
+            "to": 2020,
+            "short": "Vidiyal",
+            "title": "Assistant Professor, Department of Management Studies",
+            "place": "Sri Meenakshi Vidiyal Arts and Science College, Tiruchirappalli",
+            "years": "2018–2020"
+          },
+          {
+            "from": 2020,
+            "to": 2027,
+            "short": "St. Joseph’s College",
+            "title": "Assistant Professor, Department of Business Administration",
+            "place": "St. Joseph’s College (Autonomous), Tiruchirappalli",
+            "years": "2020 to now",
+            "current": true,
+            "accent": true
+          }
+        ]
+      },
+      {
+        "label": "TOSS",
+        "bars": [
+          {
+            "from": 2009,
+            "to": 2027,
+            "short": "Founder and trustee",
+            "title": "Founder, trustee and core member",
+            "place": "TOSS Charitable Trust, Tiruchirappalli",
+            "years": "2009 to now",
+            "accent": true
+          },
+          {
+            "from": 2015,
+            "to": 2016,
+            "row": 2,
+            "short": "President",
+            "title": "President",
+            "place": "Team of Social Service, Tiruchirappalli, Chennai and Tuticorin",
+            "years": "2015–2016"
+          }
+        ]
+      }
+    ]
+  },
+  "positions": [
+    {
+      "years": "2020–present",
+      "start": 2020,
+      "end": 2026,
+      "title": "Assistant Professor, Department of Business Administration",
+      "place": "St. Joseph's College (Autonomous), Tiruchirappalli",
+      "kind": "teach"
+    },
+    {
+      "years": "2018–2020",
+      "start": 2018,
+      "end": 2020,
+      "title": "Assistant Professor, Department of Management Studies",
+      "place": "Sri Meenakshi Vidiyal Arts and Science College, Tiruchirappalli",
+      "kind": "teach"
+    },
+    {
+      "years": "2016–2017",
+      "start": 2016,
+      "end": 2017,
+      "title": "Human Resource Executive and Assistant Professor (M.B.A.)",
+      "place": "MASTeR Group of Institutions, Tiruchirappalli",
+      "kind": "teach"
+    },
+    {
+      "years": "2015–2016",
+      "start": 2015,
+      "end": 2016,
+      "title": "President",
+      "place": "Team of Social Service (NGO), Tiruchirappalli, Chennai and Tuticorin",
+      "kind": "serve"
+    },
+    {
+      "years": "2013–2014",
+      "start": 2013,
+      "end": 2014,
+      "title": "Studio Technical Coordinator",
+      "place": "Kalai Kaviri College of Fine Arts, Tiruchirappalli",
+      "kind": "work"
+    }
+  ],
+  "education": [
+    {
+      "years": "Ongoing",
+      "title": "Ph.D., Management Studies",
+      "place": "Part-time research scholar"
+    },
+    {
+      "years": "2019",
+      "title": "UGC National Eligibility Test (NET), Management",
+      "place": "Qualified April 2019"
+    },
+    {
+      "years": "2017",
+      "title": "Tamil Nadu State Eligibility Test (TNSET), Management",
+      "place": "Qualified September 2017"
+    },
+    {
+      "years": "2016",
+      "title": "M.B.A., Human Resource Management and Marketing",
+      "place": "M.A.M. College of Engineering and Technology, Anna University",
+      "note": "First class"
+    },
+    {
+      "years": "2013",
+      "title": "B.Tech., Computer Science and Engineering",
+      "place": "Karunya University, Coimbatore",
+      "note": "First class"
+    }
+  ],
+  "publications": [
+    {
+      "year": "2026",
+      "type": "Journal article",
+      "title": "Occupational stress and quality of work life across knowledge-intensive sectors: Toward a sector-sensitive integrative framework",
+      "venue": "International Journal of Novel Research and Development, 11(6)",
+      "citation": "Inigo Papu Vinodhan, J., Victor Lazarus, R., & Sumithra, K. (2026). Occupational stress and quality of work life across knowledge-intensive sectors: Toward a sector-sensitive integrative framework. International Journal of Novel Research and Development, 11(6), d329–d336.",
+      "url": "https://www.ijnrd.org/viewpaperforall.php?paper=IJNRD2606338",
+      "pdf": "https://www.ijnrd.org/papers/IJNRD2606338.pdf"
+    },
+    {
+      "year": "2026",
+      "type": "Journal article",
+      "title": "The role of green HRM, employee green behaviour and employee participation on sustainability in HEIs",
+      "venue": "International Journal of Novel Research and Development, 11(6)",
+      "citation": "Udhayageetha, V., & Inigo Papu Vinodhan, J. L. M. (2026). The role of green HRM, employee green behaviour and employee participation on sustainability in HEIs. International Journal of Novel Research and Development, 11(6), d638–d644.",
+      "url": "https://www.ijnrd.org/viewpaperforall.php?paper=IJNRD2606366",
+      "pdf": "https://www.ijnrd.org/papers/IJNRD2606366.pdf"
+    },
+    {
+      "year": "2025",
+      "type": "Book chapter",
+      "title": "Millennial vs. Gen Z perspectives on green products: A conceptual analysis",
+      "venue": "Next Gen Marketing Strategies, Mind Reading Publications, Madurai",
+      "citation": "Inigo Papu Vinodhan, J., & Udhaya Geetha, V. (2025). Millennial vs. Gen Z perspectives on green products: A conceptual analysis. In Next Gen Marketing Strategies (Chapter 7). Madurai: Mind Reading Publications. ISBN 978-93-92150-32-6.",
+      "url": ""
+    },
+    {
+      "year": "2024",
+      "type": "Conference paper",
+      "title": "Impact of an NGO's initiatives in establishing street libraries and revitalizing school libraries",
+      "venue": "Proceedings of the G20 Library Summit, Pondicherry University",
+      "citation": "Rajkumar, N., Inigo Papu Vinodhan, J., & Surulinathi, M. (2024). Impact of an NGO's initiatives in establishing street libraries and revitalizing school libraries: Visionary approach to the revolution. In M. Vijayakumar & P. Vijayakumar (Eds.), Proceedings of the G20 Library Summit: Connecting Nations for Knowledge and Cultural Heritage (Vol. I, pp. 69–74). Puducherry: Ananda Rangapillai Library, Pondicherry University.",
+      "url": "",
+      "video": "https://www.youtube.com/watch?v=03m5koLjMA0"
+    }
+  ],
+  "teachingNote": "I teach the core papers of the B.B.A. programme. Law classes run on lectures and classroom games, operations research on worked problems and take-home exercises, and international business on case studies.",
+  "teaching": [
+    {
+      "id": "people",
+      "area": "Management and people",
+      "courses": [
+        {
+          "slug": "principles-of-management",
+          "title": "Principles of Management",
+          "sem": 1
+        },
+        {
+          "slug": "human-resource-management",
+          "title": "Human Resource Management",
+          "sem": 2
+        },
+        {
+          "slug": "business-communication",
+          "title": "Business Communication",
+          "sem": 5
+        },
+        {
+          "slug": "organisational-behaviour",
+          "title": "Organisational Behaviour",
+          "sem": 5
+        },
+        {
+          "slug": "industrial-relations",
+          "title": "Industrial Relations",
+          "sem": 6
+        },
+        {
+          "slug": "performance-management",
+          "title": "Performance Management",
+          "sem": 6
+        }
+      ]
+    },
+    {
+      "id": "markets",
+      "area": "Marketing and enterprise",
+      "courses": [
+        {
+          "slug": "marketing-management",
+          "title": "Marketing Management",
+          "sem": 2
+        },
+        {
+          "slug": "e-commerce",
+          "title": "E-Commerce",
+          "sem": 3
+        },
+        {
+          "slug": "entrepreneurship",
+          "title": "Entrepreneurship",
+          "sem": 4
+        },
+        {
+          "slug": "msme-management",
+          "title": "Management of Micro, Small and Medium Enterprises",
+          "sem": 4
+        }
+      ]
+    },
+    {
+      "id": "numbers",
+      "area": "Numbers and systems",
+      "courses": [
+        {
+          "slug": "computer-applications",
+          "title": "Computer Applications in Business",
+          "sem": 1
+        },
+        {
+          "slug": "business-mathematics-statistics",
+          "title": "Business Mathematics and Statistics for Managers",
+          "sem": 2
+        },
+        {
+          "slug": "operations-research",
+          "title": "Operations Research for Managers",
+          "sem": 3
+        },
+        {
+          "slug": "management-information-system",
+          "title": "Management Information System",
+          "sem": 3
+        },
+        {
+          "slug": "business-analytics",
+          "title": "Business Analytics",
+          "sem": 4
+        },
+        {
+          "slug": "research-methodology",
+          "title": "Research Methodology",
+          "sem": 6
+        }
+      ]
+    },
+    {
+      "id": "finance",
+      "area": "Economics and finance",
+      "courses": [
+        {
+          "slug": "managerial-economics",
+          "title": "Managerial Economics",
+          "sem": 1
+        },
+        {
+          "slug": "financial-management",
+          "title": "Financial Management",
+          "sem": 4
+        },
+        {
+          "slug": "financial-planning",
+          "title": "Financial Planning and Investment Management",
+          "sem": 5
+        },
+        {
+          "slug": "mergers-acquisitions",
+          "title": "International Ventures, Mergers and Acquisitions",
+          "sem": 5
+        }
+      ]
+    },
+    {
+      "id": "global",
+      "area": "Law, operations and global business",
+      "courses": [
+        {
+          "slug": "business-law",
+          "title": "Business Law",
+          "sem": 5
+        },
+        {
+          "slug": "exim-policy",
+          "title": "EXIM Policy and Documentation",
+          "sem": 5
+        },
+        {
+          "slug": "international-business",
+          "title": "International Business",
+          "sem": 6
+        },
+        {
+          "slug": "production-management",
+          "title": "Production Management",
+          "sem": 6
+        },
+        {
+          "slug": "logistics-supply-chain",
+          "title": "Logistics and Supply Chain Management",
+          "sem": 6
+        }
+      ]
+    }
+  ],
+  "tools": [
+    {
+      "title": "Network Diagram Simulator",
+      "text": "A free web app for network analysis in Operations Research. Enter activities, durations and dependencies, and it draws the project network, works out earliest and latest times, floats and the critical path, tests crashing against cost, and plots a Gantt chart.",
+      "url": "https://sjcbba-ns.streamlit.app/",
+      "source": "https://github.com/daprofezza/Network_Simulator",
+      "image": "/assets/photos/network-simulator.webp",
+      "imageAlt": "The Network Diagram Simulator showing a project network with its critical path highlighted",
+      "w": 1360,
+      "h": 645
+    }
+  ],
+  "talks": [
+    {
+      "years": "2026",
+      "date": "22 October 2026",
+      "role": "Resource person",
+      "title": "“AI in Marketing Management: Creating Smarter Customer Experiences”",
+      "place": "Five-day international seminar on artificial intelligence and the future of business management, Morning Star Arts and Science College for Women, Kamuthi (online)"
+    },
+    {
+      "years": "2026",
+      "date": "23 September 2026",
+      "role": "Guest of honour",
+      "title": "Effective Public Speaking, a one-day training programme",
+      "place": "Deanery of Extension Activities and Junior Jaycees Wing, Bishop Heber College (Autonomous), Tiruchirappalli, with JCI Rocktown"
+    },
+    {
+      "years": "2026",
+      "role": "Speaker",
+      "title": "“Job Satisfaction and Connection of Minds as a Team”",
+      "place": "State-level seminar, Anbalayam Trust, Tiruchirappalli"
+    },
+    {
+      "years": "2026",
+      "role": "Resource person",
+      "title": "“Effectively Utilising JosTEL LMS for Teaching and Assessment”",
+      "place": "Faculty development programme, St. Joseph's College (Autonomous)"
+    },
+    {
+      "years": "2022",
+      "role": "Speaker",
+      "title": "“Be the CEO of Your Own Life”",
+      "place": "Bridge course address, Sri Meenakshi Vidiyal Arts and Science College"
+    },
+    {
+      "years": "2021",
+      "role": "Speaker",
+      "title": "“Heroes for Today: Tapping into Inner Genius”",
+      "place": "Webinar series, M.A.M. College of Engineering and Technology"
+    },
+    {
+      "years": "2021",
+      "role": "Resource person",
+      "title": "Career-oriented programme on herbal medicine and medicinal plants",
+      "place": "SHEPHERD Extension Department, St. Joseph's College (Autonomous)"
+    }
+  ],
+  "development": [
+    {
+      "years": "2026",
+      "title": "Industrial training in retail operations",
+      "place": "RetailG, skill-enhancement programme"
+    },
+    {
+      "years": "2026",
+      "title": "Artificial Intelligence in Human Resource Management, 12 weeks",
+      "place": "NPTEL–SWAYAM"
+    },
+    {
+      "years": "2025",
+      "title": "Orientation and Sensitisation Programme on the National Education Policy 2020, 10 days",
+      "place": "UGC–Malaviya Mission Teacher Training Centre, NIEPA, New Delhi, with the Central University of Karnataka"
+    },
+    {
+      "years": "2025",
+      "title": "AI and Workforce 5.0 for a Circular and Sustainable Economy",
+      "place": "Loyola Institute of Business Administration, Chennai"
+    },
+    {
+      "years": "2025",
+      "title": "Publish with Purpose: Mastering the Art of Academic Writing, 10 days",
+      "place": "MCC Research Colloquium, Madras Christian College"
+    },
+    {
+      "years": "2025",
+      "title": "SPSS for Data Analysis in Social Science Research",
+      "place": "MCC Research Colloquium, Madras Christian College"
+    },
+    {
+      "years": "2025",
+      "title": "Contemporary Approaches to Research Paper Writing",
+      "place": "AIMS IBS Business School, Bengaluru"
+    },
+    {
+      "years": "2025",
+      "title": "Pedagogical Immersion in Education: A Transformative Path",
+      "place": "Faculty Development Centre, St. Joseph's College (Autonomous)"
+    },
+    {
+      "years": "2024",
+      "title": "Career Essentials in Generative AI",
+      "place": "Microsoft and LinkedIn"
+    }
+  ],
+  "service": [
+    {
+      "years": "2020–2026",
+      "title": "Member, Board of Studies",
+      "place": "St. Joseph's College (Autonomous), Tiruchirappalli"
+    },
+    {
+      "years": "2025–2026",
+      "title": "Member, Micro-Quality Cell (MQC)",
+      "place": "Departmental data for NAAC accreditation and the India Today ranking"
+    },
+    {
+      "years": "2024–2025",
+      "title": "Coordinator, Biz-Tech Club",
+      "place": "Ran BIZ-OPERA, a state-level intercollegiate management meet, with 150 students from other colleges"
+    },
+    {
+      "years": "2023–2026",
+      "title": "Departmental In-charge, JosTEL learning management system",
+      "place": "Designed and ran the programme's first fully digital component test"
+    },
+    {
+      "years": "2025",
+      "title": "Student outreach with TOSS Charitable Trust",
+      "place": "B.B.A. students at a social responsibility seminar, as Talent Fest volunteers and at a park tree planting"
+    },
+    {
+      "years": "2022–2026",
+      "title": "Soft Skills Trainer",
+      "place": "Joseph Academy for Soft Skills (JASS)"
+    },
+    {
+      "years": "2025–26",
+      "title": "Undergraduate research supervision",
+      "place": "15 project students and 15 internship students"
+    }
+  ],
+  "memberships": [
+    {
+      "years": "2009",
+      "title": "Founder, Trustee and Core Member",
+      "place": "TOSS Charitable Trust, Tiruchirappalli"
+    },
+    {
+      "years": "2022",
+      "title": "Life Member",
+      "place": "Academic and Research Conclave, Coimbatore"
+    }
+  ],
+  "community": "Through TOSS Charitable Trust I have helped build a network of more than 150 student and young-professional volunteers across three districts of Tamil Nadu. Its campaigns include the TOSS Talent Fest, a sports and cultural meet for differently-abled and special children now in its twelfth year; Operation Oxygen, a tree-planting programme; Clean Cauvery, a riverbank restoration campaign; Limitless, educational support for hearing-impaired learners; and street and school libraries."
+}
