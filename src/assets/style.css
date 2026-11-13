@@ -312,6 +312,18 @@ html.reveal-on .in.in { opacity: 1; translate: none; }
 .rail-year { display: block; margin-bottom: .45rem; font: 800 clamp(1.5rem, 2.2vw, 1.9rem)/1 var(--font-display); letter-spacing: -0.03em; color: var(--accent); font-variant-numeric: tabular-nums; }
 .rail-item p { margin: 0; font-size: .975rem; line-height: 1.55; color: var(--brand-ink); opacity: .88; }
 @media (max-width: 900px) { .rail { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+/* Community: the seventeen-years band */
+.years-band { padding-block: clamp(3.5rem, 8vw, 6rem); }
+.years-head { display: flex; align-items: center; gap: clamp(1.25rem, 3vw, 2.5rem); margin-bottom: clamp(2.25rem, 5vw, 3.5rem); }
+.years-num {
+  margin: 0; flex-shrink: 0; font: 800 clamp(6rem, 16vw, 11rem)/.8 var(--font-display); letter-spacing: -0.06em;
+  color: var(--accent); font-variant-numeric: tabular-nums;
+}
+.years-head .kicker { color: var(--brand-ink); opacity: .8; margin: 0 0 .5rem; }
+.years-head .rail-title { margin: 0; max-width: 18ch; text-wrap: balance; }
+.community-rest { padding-top: clamp(1rem, 3vw, 2rem); }
+@media (max-width: 560px) { .years-head { flex-direction: column; align-items: flex-start; gap: 1rem; } }
+
 @media (max-width: 560px) {
   .rail { grid-template-columns: 1fr; gap: 0; margin-left: 7px; border-left: 2px solid var(--brand-line); }
   .rail-item { border-top: 0; padding: 0 0 1.4rem 1.4rem; }

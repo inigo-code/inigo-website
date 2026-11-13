@@ -5,7 +5,7 @@ permalink: /community/
 description: "TOSS Charitable Trust, the youth-led organisation Inigo Papu Vinodhan founded in 2009: Talent Fest, Operation Oxygen, Clean Cauvery, libraries and more."
 image: /assets/community/talent-fest-2025-group.webp
 ---
-<div class="wrap page community-page">
+<div class="wrap community-page">
   <header class="page-head">
     <p class="eyebrow">Community · {{ community.expanded }}</p>
     <h1>{{ community.name }}</h1>
@@ -40,14 +40,29 @@ image: /assets/community/talent-fest-2025-group.webp
     <figure><img src="{{ community.photos.trees.src }}" alt="{{ community.photos.trees.alt }}" width="{{ community.photos.trees.w }}" height="{{ community.photos.trees.h }}" loading="lazy"></figure>
   </section>
 
-  <section class="cv-section">
-    <h2>Seventeen years</h2>
-    <ol class="timeline">
+</div>
+
+<section class="rail-section years-band" aria-labelledby="rail-title">
+  <div class="wrap">
+    <div class="years-head reveal">
+      <p class="years-num" aria-hidden="true">17</p>
+      <div>
+        <p class="kicker">Since 19 March 2009</p>
+        <h2 id="rail-title" class="rail-title">Seventeen years, from a youth club to a trust</h2>
+      </div>
+    </div>
+    <ol class="rail">
       {% for m in community.milestones %}
-        <li><span class="when">{{ m.year }}</span><div><p>{{ m.text }}</p></div></li>
+        <li class="rail-item">
+          <span class="rail-year">{{ m.year }}</span>
+          <p>{{ m.text }}</p>
+        </li>
       {% endfor %}
     </ol>
-  </section>
+  </div>
+</section>
+
+<div class="wrap page community-page community-rest">
 
   <section class="cv-section">
     <h2>In the news</h2>

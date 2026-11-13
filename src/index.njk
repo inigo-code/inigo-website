@@ -70,19 +70,6 @@ layout: layouts/base.njk
   </div>
 </section>
 
-<section class="rail-section" aria-labelledby="rail-title">
-  <div class="wrap">
-    <h2 id="rail-title" class="rail-title">From a youth club to a trust</h2>
-    <ol class="rail">
-      {% for m in community.milestones %}
-        <li class="rail-item">
-          <span class="rail-year">{{ m.year }}</span>
-          <p>{{ m.text }}</p>
-        </li>
-      {% endfor %}
-    </ol>
-  </div>
-</section>
 
 <section class="news" aria-labelledby="news-title">
   <div class="wrap">

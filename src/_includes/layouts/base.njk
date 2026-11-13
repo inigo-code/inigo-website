@@ -81,7 +81,7 @@
     <div class="wrap footer-inner">
       <div>
         <p class="footer-name" translate="no"><span class="footer-mark"><img class="logo" src="/assets/brand/logo-on-dark.svg" alt="" width="120" height="120" loading="lazy" decoding="async"></span><span class="footer-script"><img class="name-script" src="/assets/brand/name-script-on-dark.svg" alt="" width="748" height="118" loading="lazy" decoding="async"><span class="sr-only">{{ site.fullName }}</span></span></p>
-        <p class="muted">{{ site.role }}, {{ site.department }}<br>{{ site.institution }}</p>
+        <p class="muted">{{ site.role }}<br>{{ site.department }}<br>{{ site.institution }}</p>
         <p class="footer-email"><a href="mailto:{{ site.personalEmail }}">{{ site.personalEmail }}</a></p>
       </div>
       <div>
@@ -89,7 +89,6 @@
         <ul class="footer-links">
           <li><a href="/articles/">Articles</a></li>
           <li><a href="/resources/">Resources</a></li>
-          <li><a href="/blog/">Blog</a></li>
           <li><a href="/press/">In the news</a></li>
           <li><a href="/feed.xml">Feed</a></li>
         </ul>
@@ -111,7 +110,7 @@
         </ul>
       </div>
     </div>
-    <div class="wrap footer-base muted">© {{ build.year }} {{ site.fullName }} · Photographs of TOSS events courtesy of TOSS Charitable Trust</div>
+    <div class="wrap footer-base muted">© {{ build.year }} {{ site.fullName }}</div>
   </footer>
 
   <dialog class="lightbox" aria-label="Photo viewer">

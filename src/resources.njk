@@ -56,7 +56,6 @@ description: "Study notes, diagrams and a free network-analysis web app for B.B.
   <section class="syllabus" aria-labelledby="syllabus-title">
     <div class="section-head">
       <h2 id="syllabus-title">Papers I teach</h2>
-      <p class="section-note">{{ cv.teaching | courseCount }} B.B.A. papers in five areas</p>
     </div>
     <div class="area-grid">
       {% for a in cv.teaching %}
@@ -67,7 +66,6 @@ description: "Study notes, diagrams and a free network-analysis web app for B.B.
               {% set notes = collections.resources | byCourse(c.slug) %}
               <li{% if notes.length %} class="has-notes"{% endif %}>
                 <span class="area-course">{{ c.title }}</span>
-                <span class="area-sem">Sem {{ c.sem }}</span>
                 {% for n in notes %}<a class="area-note" href="{{ n.url }}">{{ n.data.title }}</a>{% endfor %}
               </li>
             {% endfor %}
