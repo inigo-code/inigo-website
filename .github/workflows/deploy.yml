@@ -14,6 +14,8 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    outputs:
+      indexnow: ${{ steps.indexnow.outputs.payload }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -22,6 +24,9 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run build
+      # Compare the new pages with the live site, so only new or changed pages are reported to IndexNow.
+      - id: indexnow
+        run: echo "payload=$(node scripts/indexnow.mjs payload)" >> "$GITHUB_OUTPUT"
       - uses: actions/upload-pages-artifact@v3
         with:
           path: _site
@@ -34,3 +39,11 @@ jobs:
     steps:
       - id: deployment
         uses: actions/deploy-pages@v4
+      # Tell Bing and the other IndexNow search engines which pages changed. Never fails the deploy.
+      - name: Report changed pages to IndexNow
+        if: needs.build.outputs.indexnow != ''
+        env:
+          PAYLOAD: ${{ needs.build.outputs.indexnow }}
+        run: |
+          code=$(curl -sS -o /dev/null -w "%{http_code}" -X POST https://api.indexnow.org/indexnow -H "Content-Type: application/json; charset=utf-8" --data "$PAYLOAD" || echo failed)
+          echo "IndexNow answered: $code"
