@@ -51,6 +51,7 @@
   <script>document.documentElement.classList.add("js"); if ("IntersectionObserver" in window && !matchMedia("(prefers-reduced-motion: reduce)").matches) requestAnimationFrame(() => document.documentElement.classList.add("reveal-on"));</script>
 </head>
 <body>
+  <div class="top-mark" aria-hidden="true"></div>
   <a class="skip" href="#main">Skip to content</a>
   <header class="topbar">
     <div class="wrap topbar-inner">
@@ -113,6 +114,8 @@
     <div class="wrap footer-base muted">© {{ build.year }} {{ site.fullName }}</div>
   </footer>
 
+  <a class="to-top" href="#main" aria-label="Back to top" hidden><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M12 19V5M5.5 11.5 12 5l6.5 6.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+
   <dialog class="lightbox" aria-label="Photo viewer">
     <div class="lb-bar">
       <button type="button" class="lb-back" data-lb-close>← Back to the page</button>
@@ -168,6 +171,19 @@
         io.observe(el);
       });
     }
+
+    // Back to top: shows only once the reader is a screen and a half down, so short pages never get it.
+    (() => {
+      const btn = document.querySelector(".to-top"), mark = document.querySelector(".top-mark");
+      if (!btn || !mark || !("IntersectionObserver" in window)) return;
+      btn.hidden = false;
+      new IntersectionObserver(([en]) => btn.classList.toggle("show", !en.isIntersecting)).observe(mark);
+      btn.addEventListener("click", (e) => {
+        e.preventDefault();
+        scrollTo({ top: 0, behavior: calm.matches ? "auto" : "smooth" });
+        document.querySelector(".wordmark")?.focus({ preventScroll: true });
+      });
+    })();
 
     // Main nav: one soft pill slides to whichever link the pointer or keyboard is on.
     (() => {
