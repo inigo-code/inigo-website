@@ -240,8 +240,8 @@ h2.kicker { font: 600 .95rem/1.3 var(--font-text); letter-spacing: 0; }
   .reveal-on .hero-press { animation: fade 1s var(--ease) .5s both; }
 }
 @keyframes rise { from { opacity: 0; transform: translateY(18px); } }
-@keyframes settle { from { opacity: 0; transform: scale(.96); } }
-@keyframes slide { from { transform: translate(1.25rem, -1.25rem); } }
+@keyframes settle { from { opacity: 0; scale: .96; } }
+@keyframes slide { from { translate: 1.25rem -1.25rem; } }
 @keyframes draw { from { transform: scaleX(0); } }
 @keyframes fade { from { opacity: 0; } }
 
@@ -965,6 +965,11 @@ a.with-icon:hover .icon { transform: translateY(-2px) scale(1.08); }
 
 /* Scroll reveal for cards and blocks (set up in base.njk; the class comes off when the rise ends) */
 .reveal-on .rv { opacity: 0; translate: 0 18px; transition: opacity .75s var(--ease) var(--d, 0ms), translate .75s var(--ease) var(--d, 0ms); }
+/* with motion allowed, cards and blocks also tip up out of the page as they rise */
+@media (prefers-reduced-motion: no-preference) {
+  .reveal-on .rv { transform: perspective(1200px) rotateX(11deg); transform-origin: 50% 0; transition: opacity .75s var(--ease) var(--d, 0ms), translate .75s var(--ease) var(--d, 0ms), transform .75s var(--ease) var(--d, 0ms); }
+  html.reveal-on .rv.in { transform: none; }
+}
 html.reveal-on .rv.in { opacity: 1; translate: none; }
 
 /* Page titles: rise in on load, with a line drawing for each page filling the empty side */
@@ -1237,3 +1242,121 @@ html:not(.js) .note-filter { display: none; }
   .cv-stat-label { font-size: .9rem; }
 }
 @media print { .cv-stats { display: none; } }
+
+/* ===== Depth and motion (with assets/fx.js) =====
+   fx.js splits a few headings into words and letters, counts figures up, and feeds pointer positions into
+   --px/--py (hero), --bx/--by (Seyalyst) and --rx/--ry/--gx/--gy (cards). None of it runs with reduced motion. */
+.hero-name .w, .hero-name .ch, .brand-giant .w, .brand-giant .ch, .closing h2 .w { display: inline-block; }
+.brand-giant .w { white-space: nowrap; }
+.read-progress { display: none; }
+
+/* Seyalyst and the seventeen: set in relief, with a darker side cut into the yellow */
+.brand-giant {
+  --ex: color-mix(in oklab, var(--accent) 64%, #000);
+  text-shadow: .003em .005em 0 var(--ex), .006em .01em 0 var(--ex), .009em .015em 0 var(--ex), .012em .02em 0 var(--ex),
+    .015em .025em 0 var(--ex), .018em .03em 0 var(--ex), .021em .035em 0 var(--ex), .024em .04em 0 var(--ex),
+    .03em .07em .06em rgba(0, 0, 0, .22);
+}
+.years-num {
+  --ex: color-mix(in oklab, var(--accent) 45%, var(--brand-bg));
+  text-shadow: .004em .006em 0 var(--ex), .008em .012em 0 var(--ex), .012em .018em 0 var(--ex), .016em .024em 0 var(--ex),
+    .02em .03em 0 var(--ex), .024em .036em 0 var(--ex), .03em .08em .08em rgba(0, 0, 0, .35);
+}
+
+/* News clippings lie a little askew, like cuttings pinned to a board */
+.clippings > .clipping:nth-child(3n + 1) { rotate: -1deg; }
+.clippings > .clipping:nth-child(3n + 2) { rotate: .6deg; }
+.clippings > .clipping:nth-child(3n) { rotate: -.4deg; }
+.clippings > .clipping:hover { rotate: 0deg; }
+
+@media (prefers-reduced-motion: no-preference) {
+  /* Hero: a slow yellow glow drifts behind; the portrait swings in and stands in space */
+  .hero { position: relative; overflow: clip; isolation: isolate; }
+  .hero::before {
+    content: ""; position: absolute; z-index: -1; pointer-events: none;
+    width: min(64rem, 95vw); aspect-ratio: 1; right: -18%; top: -38%; border-radius: 50%;
+    background: radial-gradient(closest-side, color-mix(in srgb, var(--accent) 15%, transparent), transparent);
+    animation: drift 18s ease-in-out infinite alternate;
+  }
+  .hero-grid { perspective: 1100px; }
+  .hero-portrait { transform-style: preserve-3d; transform: rotateY(calc(var(--px, 0) * 11deg)) rotateX(calc(var(--py, 0) * -8deg)); }
+  .hero-portrait img { box-shadow: 0 2.5rem 4rem -2rem rgba(0, 0, 0, .55); }
+  .reveal-on .hero-portrait { animation: swing-in 1.3s var(--ease) .1s both; }
+  @media (hover: hover) and (pointer: fine) {
+    /* the yellow plate sits back, the seal floats forward: they part as the portrait turns */
+    .hero-portrait::before { transform: translateZ(-60px) scale(1.06); }
+    .seal { transform: translateZ(80px); transition: rotate 1.4s var(--ease); }
+    .hero-portrait:hover .seal { transform: translateZ(80px); rotate: -120deg; }
+  }
+
+  /* The name flips up letter by letter */
+  .reveal-on .hero-text > .hero-name[data-split] { animation: none; }
+  .hero-name .w { perspective: 600px; }
+  .reveal-on .hero-name .ch { transform-origin: 50% 85%; animation: flip-up 1s var(--ease) calc(.1s + var(--i) * 38ms) both; }
+  .reveal-on .hero-name[data-split] .hl::after { animation-delay: 1.05s; }
+
+  /* What I do: each big word stands up as its row arrives */
+  .role-list a { perspective: 900px; }
+  .reveal-on .role-list li .role-word {
+    transform-origin: 50% 100%; rotate: x -80deg; opacity: 0;
+    transition: transform .45s var(--ease), rotate 1s var(--ease) .12s, opacity .6s var(--ease) .12s;
+  }
+  html.reveal-on .role-list li.in .role-word { rotate: x 0deg; opacity: 1; }
+
+  /* Seyalyst: the letters drop in on scroll and the word leans toward the pointer */
+  .brand-giant { transform: perspective(1600px) rotateX(calc(var(--by, 0) * -7deg)) rotateY(calc(var(--bx, 0) * 9deg)); }
+  .brand-giant .w { perspective: 1000px; }
+  .brand-giant .ch { transform-origin: 50% 0; transition: opacity .5s var(--ease) calc(var(--i) * 70ms), transform 1.1s cubic-bezier(.34, 1.4, .64, 1) calc(var(--i) * 70ms); }
+  .reveal-on .brand-giant[data-split]:not(.in) .ch { opacity: 0; transform: translateY(-.2em) rotateX(85deg); }
+
+  /* The closing line arrives word by word */
+  .closing h2 { perspective: 900px; }
+  .closing h2[data-split] .w { transform-origin: 50% 100%; transition: opacity .7s var(--ease) calc(var(--i) * 55ms), transform 1s var(--ease) calc(var(--i) * 55ms); }
+  .reveal-on .closing h2[data-split]:not(.in) .w { opacity: 0; transform: translateY(.45em) rotateX(-70deg); }
+
+  /* Cards lean toward the pointer (mouse only), lifting a little, with a sheen where it rests */
+  :root .tilt.tilt {
+    position: relative;
+    transform: perspective(1000px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+    transition: transform .7s var(--ease), box-shadow .5s var(--ease), border-color .25s var(--ease), rotate .5s var(--ease),
+      opacity .8s var(--ease), translate .8s var(--ease);
+  }
+  :root .tilt.tilting {
+    transform: perspective(1000px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) translateY(-4px);
+    transition-duration: .2s, .5s, .25s, .5s, .8s, .8s;
+    box-shadow: 0 30px 60px -32px rgba(13, 42, 28, .55);
+  }
+  .glare {
+    position: absolute; inset: 0; z-index: 2; border-radius: inherit; pointer-events: none; opacity: 0;
+    background: radial-gradient(26rem circle at var(--gx, 50%) var(--gy, 50%), rgba(255, 255, 255, .16), transparent 60%);
+    transition: opacity .5s var(--ease);
+  }
+  .tilting > .glare { opacity: 1; }
+
+  /* The logo turns over like a coin */
+  .wordmark .logo, .footer-mark .logo { transition: transform .9s var(--ease); }
+  .wordmark:hover .logo, .footer-name:hover .logo { transform: perspective(500px) rotateY(360deg); }
+  .wordmark:active .logo { transform: perspective(500px) rotateY(360deg) scale(.94); }
+
+  /* Moving between pages: the old page lifts away, the new one rises in; the top bar stays put */
+  @view-transition { navigation: auto; }
+  ::view-transition-old(root) { animation: vt-out .2s ease-in both; }
+  ::view-transition-new(root) { animation: vt-in .45s var(--ease) both; }
+  .topbar { view-transition-name: topbar; }
+}
+@supports (animation-timeline: scroll()) {
+  @media (prefers-reduced-motion: no-preference) {
+    /* Articles and notes: a thin yellow line across the top shows how far you have read */
+    .read-progress {
+      display: block; position: fixed; top: 0; left: 0; right: 0; height: 3px; z-index: 30;
+      background: var(--accent); transform-origin: 0 50%; pointer-events: none;
+      animation: read-grow linear both; animation-timeline: scroll(root);
+    }
+  }
+}
+@keyframes drift { to { translate: -14% 16%; scale: 1.15; } }
+@keyframes swing-in { from { opacity: 0; rotate: y -28deg; scale: .9; } }
+@keyframes flip-up { from { opacity: 0; transform: translateY(.3em) rotateX(-95deg); } }
+@keyframes vt-out { to { opacity: 0; translate: 0 -10px; } }
+@keyframes vt-in { from { opacity: 0; translate: 0 18px; } }
+@keyframes read-grow { from { transform: scaleX(0); } }
