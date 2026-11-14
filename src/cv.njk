@@ -16,11 +16,18 @@ description: "CV of J. Inigo Papu Vinodhan, Assistant Professor of Business Admi
   ["memberships", "Memberships"],
   ["community", "Community work"]
 ] %}
+{#- A year marker: the first year large, the end of a range small beneath it. Rows that share the year with the
+    row above leave the marker out (screen readers still hear the year), so a long list reads in year groups. -#}
+{% macro when(years, same) %}{% set y = years | yearSpan %}<span class="when{% if same %} when-same{% endif %}">
+  {%- if same %}<span class="sr-only">{{ years }}</span>
+  {%- else %}<span class="when-from">{{ y.from }}</span>{% if y.to %}<span class="when-to"><span class="sr-only">to </span>{{ y.to }}</span>{% endif %}{% endif -%}
+</span>{% endmacro %}
 {% macro rows(list, limit) %}
   <ol class="timeline{% if limit and list.length > limit %} is-collapsed{% endif %}">
     {% for r in list %}
-      <li{% if limit and loop.index > limit %} class="extra"{% endif %}>
-        <span class="when">{{ r.years or r.year or "—" }}</span>
+      {%- set yrs = r.years or r.year or "—" %}{% set same = loop.index0 > 0 and (list[loop.index0 - 1].years or list[loop.index0 - 1].year) == yrs %}
+      <li class="{% if same %}same-year{% else %}year-start{% endif %}{% if limit and loop.index > limit %} extra{% endif %}">
+        {{ when(yrs, same) }}
         <div>
           <p class="what">{{ r.title }}</p>
           {% if r.place %}<p class="where">{{ r.place }}</p>{% endif %}
@@ -174,12 +181,13 @@ description: "CV of J. Inigo Papu Vinodhan, Assistant Professor of Business Admi
           {% endif %}{% endfor %}
         </ul>
         <ol class="timeline">
-          {% for t in cv.talks %}{% if not t.date %}
-            <li>
-              <span class="when">{{ t.years }}</span>
+          {%- set undated = cv.talks | rejectattr("date") %}
+          {% for t in undated %}{% set same = loop.index0 > 0 and undated[loop.index0 - 1].years == t.years %}
+            <li class="{% if same %}same-year{% else %}year-start{% endif %}">
+              {{ when(t.years, same) }}
               <div><p class="what">{{ t.title }}</p><p class="where">{{ t.role }} · {{ t.place }}</p></div>
             </li>
-          {% endif %}{% endfor %}
+          {% endfor %}
         </ol>
       </section>
 

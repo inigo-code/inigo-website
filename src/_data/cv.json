@@ -851,46 +851,20 @@
   ],
   "service": [
     {
-      "years": "2020–2026",
-      "title": "Member, Board of Studies",
-      "place": "St. Joseph's College (Autonomous), Tiruchirappalli"
-    },
-    {
       "years": "2025–2026",
       "title": "Member, Micro-Quality Cell (MQC)",
       "place": "Departmental data for NAAC accreditation and the India Today ranking"
-    },
-    {
-      "years": "2024–2025",
-      "title": "Coordinator, Biz-Tech Club",
-      "place": "Ran BIZ-OPERA, a state-level intercollegiate management meet, with 150 students from other colleges"
-    },
-    {
-      "years": "2023–2026",
-      "title": "Departmental In-charge, JosTEL learning management system",
-      "place": "Designed and ran the programme's first fully digital component test"
-    },
-    {
-      "years": "2025",
-      "title": "Student outreach with TOSS Charitable Trust",
-      "place": "B.B.A. students at a social responsibility seminar, as Talent Fest volunteers and at a park tree planting"
-    },
-    {
-      "years": "2022–2026",
-      "title": "Soft Skills Trainer",
-      "place": "Joseph Academy for Soft Skills (JASS)"
-    },
-    {
-      "years": "2023–2026",
-      "title": "Undergraduate research supervision",
-      "place": "Final-year B.B.A. projects and internships: 16 and 16 in 2023–24, 18 and 18 in 2024–25, 15 and 15 in 2025–26",
-      "pdfPlace": "49 final-year projects, each with an internship, since 2023"
     },
     {
       "years": "2025–2026",
       "title": "Class Mentor, III B.B.A. ‘B’",
       "place": "St. Joseph's College (Autonomous), Tiruchirappalli",
       "pdf": false
+    },
+    {
+      "years": "2025",
+      "title": "Student outreach with TOSS Charitable Trust",
+      "place": "B.B.A. students at a social responsibility seminar, as Talent Fest volunteers and at a park tree planting"
     },
     {
       "years": "2025",
@@ -917,6 +891,22 @@
       "pdf": false
     },
     {
+      "years": "2024–2025",
+      "title": "Coordinator, Biz-Tech Club",
+      "place": "Ran BIZ-OPERA, a state-level intercollegiate management meet, with 150 students from other colleges"
+    },
+    {
+      "years": "2023–2026",
+      "title": "Departmental In-charge, JosTEL learning management system",
+      "place": "Designed and ran the programme's first fully digital component test"
+    },
+    {
+      "years": "2023–2026",
+      "title": "Undergraduate research supervision",
+      "place": "Final-year B.B.A. projects and internships: 16 and 16 in 2023–24, 18 and 18 in 2024–25, 15 and 15 in 2025–26",
+      "pdfPlace": "49 final-year projects, each with an internship, since 2023"
+    },
+    {
       "years": "2023–2024",
       "title": "President, BBA Association",
       "place": "Ran Biz-Opera 2023 and the association's academic and cultural programmes",
@@ -939,6 +929,16 @@
       "title": "Founded the department's student library and a WhatsApp mentoring group",
       "place": "Department of Business Administration, St. Joseph's College (Autonomous), Tiruchirappalli",
       "pdf": false
+    },
+    {
+      "years": "2022–2026",
+      "title": "Soft Skills Trainer",
+      "place": "Joseph Academy for Soft Skills (JASS)"
+    },
+    {
+      "years": "2020–2026",
+      "title": "Member, Board of Studies",
+      "place": "St. Joseph's College (Autonomous), Tiruchirappalli"
     }
   ],
   "memberships": [

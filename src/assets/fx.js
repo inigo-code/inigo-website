@@ -1,6 +1,6 @@
-// The motion layer: a 3D hero portrait, letters that flip up, cards that tilt toward the pointer,
-// figures that count up and a 3D Seyalyst word. Nothing here runs when the visitor asks for reduced motion,
-// and the page reads the same without it.
+// The motion layer, kept quiet: a portrait that turns slightly toward the pointer, letters that flip up once,
+// and figures that count up. Nothing here runs when the visitor asks for reduced motion, and the page reads
+// the same without it.
 (() => {
   if (matchMedia("(prefers-reduced-motion: reduce)").matches || !("IntersectionObserver" in window)) return;
   const fine = matchMedia("(hover: hover) and (pointer: fine)").matches;
@@ -79,7 +79,7 @@
     seen.unobserve(el); el.textContent = el.dataset.count + (el.dataset.tail || "");
   }));
 
-  if (!fine) return; // everything below follows a mouse pointer
+  if (!fine) return; // the portrait follows a mouse pointer only
 
   // Smoothly follow the pointer over an area, writing -1…1 into two CSS variables on a target.
   const follow = (area, target, xVar, yVar) => {
@@ -99,35 +99,5 @@
   };
   const hero = document.querySelector(".hero"), portrait = document.querySelector(".hero-portrait");
   if (hero && portrait) follow(hero, portrait, "--px", "--py");
-  const brand = document.querySelector(".brand"), giant = document.querySelector(".brand-giant");
-  if (brand && giant) follow(brand, giant, "--bx", "--by");
 
-  // Cards lean toward the pointer, with a soft sheen where it rests.
-  const cards = ".feature-card, .article-lead, .article-card, .note-card, .clipping, .toss-card, .mosaic figure, .about-trio li, .campaign-grid > li, .talk-cards > li, .stage-talks > li, .tool-shot";
-  document.querySelectorAll(cards).forEach((el) => {
-    let raf = 0;
-    const glare = document.createElement("span");
-    glare.className = "glare"; glare.setAttribute("aria-hidden", "true");
-    el.addEventListener("pointerenter", () => {
-      if (!glare.isConnected) el.append(glare);
-      el.classList.add("tilt", "tilting");
-    });
-    el.addEventListener("pointermove", (e) => {
-      cancelAnimationFrame(raf);
-      raf = requestAnimationFrame(() => {
-        const r = el.getBoundingClientRect();
-        const x = (e.clientX - r.left) / r.width, y = (e.clientY - r.top) / r.height;
-        const max = r.width > 520 ? 4 : 7; // big cards lean less
-        el.style.setProperty("--ry", ((x - 0.5) * max).toFixed(2) + "deg");
-        el.style.setProperty("--rx", ((0.5 - y) * max).toFixed(2) + "deg");
-        el.style.setProperty("--gx", (x * 100).toFixed(1) + "%");
-        el.style.setProperty("--gy", (y * 100).toFixed(1) + "%");
-      });
-    });
-    el.addEventListener("pointerleave", () => {
-      cancelAnimationFrame(raf);
-      el.classList.remove("tilting");
-      el.style.setProperty("--rx", "0deg"); el.style.setProperty("--ry", "0deg");
-    });
-  });
 })();

@@ -81,6 +81,13 @@ export default function (eleventyConfig) {
   });
   eleventyConfig.addFilter("where", (list, key, value) => (list || []).filter((x) => (value === undefined ? x[key] : x[key] === value)));
   eleventyConfig.addFilter("whereNot", (list, key, value) => (list || []).filter((x) => x[key] !== value));
+  // "2023–2026" → { from: "2023", to: "2026" }; "2025–26" → to "2026"; "2020–present" → to "present"; "2025" → no to.
+  eleventyConfig.addFilter("yearSpan", (value) => {
+    const [from, to] = String(value ?? "").split(/\s*[–-]\s*/);
+    if (!to) return { from };
+    const t = /^\d{2}$/.test(to) && /^\d{4}$/.test(from) ? from.slice(0, 2) + to : /present/i.test(to) ? "present" : to;
+    return { from, to: t };
+  });
 
   // Structured data (schema.org JSON-LD) for search engines and AI answer engines.
   // One Person node for Inigo, the WebSite, and per page: a profile, an article, a study note,
