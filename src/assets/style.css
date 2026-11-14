@@ -1331,3 +1331,13 @@ html:not(.js) .note-filter { display: none; }
 .dev-kinds strong { color: var(--ink); font: 800 1.15rem/1 var(--font-display); letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
 .cv-sub { font-size: clamp(1.25rem, 2vw, 1.5rem); letter-spacing: -0.02em; margin: clamp(2.25rem, 4vw, 3rem) 0 1rem; }
 @media print { .dev-kinds { display: none; } }
+
+/* Phones and touch screens: things fade in where they stand as they arrive. Nothing slides, tips or turns under
+   the reader's finger, which reads as the page jittering while it scrolls. */
+@media (hover: none), (max-width: 720px) {
+  .reveal-on .reveal, .reveal-on .clipping, .reveal-on .rail-item, .reveal-on .role-list li, .reveal-on .course-rows li, .reveal-on .rv {
+    translate: none; transform: none; transition: opacity .5s var(--ease) var(--d, 0ms);
+  }
+  .reveal-on .role-list li .role-word { rotate: none; }
+  .reveal-on .closing h2[data-split]:not(.in) .w, .reveal-on .brand-giant[data-split]:not(.in) .ch { transform: none; }
+}
