@@ -1360,3 +1360,13 @@ html:not(.js) .note-filter { display: none; }
 .to-top:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
 @media (min-width: 900px) { .to-top { right: 1.75rem; bottom: 1.75rem; } }
 @media print { .to-top { display: none !important; } }
+
+/* "Read the article" / "Read the essay": a real link with a full-size tap area, above the card's stretched link.
+   It is hidden from screen readers and skipped by Tab, since the card's title link already goes to the same place. */
+a.feature-go { position: relative; z-index: 1; min-height: 44px; padding-block: .5rem; text-decoration: none; -webkit-tap-highlight-color: transparent; }
+/* Touch screens have no hover: cards keep still when tapped, so a first tap is never spent on a hover state */
+@media (hover: none) {
+  .feature-card:hover, .article-lead:hover, .article-card:hover, .note-card:hover, .clipping:hover, .about-trio li:hover { transform: none; }
+  .article-lead:hover .feature-arrow, .feature-card:hover .feature-arrow { transform: none; }
+  .note-card:hover .note-media .fig, .article-card:hover .article-media :is(img, .fig), .article-lead:hover .article-media :is(img, .fig) { transform: none; }
+}

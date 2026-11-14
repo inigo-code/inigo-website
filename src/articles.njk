@@ -20,7 +20,7 @@ description: "Essays on management, work and organisations by Inigo Papu Vinodha
       <p class="card-meta"><time datetime="{{ lead.date | isoDate }}">{{ lead.date | readableDate }}</time><span>{{ lead.content | readingTime }} min read</span></p>
       <h2><a href="{{ lead.url }}">{{ lead.data.title }}</a></h2>
       <p>{{ lead.data.description }}</p>
-      <span class="feature-go" aria-hidden="true">Read the article <span class="feature-arrow">→</span></span>
+      <a class="feature-go" href="{{ lead.url }}" tabindex="-1" aria-hidden="true">Read the article <span class="feature-arrow">→</span></a>
     </div>
   </article>
   {% endif %}

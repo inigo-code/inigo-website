@@ -98,7 +98,7 @@ layout: layouts/base.njk
         <p class="card-meta"><span class="tag">Essay</span> {{ featured.content | readingTime }} min read</p>
         <h3><a href="{{ featured.url }}">{{ featured.data.title }}</a></h3>
         <p>{{ featured.data.description }}</p>
-        <span class="feature-go" aria-hidden="true">Read the essay <span class="feature-arrow">→</span></span>
+        <a class="feature-go" href="{{ featured.url }}" tabindex="-1" aria-hidden="true">Read the essay <span class="feature-arrow">→</span></a>
       </article>
       {% endif %}
       <ul class="entry-list">
