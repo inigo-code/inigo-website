@@ -53,8 +53,8 @@ description: "CV of J. Inigo Papu Vinodhan, Assistant Professor of Business Admi
   <ul class="cv-stats" aria-label="At a glance">
     <li><a href="#positions"><span class="cv-stat-num">{{ cv.teachingSince | yearsSince }}</span><span class="cv-stat-label">years teaching in higher education</span></a></li>
     <li><a href="#publications"><span class="cv-stat-num">{{ cv.publications.length }}</span><span class="cv-stat-label">publications: journal articles, a book chapter and a conference paper</span></a></li>
-    <li><a href="#talks"><span class="cv-stat-num">{{ cv.talks.length }}</span><span class="cv-stat-label">invited talks as speaker or resource person</span></a></li>
-    <li><a href="#development"><span class="cv-stat-num">{{ fdps.length }}</span><span class="cv-stat-label">faculty development programmes and trainings attended</span></a></li>
+    <li><a href="#talks"><span class="cv-stat-num">{{ cv.talks.length }}</span><span class="cv-stat-label">invited talks and sessions, as speaker, resource person or judge</span></a></li>
+    <li><a href="#development"><span class="cv-stat-num">{{ fdps.length }}</span><span class="cv-stat-label">faculty development programmes, workshops, seminars and courses attended since 2020</span></a></li>
     <li><a href="#development"><span class="cv-stat-num">{{ certs.length }}</span><span class="cv-stat-label">certificate courses, from NPTEL–SWAYAM and Microsoft with LinkedIn</span></a></li>
     <li><a href="#service"><span class="cv-stat-num">{{ cv.supervised.count }}</span><span class="cv-stat-label">{{ cv.supervised.label }}</span></a></li>
   </ul>
@@ -156,6 +156,10 @@ description: "CV of J. Inigo Papu Vinodhan, Assistant Professor of Business Admi
             <span><span class="kicker">Teaching tool I built</span><strong>{{ t.title }}</strong><span class="cv-tool-go">Open the app ↗</span></span>
           </a>
         {% endfor %}
+        {% if cv.curriculum %}
+          <h3 class="cv-sub">Curriculum, course materials and e-content</h3>
+          {{ rows(cv.curriculum) }}
+        {% endif %}
       </section>
 
       <section class="cv-block" id="talks" aria-labelledby="talks-title">
@@ -186,7 +190,11 @@ description: "CV of J. Inigo Papu Vinodhan, Assistant Professor of Business Admi
 
       <section class="cv-block" id="development" aria-labelledby="development-title">
         <h2 id="development-title">Training and certification</h2>
-        {{ rows(cv.development, 5) }}
+        {%- set kinds = [["fdp", "faculty development programmes"], ["seminar", "seminars and webinars"], ["workshop", "workshops"], ["course", "short-term courses"], ["conference", "conferences"], ["certificate", "certificate courses"]] %}
+        <ul class="dev-kinds">
+          {% for k in kinds %}{% set n = (cv.development | where("kind", k[0])).length %}{% if n %}<li><strong>{{ n }}</strong> {{ k[1] }}</li>{% endif %}{% endfor %}
+        </ul>
+        {{ rows(cv.development, 6) }}
       </section>
 
       <section class="cv-block" id="memberships" aria-labelledby="memberships-title">

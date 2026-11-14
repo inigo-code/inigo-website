@@ -99,7 +99,7 @@ eleventyExcludeFromCollections: true
 
       <section>
         <h2>Invited lectures</h2>
-        {% for t in cv.talks %}<div class="row"><span class="yr">{{ t.years }}</span><div><p class="t">{{ t.title }}</p><p class="p">{{ t.role }} · {{ t.place }}</p></div></div>{% endfor %}
+        {% for t in cv.talks | whereNot("pdf", false) %}<div class="row"><span class="yr">{{ t.years }}</span><div><p class="t">{{ t.title }}</p><p class="p">{{ t.role }} · {{ t.place }}</p></div></div>{% endfor %}
       </section>
 
       <section>
@@ -115,7 +115,7 @@ eleventyExcludeFromCollections: true
 
       <section>
         <h2>Responsibilities</h2>
-        {% for r in cv.service %}<div class="row"><span class="yr">{{ r.years }}</span><div><p class="t">{{ r.title }}</p><p class="p">{{ r.place }}</p></div></div>{% endfor %}
+        {% for r in cv.service | whereNot("pdf", false) %}<div class="row"><span class="yr">{{ r.years }}</span><div><p class="t">{{ r.title }}</p><p class="p">{{ r.pdfPlace or r.place }}</p></div></div>{% endfor %}
       </section>
     </div>
 
@@ -132,7 +132,8 @@ eleventyExcludeFromCollections: true
 
       <section>
         <h2>Training</h2>
-        {% for r in cv.development %}<div class="row"><span class="yr">{{ r.years }}</span><div><p class="t" style="font-weight:500">{{ r.title }}</p><p class="p">{{ r.place }}</p></div></div>{% endfor %}
+        {% for r in cv.development | whereNot("pdf", false) %}<div class="row"><span class="yr">{{ r.years }}</span><div><p class="t" style="font-weight:500">{{ r.title }}</p><p class="p">{{ r.place }}</p></div></div>{% endfor %}
+        {% set more = cv.development | where("pdf", false) %}{% if more.length %}<p class="p" style="margin-top:1.5mm">And {{ more.length }} more programmes, workshops and seminars since 2020, listed at inigo.co.in/cv.</p>{% endif %}
       </section>
 
       <section>

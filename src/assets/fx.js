@@ -74,6 +74,10 @@
     el.textContent = "0" + m[2];
     seen.observe(el);
   });
+  // A page printed before its figures scrolled into view still prints the real numbers.
+  addEventListener("beforeprint", () => document.querySelectorAll("[data-count]").forEach((el) => {
+    seen.unobserve(el); el.textContent = el.dataset.count + (el.dataset.tail || "");
+  }));
 
   if (!fine) return; // everything below follows a mouse pointer
 

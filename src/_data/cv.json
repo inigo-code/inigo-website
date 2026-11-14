@@ -425,6 +425,20 @@
       "place": "Faculty development programme, St. Joseph's College (Autonomous)"
     },
     {
+      "years": "2025",
+      "role": "Judge",
+      "title": "AD-ZAP, a state-level intercollegiate competition",
+      "place": "Department of Human Resource Management, St. Joseph's College (Autonomous), 29 September 2025",
+      "pdf": false
+    },
+    {
+      "years": "2023",
+      "role": "Resource person",
+      "title": "Palm seed sowing in rural water reservoir banks, a lecture and field work",
+      "place": "B.B.A. Department and SHEPHERD, St. Joseph's College (Autonomous), at Archampatti village, 26 November 2023",
+      "pdf": false
+    },
+    {
       "years": "2022",
       "role": "Speaker",
       "title": "“Be the CEO of Your Own Life”",
@@ -447,7 +461,8 @@
     {
       "years": "2026",
       "title": "Industrial training in retail operations",
-      "place": "RetailG, skill-enhancement programme"
+      "place": "RetailG, skill-enhancement programme",
+      "kind": "training"
     },
     {
       "years": "2026",
@@ -458,38 +473,380 @@
     {
       "years": "2025",
       "title": "Orientation and Sensitisation Programme on the National Education Policy 2020, 10 days",
-      "place": "UGC–Malaviya Mission Teacher Training Centre, NIEPA, New Delhi, with the Central University of Karnataka"
+      "place": "UGC–Malaviya Mission Teacher Training Centre, NIEPA, New Delhi, with the Central University of Karnataka",
+      "kind": "fdp"
     },
     {
       "years": "2025",
       "title": "AI and Workforce 5.0 for a Circular and Sustainable Economy",
-      "place": "Loyola Institute of Business Administration, Chennai"
+      "place": "Loyola Institute of Business Administration, Chennai",
+      "kind": "fdp"
     },
     {
       "years": "2025",
       "title": "Publish with Purpose: Mastering the Art of Academic Writing, 10 days",
-      "place": "MCC Research Colloquium, Madras Christian College"
+      "place": "MCC Research Colloquium, Madras Christian College",
+      "kind": "course"
     },
     {
       "years": "2025",
       "title": "SPSS for Data Analysis in Social Science Research",
-      "place": "MCC Research Colloquium, Madras Christian College"
+      "place": "MCC Research Colloquium, Madras Christian College",
+      "kind": "course"
     },
     {
       "years": "2025",
       "title": "Contemporary Approaches to Research Paper Writing",
-      "place": "AIMS IBS Business School, Bengaluru"
+      "place": "AIMS IBS Business School, Bengaluru",
+      "kind": "course"
     },
     {
       "years": "2025",
       "title": "Pedagogical Immersion in Education: A Transformative Path",
-      "place": "Faculty Development Centre, St. Joseph's College (Autonomous)"
+      "place": "Faculty Development Centre, St. Joseph's College (Autonomous)",
+      "kind": "course"
+    },
+    {
+      "years": "2025",
+      "title": "Two-Day Orientation Programme for Teaching Faculty",
+      "place": "St. Joseph's College (Autonomous), Tiruchirappalli",
+      "kind": "fdp",
+      "pdf": false
+    },
+    {
+      "years": "2025",
+      "title": "Documenting Online Pedagogical Methods and Assessment Practices, LMS Uploads and Report Generation",
+      "place": "St. Joseph's College (Autonomous), Tiruchirappalli",
+      "kind": "seminar",
+      "pdf": false
+    },
+    {
+      "years": "2025",
+      "title": "Documenting Offline Pedagogical Methods and Assessment Practices",
+      "place": "St. Joseph's College (Autonomous), Tiruchirappalli",
+      "kind": "seminar",
+      "pdf": false
     },
     {
       "years": "2024",
       "title": "Career Essentials in Generative AI",
       "place": "Microsoft and LinkedIn",
       "kind": "certificate"
+    },
+    {
+      "years": "2024",
+      "title": "AI-Aided MS Excel, online faculty development programme",
+      "place": "Department of Commerce Honours, St. Joseph's College (Autonomous), with the Institute of Analytics",
+      "kind": "fdp",
+      "pdf": false
+    },
+    {
+      "years": "2023",
+      "title": "Intricacies of Writing for Research Publications and Projects, faculty development programme",
+      "place": "IQAC, St. Joseph's College (Autonomous), Tiruchirappalli",
+      "kind": "fdp",
+      "pdf": false
+    },
+    {
+      "years": "2023",
+      "title": "Academic Research Writing, faculty development programme",
+      "place": "St. Joseph's College (Autonomous), Tiruchirappalli",
+      "kind": "fdp",
+      "pdf": false
+    },
+    {
+      "years": "2023",
+      "title": "Creation of E-Content, five-day virtual hands-on faculty development programme",
+      "place": "St. Joseph's College (Autonomous), Tiruchirappalli",
+      "kind": "fdp",
+      "pdf": false
+    },
+    {
+      "years": "2023",
+      "title": "Research Methodology, seven-day national faculty development programme",
+      "place": "IOT Academy and Academic Research Conclave, Coimbatore",
+      "kind": "fdp",
+      "pdf": false
+    },
+    {
+      "years": "2023",
+      "title": "LOCF: A Reformative Roadmap towards Excellence, faculty development programme",
+      "place": "St. Joseph's College (Autonomous), Tiruchirappalli",
+      "kind": "fdp",
+      "pdf": false
+    },
+    {
+      "years": "2023",
+      "title": "Top-Up Programme for Junior Faculty",
+      "place": "St. Joseph's College (Autonomous), Tiruchirappalli",
+      "kind": "fdp",
+      "pdf": false
+    },
+    {
+      "years": "2023",
+      "title": "Course Design Matrix, faculty development programme",
+      "place": "St. Joseph's College (Autonomous), Tiruchirappalli",
+      "kind": "fdp",
+      "pdf": false
+    },
+    {
+      "years": "2022",
+      "title": "The Ignatian Paradigm of Leadership, one-day workshop",
+      "place": "St. Xavier's College (Autonomous), Madurai, with the Jesuit Higher Education Commission",
+      "kind": "workshop",
+      "pdf": false
+    },
+    {
+      "years": "2022",
+      "title": "Research Methodology, two-day workshop",
+      "place": "PG and Research Department of Management Studies, Bishop Heber College (Autonomous), Tiruchirappalli",
+      "kind": "workshop",
+      "pdf": false
+    },
+    {
+      "years": "2021",
+      "title": "Financial Market and Investment, three-day faculty development programme",
+      "place": "St. Joseph's College (Autonomous) with MCUBE Academy",
+      "kind": "fdp",
+      "pdf": false
+    },
+    {
+      "years": "2021",
+      "title": "Developing Online Courses in LMS (Phase I), two-day workshop",
+      "place": "IQAC, St. Joseph's College (Autonomous), Tiruchirappalli",
+      "kind": "workshop",
+      "pdf": false
+    },
+    {
+      "years": "2021",
+      "title": "Process and Paradigms in Research, two-day national webinar",
+      "place": "Research Advisory Committee, St. Joseph's College (Autonomous), Tiruchirappalli",
+      "kind": "seminar",
+      "pdf": false
+    },
+    {
+      "years": "2021",
+      "title": "Preparing E-Content for MOOCs on SWAYAM, faculty development programme",
+      "place": "St. Joseph's College (Autonomous), Tiruchirappalli",
+      "kind": "fdp",
+      "pdf": false
+    },
+    {
+      "years": "2021",
+      "title": "Preparation for NAAC Accreditation: A Participatory Process, one-day workshop",
+      "place": "IQAC, St. Joseph's College (Autonomous), Tiruchirappalli",
+      "kind": "workshop",
+      "pdf": false
+    },
+    {
+      "years": "2021",
+      "title": "Open Educational Resources: Search, Identify, Repurpose and Create Your OER, faculty development programme",
+      "place": "St. Joseph's College (Autonomous), Tiruchirappalli",
+      "kind": "fdp",
+      "pdf": false
+    },
+    {
+      "years": "2021",
+      "title": "Post-COVID-19 Era in Education and Technology, national webinar",
+      "place": "Dr. Ambedkar Institute of Technology, Bengaluru",
+      "kind": "seminar",
+      "pdf": false
+    },
+    {
+      "years": "2021",
+      "title": "Environment: Towards a Greener World, national webinar",
+      "place": "IQAC, Bahona College, Assam",
+      "kind": "seminar",
+      "pdf": false
+    },
+    {
+      "years": "2021",
+      "title": "Climate Change, Disaster Management and Pandemic, international webinar",
+      "place": "Mandsaur University",
+      "kind": "seminar",
+      "pdf": false
+    },
+    {
+      "years": "2021",
+      "title": "Quality Enhancement Techniques in Higher Education: A NAAC Perspective, national webinar",
+      "place": "St. Paul's College, Bengaluru",
+      "kind": "seminar",
+      "pdf": false
+    },
+    {
+      "years": "2021",
+      "title": "Research Methodology, three-day national webinar",
+      "place": "Dr. M.G.R. Educational and Research Institute, Chennai",
+      "kind": "seminar",
+      "pdf": false
+    },
+    {
+      "years": "2021",
+      "title": "Financial Awareness: A Key to Financial Well-being, national webinar",
+      "place": "Mandsaur University",
+      "kind": "seminar",
+      "pdf": false
+    },
+    {
+      "years": "2021",
+      "title": "Advance Teaching, Learning, Research Methodology and Innovations, five-day interdisciplinary online workshop",
+      "place": "St. Francis De Sales College, Nagpur",
+      "kind": "workshop",
+      "pdf": false
+    },
+    {
+      "years": "2021",
+      "title": "Ethics Conscience for a New Business Take, international webinar",
+      "place": "Cauvery College for Women (Autonomous), Tiruchirappalli",
+      "kind": "seminar",
+      "pdf": false
+    },
+    {
+      "years": "2021",
+      "title": "Emerging Technologies in Banking, webinar",
+      "place": "Christ College of Engineering and Technology, Puducherry",
+      "kind": "seminar",
+      "pdf": false
+    },
+    {
+      "years": "2021",
+      "title": "Share Market, national e-workshop",
+      "place": "Nandha Engineering College (Autonomous), Erode, with Shine Projects, Hyderabad",
+      "kind": "workshop",
+      "pdf": false
+    },
+    {
+      "years": "2021",
+      "title": "Basics of Digital Marketing, national technical talk",
+      "place": "Dr. M.G.R. Educational and Research Institute, Chennai",
+      "kind": "seminar",
+      "pdf": false
+    },
+    {
+      "years": "2021",
+      "title": "NAAC Assessment and Accreditation: A Step-by-Step Process, three-day national workshop",
+      "place": "Chadalawada Ramanamma Engineering College, Tirupati",
+      "kind": "workshop",
+      "pdf": false
+    },
+    {
+      "years": "2021",
+      "title": "Social Entrepreneurship for College Students, national webinar",
+      "place": "Patrician Institution Innovation Cell and Department of Social Work, Chennai, with EDII",
+      "kind": "seminar",
+      "pdf": false
+    },
+    {
+      "years": "2021",
+      "title": "Mergers and Acquisitions, webinar",
+      "place": "Krupanidhi Degree College, Bengaluru",
+      "kind": "seminar",
+      "pdf": false
+    },
+    {
+      "years": "2021",
+      "title": "Innovative Teaching Strategies for Digital Natives (Gen Z), two-day national faculty study circle",
+      "place": "Sivananda Sarma Memorial R.V. College, Bengaluru",
+      "kind": "fdp",
+      "pdf": false
+    },
+    {
+      "years": "2021",
+      "title": "Role of Faculty in Moulding Students, three-day national faculty development programme",
+      "place": "HKBK Degree College, Bengaluru",
+      "kind": "fdp",
+      "pdf": false
+    },
+    {
+      "years": "2021",
+      "title": "IGNITIA 2021, online HR conclave",
+      "place": "Patrician College of Arts and Science, Chennai",
+      "kind": "conference",
+      "pdf": false
+    },
+    {
+      "years": "2021",
+      "title": "Entrepreneurial Skills: A Vital Play of Technology and Innovations, national virtual seminar",
+      "place": "Kaamadenu Arts and Science College, Coimbatore",
+      "kind": "seminar",
+      "pdf": false
+    },
+    {
+      "years": "2021",
+      "title": "Data Science and Business Analytics, one-week faculty development programme",
+      "place": "Sai Ram Institute of Management Studies, Chennai",
+      "kind": "fdp",
+      "pdf": false
+    },
+    {
+      "years": "2021",
+      "title": "Effective Teaching Pedagogy and Methodology for Student Engagement and Experiential Learning, one-day virtual faculty development programme",
+      "place": "International Institute of Management Studies, Pune",
+      "kind": "fdp",
+      "pdf": false
+    },
+    {
+      "years": "2021",
+      "title": "Writing Research Articles for Scopus, five-day national faculty development programme",
+      "place": "VV Academy, Chennai",
+      "kind": "fdp",
+      "pdf": false
+    },
+    {
+      "years": "2021",
+      "title": "Investor Awareness Programme, national webinar",
+      "place": "Cheran Arts and Science College, Tiruppur",
+      "kind": "seminar",
+      "pdf": false
+    },
+    {
+      "years": "2021",
+      "title": "SPSS, two-day workshop",
+      "place": "Dr. M.G.R. Educational and Research Institute, Chennai",
+      "kind": "workshop",
+      "pdf": false
+    },
+    {
+      "years": "2021",
+      "title": "Art of Writing Interpretation for Statistical Tools in Social Science Research, one-day national workshop",
+      "place": "Kongu Business School, Erode",
+      "kind": "workshop",
+      "pdf": false
+    },
+    {
+      "years": "2021",
+      "title": "HR Practices in the Digital Era, two-day workshop",
+      "place": "Department of Social Work, Bharathidasan University, Tiruchirappalli",
+      "kind": "workshop",
+      "pdf": false
+    },
+    {
+      "years": "2021",
+      "title": "National Education Policy 2020 and Higher Education in India, six-day virtual national faculty development programme",
+      "place": "Dr. N.S.A.M. First Grade College, Bengaluru",
+      "kind": "fdp",
+      "pdf": false
+    },
+    {
+      "years": "2021",
+      "title": "Innovative Practices in Business and Management during the Contemporary Era, international conference",
+      "place": "Department of Business Administration, St. Joseph's College (Autonomous), Tiruchirappalli",
+      "kind": "conference",
+      "pdf": false
+    },
+    {
+      "years": "2021",
+      "title": "Innovation and Excellence in Research, seminar",
+      "place": "Research Advisory Committee, St. Joseph's College (Autonomous), Tiruchirappalli",
+      "kind": "seminar",
+      "pdf": false
+    },
+    {
+      "years": "2020",
+      "title": "Research Grants and Funds, national webinar",
+      "place": "Research Advisory Committee, St. Joseph's College (Autonomous), Tiruchirappalli",
+      "kind": "seminar",
+      "pdf": false
     }
   ],
   "service": [
@@ -524,9 +881,64 @@
       "place": "Joseph Academy for Soft Skills (JASS)"
     },
     {
-      "years": "2025–26",
+      "years": "2023–2026",
       "title": "Undergraduate research supervision",
-      "place": "15 project students and 15 internship students"
+      "place": "Final-year B.B.A. projects and internships: 16 and 16 in 2023–24, 18 and 18 in 2024–25, 15 and 15 in 2025–26",
+      "pdfPlace": "49 final-year projects, each with an internship, since 2023"
+    },
+    {
+      "years": "2025–2026",
+      "title": "Class Mentor, III B.B.A. ‘B’",
+      "place": "St. Joseph's College (Autonomous), Tiruchirappalli",
+      "pdf": false
+    },
+    {
+      "years": "2025",
+      "title": "Organiser, faculty development programme on “The Tantrayukti of Innovation (IKS): A Strategic Framework for Industry 5.0 and the SDGs”",
+      "place": "Online, 1 October 2025, 150 participants",
+      "pdf": false
+    },
+    {
+      "years": "2025",
+      "title": "Organiser, seminar on “Being the Change: The Power of Individual Social Responsibility”",
+      "place": "With a senior manager of IDFC First Bharat, Tiruchirappalli; 32 students, 7 October 2025",
+      "pdf": false
+    },
+    {
+      "years": "2025",
+      "title": "Industrial visit, III B.B.A. ‘B’",
+      "place": "Kaynes Technology India Limited, Mysuru: PCB assembly, testing, quality control and packaging; 59 students",
+      "pdf": false
+    },
+    {
+      "years": "2025",
+      "title": "Bridge course for first-year students, I B.B.A. ‘B’",
+      "place": "Seven days, 63 students",
+      "pdf": false
+    },
+    {
+      "years": "2023–2024",
+      "title": "President, BBA Association",
+      "place": "Ran Biz-Opera 2023 and the association's academic and cultural programmes",
+      "pdf": false
+    },
+    {
+      "years": "2023",
+      "title": "Industrial visit, B.B.A. 2021 batch",
+      "place": "Harihar Alloys Private Limited; 123 students",
+      "pdf": false
+    },
+    {
+      "years": "2023",
+      "title": "Extension work with SHEPHERD",
+      "place": "Palm seed sowing at Archampatti village, 150 beneficiaries, and a campus plantation drive with 50 III B.B.A. students",
+      "pdf": false
+    },
+    {
+      "years": "2023",
+      "title": "Founded the department's student library and a WhatsApp mentoring group",
+      "place": "Department of Business Administration, St. Joseph's College (Autonomous), Tiruchirappalli",
+      "pdf": false
     }
   ],
   "memberships": [
@@ -544,7 +956,39 @@
   "community": "Through TOSS Charitable Trust I have helped build a network of more than 150 student and young-professional volunteers across three districts of Tamil Nadu. Its campaigns include the TOSS Talent Fest, a sports and cultural meet for differently-abled and special children now in its twelfth year; Operation Oxygen, a tree-planting programme; Clean Cauvery, a riverbank restoration campaign; Limitless, educational support for hearing-impaired learners; and street and school libraries.",
   "teachingSince": "2016-10-01",
   "supervised": {
-    "count": 30,
-    "label": "students supervised in 2025–26: 15 projects and 15 internships"
-  }
+    "count": 49,
+    "label": "final-year projects supervised since 2023, each alongside an internship"
+  },
+  "curriculum": [
+    {
+      "years": "2025",
+      "title": "Syllabus revision: Digital Marketing, AI for Managers and Global Supply Chain Management",
+      "place": "B.B.A. programme, Board of Studies"
+    },
+    {
+      "years": "2024",
+      "title": "Syllabus revision: Digital Marketing and NGO Management",
+      "place": "B.B.A. programme, Board of Studies"
+    },
+    {
+      "years": "2023–2025",
+      "title": "New papers taught: NGO Management, Global Supply Chain Management, Production and Material Management, Managerial Economics, and Emotional Intelligence and Managerial Effectiveness",
+      "place": "B.B.A. core and general elective papers"
+    },
+    {
+      "years": "2023–2025",
+      "title": "Course materials for NGO Management, Operations Research for Managers, Soft Skills, Customer Relationship Management, and Emotional Intelligence and Managerial Effectiveness",
+      "place": "Customer Relationship Management also runs as a self-paced LMS course, with two PDFs and three videos, for 123 students"
+    },
+    {
+      "years": "2025",
+      "title": "Gamified quizzes and assignments on Wayground for Legal Aspects of Business",
+      "place": "60 students"
+    },
+    {
+      "years": "2022–2024",
+      "title": "E-content on JosTEL: Advertising and Sales Promotion (self-paced) and Digital Marketing (value-added)",
+      "place": "The college's learning management system"
+    }
+  ]
 }
