@@ -602,8 +602,9 @@ html.reveal-on .in.in { opacity: 1; translate: none; }
 .prose table { width: 100%; border-collapse: collapse; font-size: 1rem; display: block; overflow-x: auto; }
 .prose th, .prose td { text-align: left; padding: .6rem .75rem; border-bottom: 1px solid var(--line); vertical-align: top; }
 .prose th { font-weight: 600; background: var(--surface); }
-/* Long reading text is justified. Hyphenation keeps the word gaps even on narrow phone lines. */
-.prose p, .prose li, .faq details p, .takeaways li, .cv-text p {
+/* Long reading text and the intro paragraphs are justified. Hyphenation keeps the word gaps even on narrow phone lines. */
+.prose p, .prose li, .faq details p, .takeaways li, .cv-text p,
+.lead, .hero-lead, .brand-about, .entry-list p, .author-box p:not(.author-name) {
   text-align: justify; -webkit-hyphens: auto; hyphens: auto; hyphenate-limit-chars: 7 3 3;
 }
 .back { margin-top: 3.5rem; font-weight: 600; }
