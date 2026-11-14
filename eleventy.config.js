@@ -74,6 +74,13 @@ export default function (eleventyConfig) {
   });
   eleventyConfig.addFilter("course", (slug, teaching) => allCourses(teaching).find((c) => c.slug === slug) || { title: slug, slug });
   eleventyConfig.addFilter("courseCount", (teaching) => allCourses(teaching).length);
+  // Whole years from a start date to the build date (2016-10-01 → 10 in November 2026).
+  eleventyConfig.addFilter("yearsSince", (start) => {
+    const s = new Date(start), n = new Date();
+    return n.getFullYear() - s.getFullYear() - (n < new Date(n.getFullYear(), s.getMonth(), s.getDate()) ? 1 : 0);
+  });
+  eleventyConfig.addFilter("where", (list, key, value) => (list || []).filter((x) => (value === undefined ? x[key] : x[key] === value)));
+  eleventyConfig.addFilter("whereNot", (list, key, value) => (list || []).filter((x) => x[key] !== value));
 
   // Structured data (schema.org JSON-LD) for search engines and AI answer engines.
   // One Person node for Inigo, the WebSite, and per page: a profile, an article, a study note,

@@ -47,6 +47,18 @@ description: "CV of J. Inigo Papu Vinodhan, Assistant Professor of Business Admi
     <span class="head-motif">{% include "motifs/cv.svg" %}</span>
   </header>
 
+  {#- The numbers band. Each figure is counted from the CV's own lists, so it stays true as they grow. -#}
+  {% set fdps = cv.development | whereNot("kind", "certificate") %}
+  {% set certs = cv.development | where("kind", "certificate") %}
+  <ul class="cv-stats" aria-label="At a glance">
+    <li><a href="#positions"><span class="cv-stat-num">{{ cv.teachingSince | yearsSince }}</span><span class="cv-stat-label">years teaching in higher education</span></a></li>
+    <li><a href="#publications"><span class="cv-stat-num">{{ cv.publications.length }}</span><span class="cv-stat-label">publications: journal articles, a book chapter and a conference paper</span></a></li>
+    <li><a href="#talks"><span class="cv-stat-num">{{ cv.talks.length }}</span><span class="cv-stat-label">invited talks as speaker or resource person</span></a></li>
+    <li><a href="#development"><span class="cv-stat-num">{{ fdps.length }}</span><span class="cv-stat-label">faculty development programmes and trainings attended</span></a></li>
+    <li><a href="#development"><span class="cv-stat-num">{{ certs.length }}</span><span class="cv-stat-label">certificate courses, from NPTEL–SWAYAM and Microsoft with LinkedIn</span></a></li>
+    <li><a href="#service"><span class="cv-stat-num">{{ cv.supervised.count }}</span><span class="cv-stat-label">{{ cv.supervised.label }}</span></a></li>
+  </ul>
+
   <div class="cv-layout">
     <nav class="cv-nav" aria-label="CV sections">
       <ol>

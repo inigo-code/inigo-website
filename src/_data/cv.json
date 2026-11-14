@@ -452,7 +452,8 @@
     {
       "years": "2026",
       "title": "Artificial Intelligence in Human Resource Management, 12 weeks",
-      "place": "NPTEL–SWAYAM"
+      "place": "NPTEL–SWAYAM",
+      "kind": "certificate"
     },
     {
       "years": "2025",
@@ -487,7 +488,8 @@
     {
       "years": "2024",
       "title": "Career Essentials in Generative AI",
-      "place": "Microsoft and LinkedIn"
+      "place": "Microsoft and LinkedIn",
+      "kind": "certificate"
     }
   ],
   "service": [
@@ -539,5 +541,10 @@
       "place": "Academic and Research Conclave, Coimbatore"
     }
   ],
-  "community": "Through TOSS Charitable Trust I have helped build a network of more than 150 student and young-professional volunteers across three districts of Tamil Nadu. Its campaigns include the TOSS Talent Fest, a sports and cultural meet for differently-abled and special children now in its twelfth year; Operation Oxygen, a tree-planting programme; Clean Cauvery, a riverbank restoration campaign; Limitless, educational support for hearing-impaired learners; and street and school libraries."
+  "community": "Through TOSS Charitable Trust I have helped build a network of more than 150 student and young-professional volunteers across three districts of Tamil Nadu. Its campaigns include the TOSS Talent Fest, a sports and cultural meet for differently-abled and special children now in its twelfth year; Operation Oxygen, a tree-planting programme; Clean Cauvery, a riverbank restoration campaign; Limitless, educational support for hearing-impaired learners; and street and school libraries.",
+  "teachingSince": "2016-10-01",
+  "supervised": {
+    "count": 30,
+    "label": "students supervised in 2025–26: 15 projects and 15 internships"
+  }
 }
