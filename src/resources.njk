@@ -54,6 +54,24 @@ description: "Study notes, diagrams and OR Lab, free step-by-step Operations Res
   </section>
   {% endfor %}
 
+  <section class="notes-section" aria-labelledby="tools-title">
+    <div class="section-head">
+      <h2 id="tools-title">{{ orlab.name }} tools</h2>
+      <p class="section-note">{{ orlab.tools | dictsort | length }} tools for {{ orlab.paper }}, by unit</p>
+    </div>
+    <ul class="tool-grid">
+      {% for u in orlab.units %}{% for slug in u.tools %}{% set t = orlab.tools[slug] %}
+        <li class="note-card">
+          <div class="note-body">
+            <p class="card-meta"><span class="tag">Unit {{ u.no }}</span><span>{{ u.name }}</span></p>
+            <h3><a href="/tools/{{ slug }}/">{{ t.title }}</a></h3>
+            <p>{{ t.text }}</p>
+          </div>
+        </li>
+      {% endfor %}{% endfor %}
+    </ul>
+  </section>
+
   <section class="syllabus" aria-labelledby="syllabus-title">
     <div class="section-head">
       <h2 id="syllabus-title">Papers I teach</h2>
@@ -65,9 +83,10 @@ description: "Study notes, diagrams and OR Lab, free step-by-step Operations Res
           <ul class="area-courses">
             {% for c in a.courses %}
               {% set notes = collections.resources | byCourse(c.slug) %}
-              <li{% if notes.length %} class="has-notes"{% endif %}>
+              <li{% if notes.length or c.slug == "operations-research" %} class="has-notes"{% endif %}>
                 <span class="area-course">{{ c.title }}</span>
                 {% for n in notes %}<a class="area-note" href="{{ n.url }}">{{ n.data.title }}</a>{% endfor %}
+                {% if c.slug == "operations-research" %}<a class="area-note" href="/tools/">{{ orlab.name }} tools</a>{% endif %}
               </li>
             {% endfor %}
           </ul>

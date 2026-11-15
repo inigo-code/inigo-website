@@ -633,7 +633,7 @@ html.reveal-on .in.in { opacity: 1; translate: none; }
 /* Resources: note cards with their diagram */
 .notes-section, .syllabus { margin-bottom: clamp(3.5rem, 8vw, 6rem); }
 .section-note { color: var(--muted); font-weight: 600; font-size: .95rem; }
-.note-grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 21rem), 1fr)); gap: clamp(1rem, 2vw, 1.5rem); }
+.note-grid, .tool-grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 21rem), 1fr)); gap: clamp(1rem, 2vw, 1.5rem); }
 .note-card, .article-card {
   position: relative; display: flex; flex-direction: column;
   background: var(--surface); border-radius: var(--radius); overflow: hidden;
