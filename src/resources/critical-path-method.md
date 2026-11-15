@@ -112,9 +112,9 @@ Activities with zero total float are A, C, E and F. The **critical path is A →
 
 What this tells the manager: the layout, electrical work and furniture fitting need daily attention. Ordering furniture (B) and network cabling (D) can each slip by one day without moving the finish date.
 
-## Check your work with the simulator
+## Check your work in OR Lab
 
-I built the [Network Simulator](/tools/network/) in OR Lab for exactly this kind of problem. Enter each activity by its start and end event, as numbered in the network above (this example is already loaded there), and it draws the network, runs both passes, works out the floats and marks every critical path. Solve the problem by hand first, then use the simulator to check.
+I built [Network analysis](/tools/network/) in OR Lab for exactly this kind of problem. Enter each activity by its start and end event, as numbered in the network above (this example is already loaded there), and it draws the network, runs both passes, works out the floats and marks every critical path. Solve the problem by hand first, then use the tool to check.
 
 ## Common mistakes in exams
 

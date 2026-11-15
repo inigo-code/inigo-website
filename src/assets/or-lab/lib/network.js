@@ -1,5 +1,4 @@
-// Network analysis for an activity-on-arrow (i-j) project network: CPM, PERT and a
-// Monte Carlo simulation of the project time.
+// Network analysis for an activity-on-arrow (i-j) project network: CPM and PERT.
 //
 // Notation (as in B.B.A. textbooks):
 //   E(i), L(i)  earliest and latest time of event i
@@ -11,7 +10,7 @@
 //   PERT: te = (a + 4m + b) / 6, variance = ((b - a) / 6)^2
 // A dummy activity has duration 0 (a = m = b = 0 in PERT).
 
-import { EPS, clean, normCdf, normInv, rng } from "./num.js";
+import { EPS, clean, normCdf, normInv } from "./num.js";
 
 export const MAX_PATHS = 50;
 
@@ -50,7 +49,7 @@ export function validate(acts, mode = "cpm") {
   return errors;
 }
 
-// Build the event structure once; it is reused by every pass and every simulation run.
+// Build the event structure once; both passes use it.
 function structure(acts) {
   const nodes = [], seen = new Set(), succ = new Map(), pred = new Map();
   const add = (n) => { if (!seen.has(n)) { seen.add(n); nodes.push(n); succ.set(n, []); pred.set(n, []); } };
@@ -194,83 +193,4 @@ export function probabilityBy(Te, sd, T) {
 export function timeFor(Te, sd, p) {
   const z = normInv(p);
   return { z, T: Te + z * sd };
-}
-
-// ----- Monte Carlo simulation of the project time -----
-
-// Gamma(shape, 1) for shape >= 1 (Marsaglia and Tsang).
-function gamma(shape, rand) {
-  const d = shape - 1 / 3, c = 1 / Math.sqrt(9 * d);
-  for (;;) {
-    let x, v;
-    do {
-      // Standard normal by Box–Muller.
-      x = Math.sqrt(-2 * Math.log(1 - rand())) * Math.cos(2 * Math.PI * rand());
-      v = 1 + c * x;
-    } while (v <= 0);
-    v = v * v * v;
-    const u = rand();
-    if (u < 1 - 0.0331 * x ** 4) return d * v;
-    if (Math.log(u) < 0.5 * x * x + d * (1 - v + Math.log(v))) return d * v;
-  }
-}
-
-// One random activity time from (a, m, b).
-export function sampler(dist) {
-  if (dist === "triangular") {
-    return (a, m, b, rand) => {
-      if (b - a < EPS) return a;
-      const u = rand(), f = (m - a) / (b - a);
-      return u < f ? a + Math.sqrt(u * (b - a) * (m - a)) : b - Math.sqrt((1 - u) * (b - a) * (b - m));
-    };
-  }
-  if (dist === "uniform") return (a, m, b, rand) => a + (b - a) * rand();
-  // Beta-PERT: the beta distribution PERT assumes, with mean (a + 4m + b) / 6.
-  return (a, m, b, rand) => {
-    if (b - a < EPS) return a;
-    const al = 1 + 4 * (m - a) / (b - a), be = 1 + 4 * (b - m) / (b - a);
-    const x = gamma(al, rand), y = gamma(be, rand);
-    return a + (b - a) * x / (x + y);
-  };
-}
-
-// Run `runs` random projects. Returns the project times (sorted), summary statistics and,
-// for each activity, the share of runs in which it was critical.
-export function simulate(acts, { runs = 10000, seed = 1, dist = "beta" } = {}) {
-  const s = structure(acts);
-  if (s.loop) return { ok: false };
-  const rand = rng(seed), draw = sampler(dist);
-  const times = new Float64Array(runs), critCount = new Array(acts.length).fill(0);
-  const dur = new Array(acts.length);
-  for (let r = 0; r < runs; r++) {
-    for (let k = 0; k < acts.length; k++) dur[k] = draw(acts[k].a, acts[k].m, acts[k].b, rand);
-    const { early, late, total } = passes(acts, s, dur);
-    times[r] = total;
-    for (let k = 0; k < acts.length; k++) {
-      if (Math.abs(late.get(acts[k].end) - early.get(acts[k].start) - dur[k]) < 1e-7) critCount[k]++;
-    }
-  }
-  const sorted = Array.from(times).sort((x, y) => x - y);
-  const mean = sorted.reduce((a, b) => a + b, 0) / runs;
-  const sd = Math.sqrt(sorted.reduce((a, b) => a + (b - mean) ** 2, 0) / (runs - 1 || 1));
-  const quantile = (q) => sorted[Math.min(runs - 1, Math.max(0, Math.ceil(q * runs) - 1))];
-  return {
-    ok: true, runs, seed, dist, times: sorted, mean, sd,
-    min: sorted[0], max: sorted[runs - 1], quantile,
-    probBy: (T) => { // share of runs finishing on or before T
-      let lo = 0, hi = runs;
-      while (lo < hi) { const mid = (lo + hi) >> 1; if (sorted[mid] <= T + 1e-9) lo = mid + 1; else hi = mid; }
-      return lo / runs;
-    },
-    criticality: acts.map((x, k) => ({ id: x.id, share: critCount[k] / runs })),
-  };
-}
-
-// Equal-width bins for a histogram.
-export function histogram(sorted, bins = 30) {
-  const lo = sorted[0], hi = sorted[sorted.length - 1];
-  if (hi - lo < EPS) return [{ from: lo, to: hi, count: sorted.length }];
-  const w = (hi - lo) / bins, out = Array.from({ length: bins }, (_, i) => ({ from: lo + i * w, to: lo + (i + 1) * w, count: 0 }));
-  for (const x of sorted) out[Math.min(bins - 1, Math.floor((x - lo) / w))].count++;
-  return out;
 }

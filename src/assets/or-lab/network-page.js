@@ -1,6 +1,6 @@
-// Network Simulator page: CPM, PERT and a Monte Carlo simulation of the project time.
-import { h, s, $, messages, inputTable, tableValues, saveState, loadState, shareButton, scale, ticks, pct, block, scroller, resultTable, kv, fmt, parseNum } from "./ui.js";
-import { validate, cpm, pert, probabilityBy, timeFor, simulate, histogram } from "./lib/network.js";
+// Network analysis page: CPM and PERT for an arrow diagram.
+import { h, s, $, messages, inputTable, tableValues, saveState, loadState, shareButton, pct, block, scroller, resultTable, kv, fmt, parseNum } from "./ui.js";
+import { validate, cpm, pert, probabilityBy, timeFor } from "./lib/network.js";
 
 const EXAMPLES = {
   cpm: [["A", "1", "2", "3"], ["B", "1", "3", "4"], ["C", "2", "3", "2"], ["D", "2", "4", "5"], ["E", "3", "4", "4"], ["F", "4", "5", "3"]],
@@ -12,7 +12,7 @@ const HEAD = {
 };
 
 const root = $("#lab");
-let state = loadState() || { mode: "cpm", rows: EXAMPLES.cpm, target: "", prob: "0.95", runs: "10000", dist: "beta", seed: "1" };
+let state = loadState() || { mode: "cpm", rows: EXAMPLES.cpm, target: "", prob: "0.95" };
 let table, results, msgBox;
 
 function convertRows(rows, to) {
@@ -109,8 +109,8 @@ function showResults(acts, res) {
       h("p", {}, "Total float = L(j) − E(i) − t;  Free float = E(j) − E(i) − t;  Independent float = E(j) − L(i) − t (0 if negative)"),
       h("p", {}, "Highlighted rows are critical (total float 0)."))));
 
-  if (state.mode === "pert") blocks.push(probabilityBlock(res), simulationBlock(acts, res));
-  else blocks.push(block("Uncertain times?", h("p", { class: "lab-hint", html: "Switch to <strong>PERT: three time estimates</strong> above to work out the probability of finishing by a date, and to <strong>simulate</strong> the project thousands of times." })));
+  if (state.mode === "pert") blocks.push(probabilityBlock(res));
+  else blocks.push(block("Uncertain times?", h("p", { class: "lab-hint", html: "Switch to <strong>PERT: three time estimates</strong> above to work out the expected project time and the probability of finishing by a date." })));
 
   blocks.push(h("div", { class: "lab-actions" }, shareButton(), h("button", { type: "button", class: "button ghost lab-small", onclick: () => print() }, "Print")));
   results.replaceChildren(...blocks);
@@ -151,52 +151,6 @@ function probabilityBlock(res) {
     h("div", { class: "lab-controls" }, h("div", { class: "lab-field w-m" }, h("label", { for: "pert-p" }, "Wanted probability"), pIn)), out2);
   update();
   return box;
-}
-
-function simulationBlock(acts, res) {
-  const runs = h("select", { id: "sim-runs" }, ["1000", "10000", "50000"].map((v) => h("option", { value: v, selected: state.runs === v }, Number(v).toLocaleString("en-IN"))));
-  const dist = h("select", { id: "sim-dist" }, [["beta", "Beta (PERT)"], ["triangular", "Triangular"], ["uniform", "Uniform a to b"]].map(([v, t]) => h("option", { value: v, selected: state.dist === v }, t)));
-  const seed = h("input", { type: "text", inputmode: "numeric", id: "sim-seed", value: state.seed || "1" });
-  const out = h("div", { class: "lab-results", tabindex: "-1" });
-  const go = () => {
-    state.runs = runs.value; state.dist = dist.value; state.seed = seed.value;
-    const sd = Math.max(1, Math.floor(parseNum(seed.value)) || 1);
-    const sim = simulate(acts, { runs: Number(runs.value), seed: sd, dist: dist.value });
-    saveState(state);
-    out.replaceChildren(...simResults(sim, res));
-  };
-  return block("Monte Carlo simulation",
-    h("div", { class: "lab-prose" },
-      h("p", {}, "PERT gives one answer from one path. A simulation instead plays the project out thousands of times: in each run every activity gets a random time between a and b, the critical path is found again, and the finishing time is recorded. The spread of those finishing times shows the real risk, including runs where a different path becomes critical."),
-      h("p", { class: "lab-hint" }, "The seed makes a run repeatable: the same seed always gives the same random times, so a class can compare answers.")),
-    h("div", { class: "lab-controls" },
-      h("div", { class: "lab-field w-m" }, h("label", { for: "sim-runs" }, "Number of runs"), runs),
-      h("div", { class: "lab-field w-m" }, h("label", { for: "sim-dist" }, "Random times drawn from"), dist),
-      h("div", { class: "lab-field w-s" }, h("label", { for: "sim-seed" }, "Seed"), seed),
-      h("button", { type: "button", class: "button", onclick: go }, "Run the simulation")),
-    out);
-}
-
-function simResults(sim, res) {
-  const T = parseNum(state.target);
-  const hasT = Number.isFinite(T);
-  const pertP = hasT ? probabilityBy(res.total, res.sd, T).p : null;
-  const figs = [
-    ["Average finishing time", fmt(sim.mean, 2), `PERT expected time: ${fmt(res.total)}`],
-    ["Standard deviation", fmt(sim.sd, 2), `PERT σ: ${fmt(res.sd, 2)}`],
-    ["Shortest and longest run", `${fmt(sim.min, 1)} – ${fmt(sim.max, 1)}`, null],
-    ["Finished by (90% of runs)", fmt(sim.quantile(0.9), 2), null],
-  ];
-  if (hasT) figs.push([`Chance of finishing within ${fmt(T)}`, pct(sim.probBy(T)), `PERT formula: ${pct(pertP)}`]);
-  const kids = [kv(figs.map(([k, v, small]) => [k, small ? h("span", {}, v, h("small", {}, small)) : v]))];
-  kids.push(h("figure", { class: "lab-figure" }, histogramSvg(sim, res, hasT ? T : null),
-    h("figcaption", {}, `How often each finishing time came up in ${sim.runs.toLocaleString("en-IN")} runs. The curve is the normal distribution PERT assumes (mean Te, standard deviation σ).${hasT ? " The red line is the target time." : ""}`)));
-  const diff = sim.mean - res.total;
-  if (diff > 0.05 * (res.sd || 1)) kids.push(h("p", { class: "lab-hint" }, `The simulated average (${fmt(sim.mean, 2)}) is later than PERT's Te (${fmt(res.total)}). PERT follows only the critical path; when another path is nearly as long, it sometimes takes over and pushes the finish later.`));
-  kids.push(h("h3", { class: "lab-h" }, "How often each activity was critical"));
-  kids.push(scroller(resultTable(["Activity", "Critical in", "PERT says"],
-    sim.criticality.map((c, k) => [c.id, { node: h("span", {}, pct(c.share), h("span", { class: "lab-meter", "aria-hidden": "true" }, h("b", { style: `width:${(c.share * 100).toFixed(1)}%` }))) }, res.rows[k].critical ? "critical" : "not critical"]))));
-  return kids;
 }
 
 // ----- drawings -----
@@ -270,34 +224,6 @@ function diagram(res) {
       s("text", { x, y: y + 12, class: `g-node-text${crit ? " g-on-accent" : ""}`, "font-size": 11 }, `${fmt(res.early.get(n), 2)} | ${fmt(res.late.get(n), 2)}`)));
   }
   return h("figure", { class: "lab-figure wide" }, svg);
-}
-
-function histogramSvg(sim, res, T) {
-  const W = 680, H = 280, m = { l: 48, r: 16, t: 16, b: 40 };
-  const bins = histogram(sim.times, 32);
-  const lo = Math.min(bins[0].from, res.total - 3 * res.sd), hi = Math.max(bins.at(-1).to, res.total + 3 * res.sd, T ?? -Infinity);
-  const x = scale(lo, hi, m.l, W - m.r);
-  const w = bins[0].to - bins[0].from || 1;
-  const pdf = (v) => (res.sd > 0 ? Math.exp(-(((v - res.total) / res.sd) ** 2) / 2) / (res.sd * Math.sqrt(2 * Math.PI)) : 0);
-  const curveMax = res.sd > 0 ? sim.runs * w * pdf(res.total) : 0;
-  const top = Math.max(...bins.map((b) => b.count), curveMax) * 1.08;
-  const y = scale(0, top, H - m.b, m.t);
-  const svg = s("svg", { viewBox: `0 0 ${W} ${H}`, role: "img", "aria-label": `Histogram of simulated finishing times from ${fmt(sim.min, 1)} to ${fmt(sim.max, 1)}, average ${fmt(sim.mean, 2)}.` });
-  for (const t of ticks(0, top, 4)) svg.append(s("line", { x1: m.l, x2: W - m.r, y1: y(t), y2: y(t), class: "g-grid" }), s("text", { x: m.l - 6, y: y(t) + 4, "text-anchor": "end", class: "g-small" }, t.toLocaleString("en-IN")));
-  for (const b of bins) {
-    const on = T !== null && b.to <= T + 1e-9;
-    svg.append(s("rect", { x: x(b.from) + 0.5, y: y(b.count), width: Math.max(0.5, x(b.to) - x(b.from) - 1), height: y(0) - y(b.count), class: on ? "g-bar-on" : "g-bar" }));
-  }
-  if (res.sd > 0) {
-    const pts = [];
-    for (let i = 0; i <= 120; i++) { const v = lo + (hi - lo) * i / 120; pts.push(`${x(v).toFixed(1)},${y(sim.runs * w * pdf(v)).toFixed(1)}`); }
-    svg.append(s("polyline", { points: pts.join(" "), class: "g-curve" }));
-  }
-  svg.append(s("line", { x1: m.l, x2: W - m.r, y1: y(0), y2: y(0), class: "g-axis" }));
-  for (const t of ticks(lo, hi, 8)) svg.append(s("line", { x1: x(t), x2: x(t), y1: y(0), y2: y(0) + 5, class: "g-axis" }), s("text", { x: x(t), y: H - m.b + 20, "text-anchor": "middle", class: "g-small" }, fmt(t)));
-  svg.append(s("text", { x: (m.l + W - m.r) / 2, y: H - 4, "text-anchor": "middle", class: "g-small" }, "Project finishing time"));
-  if (T !== null) svg.append(s("line", { x1: x(T), x2: x(T), y1: m.t, y2: y(0), class: "g-mark" }), s("text", { x: x(T) + 5, y: m.t + 12, class: "g-mark-text" }, `T = ${fmt(T)}`));
-  return svg;
 }
 
 // ----- start -----

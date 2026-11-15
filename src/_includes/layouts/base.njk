@@ -71,7 +71,7 @@
           ["/contact/", "Contact"]
         ] %}
         {% for item in navItems %}
-          <a href="{{ item[0] }}"{% if (item[0] == "/" and page.url == "/") or (item[0] != "/" and page.url.startsWith(item[0])) %} aria-current="page"{% endif %}>{{ item[1] }}</a>
+          <a href="{{ item[0] }}"{% if (item[0] == "/" and page.url == "/") or (item[0] != "/" and page.url.startsWith(item[0])) or (item[0] == "/resources/" and page.url.startsWith("/tools/")) %} aria-current="page"{% endif %}>{{ item[1] }}</a>
         {% endfor %}
       </nav>
     </div>

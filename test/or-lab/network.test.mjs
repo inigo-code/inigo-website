@@ -1,7 +1,7 @@
 // Network analysis checked against examples worked out by hand.
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { cpm, pert, validate, probabilityBy, timeFor, simulate, histogram } from "../../src/assets/or-lab/lib/network.js";
+import { cpm, pert, validate, probabilityBy, timeFor } from "../../src/assets/or-lab/lib/network.js";
 import { normCdf, normInv } from "../../src/assets/or-lab/lib/num.js";
 
 const A = (rows) => rows.map(([id, start, end, t]) => ({ id, start, end, t }));
@@ -113,30 +113,4 @@ test("probability edge cases", () => {
   assert.equal(normCdf(1.96).toFixed(4), "0.9750");
   assert.equal(normCdf(-1).toFixed(4), "0.1587");
   assert.equal(normInv(0.95).toFixed(3), "1.645");
-});
-
-test("Monte Carlo simulation agrees with the PERT formula on a single chain", () => {
-  // One chain, so the project time is a plain sum. A Beta-PERT time has mean exactly (a + 4m + b)/6,
-  // so the simulated mean should be close to te = 4 + 6 + 6 = 16.
-  const acts = P([["A", "1", "2", 2, 4, 6], ["B", "2", "3", 3, 5, 13], ["C", "3", "4", 4, 6, 8]]);
-  const sim = simulate(acts, { runs: 20000, seed: 7 });
-  assert.ok(Math.abs(sim.mean - 16) < 0.05, `mean ${sim.mean}`);
-  // Triangular times have mean (a + m + b)/3: 4 + 7 + 6 = 17.
-  const tri = simulate(acts, { runs: 20000, seed: 7, dist: "triangular" });
-  assert.ok(Math.abs(tri.mean - 17) < 0.05, `triangular mean ${tri.mean}`);
-});
-
-test("Monte Carlo is repeatable and finds criticality", () => {
-  const acts = P([["A", "1", "2", 2, 4, 6], ["B", "1", "3", 3, 5, 13], ["C", "2", "4", 1, 2, 3], ["D", "3", "4", 2, 3, 10], ["E", "4", "5", 4, 6, 8]]);
-  const a = simulate(acts, { runs: 5000, seed: 3 }), b = simulate(acts, { runs: 5000, seed: 3 });
-  assert.equal(a.mean, b.mean);
-  const crit = Object.fromEntries(a.criticality.map((c) => [c.id, c.share]));
-  assert.equal(crit.E, 1); // every path goes through E
-  assert.ok(crit.B > 0.9 && crit.A < 0.1);
-  assert.ok(Math.abs(crit.A + crit.B - 1) < 1e-9); // exactly one branch is critical in each run
-  assert.ok(a.mean > 16); // merging paths push the mean above the PERT estimate
-  assert.ok(a.probBy(a.max) === 1 && a.probBy(a.min - 1) === 0);
-  const h = histogram(a.times, 20);
-  assert.equal(h.reduce((s, x) => s + x.count, 0), 5000);
-  for (const dist of ["triangular", "uniform"]) assert.ok(simulate(acts, { runs: 500, dist }).ok);
 });

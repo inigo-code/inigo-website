@@ -166,14 +166,9 @@
 .g-halo { paint-order: stroke; stroke: var(--bg); stroke-width: 4px; stroke-linejoin: round; }
 .g-opt { fill: var(--ink); stroke: var(--accent); stroke-width: 3; }
 .g-pt { fill: var(--bg); stroke: var(--ink); stroke-width: 2; }
-.g-bar { fill: var(--muted); }
-.g-bar-on { fill: var(--ink); }
-.g-mark { stroke: #a12a1a; stroke-width: 2.5; fill: none; }
-.g-mark-text { fill: #a12a1a; font-size: 12.5px; font-weight: 700; }
-.g-curve { stroke: var(--ink); stroke-width: 2.5; fill: none; }
 .g-head { fill: var(--muted); }
 .g-head-crit { fill: var(--ink); }
-@media (prefers-color-scheme: dark) { .g-mark { stroke: #ff9b85; } .g-mark-text { fill: #ff9b85; } .g-region { fill-opacity: .28; } }
+@media (prefers-color-scheme: dark) { .g-region { fill-opacity: .28; } }
 
 .lab-legend { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; color: var(--muted); font-size: .875rem; margin-top: .6rem; padding: 0 .25rem; }
 .lab-legend span { display: inline-flex; align-items: center; gap: .45rem; }

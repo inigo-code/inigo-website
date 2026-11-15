@@ -179,7 +179,7 @@ test("CPM: random networks agree with listing every path", () => {
   }
 });
 
-test("PERT: random networks; with a = m = b every simulated run equals CPM", () => {
+test("PERT: random networks agree with listing every path; with a = m = b PERT equals CPM", () => {
   const g = R(22);
   for (let t = 0; t < 600 * K; t++) {
     const base = randomNetwork(g, false);
@@ -196,15 +196,10 @@ test("PERT: random networks; with a = m = b every simulated run equals CPM", () 
     const crit = e.paths.filter((p) => Math.abs(p.len - e.total) < 1e-7);
     const vmax = Math.max(...crit.map((p) => p.chain.reduce((s, k) => s + ((acts[k].b - acts[k].a) / 6) ** 2, 0)));
     if (crit.length <= net.MAX_PATHS) assert.ok(close(res.variance, vmax, 1e-9), `${tag}: variance ${res.variance} vs ${vmax}`);
-    // Every run's project time is at least as long as any path in that run, so the mean is at least
-    // roughly the PERT time (allowing for sampling error).
-    const sim = net.simulate(acts, { runs: 400, seed: t + 1 });
-    assert.ok(sim.ok && sim.mean >= res.total - 4 * (res.sd + 0.01) / Math.sqrt(400) * 3, `${tag}: mean ${sim.mean} vs ${res.total}`);
-    assert.ok(sim.min >= Math.max(...crit.map((p) => p.chain.reduce((s, k) => s + acts[k].a, 0))) - 1e-9, tag);
+    assert.ok(close(res.sd, Math.sqrt(res.variance), 1e-12), tag);
     const fixed = acts.map((x) => ({ ...x, a: x.m, b: x.m }));
-    const sim2 = net.simulate(fixed, { runs: 20, seed: 3 });
-    const cpmT = net.cpm(fixed.map((x) => ({ ...x, t: x.m }))).total;
-    assert.ok(sim2.times.every((v) => close(v, cpmT, 1e-9)), tag);
+    const p2 = net.pert(fixed), cpmT = net.cpm(fixed.map((x) => ({ ...x, t: x.m }))).total;
+    assert.ok(close(p2.total, cpmT, 1e-9) && p2.variance === 0, tag);
   }
 });
 

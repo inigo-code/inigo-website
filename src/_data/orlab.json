@@ -16,6 +16,6 @@
     "queuing": { "title": "Single-server queue", "text": "The M/M/1 model: utilisation, the chance the server is idle, expected numbers in the queue and in the system, waiting times, and the probability of n customers, with each formula shown." },
     "monte-carlo": { "title": "Monte Carlo simulation", "text": "Turns a probability table into random-number ranges and simulates with your own random numbers or generated ones. Covers one variable (such as daily demand) and a single-server queue." },
     "games": { "title": "Game theory", "text": "Two-person zero-sum games: maximin and minimax, saddle points, dominance step by step, the 2 × 2 formula and the graphical method for 2 × n and m × 2 games." },
-    "network": { "title": "Network Simulator", "text": "CPM and PERT for an arrow diagram: earliest and latest event times, total, free and independent float, every critical path, and the probability of finishing by a date. Then a Monte Carlo simulation runs the project thousands of times." }
+    "network": { "title": "Network analysis", "text": "CPM and PERT for an arrow diagram: earliest and latest event times, total, free and independent float, every critical path, the expected project time and its variance, and the probability of finishing by a date." }
   }
 }
