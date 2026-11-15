@@ -1,9 +1,9 @@
 // Time series trend by semi-averages and by moving averages, and the index numbers of
 // Laspeyres, Paasche and Fisher, with the time-reversal and factor-reversal tests.
 
-import { clean } from "../../or-lab/lib/num.js";
+import { tidy as clean, tsum } from "./tidy.js";
 
-const sum = (a) => a.reduce((s, v) => s + v, 0);
+const sum = tsum;
 
 export function validateSeries(t, y) {
   const errors = [];
@@ -67,6 +67,8 @@ export function validateIndex(items) {
   if (!errors.length) {
     const t = totals(items);
     if (t.p0q0 === 0 || t.p0q1 === 0) errors.push("The base-year values Σp₀q₀ and Σp₀q₁ must be more than zero.");
+    // The reversal tests divide by the current-year values as well.
+    else if (t.p1q0 === 0 || t.p1q1 === 0) errors.push("The current-year values Σp₁q₀ and Σp₁q₁ must be more than zero: at least one item needs a current-year price above zero.");
   }
   return errors;
 }

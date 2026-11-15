@@ -7,7 +7,13 @@ const P = (fav, total, words) => {
   const p = new F(BigInt(fav), BigInt(total));
   return { p, line: `P(${words}) = favourable / total = ${big(fav)} / ${big(total)}${p.n !== BigInt(fav) ? ` = ${p}` : ""}` };
 };
-const probAnswer = (words, p) => answer(`P(${words})`, fracText(p), h("p", {}, p.isZero() ? "It cannot happen." : p.eq(new F(1n)) ? "It is certain." : `About ${fmt(p.toNumber() * 100, 2)}% of the time.`));
+// 3.4694 × 10⁻¹⁸ for a probability too small to show in four decimals.
+const sci = (x) => { const e = Math.floor(Math.log10(x)); return `${Number((x / 10 ** e).toFixed(4))} × 10${String(e).replace("-", "⁻").replace(/\d/g, (d) => "⁰¹²³⁴⁵⁶⁷⁸⁹"[d])}`; };
+const probAnswer = (words, p) => {
+  const x = p.toNumber(), tiny = x > 0 && x < 0.00005;
+  return answer(`P(${words})`, tiny ? `${p} ≈ ${sci(x)}` : fracText(p),
+    h("p", {}, p.isZero() ? "It cannot happen." : p.eq(new F(1n)) ? "It is certain." : tiny ? "Less than 0.01% of the time: practically never." : `About ${fmt(x * 100, 2)}% of the time.`));
+};
 
 const EVENTS = [["eq", "Exactly"], ["ge", "At least"], ["le", "At most"]];
 const evWord = { eq: "exactly", ge: "at least", le: "at most" };

@@ -2,13 +2,13 @@
 layout: layouts/base.njk
 ---
 {% from "icons.njk" import icon %}
-<a class="lab-strip" href="/tools/">
-  <span class="wrap lab-strip-inner">
+<div class="lab-strip">
+  <div class="wrap lab-strip-inner">
     <span class="lab-new"><svg class="lab-new-icon" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C8.6 4.6 11.4 7.4 16 8 11.4 8.6 8.6 11.4 8 16 7.4 11.4 4.6 8.6 0 8 4.6 7.4 7.4 4.6 8 0Z"/></svg>New</span>
-    <span class="lab-strip-text"><strong>{{ orlab.name }}</strong><span class="lab-strip-long">: free step-by-step tools for every unit of Operations Research</span><span class="lab-strip-short">: step-by-step tools</span></span>
-    <span class="lab-strip-go"><span class="lab-strip-open">Open</span> <span aria-hidden="true">→</span></span>
-  </span>
-</a>
+    <span class="lab-strip-text"><span class="lab-strip-long">Free step-by-step tools for Operations Research and for Business Mathematics and Statistics</span><span class="lab-strip-mid">Free step-by-step tools</span><span class="lab-strip-short">Free tools</span></span>
+    <span class="lab-strip-links"><a href="/tools/">{{ orlab.name }} <span aria-hidden="true">→</span></a><a href="/tools/stats/">{{ statlab.name }} <span aria-hidden="true">→</span></a></span>
+  </div>
+</div>
 <section class="hero">
   <div class="wrap hero-grid">
     <div class="hero-text">

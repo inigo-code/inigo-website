@@ -7,6 +7,9 @@
 .lab-hint { color: var(--muted); font-size: .95rem; max-width: 46rem; }
 .lab-hint strong { color: var(--ink); }
 .lab-block { min-width: 0; }
+/* Everything inside a result section gets the same space above it, so a hint, a formula and a
+   table never touch. */
+.lab-results .lab-block > * + * { margin-top: 1rem; }
 .lab-block + .lab-block { border-top: 2px solid var(--ink); padding-top: clamp(1.5rem, 4vw, 2.25rem); }
 .lab-results { display: grid; gap: clamp(2rem, 5vw, 3rem); min-width: 0; }
 .lab-results:empty { display: none; }

@@ -18,7 +18,7 @@ let results, msgBox, f;
 
 function distEditor(key, title) {
   const table = inputTable({ head: ["Value", "Probability or frequency"], rows: state[key], onRemove: (i) => { read(); state[key].splice(i, 1); drawInputs(); } });
-  return { table, el: h("div", { class: "lab-dist" }, h("h3", { class: "lab-sub" }, title), table,
+  return { table, el: h("div", { class: "lab-dist" }, h("h3", { class: "lab-sub" }, title), scroller(table, title),
     h("div", { class: "lab-actions" }, h("button", { type: "button", class: "button ghost lab-small", onclick: () => { read(); state[key].push(["", ""]); drawInputs(); } }, "+ Add row"))) };
 }
 

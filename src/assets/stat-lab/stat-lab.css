@@ -7,7 +7,7 @@
   font-variant-numeric: tabular-nums; text-align: right; line-height: 1.5;
 }
 .mx.is-det { border-radius: 0; }
-.mx-line { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem; margin: .4rem 0; font-variant-numeric: tabular-nums; }
+.mx-line { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem; font-variant-numeric: tabular-nums; }
 .mx-line + .mx-line { margin-top: .75rem; }
 .mx-list { display: grid; gap: .9rem; }
 
@@ -37,3 +37,14 @@
 .lab-legend i.ink-dash { border-top: 2px dashed var(--ink); }
 @media (max-width: 600px) { .mx { gap: .1rem .6rem; padding: .25rem .45rem; } .lab-field.w-l { width: 100%; } }
 .ov { text-decoration: overline; text-decoration-thickness: .07em; }
+/* A matrix wider than the screen scrolls sideways instead of being cut off. */
+.mx { max-width: 100%; overflow-x: auto; }
+.mx-line > * { min-width: 0; max-width: 100%; }
+/* Long exact answers (big fractions, 45-letter words) wrap instead of widening the answer box. */
+.lab-answer { min-width: 0; overflow-wrap: anywhere; }
+.lab-answer { grid-template-columns: minmax(0, 1fr); }
+.lab-answer > * { min-width: 0; }
+.mx-list { grid-template-columns: minmax(0, 1fr); }
+.mx-line { min-width: 0; overflow-wrap: anywhere; }
+/* An entry such as −1931/15335 never breaks across lines; the matrix scrolls instead. */
+.mx > span { white-space: nowrap; overflow-wrap: normal; }

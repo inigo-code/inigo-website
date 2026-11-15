@@ -100,7 +100,8 @@ const MODES = {
       if (rows.length < 2) errors.push("Enter at least two times.");
       if (errors.length) return { errors };
       const rate = t.reduce((s, f) => s.add(new F(1n).div(f)), new F(0n));
-      const parts = t.map((f) => (f.sign() < 0 ? `− 1/${f.neg()}` : `+ 1/${f}`)).join(" ").replace(/^\+ /, "");
+      const one = new F(1n), rateOf = (f) => (f.isInt() ? `1/${f}` : String(one.div(f)));
+      const parts = t.map((f) => (f.sign() < 0 ? `− ${rateOf(f.neg())}` : `+ ${rateOf(f)}`)).join(" ").replace(/^\+ /, "");
       if (rate.sign() <= 0) return [answer("The work is never finished", rate.isZero() ? "Rates cancel" : "It empties faster"), block("Working", formula(`Work done in one unit of time = ${parts} = ${rate}`), h("p", { class: "lab-hint" }, "The emptying is at least as fast as the filling, so the tank never fills."))];
       const time = new F(1n).div(rate);
       return [answer("Together they finish in", fracText(time)),

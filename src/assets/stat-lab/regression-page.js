@@ -38,6 +38,7 @@ function read() {
 
 // "Y = 0.6X + 2.2", "X = Y − 1", as written in textbooks.
 const line = (L, a, b, R) => {
+  if (fmt(b) === "0") return `${L} = ${fmt(a)}`; // r = 0: the line is flat at the mean
   const c = fmt(b) === "1" ? "" : fmt(b) === "−1" ? "−" : fmt(b);
   return `${L} = ${c}${R}${fmt(a) === "0" ? "" : ` ${a < 0 ? "−" : "+"} ${fmt(Math.abs(a))}`}`;
 };

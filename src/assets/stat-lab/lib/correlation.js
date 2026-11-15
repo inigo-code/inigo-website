@@ -3,9 +3,9 @@
 //   Spearman: R = 1 − 6 (ΣD² + Σ(m³ − m)/12) / (n³ − n), tied values getting the average rank.
 //   Regression: Y on X: Y − Ȳ = byx (X − X̄), byx = Σxy / Σx²; X on Y: X − X̄ = bxy (Y − Ȳ), bxy = Σxy / Σy².
 
-import { clean } from "../../or-lab/lib/num.js";
+import { tidy as clean, tsum } from "./tidy.js";
 
-const sum = (a) => a.reduce((s, v) => s + v, 0);
+const sum = tsum;
 
 export function validatePairs(X, Y, { needSpread = true } = {}) {
   const errors = [];
@@ -20,7 +20,7 @@ export function validatePairs(X, Y, { needSpread = true } = {}) {
 }
 
 export function pearson(X, Y) {
-  const n = X.length, mx = sum(X) / n, my = sum(Y) / n;
+  const n = X.length, mx = clean(sum(X) / n), my = clean(sum(Y) / n);
   const rows = X.map((x, i) => { const dx = clean(x - mx), dy = clean(Y[i] - my); return { x, y: Y[i], dx, dy, dx2: clean(dx * dx), dy2: clean(dy * dy), dxdy: clean(dx * dy) }; });
   const Sxy = clean(sum(rows.map((r) => r.dxdy))), Sxx = clean(sum(rows.map((r) => r.dx2))), Syy = clean(sum(rows.map((r) => r.dy2)));
   const r = clean(Sxy / Math.sqrt(Sxx * Syy));

@@ -59,7 +59,7 @@ function semiBlocks(t, y) {
   const span = (P) => `${yr(P.t[0])} to ${yr(P.t.at(-1))}`;
   const half = (P, name) => `${name} (${span(P)}): (${P.y.map((q) => fmt(q)).join(" + ")}) / ${P.y.length} = ${fmt(P.sumY)} / ${P.y.length} = ${fmt(P.avg)}, placed at the middle year ${yr(P.mid)}`;
   const dir = r.slope > 0 ? "rises" : r.slope < 0 ? "falls" : "does not change";
-  const eqn = `Trend = ${fmt(r.A.avg)} ${r.slope < 0 ? "−" : "+"} ${fmt(Math.abs(r.slope))} × (Year − ${yr(r.A.mid)})`;
+  const eqn = fmt(r.slope) === "0" ? `Trend = ${fmt(r.A.avg)}` : `Trend = ${fmt(r.A.avg)} ${r.slope < 0 ? "−" : "+"} ${fmt(Math.abs(r.slope))} × (Year − ${yr(r.A.mid)})`;
   const blocks = [
     answer("Trend by semi-averages", eqn, h("p", {}, `The trend ${dir}${r.slope ? ` by ${fmt(Math.abs(r.slope))} a year` : ""}.`)),
     block("Semi-averages", r.odd ? h("p", { class: "lab-hint" }, `There are ${t.length} years, an odd number, so the middle year ${yr(r.left.t)} (value ${fmt(r.left.y)}) is left out.`) : null,
@@ -85,7 +85,7 @@ function semiBlocks(t, y) {
 function movingBlocks(t, y, k) {
   const m = T.movingAverage(t, y, k);
   const have = m.rows.filter((r) => r.trend !== undefined), e = m.even ? k / 2 : (k - 1) / 2;
-  const blocks = [answer(`${k}-yearly moving averages`, `${have.length} trend values`, h("p", {}, `From ${yr(have[0].t)} to ${yr(have.at(-1).t)}. There is no trend value for the first ${e} and the last ${e} year${e > 1 ? "s" : ""}.`))];
+  const blocks = [answer(`${k}-yearly moving averages`, `${have.length} trend values`, h("p", {}, `From ${yr(have[0].t)} to ${yr(have.at(-1).t)}. There is no trend value for ${e === 1 ? "the first and the last year" : `the first ${e} and the last ${e} years`}.`))];
   if (!m.even) {
     blocks.push(block("Working table", h("p", { class: "lab-hint" }, `Each ${k}-yearly total adds the year's value and the ${(k - 1) / 2} on either side of it. The moving average is that total ÷ ${k}.`),
       scroller(resultTable(["Year", "Value", `${k}-yearly total`, `Moving average (÷ ${k})`], m.rows.map((r) => [yr(r.t), fmt(r.y), r.total === undefined ? "" : fmt(r.total), r.trend === undefined ? "" : fmt(r.trend)])), "Working table")));

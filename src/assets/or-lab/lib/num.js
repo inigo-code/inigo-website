@@ -13,6 +13,11 @@ export const fmt = (x, dp = 4) => {
   if (x === Infinity) return "∞";
   if (x === -Infinity) return "−∞";
   if (Number.isNaN(x)) return "–";
+  // Beyond a thousand trillion the digits are no longer exact, so write a power of ten: 8.8077 × 10¹⁶⁰.
+  if (Math.abs(x) >= 1e15) {
+    const e = Math.floor(Math.log10(Math.abs(x))), m = Number((x / 10 ** e).toFixed(4));
+    return `${String(m).replace("-", "−")} × 10${String(e).replace(/\d/g, (d) => "⁰¹²³⁴⁵⁶⁷⁸⁹"[d])}`;
+  }
   const c = clean(x), r = Number(c.toFixed(dp));
   // A small number that is not zero, such as a rate of 0.00002 per day, keeps 4 significant digits.
   if (r === 0 && c !== 0) return c.toLocaleString("en-IN", { maximumSignificantDigits: 4, maximumFractionDigits: 20 }).replace("-", "−");

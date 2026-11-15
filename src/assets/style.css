@@ -258,6 +258,7 @@ html.reveal-on .in.in { opacity: 1; translate: none; }
 
 /* What I do: three big words */
 .roles { padding-block: var(--section) calc(var(--section) * .75); }
+.hero + .roles { padding-top: clamp(2.5rem, 5vw, 4rem); }
 .role-list { list-style: none; margin: 0; padding: 0; border-top: 2px solid var(--ink); }
 .role-list a {
   position: relative; isolation: isolate;
@@ -274,22 +275,25 @@ html.reveal-on .in.in { opacity: 1; translate: none; }
 .role-list a:hover .role-word { transform: translateX(.75rem); }
 .role-text { font-size: 1.1rem; line-height: 1.5; max-width: 30rem; }
 /* Home: OR Lab, a narrow highlighter strip just under the top bar, marked New */
-.lab-strip { display: block; background: var(--accent); color: var(--accent-ink); text-decoration: none; }
-.lab-strip-inner { display: flex; align-items: center; gap: .75rem; min-height: 2.75rem; padding-block: .45rem; font-size: .95rem; line-height: 1.35; }
+.lab-strip { background: var(--accent); color: var(--accent-ink); }
+.lab-strip-inner { display: flex; align-items: center; gap: .75rem; min-height: 2.75rem; font-size: .95rem; line-height: 1.35; }
 .lab-new { display: inline-flex; align-items: center; gap: .3rem; flex-shrink: 0; background: var(--accent-ink); color: var(--accent); font-weight: 700; font-size: .8rem; padding: .2rem .6rem .2rem .45rem; border-radius: 999px; }
 .lab-new-icon { width: .8rem; height: .8rem; fill: currentColor; animation: lab-twinkle 3s var(--ease) infinite; }
 /* A four-point star looks the same after a quarter turn, so the loop has no seam. */
 @keyframes lab-twinkle { 0% { transform: rotate(0) scale(1); } 25% { transform: rotate(45deg) scale(1.3); } 50%, 100% { transform: rotate(90deg) scale(1); } }
-.lab-strip-text { flex: 1; min-width: 0; }
-.lab-strip-text strong { font-weight: 700; }
-.lab-strip-short { display: none; }
-.lab-strip-go { flex-shrink: 0; font-weight: 600; white-space: nowrap; }
-.lab-strip-go span[aria-hidden] { display: inline-block; transition: transform .3s var(--ease); }
-.lab-strip:hover .lab-strip-go span[aria-hidden] { transform: translateX(4px); }
-.lab-strip:hover .lab-strip-text strong { text-decoration: underline; text-underline-offset: .2em; }
-.lab-strip:focus-visible { outline: 3px solid var(--accent-ink); outline-offset: -5px; box-shadow: none; border-radius: 0; }
-@media (max-width: 600px) { .lab-strip-long, .lab-strip-open { display: none; } .lab-strip-short { display: inline; } .lab-strip-inner { gap: .6rem; } }
-@media (prefers-reduced-motion: reduce) { .lab-new-icon { animation: none; } .lab-strip-go span[aria-hidden] { transition: none; } }
+.lab-strip-text { flex: 1; min-width: 0; padding-block: .45rem; }
+.lab-strip-mid, .lab-strip-short { display: none; }
+.lab-strip-links { display: flex; flex-shrink: 0; gap: 1.5rem; }
+.lab-strip-links a { display: inline-flex; align-items: center; gap: .3rem; min-height: 2.75rem; color: inherit; font-weight: 700; white-space: nowrap; text-decoration: none; }
+.lab-strip-links a:hover { text-decoration: underline; text-underline-offset: .2em; }
+.lab-strip-links a span { display: inline-block; transition: transform .3s var(--ease); }
+.lab-strip-links a:hover span { transform: translateX(3px); }
+.lab-strip-links a:focus-visible { outline: 3px solid var(--accent-ink); outline-offset: 2px; box-shadow: none; }
+@media (max-width: 1000px) { .lab-strip-long { display: none; } .lab-strip-mid { display: inline; } }
+@media (max-width: 600px) { .lab-strip-mid { display: none; } .lab-strip-short { display: inline; } .lab-strip-inner { gap: .6rem; } .lab-strip-links { gap: 1rem; } }
+@media (prefers-reduced-motion: reduce) { .lab-new-icon { animation: none; } .lab-strip-links a span { transition: none; } }
+/* With the strip above it, the hero needs less air at the top. */
+.lab-strip + .hero { padding-top: clamp(2.25rem, 5vw, 3.5rem); }
 .role-cta { font-weight: 600; white-space: nowrap; display: inline-flex; gap: .4rem; }
 .role-cta span { transition: transform .3s var(--ease); }
 .role-list a:hover .role-cta span { transform: translateX(4px); }

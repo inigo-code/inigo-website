@@ -7,9 +7,9 @@
 // (individual series interpolate between items); N/2, N/4 and 3N/4 for continuous series.
 // Standard deviation divides by n (the population formula used in these textbooks).
 
-import { clean } from "../../or-lab/lib/num.js";
+import { tidy as clean, tsum } from "./tidy.js";
 
-const sum = (a) => a.reduce((s, v) => s + v, 0);
+const sum = tsum;
 
 // The value at a (possibly fractional) position in a sorted list, as Gupta interpolates it.
 function itemAt(sorted, pos) {
