@@ -6,7 +6,14 @@
 
 import { EPS, clean } from "./num.js";
 
-export const BIG = 1e7; // stands in for "M" (a prohibited route) in the arithmetic
+// "M" (a prohibited route) is a number far larger than any cost in the problem: at least 10,000,000,
+// and always a thousand times more than any sum of costs the method can build up.
+export const BIG = 1e7;
+export const bigFor = (cost) => {
+  const top = Math.max(0, ...cost.flat().filter(Number.isFinite).map(Math.abs));
+  const need = 1000 * (cost.length + (cost[0]?.length ?? 0)) * (top + 1);
+  return need <= BIG ? BIG : 10 ** Math.ceil(Math.log10(need));
+};
 
 export function validate(p) {
   const errors = [];
@@ -17,6 +24,7 @@ export function validate(p) {
     if (!(Number.isFinite(c) || c === Infinity)) errors.push(`Cell (${i + 1}, ${j + 1}): enter a number, or M for a route that cannot be used.`);
     else if (c < 0 && p.sense !== "max") errors.push(`Cell (${i + 1}, ${j + 1}): a cost cannot be negative.`);
   }));
+  if (p.cost.length && p.cost.flat().length && p.cost.flat().every((c) => c === Infinity)) errors.push("Every route is marked M, so nothing can be sent. At least one route must be allowed.");
   p.supply.forEach((s, i) => { if (!Number.isFinite(s) || s <= 0) errors.push(`Supply of source ${i + 1} must be a positive number.`); });
   p.demand.forEach((d, j) => { if (!Number.isFinite(d) || d <= 0) errors.push(`Demand of destination ${j + 1} must be a positive number.`); });
   return errors;
@@ -40,10 +48,10 @@ export function prepare(p) {
     cost = [...cost, new Array(demand.length).fill(0)]; supply = [...supply, clean(D - S)]; dummy = "row";
     notes.push(`Demand (${D}) is more than supply (${S}), so a dummy source supplies the missing ${clean(D - S)} at zero cost.`);
   } else notes.push(`Total supply equals total demand (${S}), so the problem is balanced.`);
-  return { cost, supply, demand, dummy, notes, m: supply.length, n: demand.length };
+  return { cost, supply, demand, dummy, notes, m: supply.length, n: demand.length, big: bigFor(cost) };
 }
 
-const val = (c) => (Number.isFinite(c) ? c : BIG);
+const val = (q, c) => (Number.isFinite(c) ? c : q.big ?? BIG);
 const blank = (m, n) => Array.from({ length: m }, () => new Array(n).fill(null)); // null = no allocation
 
 // ----- Initial basic feasible solutions -----
@@ -66,7 +74,7 @@ export function leastCost(q) {
   for (;;) {
     let best = null;
     for (let i = 0; i < q.m; i++) if (!rowDone[i]) for (let j = 0; j < q.n; j++) if (!colDone[j]) {
-      const c = val(q.cost[i][j]), a = Math.min(s[i], d[j]);
+      const c = val(q, q.cost[i][j]), a = Math.min(s[i], d[j]);
       if (!best || c < best.c - EPS || (Math.abs(c - best.c) <= EPS && a > best.a + EPS)) best = { i, j, c, a };
     }
     if (!best) break;
@@ -86,14 +94,14 @@ export function vogel(q) {
   for (;;) {
     const rows = [...Array(q.m).keys()].filter((i) => !rowDone[i]), cols = [...Array(q.n).keys()].filter((j) => !colDone[j]);
     if (!rows.length || !cols.length) break;
-    const rp = rows.map((i) => ({ kind: "row", k: i, pen: two(cols.map((j) => val(q.cost[i][j]))) }));
-    const cp = cols.map((j) => ({ kind: "col", k: j, pen: two(rows.map((i) => val(q.cost[i][j]))) }));
+    const rp = rows.map((i) => ({ kind: "row", k: i, pen: two(cols.map((j) => val(q, q.cost[i][j]))) }));
+    const cp = cols.map((j) => ({ kind: "col", k: j, pen: two(rows.map((i) => val(q, q.cost[i][j]))) }));
     // The cheapest cell in a row or column, preferring the larger allocation on a tie.
     const cheapest = (line) => {
       const cells = line.kind === "row" ? cols.map((j) => [line.k, j]) : rows.map((i) => [i, line.k]);
       let best = null;
       for (const [i, j] of cells) {
-        const c = val(q.cost[i][j]), a = Math.min(s[i], d[j]);
+        const c = val(q, q.cost[i][j]), a = Math.min(s[i], d[j]);
         if (!best || c < best.c - EPS || (Math.abs(c - best.c) <= EPS && a > best.a + EPS)) best = { i, j, c, a };
       }
       return best;
@@ -110,7 +118,7 @@ export function vogel(q) {
         if (!line || L.pen > line.pen + EPS || (Math.abs(L.pen - line.pen) <= EPS && (c.c < cell.c - EPS || (Math.abs(c.c - cell.c) <= EPS && c.a > cell.a + EPS)))) { line = L; cell = c; }
       }
       pick = cell;
-      why = `Largest penalty is ${fmtCost(line.pen)} in ${line.kind === "row" ? "row" : "column"} ${line.k + 1}; its lowest cost is ${fmtCost(q.cost[cell.i][cell.j])} at (${cell.i + 1}, ${cell.j + 1}).`;
+      why = `Largest penalty is ${penText(q, line.pen)} in ${line.kind === "row" ? "row" : "column"} ${line.k + 1}; its lowest cost is ${fmtCost(q.cost[cell.i][cell.j])} at (${cell.i + 1}, ${cell.j + 1}).`;
     }
     const { i, j } = pick, a = clean(pick.a);
     x[i][j] = a; s[i] = clean(s[i] - a); d[j] = clean(d[j] - a);
@@ -121,7 +129,15 @@ export function vogel(q) {
   return { x, steps };
 }
 
-const fmtCost = (c) => (Number.isFinite(c) && c < BIG / 10 ? String(clean(c)) : "M");
+const fmtCost = (c) => (Number.isFinite(c) ? String(clean(c)) : "M");
+
+// A penalty may be a difference involving M, such as M − 5.
+const penText = (q, v) => {
+  const big = q.big ?? BIG;
+  if (Math.abs(v) < big / 10) return String(clean(v));
+  const k = Math.round(v / big), rest = clean(v - k * big);
+  return `${k === 1 ? "M" : `${k}M`}${rest ? ` ${rest > 0 ? "+" : "−"} ${Math.abs(rest)}` : ""}`;
+};
 
 export const totalCost = (cost, x) => {
   let t = 0, usesM = false;
@@ -148,7 +164,7 @@ export function fixDegeneracy(q, x) {
   const uf = connected(q.m, q.n, basic);
   const cells = [];
   for (let i = 0; i < q.m; i++) for (let j = 0; j < q.n; j++) if (x[i][j] === null) cells.push([i, j]);
-  cells.sort((a, b) => val(q.cost[a[0]][a[1]]) - val(q.cost[b[0]][b[1]]) || a[0] - b[0] || a[1] - b[1]);
+  cells.sort((a, b) => val(q, q.cost[a[0]][a[1]]) - val(q, q.cost[b[0]][b[1]]) || a[0] - b[0] || a[1] - b[1]);
   for (const [i, j] of cells) {
     if (eps.length === need) break;
     if (uf.find(i) !== uf.find(q.m + j)) { uf.union(i, q.m + j); x[i][j] = 0; basic.push([i, j]); eps.push([i, j]); }
@@ -166,7 +182,7 @@ function potentials(q, basic) {
   while (changed) {
     changed = false;
     for (const [i, j] of basic) {
-      const c = val(q.cost[i][j]);
+      const c = val(q, q.cost[i][j]);
       if (u[i] !== null && v[j] === null) { v[j] = clean(c - u[i]); changed = true; }
       else if (v[j] !== null && u[i] === null) { u[i] = clean(c - v[j]); changed = true; }
     }
@@ -201,17 +217,19 @@ export function modi(q, x0, maxIter = 100) {
   const { basic, eps } = fixDegeneracy(q, x);
   let basicSet = basic.map((c) => c.slice());
   const iterations = [];
+  // When M is in play the u and v values are huge, and their last digits are rounding noise.
+  const dtol = Math.max(EPS, 1e-13 * (q.big ?? BIG));
   for (let it = 0; it < maxIter; it++) {
     const { u, v, r0 } = potentials(q, basicSet);
-    const delta = Array.from({ length: q.m }, (_, i) => Array.from({ length: q.n }, (_, j) => (x[i][j] === null ? clean(val(q.cost[i][j]) - u[i] - v[j]) : null)));
+    const delta = Array.from({ length: q.m }, (_, i) => Array.from({ length: q.n }, (_, j) => (x[i][j] === null ? clean(val(q, q.cost[i][j]) - u[i] - v[j]) : null)));
     let enter = null;
     for (let i = 0; i < q.m; i++) for (let j = 0; j < q.n; j++) {
       const dl = delta[i][j];
-      if (dl !== null && dl < -EPS && (!enter || dl < enter.d - EPS)) enter = { i, j, d: dl };
+      if (dl !== null && dl < -dtol && (!enter || dl < enter.d - dtol)) enter = { i, j, d: dl };
     }
     const snap = { x: x.map((r) => r.slice()), u, v, r0, delta, eps: eps.filter(([i, j]) => x[i][j] === 0).map((c) => c.slice()) };
     if (!enter) {
-      iterations.push({ ...snap, optimal: true, alternative: delta.flat().some((dl) => dl !== null && Math.abs(dl) <= EPS) });
+      iterations.push({ ...snap, optimal: true, alternative: delta.flat().some((dl) => dl !== null && Math.abs(dl) <= dtol) });
       return { x, iterations, optimal: true };
     }
     const loop = loopFor(q, basicSet, enter.i, enter.j);

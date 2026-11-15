@@ -1,6 +1,6 @@
 // Transportation problem page: NWC, Least Cost or Vogel to start, then MODI to the optimum.
 import { h, $, messages, saveState, loadState, shareButton, block, stepsBox, scroller, kv, fmt, parseNum } from "./ui.js";
-import { BIG, validate, solve, prepare, northWest, leastCost, vogel, totalCost } from "./lib/transport.js";
+import { BIG as BIG0, validate, solve, prepare, northWest, leastCost, vogel, totalCost } from "./lib/transport.js";
 
 const EXAMPLE = {
   sense: "min", method: "vam",
@@ -14,7 +14,8 @@ const root = $("#lab");
 let state = loadState() || structuredClone(EXAMPLE);
 let results, msgBox, grid;
 
-// Numbers that may contain M (a prohibited route) in the arithmetic.
+// Numbers that may contain M (a prohibited route) in the arithmetic. M is sized to the problem.
+let BIG = BIG0;
 const mfmt = (v) => {
   if (v === null || v === undefined) return "";
   if (Math.abs(v) < BIG / 10) return fmt(v);
@@ -140,6 +141,7 @@ function sumText(orig, x, q) {
 }
 
 function show(p, r) {
+  BIG = r.q.big;
   const { q, start, startTotal, opt, finalTotal } = r;
   const names = rowColNames(q);
   const isMax = p.sense === "max";

@@ -26,6 +26,7 @@ export function saddle(A) {
 // Row r is dominated by row s if every value in r is <= the value in s (A would never choose r).
 // Column c is dominated by column d if every value in c is >= the value in d (B would never choose c).
 export function reduce(A) {
+  const tol = EPS * Math.max(1, ...A.flat().map(Math.abs));
   let rows = A.map((_, i) => i), cols = A[0].map((_, j) => j);
   const steps = [];
   let changed = true;
@@ -52,7 +53,7 @@ export function reduce(A) {
     // Dominance by the average of two other strategies, as textbooks use once plain dominance runs out.
     outer3: for (const r of rows) for (const s of rows) for (const t of rows) {
       if (rows.length < 3 || r === s || r === t || s >= t) continue;
-      if (cols.every((j) => A[r][j] <= (A[s][j] + A[t][j]) / 2 + EPS)) {
+      if (cols.every((j) => A[r][j] <= (A[s][j] + A[t][j]) / 2 + tol)) {
         steps.push({ kind: "row", removed: r, by: [s, t], average: true, rows: rows.slice(), cols: cols.slice() });
         rows = rows.filter((x) => x !== r); changed = true; break outer3;
       }
@@ -60,7 +61,7 @@ export function reduce(A) {
     if (changed) continue;
     outer4: for (const c of cols) for (const d of cols) for (const e of cols) {
       if (cols.length < 3 || c === d || c === e || d >= e) continue;
-      if (rows.every((i) => A[i][c] >= (A[i][d] + A[i][e]) / 2 - EPS)) {
+      if (rows.every((i) => A[i][c] >= (A[i][d] + A[i][e]) / 2 - tol)) {
         steps.push({ kind: "col", removed: c, by: [d, e], average: true, rows: rows.slice(), cols: cols.slice() });
         cols = cols.filter((x) => x !== c); changed = true; break outer4;
       }
@@ -81,16 +82,17 @@ export function mixed2x2(a, b, c, d) {
 // q = probability of B's first column; B picks the lowest point of the highest lines.
 export function graphical(M) {
   const twoRows = M.length === 2;
+  const tol = EPS * Math.max(1, ...M.flat().map(Math.abs)); // comparisons in proportion to the payoffs
   const lines = twoRows
     ? M[0].map((_, j) => ({ k: j, at0: M[1][j], at1: M[0][j] }))   // E_j(p) = M[0][j] p + M[1][j] (1 - p)
     : M.map((r, i) => ({ k: i, at0: r[1], at1: r[0] }));            // E_i(q) = r[0] q + r[1] (1 - q)
   const f = (L, x) => L.at1 * x + L.at0 * (1 - x);
   const env = (x) => (twoRows ? Math.min : Math.max)(...lines.map((L) => f(L, x)));
-  const better = twoRows ? (u, v) => u > v + EPS : (u, v) => u < v - EPS;
+  const better = twoRows ? (u, v) => u > v + tol : (u, v) => u < v - tol;
   const cand = [0, 1];
   for (let a = 0; a < lines.length; a++) for (let b = a + 1; b < lines.length; b++) {
     const sa = lines[a].at1 - lines[a].at0, sb = lines[b].at1 - lines[b].at0;
-    if (Math.abs(sa - sb) < EPS) continue;
+    if (Math.abs(sa - sb) <= tol) continue;
     const x = (lines[b].at0 - lines[a].at0) / (sa - sb);
     if (x > EPS && x < 1 - EPS) cand.push(x);
   }
@@ -98,8 +100,8 @@ export function graphical(M) {
   for (const x of cand) if (better(env(x), env(best))) best = x;
   const value = env(best);
   // The two lines through the optimal point, one rising and one falling, decide the other player's mix.
-  const active = lines.filter((L) => Math.abs(f(L, best) - value) < 1e-7);
-  const up = active.filter((L) => L.at1 - L.at0 > EPS), down = active.filter((L) => L.at1 - L.at0 < -EPS), flat = active.filter((L) => Math.abs(L.at1 - L.at0) <= EPS);
+  const active = lines.filter((L) => Math.abs(f(L, best) - value) <= 100 * tol);
+  const up = active.filter((L) => L.at1 - L.at0 > tol), down = active.filter((L) => L.at1 - L.at0 < -tol), flat = active.filter((L) => Math.abs(L.at1 - L.at0) <= tol);
   let pair = null;
   if (flat.length) pair = [flat[0]];
   else if (up.length && down.length) pair = [up[0], down[0]].sort((a, b) => a.k - b.k); // in matrix order, as written by hand
@@ -111,8 +113,10 @@ export function graphical(M) {
 // B's problem after adding a constant so every value is positive: maximise Σy subject to My <= 1, y >= 0.
 export function lpSolve(M) {
   const m = M.length, n = M[0].length;
-  const shift = 1 - Math.min(...M.flat());
-  const B = M.map((r) => r.map((v) => v + shift));
+  // Work on the payoffs divided by the largest, so the tolerances below fit any size of number.
+  const size = Math.max(...M.flat().map(Math.abs)) || 1;
+  const shift = 1 - Math.min(...M.flat()) / size;
+  const B = M.map((r) => r.map((v) => v / size + shift));
   // Tableau: rows 0..m-1 constraints, columns 0..n-1 y, n..n+m-1 slacks, last = right-hand side.
   const T = B.map((r, i) => [...r, ...Array.from({ length: m }, (_, k) => (k === i ? 1 : 0)), 1]);
   const obj = [...new Array(n).fill(-1), ...new Array(m).fill(0), 0];
@@ -137,7 +141,7 @@ export function lpSolve(M) {
   const q = new Array(n).fill(0);
   basis.forEach((b, i) => { if (b < n) q[b] = T[i][n + m] * v; });
   const p = Array.from({ length: m }, (_, i) => obj[n + i] * v);
-  return { p: p.map(clean), q: q.map(clean), value: clean(v - shift) };
+  return { p: p.map(clean), q: q.map(clean), value: clean((v - shift) * size) };
 }
 
 // The whole method, in textbook order: saddle point, dominance, then 2 × 2, graphical or LP.

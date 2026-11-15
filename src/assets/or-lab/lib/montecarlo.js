@@ -16,7 +16,9 @@ export function ranges(dist) {
   const total = dist.reduce((s, d) => s + d.p, 0);
   if (total <= 0) return { errors: ["The probabilities (or frequencies) must add up to more than zero."] };
   const isProb = Math.abs(total - 1) < 1e-6;
-  if (!isProb && dist.every((d) => d.p <= 1)) return { errors: [`The probabilities add up to ${clean(total)}, not 1. Check them, or enter frequencies instead.`] };
+  // Values all at most 1 that are not whole numbers are probabilities that do not add up; whole
+  // numbers such as 1, 1, 0, 2 are frequencies.
+  if (!isProb && dist.every((d) => d.p <= 1) && !dist.every((d) => Number.isInteger(d.p))) return { errors: [`The probabilities add up to ${clean(total)}, not 1. Check them, or enter frequencies instead.`] };
   const probs = dist.map((d) => d.p / total);
   // Use as many digits as the probabilities need: 2 digits for 0.25, 3 for 0.125, up to 4.
   let digits = 0;

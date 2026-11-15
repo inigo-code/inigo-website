@@ -126,6 +126,9 @@ export function analyse(acts, dur) {
   if (s.ends.length > 1) res.warnings.push(`The network has more than one end event (${s.ends.join(", ")}). A project network should finish at a single event; here they are all given the project end as their latest time.`);
 
   const { early, late, total } = passes(acts, s, dur);
+  // Each time is rounded to 9 decimals, so two paths of equal length can differ in the last digits
+  // (PERT times such as 4.1667 add up this way). Allow for that rounding, and no more.
+  const tol = 1e-9 * (acts.length + 2) + 1e-12 * Math.abs(total);
   const rows = acts.map((x, k) => {
     const t = dur[k];
     const tf = clean(late.get(x.end) - early.get(x.start) - t);
@@ -136,7 +139,7 @@ export function analyse(acts, dur) {
       tf,
       ff: clean(early.get(x.end) - early.get(x.start) - t),
       ifl: clean(Math.max(0, early.get(x.end) - late.get(x.start) - t)),
-      critical: Math.abs(tf) < EPS,
+      critical: Math.abs(tf) <= tol,
       dummy: t === 0 && (x.t === 0 || (x.a === 0 && x.b === 0)),
     };
   });
@@ -147,10 +150,10 @@ export function analyse(acts, dur) {
   const walk = (node, chain) => {
     if (paths.length >= MAX_PATHS) { truncated = true; return; }
     const out = s.succ.get(node);
-    if (!out.length) { if (Math.abs(early.get(node) - total) < EPS) paths.push(chain.slice()); return; }
+    if (!out.length) { if (Math.abs(early.get(node) - total) <= tol) paths.push(chain.slice()); return; }
     for (const k of out) if (rows[k].critical) { chain.push(k); walk(acts[k].end, chain); chain.pop(); }
   };
-  for (const n of s.starts) if (Math.abs(late.get(n)) < EPS) walk(n, []);
+  for (const n of s.starts) if (Math.abs(late.get(n)) <= tol) walk(n, []);
 
   Object.assign(res, {
     ok: true, total, rows, early, late,
@@ -174,7 +177,7 @@ export function pert(acts) {
     const variance = clean(p.reduce((s, k) => s + res.rows[k].variance, 0));
     return { path: p, variance, sd: Math.sqrt(variance) };
   });
-  const top = res.pathStats.reduce((best, p) => (!best || p.variance > best.variance + EPS ? p : best), null);
+  const top = res.pathStats.reduce((best, p) => (!best || p.variance > best.variance + 1e-9 ? p : best), null);
   res.variance = top ? top.variance : 0;
   res.sd = Math.sqrt(res.variance);
   return res;

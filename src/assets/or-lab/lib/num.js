@@ -13,7 +13,9 @@ export const fmt = (x, dp = 4) => {
   if (x === Infinity) return "∞";
   if (x === -Infinity) return "−∞";
   if (Number.isNaN(x)) return "–";
-  const r = Number(clean(x).toFixed(dp));
+  const c = clean(x), r = Number(c.toFixed(dp));
+  // A small number that is not zero, such as a rate of 0.00002 per day, keeps 4 significant digits.
+  if (r === 0 && c !== 0) return c.toLocaleString("en-IN", { maximumSignificantDigits: 4, maximumFractionDigits: 20 }).replace("-", "−");
   return (Object.is(r, -0) ? 0 : r).toLocaleString("en-IN", { maximumFractionDigits: dp }).replace("-", "−");
 };
 

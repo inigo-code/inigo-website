@@ -60,7 +60,7 @@ function run() {
 // "0.4 hours (24 minutes)" for times, so students see both.
 function timeText(x) {
   const u = UNITS[state.unit];
-  const main = `${fmt(x)} ${x === 1 ? u.one : u.many}`;
+  const main = `${fmt(x)} ${fmt(x) === "1" ? u.one : u.many}`;
   if (state.unit === "hour") return `${main} (${fmt(x * 60, 2)} minutes)`;
   if (state.unit === "day") return `${main} (${fmt(x * 24, 2)} hours)`;
   return main;
@@ -96,7 +96,9 @@ function show(q) {
   let cum = 0;
   for (let n = 0; n <= 30 && (cum < 0.99 || n < 5); n++) { const p = q.pn(n); cum += p; pr.push([String(n), pct(p), h("span", { class: "lab-meter", "aria-hidden": "true" }, h("b", { style: `width:${Math.min(100, (p / q.p0) * 100)}%` })), pct(cum)]); }
   blocks.push(block("How many customers are there?", scroller(resultTable(["n customers in the system", "Pₙ = (1 − ρ) ρⁿ", "", "P(n or fewer)"], pr.map((r) => [r[0], r[1], { node: r[2] }, r[3]]))),
-    h("p", { class: "lab-hint" }, `The table stops once the chance of more customers is under 1%.`)));
+    h("p", { class: "lab-hint" }, cum >= 0.99 - 1e-12
+      ? "The table stops once the chance of more customers is under 1%."
+      : `The table stops at ${pr.length - 1} customers. The chance of more than ${pr.length - 1} is ${pct(1 - cum)}; use “Other probabilities” below for any n.`)));
 
   // Questions a problem may ask.
   const ask = h("div", { class: "lab-ask" });

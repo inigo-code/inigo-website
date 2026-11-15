@@ -3,7 +3,13 @@
 
 import { EPS, clean } from "./num.js";
 
+// "M" (an assignment that is not allowed) is a number far larger than any value in the table.
 export const BIG = 1e7;
+const bigFor = (A) => {
+  const top = Math.max(0, ...A.flat().filter(Number.isFinite).map(Math.abs));
+  const need = 1000 * A.length * (top + 1);
+  return need <= BIG ? BIG : 10 ** Math.ceil(Math.log10(need));
+};
 
 export function validate(p) {
   const errors = [];
@@ -12,6 +18,7 @@ export function validate(p) {
   p.cost.forEach((r, i) => r.forEach((c, j) => {
     if (!(Number.isFinite(c) || c === Infinity)) errors.push(`Cell (${i + 1}, ${j + 1}): enter a number, or M for an assignment that is not allowed.`);
   }));
+  if (p.cost.length && p.cost.flat().length && p.cost.flat().every((c) => c === Infinity)) errors.push("Every cell is marked M, so no assignment is allowed. At least one cell must be a number.");
   return errors;
 }
 
@@ -62,18 +69,19 @@ export function solve(p) {
   if (c0 < n) notes.push(`There are fewer columns than rows, so ${n - c0} dummy column${n - c0 > 1 ? "s" : ""} of zeros ${n - c0 > 1 ? "are" : "is"} added.`);
   const A = Array.from({ length: n }, (_, i) => Array.from({ length: n }, (_, j) => (i < r0 && j < c0 ? base[i][j] : 0)));
   const steps = [{ title: notes.length ? "Starting table" : "Cost table", table: A.map((r) => r.slice()) }];
-  const W = A.map((r) => r.map((c) => (Number.isFinite(c) ? c : BIG)));
+  const big = bigFor(A);
+  const W = A.map((r) => r.map((c) => (Number.isFinite(c) ? c : big)));
 
   for (let i = 0; i < n; i++) {
     const m = Math.min(...W[i]);
-    if (m >= BIG / 10) return { ok: false, error: `Row ${i + 1} has no allowed assignment.`, notes, steps };
+    if (m >= big / 10) return { ok: false, error: `Row ${i + 1} has no allowed assignment.`, notes, steps };
     for (let j = 0; j < n; j++) W[i][j] = clean(W[i][j] - m);
   }
-  const show = () => W.map((r) => r.map((c) => (c >= BIG / 10 ? Infinity : c)));
+  const show = () => W.map((r) => r.map((c) => (c >= big / 10 ? Infinity : c)));
   steps.push({ title: "Subtract the smallest value in each row from that row", table: show() });
   for (let j = 0; j < n; j++) {
     const m = Math.min(...W.map((r) => r[j]));
-    if (m >= BIG / 10) return { ok: false, error: `Column ${j + 1} has no allowed assignment.`, notes, steps };
+    if (m >= big / 10) return { ok: false, error: `Column ${j + 1} has no allowed assignment.`, notes, steps };
     for (let i = 0; i < n; i++) W[i][j] = clean(W[i][j] - m);
   }
   steps.push({ title: "Subtract the smallest value in each column from that column", table: show() });
@@ -90,7 +98,7 @@ export function solve(p) {
     }
     let k = Infinity;
     for (let i = 0; i < n; i++) if (!lines.rows[i]) for (let j = 0; j < n; j++) if (!lines.cols[j]) k = Math.min(k, W[i][j]);
-    if (k >= BIG / 10) return { ok: false, error: "No complete assignment avoids the cells marked M.", notes, steps };
+    if (k >= big / 10) return { ok: false, error: "No complete assignment avoids the cells marked M.", notes, steps };
     steps.push({ title: `Only ${count} line${count > 1 ? "s" : ""} cover every zero (fewer than ${n}). The smallest uncovered value is ${clean(k)}: subtract it from every uncovered value and add it where two lines cross`, table: show(), lines, k: clean(k) });
     for (let i = 0; i < n; i++) for (let j = 0; j < n; j++) {
       if (!lines.rows[i] && !lines.cols[j]) W[i][j] = clean(W[i][j] - k);
