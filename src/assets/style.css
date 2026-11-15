@@ -273,17 +273,21 @@ html.reveal-on .in.in { opacity: 1; translate: none; }
 .role-word { white-space: nowrap; font: 900 clamp(2.75rem, 9vw, 7.5rem)/.9 var(--font-display); letter-spacing: -0.06em; transition: transform .45s var(--ease); }
 .role-list a:hover .role-word { transform: translateX(.75rem); }
 .role-text { font-size: 1.1rem; line-height: 1.5; max-width: 30rem; }
-/* One quiet line under "What I do", pointing to OR Lab */
-.role-extra { margin-top: 1.25rem; }
-.role-extra a {
-  display: inline-flex; flex-wrap: wrap; align-items: baseline; gap: .25rem .75rem; padding: .5rem 0; min-height: 44px;
-  text-decoration: none; color: var(--muted);
+/* Home: OR Lab, a highlighter-yellow card just below the hero */
+.lab-promo { padding-top: clamp(2.5rem, 6vw, 4rem); }
+.lab-promo-card {
+  display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 1.25rem clamp(1.5rem, 4vw, 3rem);
+  background: var(--accent); color: var(--accent-ink); border-radius: var(--radius); padding: clamp(1.4rem, 3.5vw, 2.25rem) clamp(1.25rem, 4vw, 2.75rem);
 }
-.role-extra strong { color: var(--ink); background: linear-gradient(var(--accent), var(--accent)) 0 88% / 100% .3em no-repeat; }
-.role-extra-go { display: inline-block; color: var(--ink); transition: transform .3s var(--ease); }
-.role-extra a:hover .role-extra-text { color: var(--ink); text-decoration: underline; text-underline-offset: .2em; }
-.role-extra a:hover .role-extra-go { transform: translateX(4px); }
-@media (prefers-reduced-motion: reduce) { .role-extra-go { transition: none; } }
+.lab-promo + .roles { padding-top: clamp(3rem, 7vw, 5rem); }
+.lab-promo-text { display: grid; gap: .5rem; max-width: 46rem; }
+.lab-promo-kicker { font-weight: 600; font-size: .95rem; }
+.lab-promo h2 { font-size: clamp(2rem, 4vw, 3rem); font-weight: 800; letter-spacing: -0.04em; line-height: 1; color: var(--accent-ink); }
+.lab-promo p { color: var(--accent-ink); }
+.lab-promo .button span { transition: transform .3s var(--ease); }
+.lab-promo .button:hover span { transform: translateX(4px); }
+@media (max-width: 720px) { .lab-promo-card { grid-template-columns: minmax(0, 1fr); } .lab-promo .button { justify-self: start; } }
+@media (prefers-reduced-motion: reduce) { .lab-promo .button span { transition: none; } }
 .role-cta { font-weight: 600; white-space: nowrap; display: inline-flex; gap: .4rem; }
 .role-cta span { transition: transform .3s var(--ease); }
 .role-list a:hover .role-cta span { transform: translateX(4px); }

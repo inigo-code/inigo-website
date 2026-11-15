@@ -32,6 +32,19 @@ layout: layouts/base.njk
   </div>
 </section>
 
+<section class="lab-promo" aria-labelledby="lab-promo-title">
+  <div class="wrap">
+    <div class="lab-promo-card">
+      <div class="lab-promo-text">
+        <p class="lab-promo-kicker">For my B.B.A. students</p>
+        <h2 id="lab-promo-title">{{ orlab.name }}</h2>
+        <p>Free tools for every unit of Operations Research: LPP, transportation, assignment, queuing, simulation, game theory, and CPM and PERT. Each one works your problem out step by step.</p>
+      </div>
+      <a class="button dark" href="/tools/">Open {{ orlab.name }} <span aria-hidden="true">→</span></a>
+    </div>
+  </div>
+</section>
+
 <section class="roles" aria-labelledby="roles-title">
   <div class="wrap">
     <h2 id="roles-title" class="kicker">What I do</h2>
@@ -46,7 +59,6 @@ layout: layouts/base.njk
         </li>
       {% endfor %}
     </ul>
-    <p class="role-extra"><a href="/tools/"><strong>{{ orlab.name }}</strong><span class="role-extra-text">Free step-by-step tools for my Operations Research students&nbsp;<span class="role-extra-go" aria-hidden="true">→</span></span></a></p>
   </div>
 </section>
 
