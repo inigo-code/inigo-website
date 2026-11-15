@@ -37,28 +37,12 @@ description: "Study notes, diagrams and OR Lab, free step-by-step Operations Res
     </ul>
   </section>
 
-  {% for t in cv.tools %}
-  <section class="tool-feature" aria-labelledby="tool-{{ loop.index }}">
-    <a class="tool-shot" href="{{ t.url }}" tabindex="-1" aria-hidden="true">
-      <img src="{{ t.image }}" alt="" width="{{ t.w }}" height="{{ t.h }}" loading="lazy" decoding="async">
-    </a>
-    <div class="tool-text">
-      <p class="kicker">Free tools</p>
-      <h2 id="tool-{{ loop.index }}">{{ t.title }}</h2>
-      <p>{{ t.text }}</p>
-      <p class="actions">
-        <a class="button" href="{{ t.url }}">Open {{ t.title }}</a>
-        {% if t.source %}<a class="button ghost" href="{{ t.source }}" rel="noopener">Source code ↗</a>{% endif %}
-      </p>
-    </div>
-  </section>
-  {% endfor %}
-
   <section class="notes-section" aria-labelledby="tools-title">
     <div class="section-head">
-      <h2 id="tools-title">{{ orlab.name }} tools</h2>
-      <p class="section-note">{{ orlab.tools | dictsort | length }} tools for {{ orlab.paper }}, by unit</p>
+      <h2 id="tools-title">{{ orlab.name }}</h2>
+      <p class="section-note">{{ orlab.tools | dictsort | length }} free tools for {{ orlab.paper }}, by unit</p>
     </div>
+    <p class="tools-intro">Enter a problem from your textbook or class, and each tool works it out step by step, the way you would by hand, so you can check your own working.</p>
     <ul class="tool-grid">
       {% for u in orlab.units %}{% for slug in u.tools %}{% set t = orlab.tools[slug] %}
         <li class="note-card">
@@ -86,7 +70,7 @@ description: "Study notes, diagrams and OR Lab, free step-by-step Operations Res
               <li{% if notes.length or c.slug == "operations-research" %} class="has-notes"{% endif %}>
                 <span class="area-course">{{ c.title }}</span>
                 {% for n in notes %}<a class="area-note" href="{{ n.url }}">{{ n.data.title }}</a>{% endfor %}
-                {% if c.slug == "operations-research" %}<a class="area-note" href="/tools/">{{ orlab.name }} tools</a>{% endif %}
+                {% if c.slug == "operations-research" %}<a class="area-note" href="/tools/">{{ orlab.name }}: step-by-step tools</a>{% endif %}
               </li>
             {% endfor %}
           </ul>
