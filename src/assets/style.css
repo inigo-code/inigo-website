@@ -983,6 +983,14 @@ html.reveal-on .in.in { opacity: 1; translate: none; }
   .hero-portrait { margin-left: 1.75rem; width: calc(100% - 1.75rem); max-width: 18rem; }
 }
 
+/* On phones the photo comes first and smaller, so the face shows without scrolling. */
+@media (max-width: 600px) {
+  .hero-grid { gap: 2.75rem; }
+  .hero-portrait { order: -1; margin-left: 1.75rem; width: calc(100% - 1.75rem); max-width: 13rem; }
+  .hero-portrait::before { inset: .9rem .9rem -.9rem -.9rem; }
+  .seal { width: 5.75rem; height: 5.75rem; left: -1.75rem; bottom: 1.5rem; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { transition-duration: .01ms !important; animation: none !important; scroll-behavior: auto !important; }
 }
