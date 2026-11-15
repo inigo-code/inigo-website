@@ -634,7 +634,7 @@ html.reveal-on .in.in { opacity: 1; translate: none; }
 .notes-section, .syllabus { margin-bottom: clamp(3.5rem, 8vw, 6rem); }
 .tools-intro { color: var(--muted); max-width: 46rem; margin: 0 0 clamp(1.75rem, 4vw, 2.5rem); }
 .section-note { color: var(--muted); font-weight: 600; font-size: .95rem; }
-.note-grid, .tool-grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 21rem), 1fr)); gap: clamp(1rem, 2vw, 1.5rem); }
+.note-grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 21rem), 1fr)); gap: clamp(1rem, 2vw, 1.5rem); }
 .note-card, .article-card {
   position: relative; display: flex; flex-direction: column;
   background: var(--surface); border-radius: var(--radius); overflow: hidden;
@@ -651,6 +651,21 @@ html.reveal-on .in.in { opacity: 1; translate: none; }
 .note-body p:not(.card-meta), .article-card p:not(.card-meta) { color: var(--muted); font-size: .985rem; }
 .note-card:has(a:focus-visible), .article-card:has(a:focus-visible), .article-lead:has(a:focus-visible) { outline: 3px solid var(--ink); outline-offset: 3px; }
 .note-card a:focus-visible, .article-card a:focus-visible, .article-lead a:focus-visible { outline: none; box-shadow: none; }
+
+/* Resources: OR Lab, a compact list of links (the full descriptions are on /tools/) */
+.tool-list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 22rem), 1fr)); column-gap: clamp(1.5rem, 3vw, 2.5rem); border-top: 2px solid var(--ink); }
+.tool-list a {
+  display: grid; grid-template-columns: 4.5rem minmax(0, 1fr) auto; gap: 1rem; align-items: baseline;
+  padding: .85rem .25rem; min-height: 44px; border-bottom: 1px solid var(--line); text-decoration: none;
+}
+.tool-list a::after { content: "→"; color: var(--muted); transition: transform .2s var(--ease); }
+.tool-list a:hover::after { transform: translateX(3px); color: var(--ink); }
+.tool-list a:hover .tool-name { text-decoration: underline; text-underline-offset: .2em; }
+.tool-unit { color: var(--muted); font-size: .875rem; font-weight: 600; white-space: nowrap; }
+.tool-name { font-weight: 600; }
+.tools-more { margin-top: 1.25rem; }
+.tools-more a { font-weight: 600; }
+@media (prefers-reduced-motion: reduce) { .tool-list a::after { transition: none; } }
 
 /* Resources: the simulator */
 .tool-feature {

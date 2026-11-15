@@ -43,17 +43,12 @@ description: "Study notes, diagrams and OR Lab, free step-by-step Operations Res
       <p class="section-note">{{ orlab.tools | dictsort | length }} free tools for {{ orlab.paper }}, by unit</p>
     </div>
     <p class="tools-intro">Enter a problem from your textbook or class, and each tool works it out step by step, the way you would by hand, so you can check your own working.</p>
-    <ul class="tool-grid">
-      {% for u in orlab.units %}{% for slug in u.tools %}{% set t = orlab.tools[slug] %}
-        <li class="note-card">
-          <div class="note-body">
-            <p class="card-meta"><span class="tag">Unit {{ u.no }}</span><span>{{ u.name }}</span></p>
-            <h3><a href="/tools/{{ slug }}/">{{ t.title }}</a></h3>
-            <p>{{ t.text }}</p>
-          </div>
-        </li>
+    <ul class="tool-list">
+      {% for u in orlab.units %}{% for slug in u.tools %}
+        <li><a href="/tools/{{ slug }}/"><span class="tool-unit">Unit {{ u.no }}</span><span class="tool-name">{{ orlab.tools[slug].title }}</span></a></li>
       {% endfor %}{% endfor %}
     </ul>
+    <p class="tools-more"><a href="/tools/">What each tool does, and how to use them</a></p>
   </section>
 
   <section class="syllabus" aria-labelledby="syllabus-title">
