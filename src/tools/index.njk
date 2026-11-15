@@ -37,6 +37,7 @@ pageCss: /assets/or-lab/or-lab.css
       <p>Everything is worked out in your browser, so nothing you type is sent anywhere, and the tools keep working on a weak connection once the page has loaded. “Copy link to this problem” gives a link that opens the same problem, ready to share with a class.</p>
       {% set notes = collections.resources | byCourse("operations-research") %}
       {% if notes.length %}<p>Study notes for the paper: {% for n in notes %}<a href="{{ n.url }}">{{ n.data.title }}</a>{% if not loop.last %}, {% endif %}{% endfor %}.</p>{% endif %}
+      <p>For {{ statlab.paper }}, see <a href="/tools/stats/">{{ statlab.name }}</a>.</p>
     </div>
   </section>
 </div>

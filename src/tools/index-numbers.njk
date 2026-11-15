@@ -1,0 +1,20 @@
+---
+layout: layouts/base.njk
+title: "Index numbers"
+seoTitle: "Laspeyres, Paasche and Fisher index numbers"
+permalink: /tools/index-numbers/
+description: "Laspeyres, Paasche and Fisher's ideal index numbers with the working table, and the time reversal and factor reversal tests."
+keywords: ["index numbers", "Laspeyres", "Paasche", "Fisher's ideal index"]
+pageCss: /assets/or-lab/or-lab.css
+pageCss2: /assets/stat-lab/stat-lab.css
+pageScript: /assets/stat-lab/index-numbers-page.js
+---
+{% set t = statlab.tools["index-numbers"] %}
+<div class="wrap page">
+  <header class="page-head">
+    <p class="eyebrow"><a href="/tools/stats/">{{ statlab.name }}</a> · Unit V</p>
+    <h1>{{ t.title }}</h1>
+    <p class="lead">{{ t.text }}</p>
+  </header>
+  <div class="lab" id="lab"><noscript><p class="lab-msg is-warn">This tool works in your browser and needs JavaScript switched on.</p></noscript></div>
+</div>

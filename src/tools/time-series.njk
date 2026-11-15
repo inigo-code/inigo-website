@@ -1,0 +1,20 @@
+---
+layout: layouts/base.njk
+title: "Time series trend"
+seoTitle: "Time series trend: semi-averages and moving averages"
+permalink: /tools/time-series/
+description: "Find the trend of a time series by the semi-average method and by moving averages, centred for an even period, with a graph."
+keywords: ["time series", "moving average", "semi average method", "trend"]
+pageCss: /assets/or-lab/or-lab.css
+pageCss2: /assets/stat-lab/stat-lab.css
+pageScript: /assets/stat-lab/time-series-page.js
+---
+{% set t = statlab.tools["time-series"] %}
+<div class="wrap page">
+  <header class="page-head">
+    <p class="eyebrow"><a href="/tools/stats/">{{ statlab.name }}</a> · Unit V</p>
+    <h1>{{ t.title }}</h1>
+    <p class="lead">{{ t.text }}</p>
+  </header>
+  <div class="lab" id="lab"><noscript><p class="lab-msg is-warn">This tool works in your browser and needs JavaScript switched on.</p></noscript></div>
+</div>

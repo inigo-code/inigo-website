@@ -1,0 +1,20 @@
+---
+layout: layouts/base.njk
+title: "Permutations, combinations and probability"
+seoTitle: "Permutations, combinations and probability"
+permalink: /tools/probability/
+description: "nPr and nCr with the factors written out, arrangements of letters, and simple probability for coins, dice, cards and balls, as exact fractions."
+keywords: ["permutation", "combination", "probability", "nCr"]
+pageCss: /assets/or-lab/or-lab.css
+pageCss2: /assets/stat-lab/stat-lab.css
+pageScript: /assets/stat-lab/probability-page.js
+---
+{% set t = statlab.tools["probability"] %}
+<div class="wrap page">
+  <header class="page-head">
+    <p class="eyebrow"><a href="/tools/stats/">{{ statlab.name }}</a> · Unit II</p>
+    <h1>{{ t.title }}</h1>
+    <p class="lead">{{ t.text }}</p>
+  </header>
+  <div class="lab" id="lab"><noscript><p class="lab-msg is-warn">This tool works in your browser and needs JavaScript switched on.</p></noscript></div>
+</div>

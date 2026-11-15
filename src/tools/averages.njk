@@ -1,0 +1,20 @@
+---
+layout: layouts/base.njk
+title: "Central tendency and dispersion"
+seoTitle: "Mean, median, mode and standard deviation"
+permalink: /tools/averages/
+description: "Measures of central tendency and dispersion for individual, discrete and continuous series: mean, median, mode, quartiles, quartile deviation, mean deviation, standard deviation and coefficient of variation."
+keywords: ["mean median mode", "standard deviation", "quartile deviation", "coefficient of variation"]
+pageCss: /assets/or-lab/or-lab.css
+pageCss2: /assets/stat-lab/stat-lab.css
+pageScript: /assets/stat-lab/averages-page.js
+---
+{% set t = statlab.tools["averages"] %}
+<div class="wrap page">
+  <header class="page-head">
+    <p class="eyebrow"><a href="/tools/stats/">{{ statlab.name }}</a> · Unit III</p>
+    <h1>{{ t.title }}</h1>
+    <p class="lead">{{ t.text }}</p>
+  </header>
+  <div class="lab" id="lab"><noscript><p class="lab-msg is-warn">This tool works in your browser and needs JavaScript switched on.</p></noscript></div>
+</div>

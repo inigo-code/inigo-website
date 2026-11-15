@@ -1,0 +1,25 @@
+{
+  "name": "Stats Lab",
+  "paper": "Business Mathematics and Statistics for Managers",
+  "intro": "Free, interactive tools for every unit of the B.B.A. paper Business Mathematics and Statistics for Managers. Enter a problem from your textbook or class, and each tool works it out step by step, the way you would by hand, so you can check your own working.",
+  "units": [
+    { "no": "I", "name": "Matrices", "tools": ["matrices", "cramer"] },
+    { "no": "II", "name": "Percentage, ratios, time and work", "tools": ["percentages", "interest", "speed-work", "probability"] },
+    { "no": "III", "name": "Measures of central tendency and dispersion", "tools": ["averages"] },
+    { "no": "IV", "name": "Correlation and regression", "tools": ["correlation", "regression"] },
+    { "no": "V", "name": "Time series and index numbers", "tools": ["time-series", "index-numbers"] }
+  ],
+  "tools": {
+    "matrices": { "title": "Matrix calculator", "text": "Addition, subtraction and multiplication with every entry worked out, the transpose, the determinant by expansion, the adjoint from the cofactors, and the inverse in exact fractions, checked by A × A⁻¹ = I." },
+    "cramer": { "title": "Cramer's rule", "text": "Solves two or three simultaneous equations: Δ and each Δx, Δy, Δz written out, then x = Δx / Δ and so on. Says when Δ = 0 and the rule cannot be used." },
+    "percentages": { "title": "Percentages, ratios, profit and loss", "text": "Percentages and percentage change, successive changes, profit and loss on cost price, discounts and marked price, dividing an amount in a ratio, and proportions." },
+    "interest": { "title": "Simple and compound interest", "text": "Simple and compound interest with yearly, half-yearly, quarterly or monthly compounding. Finds the interest, the amount, the principal, the rate or the time, with a year-by-year table." },
+    "speed-work": { "title": "Time, speed, distance and work", "text": "Average speed, trains passing a pole, a platform or each other, km/h and m/s, people or pipes working together, and men–days–hours problems." },
+    "probability": { "title": "Permutations, combinations and probability", "text": "nPr and nCr with the factors written out, arrangements of a word's letters, and simple probability with coins, dice, cards and a bag of balls, as exact fractions." },
+    "averages": { "title": "Central tendency and dispersion", "text": "Mean, median, mode, quartiles, range, quartile deviation, mean deviation, standard deviation and the coefficient of variation, for individual, discrete and continuous series." },
+    "correlation": { "title": "Correlation", "text": "Karl Pearson's coefficient from deviations about the means, and Spearman's rank correlation with the correction for tied ranks, each with the full working table and a scatter diagram." },
+    "regression": { "title": "Regression", "text": "Both regression equations, Y on X and X on Y, from paired data or from the means, standard deviations and r. Estimates one variable from the other and draws both lines." },
+    "time-series": { "title": "Time series trend", "text": "Trend by the semi-average method and by moving averages of any period (centred for an even period), with the trend values and a graph of the series and its trend." },
+    "index-numbers": { "title": "Index numbers", "text": "Laspeyres, Paasche and Fisher's price index numbers with the p × q table, and the time reversal and factor reversal tests." }
+  }
+}

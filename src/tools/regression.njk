@@ -1,0 +1,20 @@
+---
+layout: layouts/base.njk
+title: "Regression"
+seoTitle: "Regression equations, Y on X and X on Y"
+permalink: /tools/regression/
+description: "Both regression equations from paired data or from means, standard deviations and r, with estimates and a graph of both lines."
+keywords: ["regression equation", "regression coefficient", "line of regression"]
+pageCss: /assets/or-lab/or-lab.css
+pageCss2: /assets/stat-lab/stat-lab.css
+pageScript: /assets/stat-lab/regression-page.js
+---
+{% set t = statlab.tools["regression"] %}
+<div class="wrap page">
+  <header class="page-head">
+    <p class="eyebrow"><a href="/tools/stats/">{{ statlab.name }}</a> · Unit IV</p>
+    <h1>{{ t.title }}</h1>
+    <p class="lead">{{ t.text }}</p>
+  </header>
+  <div class="lab" id="lab"><noscript><p class="lab-msg is-warn">This tool works in your browser and needs JavaScript switched on.</p></noscript></div>
+</div>

@@ -2,13 +2,13 @@
 layout: layouts/base.njk
 title: Resources
 permalink: /resources/
-description: "Study notes, diagrams and OR Lab, free step-by-step Operations Research tools, for B.B.A. students, from the papers Inigo Papu Vinodhan teaches at St. Joseph's College."
+description: "Study notes, diagrams and free step-by-step tools (OR Lab and Stats Lab) for B.B.A. students, from the papers Inigo Papu Vinodhan teaches at St. Joseph's College."
 ---
 <div class="wrap page">
   <header class="page-head">
     <p class="eyebrow">For students</p>
     <h1>Resources</h1>
-    <p class="lead">Study notes with diagrams, and OR Lab, free step-by-step tools for Operations Research, from the B.B.A. papers I teach. Use them, print them and pass them on.</p>
+    <p class="lead">Study notes with diagrams, and two sets of free step-by-step tools, OR Lab and Stats Lab, from the B.B.A. papers I teach. Use them, print them and pass them on.</p>
     <span class="head-motif">{% include "motifs/notes.svg" %}</span>
   </header>
 
@@ -51,6 +51,20 @@ description: "Study notes, diagrams and OR Lab, free step-by-step Operations Res
     <p class="tools-more"><a href="/tools/">What each tool does, and how to use them</a></p>
   </section>
 
+  <section class="notes-section" aria-labelledby="stats-title">
+    <div class="section-head">
+      <h2 id="stats-title">{{ statlab.name }}</h2>
+      <p class="section-note">{{ statlab.tools | dictsort | length }} free tools for {{ statlab.paper }}, by unit</p>
+    </div>
+    <p class="tools-intro">The same idea for the mathematics and statistics paper: enter a problem and see every step of the working.</p>
+    <ul class="tool-list">
+      {% for u in statlab.units %}{% for slug in u.tools %}
+        <li><a href="/tools/{{ slug }}/"><span class="tool-unit">Unit {{ u.no }}</span><span class="tool-name">{{ statlab.tools[slug].title }}</span></a></li>
+      {% endfor %}{% endfor %}
+    </ul>
+    <p class="tools-more"><a href="/tools/stats/">What each tool does, and how to use them</a></p>
+  </section>
+
   <section class="syllabus" aria-labelledby="syllabus-title">
     <div class="section-head">
       <h2 id="syllabus-title">Papers I teach</h2>
@@ -62,10 +76,11 @@ description: "Study notes, diagrams and OR Lab, free step-by-step Operations Res
           <ul class="area-courses">
             {% for c in a.courses %}
               {% set notes = collections.resources | byCourse(c.slug) %}
-              <li{% if notes.length or c.slug == "operations-research" %} class="has-notes"{% endif %}>
+              <li{% if notes.length or c.slug == "operations-research" or c.slug == "business-mathematics-statistics" %} class="has-notes"{% endif %}>
                 <span class="area-course">{{ c.title }}</span>
                 {% for n in notes %}<a class="area-note" href="{{ n.url }}">{{ n.data.title }}</a>{% endfor %}
                 {% if c.slug == "operations-research" %}<a class="area-note" href="/tools/">{{ orlab.name }}: step-by-step tools</a>{% endif %}
+                {% if c.slug == "business-mathematics-statistics" %}<a class="area-note" href="/tools/stats/">{{ statlab.name }}: step-by-step tools</a>{% endif %}
               </li>
             {% endfor %}
           </ul>

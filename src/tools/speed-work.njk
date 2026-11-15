@@ -1,0 +1,20 @@
+---
+layout: layouts/base.njk
+title: "Time, speed, distance and work"
+seoTitle: "Time, speed, distance and work problems"
+permalink: /tools/speed-work/
+description: "Average speed, trains crossing a pole, a platform or each other, km/h to m/s, people or pipes working together, and men–days–hours problems, worked step by step."
+keywords: ["time speed distance", "time and work", "trains", "pipes and cisterns"]
+pageCss: /assets/or-lab/or-lab.css
+pageCss2: /assets/stat-lab/stat-lab.css
+pageScript: /assets/stat-lab/speed-work-page.js
+---
+{% set t = statlab.tools["speed-work"] %}
+<div class="wrap page">
+  <header class="page-head">
+    <p class="eyebrow"><a href="/tools/stats/">{{ statlab.name }}</a> · Unit II</p>
+    <h1>{{ t.title }}</h1>
+    <p class="lead">{{ t.text }}</p>
+  </header>
+  <div class="lab" id="lab"><noscript><p class="lab-msg is-warn">This tool works in your browser and needs JavaScript switched on.</p></noscript></div>
+</div>

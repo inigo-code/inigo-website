@@ -389,9 +389,20 @@
     {
       "title": "OR Lab",
       "text": "Free tools for every unit of Operations Research for Managers: the LPP graphical method, the transportation and assignment problems, the single-server queue, Monte Carlo simulation, game theory, and CPM and PERT network analysis. Each tool shows the working step by step, so students can check their own.",
+      "paper": "Operations Research for Managers",
       "url": "/tools/",
       "image": "/assets/photos/or-lab.webp",
       "imageAlt": "Network analysis in OR Lab, showing a project network with its critical path highlighted",
+      "w": 1360,
+      "h": 645
+    },
+    {
+      "title": "Stats Lab",
+      "text": "Free tools for every unit of Business Mathematics and Statistics for Managers: matrices and Cramer's rule, percentages, interest, time and work, probability, measures of central tendency and dispersion, correlation, regression, time series and index numbers. Each tool shows the working step by step, so students can check their own.",
+      "paper": "Business Mathematics and Statistics for Managers",
+      "url": "/tools/stats/",
+      "image": "/assets/photos/stats-lab.webp",
+      "imageAlt": "Regression in Stats Lab, showing both regression equations and the start of the working table",
       "w": 1360,
       "h": 645
     }

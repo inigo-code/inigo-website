@@ -1,0 +1,20 @@
+---
+layout: layouts/base.njk
+title: "Simple and compound interest"
+seoTitle: "Simple and compound interest calculator"
+permalink: /tools/interest/
+description: "Simple and compound interest with yearly, half-yearly, quarterly or monthly compounding. Find the interest, amount, principal, rate or time, with a year-by-year table."
+keywords: ["simple interest", "compound interest", "interest calculator"]
+pageCss: /assets/or-lab/or-lab.css
+pageCss2: /assets/stat-lab/stat-lab.css
+pageScript: /assets/stat-lab/interest-page.js
+---
+{% set t = statlab.tools["interest"] %}
+<div class="wrap page">
+  <header class="page-head">
+    <p class="eyebrow"><a href="/tools/stats/">{{ statlab.name }}</a> · Unit II</p>
+    <h1>{{ t.title }}</h1>
+    <p class="lead">{{ t.text }}</p>
+  </header>
+  <div class="lab" id="lab"><noscript><p class="lab-msg is-warn">This tool works in your browser and needs JavaScript switched on.</p></noscript></div>
+</div>

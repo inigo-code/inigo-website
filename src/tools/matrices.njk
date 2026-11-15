@@ -1,0 +1,20 @@
+---
+layout: layouts/base.njk
+title: "Matrix calculator"
+seoTitle: "Matrix calculator: determinant, adjoint and inverse"
+permalink: /tools/matrices/
+description: "Free matrix calculator for B.B.A. students: addition, multiplication, transpose, determinant, adjoint and inverse in exact fractions, with every step shown."
+keywords: ["matrix calculator", "inverse of a matrix", "adjoint of a matrix", "determinant"]
+pageCss: /assets/or-lab/or-lab.css
+pageCss2: /assets/stat-lab/stat-lab.css
+pageScript: /assets/stat-lab/matrices-page.js
+---
+{% set t = statlab.tools["matrices"] %}
+<div class="wrap page">
+  <header class="page-head">
+    <p class="eyebrow"><a href="/tools/stats/">{{ statlab.name }}</a> · Unit I</p>
+    <h1>{{ t.title }}</h1>
+    <p class="lead">{{ t.text }}</p>
+  </header>
+  <div class="lab" id="lab"><noscript><p class="lab-msg is-warn">This tool works in your browser and needs JavaScript switched on.</p></noscript></div>
+</div>

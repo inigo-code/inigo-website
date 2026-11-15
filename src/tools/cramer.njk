@@ -1,0 +1,20 @@
+---
+layout: layouts/base.njk
+title: "Cramer's rule"
+seoTitle: "Cramer's rule solver, step by step"
+permalink: /tools/cramer/
+description: "Solve two or three simultaneous equations by Cramer's rule: the determinants Δ, Δx, Δy and Δz written out, the solution in fractions, and a check."
+keywords: ["Cramer's rule", "simultaneous equations", "determinants"]
+pageCss: /assets/or-lab/or-lab.css
+pageCss2: /assets/stat-lab/stat-lab.css
+pageScript: /assets/stat-lab/cramer-page.js
+---
+{% set t = statlab.tools["cramer"] %}
+<div class="wrap page">
+  <header class="page-head">
+    <p class="eyebrow"><a href="/tools/stats/">{{ statlab.name }}</a> · Unit I</p>
+    <h1>{{ t.title }}</h1>
+    <p class="lead">{{ t.text }}</p>
+  </header>
+  <div class="lab" id="lab"><noscript><p class="lab-msg is-warn">This tool works in your browser and needs JavaScript switched on.</p></noscript></div>
+</div>
