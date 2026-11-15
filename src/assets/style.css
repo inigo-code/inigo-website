@@ -273,6 +273,17 @@ html.reveal-on .in.in { opacity: 1; translate: none; }
 .role-word { white-space: nowrap; font: 900 clamp(2.75rem, 9vw, 7.5rem)/.9 var(--font-display); letter-spacing: -0.06em; transition: transform .45s var(--ease); }
 .role-list a:hover .role-word { transform: translateX(.75rem); }
 .role-text { font-size: 1.1rem; line-height: 1.5; max-width: 30rem; }
+/* One quiet line under "What I do", pointing to OR Lab */
+.role-extra { margin-top: 1.25rem; }
+.role-extra a {
+  display: inline-flex; flex-wrap: wrap; align-items: baseline; gap: .25rem .75rem; padding: .5rem 0; min-height: 44px;
+  text-decoration: none; color: var(--muted);
+}
+.role-extra strong { color: var(--ink); background: linear-gradient(var(--accent), var(--accent)) 0 88% / 100% .3em no-repeat; }
+.role-extra-go { display: inline-block; color: var(--ink); transition: transform .3s var(--ease); }
+.role-extra a:hover .role-extra-text { color: var(--ink); text-decoration: underline; text-underline-offset: .2em; }
+.role-extra a:hover .role-extra-go { transform: translateX(4px); }
+@media (prefers-reduced-motion: reduce) { .role-extra-go { transition: none; } }
 .role-cta { font-weight: 600; white-space: nowrap; display: inline-flex; gap: .4rem; }
 .role-cta span { transition: transform .3s var(--ease); }
 .role-list a:hover .role-cta span { transform: translateX(4px); }
