@@ -1,0 +1,19 @@
+---
+layout: layouts/base.njk
+title: "Assignment problem"
+seoTitle: "Assignment problem solver: Hungarian method step by step"
+permalink: /tools/assignment/
+description: "Free assignment problem solver using the Hungarian method: row and column reduction, covering zeros with the fewest lines and the optimal assignment. Handles unbalanced, maximisation and blocked cells."
+keywords: ["assignment problem", "Hungarian method", "Hungarian algorithm", "unbalanced assignment problem"]
+pageCss: /assets/or-lab/or-lab.css
+pageScript: /assets/or-lab/assignment-page.js
+---
+{% set t = orlab.tools["assignment"] %}
+<div class="wrap page">
+  <header class="page-head">
+    <p class="eyebrow"><a href="/tools/">{{ orlab.name }}</a> · Unit II</p>
+    <h1>{{ t.title }}</h1>
+    <p class="lead">{{ t.text }}</p>
+  </header>
+  <div class="lab" id="lab"><noscript><p class="lab-msg is-warn">This tool works in your browser and needs JavaScript switched on.</p></noscript></div>
+</div>

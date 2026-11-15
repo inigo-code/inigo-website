@@ -2,13 +2,13 @@
 layout: layouts/base.njk
 title: Resources
 permalink: /resources/
-description: "Study notes, diagrams and a free network-analysis web app for B.B.A. students, from the papers Inigo Papu Vinodhan teaches at St. Joseph's College."
+description: "Study notes, diagrams and OR Lab, free step-by-step Operations Research tools, for B.B.A. students, from the papers Inigo Papu Vinodhan teaches at St. Joseph's College."
 ---
 <div class="wrap page">
   <header class="page-head">
     <p class="eyebrow">For students</p>
     <h1>Resources</h1>
-    <p class="lead">Study notes with diagrams, and a free web app for network analysis, from the B.B.A. papers I teach. Use them, print them and pass them on.</p>
+    <p class="lead">Study notes with diagrams, and OR Lab, free step-by-step tools for Operations Research, from the B.B.A. papers I teach. Use them, print them and pass them on.</p>
     <span class="head-motif">{% include "motifs/notes.svg" %}</span>
   </header>
 
@@ -39,15 +39,15 @@ description: "Study notes, diagrams and a free network-analysis web app for B.B.
 
   {% for t in cv.tools %}
   <section class="tool-feature" aria-labelledby="tool-{{ loop.index }}">
-    <a class="tool-shot" href="{{ t.url }}" rel="noopener" tabindex="-1" aria-hidden="true">
+    <a class="tool-shot" href="{{ t.url }}" tabindex="-1" aria-hidden="true">
       <img src="{{ t.image }}" alt="" width="{{ t.w }}" height="{{ t.h }}" loading="lazy" decoding="async">
     </a>
     <div class="tool-text">
-      <p class="kicker">Free web app</p>
+      <p class="kicker">Free tools</p>
       <h2 id="tool-{{ loop.index }}">{{ t.title }}</h2>
       <p>{{ t.text }}</p>
       <p class="actions">
-        <a class="button" href="{{ t.url }}" rel="noopener">Open the app ↗</a>
+        <a class="button" href="{{ t.url }}">Open {{ t.title }}</a>
         {% if t.source %}<a class="button ghost" href="{{ t.source }}" rel="noopener">Source code ↗</a>{% endif %}
       </p>
     </div>

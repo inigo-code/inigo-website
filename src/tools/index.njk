@@ -1,0 +1,42 @@
+---
+layout: layouts/base.njk
+title: "OR Lab"
+seoTitle: "OR Lab: free Operations Research solvers, step by step"
+permalink: /tools/
+description: "Free Operations Research tools for B.B.A. students: LPP graphical method, transportation, assignment, queuing, Monte Carlo simulation, game theory, and CPM and PERT network analysis, each worked step by step."
+keywords: ["operations research calculator", "LPP solver", "transportation problem", "assignment problem", "queuing theory", "game theory", "CPM PERT"]
+pageCss: /assets/or-lab/or-lab.css
+---
+<div class="wrap page">
+  <header class="page-head">
+    <p class="eyebrow">For students</p>
+    <h1>{{ orlab.name }}</h1>
+    <p class="lead">{{ orlab.intro }}</p>
+  </header>
+
+  <div class="lab-units">
+    {% for u in orlab.units %}
+    <section class="lab-unit" aria-labelledby="unit-{{ loop.index }}">
+      <h2 class="lab-unit-head" id="unit-{{ loop.index }}"><span class="unit-no">Unit {{ u.no }}</span><span class="unit-name">{{ u.name }}</span></h2>
+      <ul class="lab-tools">
+        {% for slug in u.tools %}{% set t = orlab.tools[slug] %}
+        <li>
+          <h3><a href="/tools/{{ slug }}/">{{ t.title }}</a></h3>
+          <p>{{ t.text }}</p>
+        </li>
+        {% endfor %}
+      </ul>
+    </section>
+    {% endfor %}
+  </div>
+
+  <section class="lab-unit" aria-labelledby="about-lab">
+    <h2 class="lab-unit-head" id="about-lab"><span class="unit-no">How to use them</span></h2>
+    <div class="lab-about">
+      <p>Work the problem by hand first, then enter it here to check each step: the tools show the tables and the arithmetic in the order you would write them in an exam, not just the final answer.</p>
+      <p>Everything is worked out in your browser, so nothing you type is sent anywhere, and the tools keep working on a weak connection once the page has loaded. “Copy link to this problem” gives a link that opens the same problem, ready to share with a class.</p>
+      {% set notes = collections.resources | byCourse("operations-research") %}
+      {% if notes.length %}<p>Study notes for the paper: {% for n in notes %}<a href="{{ n.url }}">{{ n.data.title }}</a>{% if not loop.last %}, {% endif %}{% endfor %}.</p>{% endif %}
+    </div>
+  </section>
+</div>

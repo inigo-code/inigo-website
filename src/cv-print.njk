@@ -109,7 +109,7 @@ eleventyExcludeFromCollections: true
           <p class="area"><strong>{{ a.area }}:</strong> {% for c in a.courses %}{{ c.title }}{% if not loop.last %}; {% endif %}{% endfor %}</p>
         {% endfor %}
         {% for t in cv.tools %}
-          <p class="area"><strong>Teaching tool:</strong> built the {{ t.title }}, a free web app for CPM network analysis used in Operations Research (sjcbba-ns.streamlit.app).</p>
+          <p class="area"><strong>Teaching tool:</strong> built {{ t.title }}, free step-by-step tools for every unit of Operations Research for Managers (inigo.co.in/tools).</p>
         {% endfor %}
       </section>
 

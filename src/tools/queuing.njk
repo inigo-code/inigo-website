@@ -1,0 +1,19 @@
+---
+layout: layouts/base.njk
+title: "Single-server queue"
+seoTitle: "M/M/1 queuing model calculator with formulas"
+permalink: /tools/queuing/
+description: "Free M/M/1 queue calculator: utilisation, idle probability, expected numbers in the queue and system, waiting times and the probability of n customers, with each formula shown."
+keywords: ["queuing theory", "M/M/1 queue", "single server queue", "waiting line model"]
+pageCss: /assets/or-lab/or-lab.css
+pageScript: /assets/or-lab/queue-page.js
+---
+{% set t = orlab.tools["queuing"] %}
+<div class="wrap page">
+  <header class="page-head">
+    <p class="eyebrow"><a href="/tools/">{{ orlab.name }}</a> · Unit III</p>
+    <h1>{{ t.title }}</h1>
+    <p class="lead">{{ t.text }}</p>
+  </header>
+  <div class="lab" id="lab"><noscript><p class="lab-msg is-warn">This tool works in your browser and needs JavaScript switched on.</p></noscript></div>
+</div>

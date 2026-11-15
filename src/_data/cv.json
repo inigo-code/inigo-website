@@ -387,12 +387,11 @@
   ],
   "tools": [
     {
-      "title": "Network Diagram Simulator",
-      "text": "A free web app for network analysis in Operations Research. Enter activities, durations and dependencies, and it draws the project network, works out earliest and latest times, floats and the critical path, tests crashing against cost, and plots a Gantt chart.",
-      "url": "https://sjcbba-ns.streamlit.app/",
-      "source": "https://github.com/daprofezza/Network_Simulator",
-      "image": "/assets/photos/network-simulator.webp",
-      "imageAlt": "The Network Diagram Simulator showing a project network with its critical path highlighted",
+      "title": "OR Lab",
+      "text": "Free tools for every unit of Operations Research for Managers: the LPP graphical method, the transportation and assignment problems, the single-server queue, Monte Carlo simulation, game theory, and a Network Simulator for CPM and PERT that also runs the project thousands of times. Each tool shows the working step by step, so students can check their own.",
+      "url": "/tools/",
+      "image": "/assets/photos/or-lab.webp",
+      "imageAlt": "The Network Simulator in OR Lab, showing a project network with its critical path highlighted",
       "w": 1360,
       "h": 645
     }

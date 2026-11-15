@@ -1,0 +1,19 @@
+---
+layout: layouts/base.njk
+title: "LPP graphical method"
+seoTitle: "LPP graphical method solver with corner points"
+permalink: /tools/lpp/
+description: "Free LPP graphical method solver: draws each constraint, shades the feasible region, lists the corner points and finds the optimum. Spots unbounded and infeasible problems."
+keywords: ["LPP graphical method", "linear programming solver", "feasible region", "corner point method", "standard form of LPP"]
+pageCss: /assets/or-lab/or-lab.css
+pageScript: /assets/or-lab/lpp-page.js
+---
+{% set t = orlab.tools.lpp %}
+<div class="wrap page">
+  <header class="page-head">
+    <p class="eyebrow"><a href="/tools/">{{ orlab.name }}</a> · Unit I</p>
+    <h1>{{ t.title }}</h1>
+    <p class="lead">{{ t.text }}</p>
+  </header>
+  <div class="lab" id="lab"><noscript><p class="lab-msg is-warn">This tool works in your browser and needs JavaScript switched on.</p></noscript></div>
+</div>

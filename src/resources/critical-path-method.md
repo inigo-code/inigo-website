@@ -114,7 +114,7 @@ What this tells the manager: the layout, electrical work and furniture fitting n
 
 ## Check your work with the simulator
 
-I wrote the [Network Diagram Simulator](https://sjcbba-ns.streamlit.app/), a free web app, for exactly this kind of problem. Enter the activities, dependencies and durations above, and it draws the network, runs both passes, marks the critical path and plots a Gantt chart. Solve the problem by hand first, then use the app to check.
+I built the [Network Simulator](/tools/network/) in OR Lab for exactly this kind of problem. Enter each activity by its start and end event, as numbered in the network above (this example is already loaded there), and it draws the network, runs both passes, works out the floats and marks every critical path. Solve the problem by hand first, then use the simulator to check.
 
 ## Common mistakes in exams
 

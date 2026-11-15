@@ -47,6 +47,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,500..700&family=Red+Hat+Display:wght@400..900&family=Red+Hat+Text:wght@400..600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/assets/style.css">
+  {% if pageCss %}<link rel="stylesheet" href="{{ pageCss }}">{% endif %}
+  {% if pageScript %}<script type="module" src="{{ pageScript }}"></script>{% endif %}
   <script src="/assets/fx.js" defer></script>
   <script>document.documentElement.classList.add("js"); if ("IntersectionObserver" in window && !matchMedia("(prefers-reduced-motion: reduce)").matches) requestAnimationFrame(() => document.documentElement.classList.add("reveal-on"));</script>
 </head>

@@ -1,0 +1,19 @@
+---
+layout: layouts/base.njk
+title: "Game theory"
+seoTitle: "Game theory solver: saddle point, dominance, graphical method"
+permalink: /tools/games/
+description: "Free two-person zero-sum game solver: maximin and minimax, saddle point, dominance step by step, the 2 × 2 formula and the graphical method for 2 × n and m × 2 games."
+keywords: ["game theory", "saddle point", "dominance rule", "graphical method game theory", "mixed strategy"]
+pageCss: /assets/or-lab/or-lab.css
+pageScript: /assets/or-lab/games-page.js
+---
+{% set t = orlab.tools["games"] %}
+<div class="wrap page">
+  <header class="page-head">
+    <p class="eyebrow"><a href="/tools/">{{ orlab.name }}</a> · Unit IV</p>
+    <h1>{{ t.title }}</h1>
+    <p class="lead">{{ t.text }}</p>
+  </header>
+  <div class="lab" id="lab"><noscript><p class="lab-msg is-warn">This tool works in your browser and needs JavaScript switched on.</p></noscript></div>
+</div>

@@ -1,0 +1,19 @@
+---
+layout: layouts/base.njk
+title: "Monte Carlo simulation"
+seoTitle: "Monte Carlo simulation with random number tables"
+permalink: /tools/monte-carlo/
+description: "Free Monte Carlo simulation tool: turns a probability table into random-number ranges and simulates demand or a single-server queue, with your own random numbers or generated ones."
+keywords: ["Monte Carlo simulation", "random numbers", "simulation of queue", "random number ranges"]
+pageCss: /assets/or-lab/or-lab.css
+pageScript: /assets/or-lab/montecarlo-page.js
+---
+{% set t = orlab.tools["monte-carlo"] %}
+<div class="wrap page">
+  <header class="page-head">
+    <p class="eyebrow"><a href="/tools/">{{ orlab.name }}</a> · Unit III</p>
+    <h1>{{ t.title }}</h1>
+    <p class="lead">{{ t.text }}</p>
+  </header>
+  <div class="lab" id="lab"><noscript><p class="lab-msg is-warn">This tool works in your browser and needs JavaScript switched on.</p></noscript></div>
+</div>

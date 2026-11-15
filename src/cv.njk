@@ -158,9 +158,9 @@ description: "CV of J. Inigo Papu Vinodhan, Assistant Professor of Business Admi
           {% endfor %}{% endfor %}
         </ul>
         {% for t in cv.tools %}
-          <a class="cv-tool" href="{{ t.url }}" rel="noopener">
+          <a class="cv-tool" href="{{ t.url }}">
             <img src="{{ t.image }}" alt="" width="{{ t.w }}" height="{{ t.h }}" loading="lazy" decoding="async">
-            <span><span class="kicker">Teaching tool I built</span><strong>{{ t.title }}</strong><span class="cv-tool-go">Open the app ↗</span></span>
+            <span><span class="kicker">Teaching tool I built</span><strong>{{ t.title }}</strong><span class="cv-tool-go">Open {{ t.title }}</span></span>
           </a>
         {% endfor %}
         {% if cv.curriculum %}

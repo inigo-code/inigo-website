@@ -1,0 +1,19 @@
+---
+layout: layouts/base.njk
+title: "Transportation problem"
+seoTitle: "Transportation problem solver with VAM and MODI, step by step"
+permalink: /tools/transportation/
+description: "Free transportation problem solver: North-West Corner, Least Cost and Vogel's method, then the MODI method to the optimum, with every table. Handles unbalanced, degenerate and profit problems."
+keywords: ["transportation problem", "Vogel's approximation method", "VAM", "MODI method", "North-West Corner rule", "Least Cost method"]
+pageCss: /assets/or-lab/or-lab.css
+pageScript: /assets/or-lab/transport-page.js
+---
+{% set t = orlab.tools["transportation"] %}
+<div class="wrap page">
+  <header class="page-head">
+    <p class="eyebrow"><a href="/tools/">{{ orlab.name }}</a> · Unit II</p>
+    <h1>{{ t.title }}</h1>
+    <p class="lead">{{ t.text }}</p>
+  </header>
+  <div class="lab" id="lab"><noscript><p class="lab-msg is-warn">This tool works in your browser and needs JavaScript switched on.</p></noscript></div>
+</div>

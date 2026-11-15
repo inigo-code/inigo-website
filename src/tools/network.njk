@@ -1,0 +1,19 @@
+---
+layout: layouts/base.njk
+title: "Network Simulator: CPM, PERT and Monte Carlo"
+seoTitle: "Network Simulator: CPM, PERT and Monte Carlo online"
+permalink: /tools/network/
+description: "Free CPM and PERT calculator with a Monte Carlo simulation: event times, total, free and independent float, critical paths and the probability of finishing on time."
+keywords: ["CPM calculator", "PERT calculator", "critical path", "network analysis", "Monte Carlo simulation", "project probability"]
+pageCss: /assets/or-lab/or-lab.css
+pageScript: /assets/or-lab/network-page.js
+---
+{% set t = orlab.tools.network %}
+<div class="wrap page">
+  <header class="page-head">
+    <p class="eyebrow"><a href="/tools/">{{ orlab.name }}</a> · Units III and V</p>
+    <h1>{{ t.title }}</h1>
+    <p class="lead">{{ t.text }}</p>
+  </header>
+  <div class="lab" id="lab"><noscript><p class="lab-msg is-warn">This tool works in your browser and needs JavaScript switched on.</p></noscript></div>
+</div>

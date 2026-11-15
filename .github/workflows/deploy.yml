@@ -23,6 +23,8 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
+      # The OR Lab maths is checked before anything is published.
+      - run: npm test
       - run: npm run build
       # Compare the new pages with the live site, so only new or changed pages are reported to IndexNow.
       - id: indexnow

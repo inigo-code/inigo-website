@@ -92,6 +92,8 @@ Both are "≤" constraints, so the feasible region lies towards the origin.
 - **Infeasible problem:** the constraints have no common region.
 - **Redundant constraint:** a constraint that does not affect the feasible region.
 
+Solve each problem by hand first, then check your graph and corner points with the [LPP graphical method tool](/tools/lpp/) in OR Lab. The worked example above is already loaded there.
+
 ## Practice problems
 
 1. Maximise Z = 40x + 30y subject to x + y ≤ 12, 2x + y ≤ 16, x, y ≥ 0. *(Answer: x = 4, y = 8, Z = 400.)*

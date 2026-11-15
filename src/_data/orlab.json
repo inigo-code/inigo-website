@@ -1,0 +1,21 @@
+{
+  "name": "OR Lab",
+  "paper": "Operations Research for Managers",
+  "intro": "Free, interactive tools for the models in the B.B.A. paper Operations Research for Managers. Enter a problem from your textbook or class, and each tool works it out step by step, the way you would by hand, so you can check your own working.",
+  "units": [
+    { "no": "I", "name": "Linear programming", "tools": ["lpp"] },
+    { "no": "II", "name": "Transportation and assignment", "tools": ["transportation", "assignment"] },
+    { "no": "III", "name": "Queuing theory and simulation", "tools": ["queuing", "monte-carlo"] },
+    { "no": "IV", "name": "Game theory", "tools": ["games"] },
+    { "no": "V", "name": "Network analysis", "tools": ["network"] }
+  ],
+  "tools": {
+    "lpp": { "title": "LPP graphical method", "text": "Draws every constraint, shades the feasible region, lists the corner points with their Z values and finds the optimum. Spots unbounded, infeasible and multiple-optimum problems, and writes the standard form." },
+    "transportation": { "title": "Transportation problem", "text": "Initial solutions by the North-West Corner rule, the Least Cost method and Vogel's method, then the MODI method to the optimum, with every table. Handles unbalanced and degenerate problems, profits and blocked routes." },
+    "assignment": { "title": "Assignment problem", "text": "The Hungarian method step by step: row and column reduction, covering the zeros with the fewest lines, and the optimal assignment. Handles unequal rows and columns, maximisation and blocked cells." },
+    "queuing": { "title": "Single-server queue", "text": "The M/M/1 model: utilisation, the chance the server is idle, expected numbers in the queue and in the system, waiting times, and the probability of n customers, with each formula shown." },
+    "monte-carlo": { "title": "Monte Carlo simulation", "text": "Turns a probability table into random-number ranges and simulates with your own random numbers or generated ones. Covers one variable (such as daily demand) and a single-server queue." },
+    "games": { "title": "Game theory", "text": "Two-person zero-sum games: maximin and minimax, saddle points, dominance step by step, the 2 × 2 formula and the graphical method for 2 × n and m × 2 games." },
+    "network": { "title": "Network Simulator", "text": "CPM and PERT for an arrow diagram: earliest and latest event times, total, free and independent float, every critical path, and the probability of finishing by a date. Then a Monte Carlo simulation runs the project thousands of times." }
+  }
+}
