@@ -197,7 +197,9 @@ h2.kicker { font: 600 .95rem/1.3 var(--font-text); letter-spacing: 0; }
 .hero-eyebrow { font-weight: 600; color: var(--brand-muted); display: flex; align-items: center; gap: .6rem; }
 .hero-eyebrow::before { content: ""; width: .9rem; height: .9rem; background: var(--accent); -webkit-mask: url("/assets/brand/leaf.svg") center / contain no-repeat; mask: url("/assets/brand/leaf.svg") center / contain no-repeat; flex-shrink: 0; }
 .hero-name {
-  font-size: clamp(3.4rem, 9.6vw, 8.75rem); font-weight: 900; letter-spacing: -0.055em; line-height: .88;
+  /* Sized by the screen's height as well as its width, and capped so "Inigo Papu" stays on one line:
+     the name, the lead and the photo all show without scrolling on a laptop or desktop. */
+  font-size: clamp(3.4rem, min(9.6vw, 15.5vh), 8rem); font-weight: 900; letter-spacing: -0.055em; line-height: .88;
   margin-top: 1.5rem;
 }
 .hero-name span { display: block; }
@@ -208,7 +210,7 @@ h2.kicker { font: 600 .95rem/1.3 var(--font-text); letter-spacing: 0; }
 }
 .hero-lead { font-size: clamp(1.15rem, 1.7vw, 1.4rem); line-height: 1.5; color: var(--brand-muted); max-width: 36rem; margin-top: 2.25rem; }
 .hero-lead a { color: var(--brand-ink); }
-.hero-portrait { position: relative; max-width: 27rem; justify-self: end; width: 100%; }
+.hero-portrait { position: relative; max-width: clamp(16rem, calc((100vh - 13rem) * .8), 27rem); justify-self: end; width: 100%; }
 .hero-portrait::before { content: ""; position: absolute; inset: 1.25rem 1.25rem -1.25rem -1.25rem; background: var(--accent); border-radius: var(--radius); }
 .hero-portrait img { position: relative; width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: var(--radius); background: var(--accent); }
 .seal { position: absolute; left: -3.5rem; bottom: 3.5rem; width: 8.5rem; height: 8.5rem; transition: transform 1.4s var(--ease); }
