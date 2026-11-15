@@ -276,7 +276,7 @@ html.reveal-on .in.in { opacity: 1; translate: none; }
 .role-word { white-space: nowrap; font: 900 clamp(2.75rem, 9vw, 7.5rem)/.9 var(--font-display); letter-spacing: -0.06em; transition: transform .45s var(--ease); }
 .role-list a:hover .role-word { transform: translateX(.75rem); }
 .role-text { font-size: 1.1rem; line-height: 1.5; max-width: 30rem; }
-/* Home: OR Lab, a narrow highlighter strip just under the top bar, marked New */
+/* Home: the two labs, a narrow highlighter strip just under the top bar, marked New */
 .lab-strip { background: var(--accent); color: var(--accent-ink); }
 .lab-strip-inner { display: flex; align-items: center; gap: .75rem; min-height: 2.75rem; font-size: .95rem; line-height: 1.35; }
 .lab-new { display: inline-flex; align-items: center; gap: .3rem; flex-shrink: 0; background: var(--accent-ink); color: var(--accent); font-weight: 700; font-size: .8rem; padding: .2rem .6rem .2rem .45rem; border-radius: 999px; }
@@ -285,15 +285,18 @@ html.reveal-on .in.in { opacity: 1; translate: none; }
 @keyframes lab-twinkle { 0% { transform: rotate(0) scale(1); } 25% { transform: rotate(45deg) scale(1.3); } 50%, 100% { transform: rotate(90deg) scale(1); } }
 .lab-strip-text { flex: 1; min-width: 0; padding-block: .45rem; }
 .lab-strip-mid, .lab-strip-short { display: none; }
-.lab-strip-links { display: flex; flex-shrink: 0; gap: 1.5rem; }
-.lab-strip-links a { display: inline-flex; align-items: center; gap: .3rem; min-height: 2.75rem; color: inherit; font-weight: 700; white-space: nowrap; text-decoration: none; }
-.lab-strip-links a:hover { text-decoration: underline; text-underline-offset: .2em; }
-.lab-strip-links a span { display: inline-block; transition: transform .3s var(--ease); }
-.lab-strip-links a:hover span { transform: translateX(3px); }
-.lab-strip-links a:focus-visible { outline: 3px solid var(--accent-ink); outline-offset: 2px; box-shadow: none; }
+/* Each lab is a chip: an outlined pill with its icon, filled with ink on hover. */
+.lab-strip-links { display: flex; flex-shrink: 0; gap: .5rem; padding-block: .3rem; }
+.lab-chip { display: inline-flex; align-items: center; gap: .4rem; min-height: 2.25rem; padding: 0 .85rem 0 .7rem; border: 1.5px solid color-mix(in srgb, var(--accent-ink) 35%, transparent); border-radius: 999px; background: color-mix(in srgb, var(--accent-ink) 7%, transparent); color: inherit; font-size: .9rem; font-weight: 700; white-space: nowrap; text-decoration: none; transition: background-color .2s var(--ease), color .2s var(--ease), border-color .2s var(--ease); }
+.lab-chip:hover { background: var(--accent-ink); border-color: var(--accent-ink); color: var(--accent); }
+.lab-chip:focus-visible { outline: 3px solid var(--accent-ink); outline-offset: 2px; box-shadow: none; }
+.lab-chip-icon { width: 1.05rem; height: 1.05rem; flex-shrink: 0; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.lab-chip-arrow { display: inline-block; transition: transform .3s var(--ease); }
+.lab-chip:hover .lab-chip-arrow { transform: translateX(3px); }
 @media (max-width: 1000px) { .lab-strip-long { display: none; } .lab-strip-mid { display: inline; } }
-@media (max-width: 600px) { .lab-strip-mid { display: none; } .lab-strip-short { display: inline; } .lab-strip-inner { gap: .6rem; } .lab-strip-links { gap: 1rem; } }
-@media (prefers-reduced-motion: reduce) { .lab-new-icon { animation: none; } .lab-strip-links a span { transition: none; } }
+@media (max-width: 600px) { .lab-strip-mid { display: none; } .lab-strip-short { display: inline; } .lab-strip-inner { gap: .6rem; } .lab-strip-links { gap: .4rem; } .lab-chip { padding: 0 .7rem 0 .6rem; gap: .35rem; } .lab-chip-arrow { display: none; } }
+@media (max-width: 400px) { .lab-strip-text { display: none; } .lab-strip-links { margin-left: auto; } }
+@media (prefers-reduced-motion: reduce) { .lab-new-icon { animation: none; } .lab-chip, .lab-chip-arrow { transition: none; } }
 /* With the strip above it, the hero needs less air at the top. */
 .lab-strip + .hero { padding-top: clamp(2.25rem, 5vw, 3.5rem); }
 .role-cta { font-weight: 600; white-space: nowrap; display: inline-flex; gap: .4rem; }
