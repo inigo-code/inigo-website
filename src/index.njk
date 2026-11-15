@@ -2,6 +2,13 @@
 layout: layouts/base.njk
 ---
 {% from "icons.njk" import icon %}
+<a class="lab-strip" href="/tools/">
+  <span class="wrap lab-strip-inner">
+    <span class="lab-new"><svg class="lab-new-icon" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C8.6 4.6 11.4 7.4 16 8 11.4 8.6 8.6 11.4 8 16 7.4 11.4 4.6 8.6 0 8 4.6 7.4 7.4 4.6 8 0Z"/></svg>New</span>
+    <span class="lab-strip-text"><strong>{{ orlab.name }}</strong><span class="lab-strip-long">: free step-by-step tools for every unit of Operations Research</span><span class="lab-strip-short">: step-by-step tools</span></span>
+    <span class="lab-strip-go"><span class="lab-strip-open">Open</span> <span aria-hidden="true">→</span></span>
+  </span>
+</a>
 <section class="hero">
   <div class="wrap hero-grid">
     <div class="hero-text">
@@ -29,19 +36,6 @@ layout: layouts/base.njk
       {% for o in coverage.outlets %}<span class="masthead">{{ o }}</span>{% endfor %}
       <span class="hero-press-count">Reports from 2013 to 2026 →</span>
     </a>
-  </div>
-</section>
-
-<section class="lab-promo" aria-labelledby="lab-promo-title">
-  <div class="wrap">
-    <div class="lab-promo-card">
-      <div class="lab-promo-text">
-        <p class="lab-promo-kicker">For my B.B.A. students</p>
-        <h2 id="lab-promo-title">{{ orlab.name }}</h2>
-        <p>Free tools for every unit of Operations Research: LPP, transportation, assignment, queuing, simulation, game theory, and CPM and PERT. Each one works your problem out step by step.</p>
-      </div>
-      <a class="button dark" href="/tools/">Open {{ orlab.name }} <span aria-hidden="true">→</span></a>
-    </div>
   </div>
 </section>
 

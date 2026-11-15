@@ -273,21 +273,23 @@ html.reveal-on .in.in { opacity: 1; translate: none; }
 .role-word { white-space: nowrap; font: 900 clamp(2.75rem, 9vw, 7.5rem)/.9 var(--font-display); letter-spacing: -0.06em; transition: transform .45s var(--ease); }
 .role-list a:hover .role-word { transform: translateX(.75rem); }
 .role-text { font-size: 1.1rem; line-height: 1.5; max-width: 30rem; }
-/* Home: OR Lab, a highlighter-yellow card just below the hero */
-.lab-promo { padding-top: clamp(2.5rem, 6vw, 4rem); }
-.lab-promo-card {
-  display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 1.25rem clamp(1.5rem, 4vw, 3rem);
-  background: var(--accent); color: var(--accent-ink); border-radius: var(--radius); padding: clamp(1.4rem, 3.5vw, 2.25rem) clamp(1.25rem, 4vw, 2.75rem);
-}
-.lab-promo + .roles { padding-top: clamp(3rem, 7vw, 5rem); }
-.lab-promo-text { display: grid; gap: .5rem; max-width: 46rem; }
-.lab-promo-kicker { font-weight: 600; font-size: .95rem; }
-.lab-promo h2 { font-size: clamp(2rem, 4vw, 3rem); font-weight: 800; letter-spacing: -0.04em; line-height: 1; color: var(--accent-ink); }
-.lab-promo p { color: var(--accent-ink); }
-.lab-promo .button span { transition: transform .3s var(--ease); }
-.lab-promo .button:hover span { transform: translateX(4px); }
-@media (max-width: 720px) { .lab-promo-card { grid-template-columns: minmax(0, 1fr); } .lab-promo .button { justify-self: start; } }
-@media (prefers-reduced-motion: reduce) { .lab-promo .button span { transition: none; } }
+/* Home: OR Lab, a narrow highlighter strip just under the top bar, marked New */
+.lab-strip { display: block; background: var(--accent); color: var(--accent-ink); text-decoration: none; }
+.lab-strip-inner { display: flex; align-items: center; gap: .75rem; min-height: 2.75rem; padding-block: .45rem; font-size: .95rem; line-height: 1.35; }
+.lab-new { display: inline-flex; align-items: center; gap: .3rem; flex-shrink: 0; background: var(--accent-ink); color: var(--accent); font-weight: 700; font-size: .8rem; padding: .2rem .6rem .2rem .45rem; border-radius: 999px; }
+.lab-new-icon { width: .8rem; height: .8rem; fill: currentColor; animation: lab-twinkle 3s var(--ease) infinite; }
+/* A four-point star looks the same after a quarter turn, so the loop has no seam. */
+@keyframes lab-twinkle { 0% { transform: rotate(0) scale(1); } 25% { transform: rotate(45deg) scale(1.3); } 50%, 100% { transform: rotate(90deg) scale(1); } }
+.lab-strip-text { flex: 1; min-width: 0; }
+.lab-strip-text strong { font-weight: 700; }
+.lab-strip-short { display: none; }
+.lab-strip-go { flex-shrink: 0; font-weight: 600; white-space: nowrap; }
+.lab-strip-go span[aria-hidden] { display: inline-block; transition: transform .3s var(--ease); }
+.lab-strip:hover .lab-strip-go span[aria-hidden] { transform: translateX(4px); }
+.lab-strip:hover .lab-strip-text strong { text-decoration: underline; text-underline-offset: .2em; }
+.lab-strip:focus-visible { outline: 3px solid var(--accent-ink); outline-offset: -5px; box-shadow: none; border-radius: 0; }
+@media (max-width: 600px) { .lab-strip-long, .lab-strip-open { display: none; } .lab-strip-short { display: inline; } .lab-strip-inner { gap: .6rem; } }
+@media (prefers-reduced-motion: reduce) { .lab-new-icon { animation: none; } .lab-strip-go span[aria-hidden] { transition: none; } }
 .role-cta { font-weight: 600; white-space: nowrap; display: inline-flex; gap: .4rem; }
 .role-cta span { transition: transform .3s var(--ease); }
 .role-list a:hover .role-cta span { transform: translateX(4px); }
@@ -1210,7 +1212,7 @@ html:has(.lightbox[open]) { overflow: hidden; }
   body { background: #fff; color: #000; font-size: 11pt; line-height: 1.5; }
   *, *::before, *::after { animation: none !important; transition: none !important; }
   .rv, .reveal-on .rv, .reveal-on .reveal { opacity: 1 !important; translate: none !important; transform: none !important; }
-  .skip, .topbar, .footer, .lightbox, .back, .author-box, .related, .toc, .entry-actions, .menu-toggle { display: none !important; }
+  .skip, .topbar, .lab-strip, .footer, .lightbox, .back, .author-box, .related, .toc, .entry-actions, .menu-toggle { display: none !important; }
   .wrap { max-width: none; padding-inline: 0; }
   .entry > *, .entry > *:not(.entry-head), .entry-head > *, .prose { max-width: none; }
   .entry { padding-bottom: 0; }
