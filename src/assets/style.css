@@ -694,7 +694,7 @@ html.reveal-on .in.in { opacity: 1; translate: none; }
 .note-card:has(a:focus-visible), .article-card:has(a:focus-visible), .article-lead:has(a:focus-visible) { outline: 3px solid var(--ink); outline-offset: 3px; }
 .note-card a:focus-visible, .article-card a:focus-visible, .article-lead a:focus-visible { outline: none; box-shadow: none; }
 
-/* Resources: OR Lab, a compact list of links (the full descriptions are on /tools/) */
+/* Resources: OR Lab, a compact list of links (the full descriptions are on /tools/or/) */
 .tool-list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 22rem), 1fr)); column-gap: clamp(1.5rem, 3vw, 2.5rem); border-top: 2px solid var(--ink); }
 .tool-list a {
   display: grid; grid-template-columns: 4.5rem minmax(0, 1fr) auto; gap: 1rem; align-items: baseline;

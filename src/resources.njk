@@ -56,7 +56,7 @@ pageScript: /assets/list-filter.js
         <li><a href="/tools/{{ slug }}/"><span class="tool-unit">Unit {{ u.no }}</span><span class="tool-name">{{ orlab.tools[slug].title }}</span></a></li>
       {% endfor %}{% endfor %}
     </ul>
-    <p class="tools-more"><a href="/tools/">What each tool does, and how to use them</a></p>
+    <p class="tools-more"><a href="/tools/or/">What each tool does, and how to use them</a></p>
   </section>
 
   <section class="notes-section" aria-labelledby="stats-title">
@@ -87,7 +87,7 @@ pageScript: /assets/list-filter.js
               <li{% if notes.length or c.slug == "operations-research" or c.slug == "business-mathematics-statistics" %} class="has-notes"{% endif %}>
                 <span class="area-course">{{ c.title }}</span>
                 {% for n in notes %}<a class="area-note" href="{{ n.url }}">{{ n.data.title }}</a>{% endfor %}
-                {% if c.slug == "operations-research" %}<a class="area-note" href="/tools/">{{ orlab.name }}: step-by-step tools</a>{% endif %}
+                {% if c.slug == "operations-research" %}<a class="area-note" href="/tools/or/">{{ orlab.name }}: step-by-step tools</a>{% endif %}
                 {% if c.slug == "business-mathematics-statistics" %}<a class="area-note" href="/tools/stats/">{{ statlab.name }}: step-by-step tools</a>{% endif %}
               </li>
             {% endfor %}

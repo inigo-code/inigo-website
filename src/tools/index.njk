@@ -1,31 +1,46 @@
 ---
 layout: layouts/base.njk
-title: "OR Lab"
-seoTitle: "OR Lab: free Operations Research solvers, step by step"
+title: "Labs"
+seoTitle: "Labs: free step-by-step tools for Operations Research and Business Statistics"
 permalink: /tools/
-description: "Free Operations Research tools for B.B.A. students: LPP graphical method, transportation, assignment, queuing, Monte Carlo simulation, game theory, and CPM and PERT network analysis, each worked step by step."
-keywords: ["operations research calculator", "LPP solver", "transportation problem", "assignment problem", "queuing theory", "game theory", "CPM PERT"]
+description: "Two free labs for B.B.A. students. OR Lab for Operations Research, and Stats Lab for Business Mathematics and Statistics. Enter a problem from your textbook and each tool works it out step by step."
+keywords: ["operations research calculator", "business statistics calculator", "LPP solver", "transportation problem", "matrix calculator", "correlation", "regression"]
 pageCss: /assets/or-lab/or-lab.css
 ---
+{% set labs = [
+  { d: orlab, href: "/tools/or/", course: "operations-research", icon: "network" },
+  { d: statlab, href: "/tools/stats/", course: "business-mathematics-statistics", icon: "bars" }
+] %}
 <div class="wrap page">
   <header class="page-head">
     <p class="eyebrow">For students</p>
-    <h1>{{ orlab.name }}</h1>
-    <p class="lead">{{ orlab.intro }}</p>
+    <h1>Labs</h1>
+    <p class="lead">Free, interactive tools for two B.B.A. papers. Enter a problem from your textbook or class, and each tool works it out step by step, the way you would by hand, so you can check your own working.</p>
   </header>
 
   <div class="lab-units">
-    {% for u in orlab.units %}
-    <section class="lab-unit" aria-labelledby="unit-{{ loop.index }}">
-      <h2 class="lab-unit-head" id="unit-{{ loop.index }}"><span class="unit-no">Unit {{ u.no }}</span><span class="unit-name">{{ u.name }}</span></h2>
-      <ul class="lab-tools">
-        {% for slug in u.tools %}{% set t = orlab.tools[slug] %}
-        <li>
-          <h3><a href="/tools/{{ slug }}/">{{ t.title }}</a></h3>
-          <p>{{ t.text }}</p>
-        </li>
-        {% endfor %}
-      </ul>
+    {% for lab in labs %}
+    <section class="lab-unit" aria-labelledby="lab-{{ loop.index }}">
+      <div class="lab-hub-head">
+        {% if lab.icon == "network" %}
+        <svg class="lab-hub-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="5" cy="6" r="2.5"/><circle cx="19" cy="6" r="2.5"/><circle cx="12" cy="18" r="2.5"/><path d="M7.5 6h9M6.3 8.3l4.4 7.5M17.7 8.3l-4.4 7.5"/></svg>
+        {% else %}
+        <svg class="lab-hub-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 20.5h18"/><rect x="4.5" y="12" width="3.5" height="8.5" rx=".5"/><rect x="10.25" y="5" width="3.5" height="15.5" rx=".5"/><rect x="16" y="9" width="3.5" height="11.5" rx=".5"/></svg>
+        {% endif %}
+        <h2 id="lab-{{ loop.index }}"><a href="{{ lab.href }}">{{ lab.d.name }}</a></h2>
+        <p>{{ lab.d.paper }}</p>
+        <p class="lab-hub-count">{{ lab.d.tools | dictsort | length }} tools</p>
+      </div>
+      <div>
+        <ul class="tool-list">
+          {% for u in lab.d.units %}{% for slug in u.tools %}
+          <li><a href="/tools/{{ slug }}/"><span class="tool-unit">Unit {{ u.no }}</span><span class="tool-name">{{ lab.d.tools[slug].title }}</span></a></li>
+          {% endfor %}{% endfor %}
+        </ul>
+        <p class="tools-more"><a href="{{ lab.href }}">{{ lab.d.name }}: what each tool does</a></p>
+        {% set notes = collections.resources | byCourse(lab.course) %}
+        {% if notes.length %}<p class="lab-hub-notes">Study notes for the paper: {% for n in notes %}<a href="{{ n.url }}">{{ n.data.title }}</a>{% if not loop.last %}, {% endif %}{% endfor %}.</p>{% endif %}
+      </div>
     </section>
     {% endfor %}
   </div>
@@ -34,10 +49,7 @@ pageCss: /assets/or-lab/or-lab.css
     <h2 class="lab-unit-head" id="about-lab"><span class="unit-no">How to use them</span></h2>
     <div class="lab-about">
       <p>Work the problem by hand first, then enter it here to check each step: the tools show the tables and the arithmetic in the order you would write them in an exam, not just the final answer.</p>
-      <p>Everything is worked out in your browser, so nothing you type is sent anywhere, and the tools keep working on a weak connection once the page has loaded. “Copy link to this problem” gives a link that opens the same problem, ready to share with a class.</p>
-      {% set notes = collections.resources | byCourse("operations-research") %}
-      {% if notes.length %}<p>Study notes for the paper: {% for n in notes %}<a href="{{ n.url }}">{{ n.data.title }}</a>{% if not loop.last %}, {% endif %}{% endfor %}.</p>{% endif %}
-      <p>For {{ statlab.paper }}, see <a href="/tools/stats/">{{ statlab.name }}</a>.</p>
+      <p>Everything is worked out in your browser, so nothing you type is sent anywhere. “Copy link to this problem” gives a link that opens the same problem, ready to share with a class.</p>
     </div>
   </section>
 </div>
