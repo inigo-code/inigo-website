@@ -1,5 +1,5 @@
 // Transportation problem page: NWC, Least Cost or Vogel to start, then MODI to the optimum.
-import { h, $, messages, saveState, loadState, shareButton, block, stepsBox, scroller, kv, fmt, parseNum } from "./ui.js";
+import { h, $, messages, saveState, loadState, shareButton, block, stepsBox, scroller, kv, where, fmt, parseNum } from "./ui.js";
 import { BIG as BIG0, validate, solve, prepare, northWest, leastCost, vogel, totalCost } from "./lib/transport.js";
 
 const EXAMPLE = {
@@ -195,7 +195,7 @@ function show(p, r) {
   // Degeneracy.
   const need = q.m + q.n - 1;
   const eps0 = opt.iterations[0].eps;
-  blocks.push(block("Checking for degeneracy", h("p", { class: "lab-prose" }, startCount >= need
+  blocks.push(block("Checking for degeneracy", where(["m, n", `the number of rows (sources, ${q.m}) and columns (destinations, ${q.n})`], ["m + n − 1", "how many allocated cells a basic solution needs"]), h("p", { class: "lab-prose" }, startCount >= need
     ? `There are ${startCount} allocations and m + n − 1 = ${q.m} + ${q.n} − 1 = ${need}, so the solution is not degenerate and MODI can start.`
     : `There are only ${startCount} allocations but m + n − 1 = ${need}, so the solution is degenerate. A tiny amount ε (treated as 0) is placed in ${eps0.length === 1 ? "the cheapest empty cell that does not form a closed loop" : `${eps0.length} of the cheapest empty cells that do not form a closed loop`}: ${eps0.map(([i, j]) => `(${names.rows[i]}, ${names.cols[j]})`).join(", ")}.`)));
 
@@ -213,7 +213,10 @@ function show(p, r) {
   const modiBox = stepsBox(`MODI method: ${opt.iterations.length} table${opt.iterations.length > 1 ? "s" : ""}`, its);
   modiBox.open = true;
   blocks.push(block("Improving to the optimum", modiBox,
-    h("p", { class: "lab-hint" }, "Δ in an empty cell is how much the total would change per unit sent along that route. Highlighted: the entering cell; + and − mark the closed loop.")));
+    where(["u", "a number for each row (source), found from the allocated cells"], ["v", "a number for each column (destination), found the same way"],
+      ["Δ", "delta, cost − u − v for an empty cell: how much the total would change per unit sent along that route"], ["θ", "theta, the amount moved round the closed loop"],
+      ["Closed loop", "a path of + and − cells, turning only at allocated cells, that moves units without breaking the totals"], ["ε", "epsilon, a tiny amount used to avoid degeneracy; it counts as 0"]),
+    h("p", { class: "lab-hint" }, "Highlighted: the entering cell; + and − mark the closed loop.")));
 
   // Final allocation in the original figures.
   blocks.push(block("Optimal allocation",

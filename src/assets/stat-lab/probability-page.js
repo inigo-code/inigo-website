@@ -1,5 +1,5 @@
 // Permutations, combinations and simple probability, as exact whole numbers and fractions.
-import { h, block, scroller, resultTable, formula, answer, fmt, parseNum, calcPage, need, F, fracText } from "./kit.js";
+import { h, block, scroller, resultTable, formula, where, answer, fmt, parseNum, calcPage, need, F, fracText } from "./kit.js";
 import * as C from "./lib/counting.js";
 
 const big = (n) => BigInt(n).toLocaleString("en-IN");
@@ -13,6 +13,13 @@ const probAnswer = (words, p) => {
   const x = p.toNumber(), tiny = x > 0 && x < 0.00005;
   return answer(`P(${words})`, tiny ? `${p} ≈ ${sci(x)}` : fracText(p),
     h("p", {}, p.isZero() ? "It cannot happen." : p.eq(new F(1n)) ? "It is certain." : tiny ? "Less than 0.01% of the time: practically never." : `About ${fmt(x * 100, 2)}% of the time.`));
+};
+
+// The symbols every counting answer uses.
+const K = {
+  C: ["nCr", "the number of ways to choose r things from n when order does not matter (a selection)"],
+  fact: ["n!", "n factorial: n × (n − 1) × … × 2 × 1; 0! = 1"],
+  P: ["P(E)", "the probability of the event: favourable outcomes ÷ all equally likely outcomes"],
 };
 
 const EVENTS = [["eq", "Exactly"], ["ge", "At least"], ["le", "At most"]];
@@ -35,6 +42,7 @@ const MODES = {
       return [answer("Arrangements and selections", `${n}P${r} = ${big(p)}`, h("p", { class: "big" }, `${n}C${r} = ${big(c)}`)),
         block("Permutations", formula(`${n}P${r} = n! / (n − r)! = ${n}! / ${n - r}!`, `= ${C.fallingText(n, r)} (${r} factor${r === 1 ? "" : "s"}) = ${big(p)}`)),
         block("Combinations", formula(`${n}C${r} = n! / (r! (n − r)!) = ${n}P${r} / ${r}!`, `= ${big(p)} / (${C.factText(r)}) = ${big(p)} / ${big(C.factorial(r))} = ${big(c)}`),
+          where(["n", `the number of things to choose from, ${n}`], ["r", `how many are taken, ${r}`], ["nPr", "the number of arrangements of r things from n, where order matters"], K.C, K.fact),
           h("p", { class: "lab-hint" }, `nCr = nC(n − r): choosing ${r} to take is the same as choosing ${n - r} to leave.`))];
     },
   },
@@ -50,7 +58,8 @@ const MODES = {
       const rep = r.repeats.map(([c, m]) => `${c} ${m} times`).join(", ");
       return [answer(`Arrangements of ${r.letters.join("")}`, big(r.total)),
         block("Working", formula(`${r.n} letters${r.repeats.length ? `; repeated: ${rep}` : ", all different"}`,
-          r.repeats.length ? `Arrangements = ${r.n}! / (${r.repeats.map(([, m]) => `${m}!`).join(" × ")}) = ${big(C.factorial(r.n))} / ${big(r.den)} = ${big(r.total)}` : `Arrangements = ${r.n}! = ${big(r.total)}`))];
+          r.repeats.length ? `Arrangements = ${r.n}! / (${r.repeats.map(([, m]) => `${m}!`).join(" × ")}) = ${big(C.factorial(r.n))} / ${big(r.den)} = ${big(r.total)}` : `Arrangements = ${r.n}! = ${big(r.total)}`),
+          where(K.fact, ...(r.repeats.length ? [["m!", "for a letter repeated m times; dividing by it removes arrangements that look the same"]] : [])))];
     },
   },
   coins: {
@@ -67,7 +76,8 @@ const MODES = {
       const fav = ks.reduce((s, j) => s + C.nCr(n, j), 0n), total = 2n ** BigInt(n);
       const words = `${evWord[v.ev]} ${k} head${k === 1 ? "" : "s"}`, pr = P(fav, total, words);
       return [probAnswer(words, pr.p),
-        block("Working", formula(`Total outcomes = 2^${n} = ${big(total)}`, `Ways to get j heads = ${n}Cj`, `Favourable = ${ks.map((j) => `${n}C${j}`).join(" + ")} = ${ks.map((j) => big(C.nCr(n, j))).join(" + ")} = ${big(fav)}`, pr.line))];
+        block("Working", formula(`Total outcomes = 2^${n} = ${big(total)}`, `Ways to get j heads = ${n}Cj`, `Favourable = ${ks.map((j) => `${n}C${j}`).join(" + ")} = ${ks.map((j) => big(C.nCr(n, j))).join(" + ")} = ${big(fav)}`, pr.line),
+          where([`2^${n}`, `2 multiplied by itself ${n} times: each coin falls 2 ways`], [`${n}Cj`, `the number of ways to choose which j of the ${n} coins show heads`], K.P))];
     },
   },
   dice: {
@@ -85,7 +95,8 @@ const MODES = {
       const favT = totals.filter(([s]) => test(s));
       const pr = P(r.fav, r.total, words);
       return [probAnswer(words, pr.p),
-        block("Working", formula(`Total outcomes = 6^${d} = ${r.total}`, favT.length ? `Favourable totals: ${favT.map(([s, c]) => `${s} (${c} way${c === 1 ? "" : "s"})`).join(", ")}, ${r.fav} in all` : "No total meets the condition, so there are 0 favourable outcomes.", pr.line)),
+        block("Working", formula(`Total outcomes = 6^${d} = ${r.total}`, favT.length ? `Favourable totals: ${favT.map(([s, c]) => `${s} (${c} way${c === 1 ? "" : "s"})`).join(", ")}, ${r.fav} in all` : "No total meets the condition, so there are 0 favourable outcomes.", pr.line),
+          where([`6^${d}`, `6 multiplied by itself ${d} times: each die falls 6 ways`], K.P)),
         block("Ways to get each total", scroller(resultTable(["Total", ...totals.map(([s]) => String(s))], [["Ways", ...totals.map(([, c]) => String(c))]]), "Ways to get each total"))];
     },
   },
@@ -110,6 +121,7 @@ const MODES = {
       return [probAnswer(words, pr.p),
         block("Working", formula(`Total ways to draw ${take} card${take === 1 ? "" : "s"} = 52C${take} = ${big(r.total)}`,
           `Favourable = ${size}C${k} × ${52 - size}C${take - k} = ${big(C.nCr(size, k))} × ${big(C.nCr(52 - size, take - k))} = ${big(r.fav)}`, pr.line),
+          where(["52Cr", "the number of ways to pick r cards from the 52, order not mattering"], K.C, K.P),
           h("p", { class: "lab-hint" }, `${size}C${k} chooses the ${kind}s; ${52 - size}C${take - k} chooses the other cards from the ${52 - size} that are not.`))];
     },
   },
@@ -136,7 +148,8 @@ const MODES = {
       const pr = P(r.fav, r.total, words);
       return [probAnswer(words, pr.p),
         block("Working", formula(`${r.N} balls in all; ${r.take} drawn: total ways = ${r.N}C${r.take} = ${big(r.total)}`,
-          `Favourable = ${r.parts.map((q) => `${q.c}C${q.w}`).join(" × ")} = ${r.parts.map((q) => big(q.ways)).join(" × ")} = ${big(r.fav)}`, pr.line))];
+          `Favourable = ${r.parts.map((q) => `${q.c}C${q.w}`).join(" × ")} = ${r.parts.map((q) => big(q.ways)).join(" × ")} = ${big(r.fav)}`, pr.line),
+          where(["NCr", "the number of ways to pick r balls from N, order not mattering"], K.P))];
     },
   },
 };

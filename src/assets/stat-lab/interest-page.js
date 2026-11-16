@@ -1,5 +1,5 @@
 // Simple and compound interest: find the interest and amount, or the principal, rate or time.
-import { h, block, scroller, resultTable, formula, answer, fmt, calcPage, need } from "./kit.js";
+import { h, block, scroller, resultTable, formula, where, answer, fmt, calcPage, need } from "./kit.js";
 import * as A from "./lib/arith.js";
 
 const m2 = (x) => fmt(x, 2);
@@ -16,6 +16,11 @@ function years(t) {
   if (Math.abs(mo - r) < 1e-6) return [y ? `${y} year${y === 1 ? "" : "s"}` : "", r ? `${r} month${r === 1 ? "" : "s"}` : ""].filter(Boolean).join(" ") || "0 years";
   return `${fmt(t)} years (about ${y ? `${y} year${y === 1 ? "" : "s"} ` : ""}${fmt(mo, 1)} months)`;
 }
+
+const SYM = {
+  P: ["P", "the principal: the money lent, borrowed or invested"], R: ["R", "the rate of interest, per cent a year"], T: ["T", "the time, in years"],
+  A: ["A", "the amount: principal + interest, what is paid back at the end"],
+};
 
 // Read the amount or the interest, whichever was given (exactly one of them).
 function amountOrInterest(v, x, errors, word) {
@@ -45,7 +50,8 @@ function simple(v, find) {
   if (find === "R") lines.push(`R = SI × 100 / (P × T) = ${m2(r.SI)} × 100 / (${m2(r.P)} × ${fmt(r.T)}) = ${fmt(r.R)}%`);
   if (find === "T") lines.push(`T = SI × 100 / (P × R) = ${m2(r.SI)} × 100 / (${m2(r.P)} × ${fmt(r.R)}) = ${fmt(r.T)} years`);
   const big = { SI: ["Simple interest", m2(r.SI), `Amount ${m2(r.A)}`], P: ["Principal", m2(r.P), `Simple interest ${m2(r.SI)}, amount ${m2(r.A)}`], R: ["Rate of interest", `${fmt(r.R)}% a year`, `Simple interest ${m2(r.SI)}`], T: ["Time", years(r.T), `Simple interest ${m2(r.SI)}`] }[find];
-  return [answer(big[0], big[1], h("p", {}, big[2] + ".")), block("Working", h("p", { class: "lab-hint" }, base), formula(...lines))];
+  return [answer(big[0], big[1], h("p", {}, big[2] + ".")), block("Working", h("p", { class: "lab-hint" }, base), formula(...lines),
+    where(["SI", "simple interest: interest on the principal only, the same every year"], SYM.P, SYM.R, SYM.T, SYM.A))];
 }
 
 // ----- Compound interest -----
@@ -68,7 +74,9 @@ function compound(v, find) {
   if (find === "R") lines.push(`(1 + i)^n = A / P = ${m2(r.A)} / ${m2(r.P)} = ${fmt(r.A / r.P, 6)}`, `1 + i = (${fmt(r.A / r.P, 6)})^(1/${fmt(r.n)}) = ${fmt(1 + r.i, 6)}`, `R = 100 × ${k} × i = ${fmt(r.R)}% a year`);
   if (find === "T") lines.push(`(1 + i)^n = A / P = ${fmt(r.A / r.P, 6)}`, `n = log(A / P) / log(1 + i) = ${fmt(Math.log10(r.A / r.P), 6)} / ${fmt(Math.log10(1 + r.i), 6)} = ${fmt(r.n)} ${per}s`, `T = n / ${k} = ${fmt(r.T)} years`);
   const big = { CI: ["Compound interest", m2(r.CI), `Amount ${m2(r.A)}`], P: ["Principal", m2(r.P), `Compound interest ${m2(r.CI)}, amount ${m2(r.A)}`], R: ["Rate of interest", `${fmt(r.R)}% a year`, `Compounded ${K.find((q) => +q[0] === k)[1].toLowerCase()}`], T: ["Time", years(r.T), `Compounded ${K.find((q) => +q[0] === k)[1].toLowerCase()}`] }[find];
-  const blocks = [answer(big[0], big[1], h("p", {}, big[2] + ".")), block("Working", h("p", { class: "lab-hint" }, "A = P (1 + i)^n, where i is the rate for one period and n the number of periods; CI = A − P."), formula(...lines))];
+  const blocks = [answer(big[0], big[1], h("p", {}, big[2] + ".")), block("Working", h("p", { class: "lab-hint" }, "A = P (1 + i)^n and CI = A − P."), formula(...lines),
+    where(["CI", "compound interest: each period's interest is added to the principal and itself earns interest"], SYM.P, SYM.R, SYM.T, SYM.A,
+      ["k", `how many times a year interest is added: ${k}`], ["i", `the rate for one ${per}, R / (100 × k), as a decimal`], ["n", `the number of ${per}s, k × T`], ["^n", "raised to the power n: multiplied by itself n times"]))];
   const more = [`Simple interest on the same principal, rate and time = ${m2(r.P)} × ${fmt(r.R)} × ${fmt(r.T)} / 100 = ${m2(r.SI)}, so CI − SI = ${m2(r.diff)}.`];
   if (k > 1) more.push(`Effective annual rate = [(1 + i)^${k} − 1] × 100 = ${fmt(r.effective)}%, against ${fmt(r.R)}% compounded yearly.`);
   blocks.push(block("Compared with simple interest", formula(...more)));

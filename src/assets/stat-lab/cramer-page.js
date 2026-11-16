@@ -1,5 +1,5 @@
 // Cramer's rule for two or three simultaneous equations.
-import { h, messages, saveState, block, scroller, panel, seg, gridInput, gridValues, mx, eq, formula, answer, show, start, fracText, F } from "./kit.js";
+import { h, messages, saveState, block, scroller, panel, seg, gridInput, gridValues, mx, eq, formula, where, answer, show, start, fracText, F } from "./kit.js";
 import * as M from "./lib/matrix.js";
 
 const EXAMPLE = { n: "3", rows: [["1", "1", "1", "6"], ["2", "-1", "1", "3"], ["1", "2", "-1", "2"]] };
@@ -70,7 +70,9 @@ function run() {
     h("p", { class: "lab-hint" }, `Δ uses the coefficients. ${VARS.slice(0, n).map((v, k) => `Δ${v} replaces column ${k + 1} (the ${v} column) by the constants`).join("; ")}.${n === 3 ? " Each 3 × 3 determinant is expanded along its first row." : ""}`),
     h("div", { class: "mx-list" },
       eq("Δ = ", mx(coef, { det: true }), `${det2(coef)} = ${res.D}`),
-      ...res.parts.map((pt, k) => eq(`Δ${VARS[k]} = `, mx(pt.matrix, { det: true }), `${det2(pt.matrix)} = ${pt.det}`)))));
+      ...res.parts.map((pt, k) => eq(`Δ${VARS[k]} = `, mx(pt.matrix, { det: true }), `${det2(pt.matrix)} = ${pt.det}`))),
+    where(["Δ", "delta, the determinant of the coefficients (the numbers in front of the unknowns)"],
+      ...VARS.slice(0, n).map((v, k) => [`Δ${v}`, `the same determinant with the ${v} column (column ${k + 1}) replaced by the constants on the right-hand side`]))));
   if (res.unique) {
     blocks.push(block("Cramer's rule", formula(...res.parts.map((pt, k) => `${VARS[k]} = Δ${VARS[k]} / Δ = ${pt.det} / ${p(res.D)} = ${res.solution[k]}`)),
       h("p", { class: "lab-hint" }, "Check by putting the values back into each equation:"),

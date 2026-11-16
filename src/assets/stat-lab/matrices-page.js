@@ -1,5 +1,5 @@
 // Matrix calculator: every operation in Unit I, in exact fractions, with the working.
-import { h, $, messages, saveState, block, scroller, panel, seg, field, select, sizeSelect, gridInput, gridValues, numInput, mx, eq, formula, answer, show, start, F } from "./kit.js";
+import { h, $, messages, saveState, block, scroller, panel, seg, field, select, sizeSelect, gridInput, gridValues, numInput, mx, eq, formula, where, answer, show, start, F } from "./kit.js";
 import * as M from "./lib/matrix.js";
 
 const EXAMPLE = { op: "inv", A: [["2", "1", "1"], ["1", "2", "1"], ["1", "1", "2"]], B: [["1", "0", "2"], ["0", "1", "1"], ["3", "1", "0"]], k: "3" };
@@ -77,7 +77,8 @@ function run() {
     blocks.push(answer(`A × B, of order ${A.length} × ${B[0].length}`, mx(r.result)));
     blocks.push(block("Working", h("p", { class: "lab-hint" }, "Each entry is a row of A times a column of B: multiply matching entries and add."),
       eq("A × B = ", mx(A), " × ", mx(B)),
-      formula(...r.work.flatMap((row, i) => row.map((w, j) => `c${i + 1}${j + 1} = ${w.terms.map(([a, b]) => `${paren(a)} × ${paren(b)}`).join(" + ")} = ${w.value}`)))));
+      formula(...r.work.flatMap((row, i) => row.map((w, j) => `c${i + 1}${j + 1} = ${w.terms.map(([a, b]) => `${paren(a)} × ${paren(b)}`).join(" + ")} = ${w.value}`))),
+      where(["cᵢⱼ", "the entry of A × B in row i, column j: row i of A times column j of B"])));
     if (A.length === A[0].length && B.length === B[0].length && A.length === B.length) {
       const ba = M.multiply(B, A).result;
       blocks.push(block("Is AB = BA?", h("p", {}, M.equal(r.result, ba) ? "Here AB = BA, which is unusual: matrix multiplication is not commutative in general." : "No. BA is different, as is usual: the order of multiplication matters."), eq("B × A = ", mx(ba))));
@@ -109,6 +110,7 @@ function run() {
         const inv = M.map(adj, (v) => v.div(d));
         blocks.push(block("Step 3: the inverse", formula("A⁻¹ = adj A ÷ |A|"),
           eq(`A⁻¹ = 1/${paren(d)} × `, mx(adj), " = ", mx(inv)),
+          where(["A⁻¹", "the inverse of A: the matrix that, multiplied by A, gives I"], ["I", "the identity matrix: 1s on the diagonal, 0s elsewhere"], ["|A|", `the determinant, ${d}`]),
           h("p", { class: "lab-hint" }, "Check: A × A⁻¹ should be the identity matrix I."),
           eq("A × A⁻¹ = ", mx(M.multiply(A, inv).result), M.equal(M.multiply(A, inv).result, M.identity(A.length)) ? " = I ✓" : "")));
       }
@@ -131,6 +133,7 @@ function detWorking(A) {
     h("p", { class: "lab-hint" }, "Each entry of the first row times its minor (the determinant left when its row and column are struck out), with signs + − + …"),
     h("div", { class: "mx-list" }, ex.map((t) => eq(`a1${t.j + 1} = ${t.a}, minor M1${t.j + 1} = `, mx(t.minor, { det: true }), ` = ${t.minorDet}`))),
     formula(`|A| = ${terms} = ${d}`),
+    where(["|A|", "the determinant of A, a single number found from its entries"], ["a1j", "the entry of A in row 1, column j"], ["M1j", "the minor of a1j: the determinant left when row 1 and column j are struck out"]),
   ];
 }
 
@@ -142,6 +145,7 @@ function cofactorWorking(A, C, adj) {
     n > 1 ? eq("Minors: ", mx(minors)) : null,
     eq("Cofactors: ", mx(C)),
     eq("adj A = (cofactors)ᵀ = ", mx(adj)),
+    where(["Minor", "the determinant left when an entry's row and column are struck out"], ["Cofactor", "the minor with the sign (−1)^(i + j): + − + … across the first row"], ["adj A", "the adjoint of A, the cofactor matrix turned over (rows become columns)"], ["ᵀ", "transpose: rows become columns"]),
   ];
 }
 

@@ -1,5 +1,5 @@
 // Time, speed and distance; trains; time and work; men, days and hours.
-import { h, block, formula, answer, fmt, parseNum, calcPage, need, F, fracText } from "./kit.js";
+import { h, block, formula, where, answer, fmt, parseNum, calcPage, need, F, fracText } from "./kit.js";
 import * as A from "./lib/arith.js";
 
 // "2 hours 30 minutes", or "2.4167 hours" when the minutes are not whole.
@@ -132,6 +132,8 @@ const MODES = {
       const sub = { 1: "₁", 2: "₂" };
       return [answer(`${NAMES[f[0]][0].toUpperCase()}${NAMES[f[0]].slice(1)} (${f[0]}${sub[f[1]]})`, fmt(o[f])),
         block("Working", formula(`${used.map((c) => c + "₁").join(" × ")}${noW ? "" : " / W₁"} = ${used.map((c) => c + "₂").join(" × ")}${noW ? "" : " / W₂"}`, `${side(1)} = ${side(2)}`, `x = ${fmt(o[f])}`),
+          where(["M", "the number of men (or workers)"], ["D", "the number of days"], ...(noH ? [] : [["H", "the hours worked each day"]]), ...(noW ? [] : [["W", "the amount of work done"]]),
+            ["₁, ₂", "the first and the second situation"], ["x", "the value to be found"]),
           h("p", { class: "lab-hint" }, "More men or more hours finish the same work in fewer days: men, days and hours are inversely related, and each is directly related to the work."))];
     },
   },

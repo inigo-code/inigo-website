@@ -114,3 +114,9 @@ export function resultTable(head, rows, { rowClass } = {}) {
 }
 
 export const kv = (pairs) => h("dl", { class: "lab-kv" }, pairs.map(([k, v]) => h("div", {}, h("dt", { html: k }), h("dd", {}, v))));
+
+// "Where …": what each symbol in the formula above it stands for, as [symbol, meaning] pairs.
+// Falsy entries are skipped, so a page can include a symbol only when it was used.
+export const where = (...pairs) => h("div", { class: "lab-where" },
+  h("p", { class: "lab-where-h" }, "Where"),
+  h("dl", {}, pairs.filter(Boolean).map(([sym, meaning]) => h("div", {}, h("dt", {}, sym), h("dd", {}, meaning)))));

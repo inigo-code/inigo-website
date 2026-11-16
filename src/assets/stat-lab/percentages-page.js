@@ -1,5 +1,5 @@
 // Percentages, profit and loss, discounts, ratios and proportion.
-import { h, block, formula, answer, fmt, calcPage, need, numberList } from "./kit.js";
+import { h, block, formula, where, answer, fmt, calcPage, need, numberList } from "./kit.js";
 import * as A from "./lib/arith.js";
 
 const m2 = (x) => fmt(x, 2);            // money
@@ -81,7 +81,7 @@ const MODES = {
       if (r.kind === "none") return [answer("No profit, no loss", "0%", h("p", {}, "The selling price equals the cost price."))];
       const P = r.kind === "profit" ? "Profit" : "Loss";
       return [answer(P, `${m2(r.amount)}, or ${fmt(r.pct)}%`),
-        block("Working", formula(`${P} = ${r.kind === "profit" ? `SP − CP = ${m2(x.sp)} − ${m2(x.cp)}` : `CP − SP = ${m2(x.cp)} − ${m2(x.sp)}`} = ${m2(r.amount)}`, `${P} % = ${P.toLowerCase()} / CP × 100 = ${m2(r.amount)} / ${m2(x.cp)} × 100 = ${fmt(r.pct)}%`))];
+        block("Working", formula(`${P} = ${r.kind === "profit" ? `SP − CP = ${m2(x.sp)} − ${m2(x.cp)}` : `CP − SP = ${m2(x.cp)} − ${m2(x.sp)}`} = ${m2(r.amount)}`, `${P} % = ${P.toLowerCase()} / CP × 100 = ${m2(r.amount)} / ${m2(x.cp)} × 100 = ${fmt(r.pct)}%`), where(["CP", "cost price: what the seller paid for the article"], ["SP", "selling price: what the buyer pays"]))];
     },
   },
   sp: {
@@ -94,7 +94,7 @@ const MODES = {
       if (!errors.length && x.p <= -100) errors.push("A loss must be less than 100%.");
       if (errors.length) return { errors };
       const r = A.spFromProfit(x.cp, x.p);
-      return [answer("Selling price", m2(r)), block("Working", formula(`SP = CP × (100 ${sgn(x.p)}) / 100 = ${m2(x.cp)} × ${fmt(100 + x.p)} / 100 = ${m2(r)}`))];
+      return [answer("Selling price", m2(r)), block("Working", formula(`SP = CP × (100 ${sgn(x.p)}) / 100 = ${m2(x.cp)} × ${fmt(100 + x.p)} / 100 = ${m2(r)}`), where(["CP", "cost price: what the seller paid for the article"], ["SP", "selling price: what the buyer pays"], ["p", "the profit per cent (negative for a loss)"]))];
     },
   },
   cp: {
@@ -107,7 +107,7 @@ const MODES = {
       if (!errors.length && x.p <= -100) errors.push("A loss must be less than 100%.");
       if (errors.length) return { errors };
       const r = A.cpFromSp(x.sp, x.p);
-      return [answer("Cost price", m2(r)), block("Working", formula(`CP = SP × 100 / (100 ${sgn(x.p)}) = ${m2(x.sp)} × 100 / ${fmt(100 + x.p)} = ${m2(r)}`))];
+      return [answer("Cost price", m2(r)), block("Working", formula(`CP = SP × 100 / (100 ${sgn(x.p)}) = ${m2(x.sp)} × 100 / ${fmt(100 + x.p)} = ${m2(r)}`), where(["CP", "cost price: what the seller paid for the article"], ["SP", "selling price: what the buyer pays"], ["p", "the profit per cent (negative for a loss)"]))];
     },
   },
   disc: {
@@ -126,7 +126,8 @@ const MODES = {
       const steps = d.map((q) => { const np = A.afterDiscount(price, q), t = `${fmt(q)}% off ${m2(price)}: ${m2(price)} × ${fmt(100 - q)} / 100 = ${m2(np)}`; price = np; return t; });
       const eqv = A.equivalentDiscount(d);
       return [answer("Selling price", m2(price), h("p", {}, `Total discount ${m2(x.mp - price)}${d.length > 1 ? `, the same as one discount of ${fmt(eqv)}%, not ${fmt(d.reduce((s, q) => s + q, 0))}%` : ""}.`)),
-        block("Working", formula(...steps, ...(d.length > 1 ? [`Single equivalent discount = 100 − 100 × ${d.map((q) => `(1 − ${fmt(q)}/100)`).join(" × ")} = ${fmt(eqv)}%`] : [])))];
+        block("Working", formula(...steps, ...(d.length > 1 ? [`Single equivalent discount = 100 − 100 × ${d.map((q) => `(1 − ${fmt(q)}/100)`).join(" × ")} = ${fmt(eqv)}%`] : [])),
+          h("p", { class: "lab-hint" }, "Each discount is taken off the price left after the one before, not off the marked price, so successive discounts add up to less than their sum."))];
     },
   },
   marked: {
@@ -144,7 +145,8 @@ const MODES = {
         block("Working", formula(`Selling price wanted = ${m2(x.cp)} × ${fmt(100 + x.p)} / 100 = ${m2(sp)}`,
           `After a ${fmt(x.d)}% discount the customer pays ${fmt(100 - x.d)}% of the marked price, so`,
           `Marked price = ${m2(sp)} × 100 / ${fmt(100 - x.d)} = ${m2(mp)}`,
-          `Check: ${m2(mp)} × ${fmt(100 - x.d)} / 100 = ${m2(A.afterDiscount(mp, x.d))} ✓`))];
+          `Check: ${m2(mp)} × ${fmt(100 - x.d)} / 100 = ${m2(A.afterDiscount(mp, x.d))} ✓`),
+          where(["Marked price", "the list price written on the article, before any discount"], ["Selling price", "what the customer pays after the discount"], ["Cost price", "what the shop paid for the article"]))];
     },
   },
   ratio: {
@@ -177,7 +179,8 @@ const MODES = {
       if (x.c !== null) lines.push(`Fourth proportional: ${fmt(x.a)} : ${fmt(x.b)} = ${fmt(x.c)} : x, so x = ${fmt(x.b)} × ${fmt(x.c)} / ${fmt(x.a)} = ${fmt(A.fourthProportional(x.a, x.b, x.c))}`);
       lines.push(`Third proportional: ${fmt(x.a)} : ${fmt(x.b)} = ${fmt(x.b)} : x, so x = ${fmt(x.b)}² / ${fmt(x.a)} = ${fmt(A.thirdProportional(x.a, x.b))}`);
       lines.push(`Mean proportional: ${fmt(x.a)} : x = x : ${fmt(x.b)}, so x = √(${fmt(x.a)} × ${fmt(x.b)}) = ${fmt(A.meanProportional(x.a, x.b))}`);
-      return [answer(x.c !== null ? "Fourth proportional" : "Mean proportional", fmt(x.c !== null ? A.fourthProportional(x.a, x.b, x.c) : A.meanProportional(x.a, x.b))), block("Working", formula(...lines))];
+      return [answer(x.c !== null ? "Fourth proportional" : "Mean proportional", fmt(x.c !== null ? A.fourthProportional(x.a, x.b, x.c) : A.meanProportional(x.a, x.b))), block("Working", formula(...lines),
+        where(["a : b", "“a is to b”, the ratio a / b"], ["x", "the number to be found"], ["√", "the square root"]))];
     },
   },
 };

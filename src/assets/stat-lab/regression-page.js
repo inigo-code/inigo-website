@@ -1,5 +1,5 @@
 // Regression: Y on X and X on Y, from data or from summary figures.
-import { h, messages, saveState, block, scroller, resultTable, panel, seg, field, numInput, show, start, formula, answer, chart, fmt, parseNum } from "./kit.js";
+import { h, messages, saveState, block, scroller, resultTable, panel, seg, field, numInput, show, start, formula, where, answer, chart, fmt, parseNum } from "./kit.js";
 import { inputTable, tableValues } from "../or-lab/ui.js";
 import * as C from "./lib/correlation.js";
 
@@ -63,19 +63,27 @@ function run() {
   const blocks = [answer("Regression equations", h("span", {}, line("Y", g.a, g.byx, "X")), h("p", { class: "big" }, line("X", g.c, g.bxy, "Y")),
     h("p", {}, "Use Y on X to estimate Y for a given X, and X on Y to estimate X for a given Y."))];
 
+  const B = {
+    byx: ["byx", "the regression coefficient of Y on X: how much Y changes, on average, when X rises by 1"],
+    bxy: ["bxy", "the regression coefficient of X on Y: how much X changes, on average, when Y rises by 1"],
+    r: ["r", "Karl Pearson's coefficient of correlation"],
+  };
   if (state.mode === "data") {
     const t = g.rows.map((r) => [fmt(r.x), fmt(r.y), fmt(r.dx), fmt(r.dy), fmt(r.dx2), fmt(r.dy2), fmt(r.dxdy)]);
     t.push([`ΣX = ${fmt(g.sumX)}`, `ΣY = ${fmt(g.sumY)}`, "", "", `Σx² = ${fmt(g.Sxx)}`, `Σy² = ${fmt(g.Syy)}`, `Σxy = ${fmt(g.Sxy)}`].map((v) => ({ text: v, class: "is-total" })));
     blocks.push(block("Working table", h("p", { class: "lab-hint" }, `X̄ = ${fmt(g.sumX)} / ${g.n} = ${fmt(g.mx)},  Ȳ = ${fmt(g.sumY)} / ${g.n} = ${fmt(g.my)};  x = X − X̄, y = Y − Ȳ.`),
       scroller(resultTable(["X", "Y", "x", "y", "x²", "y²", "xy"], t), "Working table")));
-    blocks.push(block("Regression coefficients", formula(`byx = Σxy / Σx² = ${fmt(g.Sxy)} / ${fmt(g.Sxx)} = ${fmt(g.byx)}`, `bxy = Σxy / Σy² = ${fmt(g.Sxy)} / ${fmt(g.Syy)} = ${fmt(g.bxy)}`,
-      `Check: r = ±√(byx × bxy) = ${g.Sxy < 0 ? "−" : ""}√(${fmt(g.byx)} × ${fmt(g.bxy)}) = ${fmt(g.check)}, which is Karl Pearson's r = ${fmt(g.r)}.`)));
+    blocks.push(block("Regression coefficients", formula(`byx = Σxy / Σx² = ${fmt(g.Sxy)} / ${fmt(g.Sxx)} = ${fmt(g.byx)}`, `bxy = Σxy / Σy² = ${fmt(g.Sxy)} / ${fmt(g.Syy)} = ${fmt(g.bxy)}`),
+      formula(`Check: r = ±√(byx × bxy) = ${g.Sxy < 0 ? "−" : ""}√(${fmt(g.byx)} × ${fmt(g.bxy)}) = ${fmt(g.check)}`, `This is Karl Pearson's r = ${fmt(g.r)}.`),
+      where(B.byx, B.bxy, ["x", "X − X̄, how far each X is from its mean"], ["y", "Y − Ȳ, how far each Y is from its mean"], ["Σxy, Σx², Σy²", "the column totals in the working table"], B.r)));
   } else {
-    blocks.push(block("Regression coefficients", formula(`byx = r × σy / σx = ${fmt(g.r)} × ${fmt(g.sy)} / ${fmt(g.sx)} = ${fmt(g.byx)}`, `bxy = r × σx / σy = ${fmt(g.r)} × ${fmt(g.sx)} / ${fmt(g.sy)} = ${fmt(g.bxy)}`)));
+    blocks.push(block("Regression coefficients", formula(`byx = r × σy / σx = ${fmt(g.r)} × ${fmt(g.sy)} / ${fmt(g.sx)} = ${fmt(g.byx)}`, `bxy = r × σx / σy = ${fmt(g.r)} × ${fmt(g.sx)} / ${fmt(g.sy)} = ${fmt(g.bxy)}`),
+      where(B.byx, B.bxy, B.r, ["σx, σy", `the standard deviations of X and Y, ${fmt(g.sx)} and ${fmt(g.sy)}`])));
   }
-  blocks.push(block("The equations", formula(
-    `Y on X: Y − Ȳ = byx (X − X̄)  →  Y − ${fmt(g.my)} = ${fmt(g.byx)} (X − ${fmt(g.mx)})  →  ${line("Y", g.a, g.byx, "X")}`,
-    `X on Y: X − X̄ = bxy (Y − Ȳ)  →  X − ${fmt(g.mx)} = ${fmt(g.bxy)} (Y − ${fmt(g.my)})  →  ${line("X", g.c, g.bxy, "Y")}`),
+  blocks.push(block("The equations",
+    formula("Y on X: Y − Ȳ = byx (X − X̄)", `Y − ${fmt(g.my)} = ${fmt(g.byx)} (X − ${fmt(g.mx)})`, line("Y", g.a, g.byx, "X")),
+    formula("X on Y: X − X̄ = bxy (Y − Ȳ)", `X − ${fmt(g.mx)} = ${fmt(g.bxy)} (Y − ${fmt(g.my)})`, line("X", g.c, g.bxy, "Y")),
+    where(["X̄, Ȳ", `the means of X and Y, ${fmt(g.mx)} and ${fmt(g.my)}`], B.byx, B.bxy),
     h("p", { class: "lab-hint" }, "Both lines pass through the point of means (X̄, Ȳ). Both coefficients have the same sign as r, and r is their geometric mean.")));
 
   // Estimates

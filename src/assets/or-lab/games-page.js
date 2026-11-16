@@ -1,5 +1,5 @@
 // Game theory page: two-person zero-sum games, worked in textbook order.
-import { h, s, $, messages, saveState, loadState, shareButton, block, scroller, scale, ticks, fmt, parseNum } from "./ui.js";
+import { h, s, $, messages, saveState, loadState, shareButton, block, scroller, where, scale, ticks, fmt, parseNum } from "./ui.js";
 import { validate, solve } from "./lib/games.js";
 
 const EXAMPLE = { cost: [["3", "2", "4", "0"], ["3", "4", "2", "4"], ["4", "2", "4", "0"], ["0", "4", "0", "8"]] };
@@ -108,7 +108,9 @@ function show(A, r) {
     h("p", { class: "lab-prose" }, `Maximin (the largest row minimum) = ${fmt(sp.maximin)}. Minimax (the smallest column maximum) = ${fmt(sp.minimax)}. ` +
       (sp.points.length
         ? `They are equal, so the game has a saddle point at ${sp.points.map(([i, j]) => `(${R(i)}, ${C(j)})`).join(" and ")} and the value is ${fmt(sp.value)}. Both players use pure strategies.`
-        : `They are not equal, so there is no saddle point. The value lies between ${fmt(sp.maximin)} and ${fmt(sp.minimax)}, and the players must mix their strategies.`))));
+        : `They are not equal, so there is no saddle point. The value lies between ${fmt(sp.maximin)} and ${fmt(sp.minimax)}, and the players must mix their strategies.`)),
+    where(["Saddle point", "a pay-off that is the smallest in its row and the largest in its column"], ["Value", "what A gains on average when both players play their best"],
+      ["Pure strategy", "always playing the same row (or column)"], ["Mixed strategy", "choosing among rows (or columns) at random, with set probabilities"])));
   if (r.method === "saddle") return finish(blocks);
 
   // Step 2: dominance.
@@ -134,7 +136,8 @@ function show(A, r) {
   const RM = r.reduced;
   if (r.method === "2x2") {
     const [[a, b], [c, d]] = RM, F = r.formula;
-    blocks.push(block("Step 3. The 2 × 2 formula", formula2(a, b, c, d, F, [R(red.rows[0]), R(red.rows[1])], [C(red.cols[0]), C(red.cols[1])])));
+    blocks.push(block("Step 3. The 2 × 2 formula", formula2(a, b, c, d, F, [R(red.rows[0]), R(red.rows[1])], [C(red.cols[0]), C(red.cols[1])]),
+      where(["a, b, c, d", "the four pay-offs of the 2 × 2 game, read across the first row and then the second"], ["p", "the probability that A plays the first row"], ["q", "the probability that B plays the first column"], ["v", "the value of the game: A's average gain when both play their best"])));
   } else if (r.method === "graphical") {
     const g = r.graph;
     const names = g.twoRows ? red.cols.map(C) : red.rows.map(R);

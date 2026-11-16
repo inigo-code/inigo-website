@@ -1,9 +1,9 @@
 // Shared building blocks for Stats Lab pages, on top of the OR Lab helpers.
-import { h, s, $, messages, saveState, loadState, shareButton, scroller, block, resultTable, kv, scale, ticks, fmt, parseNum, pct } from "../or-lab/ui.js";
+import { h, s, $, messages, saveState, loadState, shareButton, scroller, block, resultTable, kv, where, scale, ticks, fmt, parseNum, pct } from "../or-lab/ui.js";
 import { F } from "./lib/frac.js";
 import { inputTable, tableValues } from "../or-lab/ui.js";
 
-export { h, s, $, messages, saveState, loadState, shareButton, scroller, block, resultTable, kv, scale, ticks, fmt, parseNum, pct, F };
+export { h, s, $, messages, saveState, loadState, shareButton, scroller, block, resultTable, kv, where, scale, ticks, fmt, parseNum, pct, F };
 
 export const root = () => $("#lab");
 

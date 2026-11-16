@@ -133,6 +133,15 @@
 
 .lab-formula { font-variant-numeric: tabular-nums; background: var(--bg); border-left: 4px solid var(--accent); padding: .75rem 1rem; border-radius: 0 var(--radius-sm) var(--radius-sm) 0; overflow-x: auto; }
 .lab-formula p + p { margin-top: .3rem; }
+/* What the symbols mean, set just under the formula it explains */
+.lab-where { border-left: 4px solid var(--line); padding: .55rem 1rem .65rem; font-size: .95rem; }
+.lab-results .lab-formula + .lab-where { margin-top: .4rem; }
+.lab-where-h { font-weight: 700; font-size: .85rem; color: var(--muted); margin-bottom: .35rem; }
+/* One aligned list: the symbol column is as wide as its widest symbol, up to 9rem, and wraps only at spaces. */
+.lab-where dl { margin: 0; display: grid; grid-template-columns: fit-content(9rem) minmax(0, 1fr); gap: .3rem 1rem; max-width: 50rem; }
+.lab-where dl > div { display: contents; }
+.lab-where dt { font-weight: 700; font-variant-numeric: tabular-nums; }
+.lab-where dd { margin: 0; color: var(--muted); }
 .lab-prose { display: grid; gap: .75rem; max-width: 46rem; }
 .lab-prose p { color: var(--ink); }
 
@@ -249,7 +258,8 @@
   .lab-table tr { break-inside: avoid; }
   .lab-table .is-alloc .amt, .lab-table .is-pick { background: none; color: #000; outline: 1.5px solid #000; outline-offset: -1px; }
   .lab-formula { background: none; border-left-width: 3px; padding: 2mm 4mm; }
-  .lab-formula p { break-inside: avoid; }
+  .lab-formula p, .lab-where { break-inside: avoid; }
+  .lab-where dd { color: #333; }
 
   /* Worked steps print open, as plain sections */
   .lab-steps { border: 0; background: none; }

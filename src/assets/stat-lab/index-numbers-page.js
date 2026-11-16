@@ -1,5 +1,5 @@
 // Index numbers: Laspeyres, Paasche and Fisher, with the time reversal and factor reversal tests.
-import { h, messages, saveState, block, scroller, resultTable, panel, show, start, formula, answer, fmt, parseNum } from "./kit.js";
+import { h, messages, saveState, block, scroller, resultTable, panel, show, start, formula, where, answer, fmt, parseNum } from "./kit.js";
 import { inputTable, tableValues } from "../or-lab/ui.js";
 import * as T from "./lib/timeseries.js";
 
@@ -40,20 +40,25 @@ function run() {
     answer("Price index numbers (base year = 100)", h("span", {}, "Fisher's ", h("mark", {}, r4(x.F))),
       h("p", {}, `Laspeyres ${r4(x.L)}, Paasche ${r4(x.P)}.`),
       h("p", {}, `By Fisher's index, prices are ${fmt(Math.abs(x.F - 100), 2)}% ${x.F >= 100 ? "higher" : "lower"} than in the base year.`)),
-    block("Working table", scroller(resultTable(["Item", "p₀", "q₀", "p₁", "q₁", "p₀q₀", "p₁q₀", "p₀q₁", "p₁q₁"], t), "Working table")),
-    block("Index numbers", formula(
-      `Laspeyres (base-year quantities): P₀₁ = Σp₁q₀ / Σp₀q₀ × 100 = ${fmt(S.p1q0)} / ${fmt(S.p0q0)} × 100 = ${r4(x.L)}`,
-      `Paasche (current-year quantities): P₀₁ = Σp₁q₁ / Σp₀q₁ × 100 = ${fmt(S.p1q1)} / ${fmt(S.p0q1)} × 100 = ${r4(x.P)}`,
-      `Fisher's ideal: P₀₁ = √(L × P) = √(Σp₁q₀/Σp₀q₀ × Σp₁q₁/Σp₀q₁) × 100 = √(${r4(x.L)} × ${r4(x.P)}) = ${r4(x.F)}`),
+    block("Working table", scroller(resultTable(["Item", "p₀", "q₀", "p₁", "q₁", "p₀q₀", "p₁q₀", "p₀q₁", "p₁q₁"], t), "Working table"),
+      where(["p₀, q₀", "the price and quantity of an item in the base year (the year compared against)"], ["p₁, q₁", "the price and quantity of an item in the current year"],
+        ["p₁q₀", "current price × base quantity: what the base-year basket costs at today's prices"], ["Σ", "“the sum of”: add the column up"])),
+    block("Index numbers",
+      formula("Laspeyres, weighted by base-year quantities:", "P₀₁ = Σp₁q₀ / Σp₀q₀ × 100", `= ${fmt(S.p1q0)} / ${fmt(S.p0q0)} × 100 = ${r4(x.L)}`),
+      formula("Paasche, weighted by current-year quantities:", "P₀₁ = Σp₁q₁ / Σp₀q₁ × 100", `= ${fmt(S.p1q1)} / ${fmt(S.p0q1)} × 100 = ${r4(x.P)}`),
+      formula("Fisher's ideal index:", "P₀₁ = √(L × P) = √(Σp₁q₀/Σp₀q₀ × Σp₁q₁/Σp₀q₁) × 100", `= √(${r4(x.L)} × ${r4(x.P)}) = ${r4(x.F)}`),
+      where(["P₀₁", "the price index for the current year (1) on the base year (0); base year = 100"], ["L, P", "the Laspeyres and Paasche indices above"], ["√", "the square root"]),
       h("p", { class: "lab-hint" }, "Fisher's index is the geometric mean of Laspeyres and Paasche. It is called ideal because it satisfies both tests below.")),
     block("Time reversal test: P₀₁ × P₁₀ = 1", formula(
       `P₀₁ = √(${fmt(S.p1q0)}/${fmt(S.p0q0)} × ${fmt(S.p1q1)}/${fmt(S.p0q1)}) = ${r4(x.trt.P01)}`,
       `P₁₀ = √(Σp₀q₁/Σp₁q₁ × Σp₀q₀/Σp₁q₀) = √(${fmt(S.p0q1)}/${fmt(S.p1q1)} × ${fmt(S.p0q0)}/${fmt(S.p1q0)}) = ${r4(x.trt.P10)}`,
-      `P₀₁ × P₁₀ = ${r4(x.trt.product)}. ${yes(x.trt.holds)}`)),
+      `P₀₁ × P₁₀ = ${r4(x.trt.product)}. ${yes(x.trt.holds)}`),
+      where(["P₁₀", "the same index worked backwards, with the current year as the base"], ["Test", "going forward and then back should bring you to where you started, so the product should be 1"])),
     block("Factor reversal test: P₀₁ × Q₀₁ = Σp₁q₁ / Σp₀q₀", formula(
       `Q₀₁ = √(Σq₁p₀/Σq₀p₀ × Σq₁p₁/Σq₀p₁) = √(${fmt(S.p0q1)}/${fmt(S.p0q0)} × ${fmt(S.p1q1)}/${fmt(S.p1q0)}) = ${r4(x.frt.Q01)}`,
       `P₀₁ × Q₀₁ = ${r4(x.trt.P01)} × ${r4(x.frt.Q01)} = ${r4(x.frt.product)}`,
       `Σp₁q₁ / Σp₀q₀ = ${fmt(S.p1q1)} / ${fmt(S.p0q0)} = ${r4(x.frt.value)}. ${yes(x.frt.holds)}`),
+      where(["Q₀₁", "the quantity index, Fisher's formula with prices and quantities swapped"], ["Test", "price change × quantity change should equal the change in total value, Σp₁q₁ / Σp₀q₀"]),
       h("p", { class: "lab-hint" }, "Laspeyres and Paasche each fail both tests in general.")),
   ]);
 }

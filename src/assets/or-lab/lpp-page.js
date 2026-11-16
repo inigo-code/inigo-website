@@ -1,5 +1,5 @@
 // LPP graphical method page.
-import { h, s, $, messages, saveState, loadState, shareButton, scale, ticks, block, scroller, resultTable, fmt, parseNum } from "./ui.js";
+import { h, s, $, messages, saveState, loadState, shareButton, scale, ticks, block, scroller, resultTable, where, fmt, parseNum } from "./ui.js";
 import { validate, solve, clipped, redundant, standardForm } from "./lib/lpp.js";
 
 const EXAMPLE = { sense: "max", c: ["500", "300"], cons: [["4", "2", "<=", "60"], ["2", "3", "<=", "54"]] };
@@ -99,7 +99,8 @@ function show(p, r) {
   }
   if (r.usage) {
     blocks.push(block("Constraints at the optimum", scroller(resultTable(["Constraint", "Left-hand side at the optimum", "Right-hand side", "Binding?", "Slack or surplus"],
-      p.cons.map((k, i) => [`(${i + 1}) ${termText(k.a[0], k.a[1])} ${opText(k.op)} ${fmt(k.b)}`, r.usage[i].lhs, k.b, r.usage[i].binding ? "Yes" : "No", r.usage[i].binding ? 0 : Math.abs(r.usage[i].slack)])))));
+      p.cons.map((k, i) => [`(${i + 1}) ${termText(k.a[0], k.a[1])} ${opText(k.op)} ${fmt(k.b)}`, r.usage[i].lhs, k.b, r.usage[i].binding ? "Yes" : "No", r.usage[i].binding ? 0 : Math.abs(r.usage[i].slack)]))),
+      where(["Binding", "the constraint is used up exactly at the optimum: it limits Z"], ["Slack", "unused capacity of a ≤ constraint"], ["Surplus", "the amount by which a ≥ constraint is exceeded"])));
   }
   const red = redundant(p);
   if (red.some(Boolean)) blocks.push(block("Redundant constraints", h("p", { class: "lab-hint" }, `Constraint${red.filter(Boolean).length > 1 ? "s" : ""} ${red.map((x, i) => (x ? `(${i + 1})` : null)).filter(Boolean).join(", ")} ${red.filter(Boolean).length > 1 ? "do" : "does"} not change the feasible region: the other constraints already cut off everything ${red.filter(Boolean).length > 1 ? "they" : "it"} would.`)));
@@ -114,7 +115,9 @@ function show(p, r) {
     h("p", { class: "lab-hint" }, [
       sf.extras.some((e) => e.kind === "slack") ? "A slack variable is added to each ≤ constraint: it is the capacity left unused." : "",
       sf.extras.some((e) => e.kind === "surplus") ? "A surplus variable is subtracted from each ≥ constraint: it is the amount above the minimum." : "",
-    ].filter(Boolean).join(" "))));
+    ].filter(Boolean).join(" ")),
+    where(["Z", "the objective function, the quantity to be made as large (or small) as possible"], ["x, y", "the decision variables: the two quantities you choose"],
+      ...sf.extras.map((e) => [e.name, e.kind === "slack" ? "a slack variable" : "a surplus variable"]), ["≥ 0", "non-negativity: no quantity can be negative"])));
   blocks.push(h("div", { class: "lab-actions" }, shareButton(), h("button", { type: "button", class: "button ghost lab-small", onclick: () => print() }, "Print")));
   results.replaceChildren(...blocks);
   results.focus({ preventScroll: true });

@@ -1,5 +1,5 @@
 // Network analysis page: CPM and PERT for an arrow diagram.
-import { h, s, $, messages, inputTable, tableValues, saveState, loadState, shareButton, pct, block, scroller, resultTable, kv, fmt, parseNum } from "./ui.js";
+import { h, s, $, messages, inputTable, tableValues, saveState, loadState, shareButton, pct, block, scroller, resultTable, kv, where, fmt, parseNum } from "./ui.js";
 import { validate, cpm, pert, probabilityBy, timeFor } from "./lib/network.js";
 
 const EXAMPLES = {
@@ -97,7 +97,9 @@ function showResults(acts, res) {
   if (state.mode === "pert") {
     blocks.push(block("PERT estimates", scroller(resultTable(["Activity", "a", "m", "b", "t<sub>e</sub> = (a + 4m + b) / 6", "Variance ((b − a) / 6)²"],
       res.rows.map((r) => [r.id + (r.dummy ? " (dummy)" : ""), r.a, r.m, r.b, r.t, fmt(r.variance)]),
-      { rowClass: (i) => (res.rows[i].critical ? "is-crit" : null) }), "PERT estimates")));
+      { rowClass: (i) => (res.rows[i].critical ? "is-crit" : null) }), "PERT estimates"),
+      where(["a", "the optimistic time: the shortest it could take"], ["m", "the most likely time"], ["b", "the pessimistic time: the longest it could take"],
+        ["tₑ", "the expected time, a weighted average that counts m four times"], ["Variance", "how uncertain the time is: larger when a and b are far apart"])));
   }
 
   blocks.push(block("Activity times and floats", scroller(resultTable(
@@ -106,8 +108,13 @@ function showResults(acts, res) {
     { rowClass: (i) => (res.rows[i].critical ? "is-crit" : null) }), "Activity times and floats"),
     h("div", { class: "lab-formula" },
       h("p", {}, "ES = E(i), EF = ES + t, LF = L(j), LS = LF − t"),
-      h("p", {}, "Total float = L(j) − E(i) − t;  Free float = E(j) − E(i) − t;  Independent float = E(j) − L(i) − t (0 if negative)"),
-      h("p", {}, "Highlighted rows are critical (total float 0)."))));
+      h("p", {}, "Total float = L(j) − E(i) − t"), h("p", {}, "Free float = E(j) − E(i) − t"), h("p", {}, "Independent float = E(j) − L(i) − t (0 if negative)")),
+    where(["i → j", "the activity runs from event i (its tail) to event j (its head)"], ["t", state.mode === "cpm" ? "the duration of the activity" : "tₑ, the expected duration of the activity"],
+      ["E(i), L(i)", "the earliest and latest times of event i, from the event table"],
+      ["ES, EF", "earliest start and earliest finish of the activity"], ["LS, LF", "latest start and latest finish without delaying the project"],
+      ["Total float", "how long the activity can be delayed without delaying the project"], ["Free float", "how long it can be delayed without delaying the next activity"],
+      ["Independent float", "the delay it can take even if the activities before it finish late"]),
+    h("p", { class: "lab-hint" }, "Highlighted rows are critical: their total float is 0, so any delay to them delays the whole project.")));
 
   if (state.mode === "pert") blocks.push(probabilityBlock(res));
   else blocks.push(block("Uncertain times?", h("p", { class: "lab-hint", html: "Switch to <strong>PERT: three time estimates</strong> above to work out the expected project time and the probability of finishing by a date." })));
@@ -147,6 +154,8 @@ function probabilityBlock(res) {
     kv([["Expected time T<sub>e</sub>", fmt(Te)], ["Variance of the critical path σ²", fmt(res.variance)], ["Standard deviation σ", fmt(sd)]]),
     pathVars,
     h("p", { class: "lab-hint" }, "PERT treats the project time as normally distributed with mean Te and standard deviation σ, using the critical path only."),
+    where(["Te", "the expected project time, the sum of tₑ along the critical path"], ["σ²", "the variance of the critical path, the sum of its activities' variances"], ["σ", "sigma, the standard deviation, √σ²"],
+      ["T", "the target time"], ["Z", "how many standard deviations T is from Te; the normal table turns it into a probability"]),
     h("div", { class: "lab-controls" }, h("div", { class: "lab-field w-m" }, h("label", { for: "pert-t" }, "Target time T"), tIn)), out1,
     h("div", { class: "lab-controls" }, h("div", { class: "lab-field w-m" }, h("label", { for: "pert-p" }, "Wanted probability"), pIn)), out2);
   update();

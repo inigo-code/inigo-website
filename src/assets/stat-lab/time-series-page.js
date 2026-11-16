@@ -1,5 +1,5 @@
 // Time series: trend by semi-averages and by moving averages.
-import { h, messages, saveState, block, scroller, resultTable, panel, seg, field, numInput, select, show, start, formula, answer, chart, fmt, parseNum } from "./kit.js";
+import { h, messages, saveState, block, scroller, resultTable, panel, seg, field, numInput, select, show, start, formula, where, answer, chart, fmt, parseNum } from "./kit.js";
 import { inputTable, tableValues } from "../or-lab/ui.js";
 import * as T from "./lib/timeseries.js";
 
@@ -57,14 +57,15 @@ const graph = (t, y, trend, label) => block("Graph", chart([
 function semiBlocks(t, y) {
   const r = T.semiAverage(t, y);
   const span = (P) => `${yr(P.t[0])} to ${yr(P.t.at(-1))}`;
-  const half = (P, name) => `${name} (${span(P)}): (${P.y.map((q) => fmt(q)).join(" + ")}) / ${P.y.length} = ${fmt(P.sumY)} / ${P.y.length} = ${fmt(P.avg)}, placed at the middle year ${yr(P.mid)}`;
+  const half = (P, name) => formula(`${name}, ${span(P)}: average = (${P.y.map((q) => fmt(q)).join(" + ")}) / ${P.y.length}`, `= ${fmt(P.sumY)} / ${P.y.length} = ${fmt(P.avg)}`, `It is placed at the middle year of the half, ${yr(P.mid)}.`);
   const dir = r.slope > 0 ? "rises" : r.slope < 0 ? "falls" : "does not change";
   const eqn = fmt(r.slope) === "0" ? `Trend = ${fmt(r.A.avg)}` : `Trend = ${fmt(r.A.avg)} ${r.slope < 0 ? "−" : "+"} ${fmt(Math.abs(r.slope))} × (Year − ${yr(r.A.mid)})`;
   const blocks = [
     answer("Trend by semi-averages", eqn, h("p", {}, `The trend ${dir}${r.slope ? ` by ${fmt(Math.abs(r.slope))} a year` : ""}.`)),
     block("Semi-averages", r.odd ? h("p", { class: "lab-hint" }, `There are ${t.length} years, an odd number, so the middle year ${yr(r.left.t)} (value ${fmt(r.left.y)}) is left out.`) : null,
-      formula(half(r.A, "First half"), half(r.B, "Second half"),
-        `Change per year = (${fmt(r.B.avg)} − ${fmt(r.A.avg)}) / (${yr(r.B.mid)} − ${yr(r.A.mid)}) = ${fmt(r.slope)}`)),
+      half(r.A, "First half"), half(r.B, "Second half"),
+      formula("Change per year = (second average − first average) / (years between their middle years)", `= (${fmt(r.B.avg)} − ${fmt(r.A.avg)}) / (${yr(r.B.mid)} − ${yr(r.A.mid)})`, `= ${fmt(r.slope)}`),
+      where(["Semi-average", "the average of one half of the series"], ["Trend", "the long-run straight-line movement of the series, with the ups and downs smoothed out"], ["Year − " + yr(r.A.mid), `the number of years after ${yr(r.A.mid)}, the middle of the first half`])),
     block("Trend values", h("p", { class: "lab-hint" }, `Each trend value is ${fmt(r.A.avg)} plus ${fmt(r.slope)} for every year after ${yr(r.A.mid)}.`),
       scroller(resultTable(["Year", "Value", "Trend value"], t.map((x, i) => [yr(x), fmt(y[i]), fmt(r.trend[i])])), "Trend values")),
   ];
@@ -88,11 +89,12 @@ function movingBlocks(t, y, k) {
   const blocks = [answer(`${k}-yearly moving averages`, `${have.length} trend values`, h("p", {}, `From ${yr(have[0].t)} to ${yr(have.at(-1).t)}. There is no trend value for ${e === 1 ? "the first and the last year" : `the first ${e} and the last ${e} years`}.`))];
   if (!m.even) {
     blocks.push(block("Working table", h("p", { class: "lab-hint" }, `Each ${k}-yearly total adds the year's value and the ${(k - 1) / 2} on either side of it. The moving average is that total ÷ ${k}.`),
+      where(["Moving average", `the average of ${k} neighbouring years, moved along one year at a time`], ["Trend value", "the moving average, written against the middle year it covers"]),
       scroller(resultTable(["Year", "Value", `${k}-yearly total`, `Moving average (÷ ${k})`], m.rows.map((r) => [yr(r.t), fmt(r.y), r.total === undefined ? "" : fmt(r.total), r.trend === undefined ? "" : fmt(r.trend)])), "Working table")));
   } else {
     blocks.push(block(`${k}-yearly totals`, h("p", { class: "lab-hint" }, `With an even period each ${k}-yearly total falls between two years, so it is centred: two neighbouring totals are added, which covers ${2 * k} values, and the sum is divided by ${2 * k}.`),
       formula(...m.totals.map((v, j) => `${yr(t[j])} to ${yr(t[j + k - 1])}: ${y.slice(j, j + k).map((q) => fmt(q)).join(" + ")} = ${fmt(v)}`))));
-    blocks.push(block("Working table", scroller(resultTable(["Year", "Value", "Centred total", `Trend (÷ ${2 * k})`],
+    blocks.push(block("Working table", where(["Centred total", `two neighbouring ${k}-yearly totals added, so the result sits against a single year`], ["Trend", `the centred total ÷ ${2 * k}, written against that year`]), scroller(resultTable(["Year", "Value", "Centred total", `Trend (÷ ${2 * k})`],
       m.rows.map((r) => [yr(r.t), fmt(r.y), r.centred === undefined ? "" : `${fmt(r.totalA)} + ${fmt(r.totalB)} = ${fmt(r.centred)}`, r.trend === undefined ? "" : fmt(r.trend)])), "Working table")));
   }
   blocks.push(graph(t, y, m.rows.map((r) => r.trend ?? NaN), "Moving average"));

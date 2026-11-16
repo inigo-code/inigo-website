@@ -1,5 +1,5 @@
 // Single-server queue (M/M/1) page: every measure with its formula and working.
-import { h, $, messages, saveState, loadState, shareButton, block, scroller, resultTable, pct, fmt, parseNum } from "./ui.js";
+import { h, $, messages, saveState, loadState, shareButton, block, scroller, resultTable, where, pct, fmt, parseNum } from "./ui.js";
 import { validate, mm1 } from "./lib/queue.js";
 
 const EXAMPLE = { given: "rate", unit: "hour", a: "8", s: "10", n: "3", k: "2", t: "" };
@@ -89,6 +89,10 @@ function show(q) {
     ["Expected length of a non-empty queue", "μ / (μ − λ)", `${M} / ${fmt(q.mu - q.lambda)}`, fmt(q.lNonEmpty)],
   ];
   blocks.push(block("Measures, with the working", scroller(resultTable(["Measure", "Formula", "Working", "Value"], rows)),
+    where(["λ", `lambda, the arrival rate: customers arriving per ${u.one} (${L})`], ["μ", `mu, the service rate: customers one server can serve per ${u.one} (${M})`],
+      ["ρ", "rho, the traffic intensity λ / μ: the share of time the server is busy"], ["P₀", "the probability that there is no one in the system"],
+      ["Ls, Lq", "the average number of customers in the system (being served or waiting) and in the queue only"],
+      ["Ws, Wq", "the average time a customer spends in the system and waiting in the queue"]),
     h("p", { class: "lab-hint" }, `Check: Ls = Lq + ρ = ${fmt(q.lq)} + ${fmt(q.rho)} = ${fmt(q.lq + q.rho)}, and Ls = λ × Ws = ${L} × ${fmt(q.ws)} = ${fmt(q.lambda * q.ws)} (Little's law).`)));
 
   // Probability of n customers, until the tail is small.
@@ -96,6 +100,7 @@ function show(q) {
   let cum = 0;
   for (let n = 0; n <= 30 && (cum < 0.99 || n < 5); n++) { const p = q.pn(n); cum += p; pr.push([String(n), pct(p), h("span", { class: "lab-meter", "aria-hidden": "true" }, h("b", { style: `width:${Math.min(100, (p / q.p0) * 100)}%` })), pct(cum)]); }
   blocks.push(block("How many customers are there?", scroller(resultTable(["n customers in the system", "Pₙ = (1 − ρ) ρⁿ", "", "P(n or fewer)"], pr.map((r) => [r[0], r[1], { node: r[2] }, r[3]]))),
+    where(["Pₙ", "the probability of exactly n customers in the system"], ["ρⁿ", "ρ multiplied by itself n times"]),
     h("p", { class: "lab-hint" }, cum >= 0.99 - 1e-12
       ? "The table stops once the chance of more customers is under 1%."
       : `The table stops at ${pr.length - 1} customers. The chance of more than ${pr.length - 1} is ${pct(1 - cum)}; use “Other probabilities” below for any n.`)));
