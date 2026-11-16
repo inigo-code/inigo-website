@@ -179,6 +179,7 @@ h2.kicker { font: 600 .95rem/1.3 var(--font-text); letter-spacing: 0; }
 .more { font-weight: 600; white-space: nowrap; padding-block: .6rem; }
 .empty { color: var(--muted); }
 .hl { position: relative; }
+.nowrap { white-space: nowrap; }
 .about-head h1 .hl { color: var(--accent); white-space: nowrap; }
 .about-head h1 .hl::after { content: ""; position: absolute; left: .02em; right: .02em; bottom: -.04em; height: .08em; border-radius: 99px; background: var(--accent); transform-origin: left center; }
 .toss .hl, .page-head h1 .hl {
@@ -641,7 +642,7 @@ html.reveal-on .in.in { opacity: 1; translate: none; }
 .prose th { font-weight: 600; background: var(--surface); }
 /* Long reading text and the intro paragraphs are justified. Hyphenation keeps the word gaps even on narrow phone lines. */
 .prose p, .prose li, .faq details p, .takeaways li, .cv-text p,
-.lead, .hero-lead, .brand-about, .entry-list p, .author-box p:not(.author-name) {
+.lead, .brand-about, .entry-list p, .author-box p:not(.author-name) {
   text-align: justify; -webkit-hyphens: auto; hyphens: auto; hyphenate-limit-chars: 7 3 3;
 }
 .back { margin-top: 3.5rem; font-weight: 600; }
@@ -933,6 +934,11 @@ html.reveal-on .in.in { opacity: 1; translate: none; }
   .hero-grid, .writing-grid, .brand-inner, .about-head, .about-photo-row, .toss-head { grid-template-columns: minmax(0, 1fr); }
   /* Stacked: the portrait sits in the middle, nudged right so the plate and seal on its left balance it */
   .hero-portrait { justify-self: center; max-width: 22rem; margin-left: 0; left: 1rem; }
+  /* ...and the line above the name and the name itself are centred under it */
+  .hero-eyebrow { display: block; text-align: center; }
+  .hero-eyebrow::before { display: inline-block; vertical-align: -.05em; margin-right: .5rem; }
+  .hero-name { text-align: center; }
+  .hero-name .hl { margin-inline: auto; }
   .about-photo-wrap { justify-self: start; max-width: 20rem; }
   .cv-section, .about-story, .about-teaching, .about-roles, .about-facts { grid-template-columns: minmax(0, 1fr); gap: 1.25rem; }
   .about-trio ul { grid-template-columns: repeat(2, minmax(0, 1fr)); }
