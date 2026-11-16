@@ -79,6 +79,7 @@ export default function (eleventyConfig) {
     const s = new Date(start), n = new Date();
     return n.getFullYear() - s.getFullYear() - (n < new Date(n.getFullYear(), s.getMonth(), s.getDate()) ? 1 : 0);
   });
+  eleventyConfig.addFilter("byTopic", (items, topic) => (items || []).filter((x) => x.data.topic === topic));
   eleventyConfig.addFilter("where", (list, key, value) => (list || []).filter((x) => (value === undefined ? x[key] : x[key] === value)));
   eleventyConfig.addFilter("whereNot", (list, key, value) => (list || []).filter((x) => x[key] !== value));
   // "2023–2026" → { from: "2023", to: "2026" }; "2025–26" → to "2026"; "2020–present" → to "present"; "2025" → no to.

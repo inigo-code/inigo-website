@@ -3,6 +3,7 @@ title: "Emotional intelligence for first-time managers: five habits worth buildi
 seoTitle: "Emotional intelligence for first-time managers"
 description: "Emotional intelligence is not a fixed trait you either have or lack. For a new manager it is a set of habits, and habits can be practised."
 related: ["/resources/goleman-five-components/"]
+topic: "Leadership"
 date: 2026-09-21
 figure: "ei-habits"
 keywords: ["emotional intelligence for managers", "first-time manager tips", "new manager skills", "emotional intelligence habits", "leadership"]

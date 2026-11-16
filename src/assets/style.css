@@ -1291,12 +1291,26 @@ html:has(.lightbox[open]) { overflow: hidden; }
   .faq details > p { display: block; }
 }
 
-/* Resources: filter the study notes by area (the chips appear only when scripts run) */
-html:not(.js) .note-filter { display: none; }
-.note-filter { margin: 0 0 clamp(1.5rem, 3vw, 2rem); }
+/* Articles and Resources: filter the cards by topic or area, and search them (shown only when scripts run) */
+html:not(.js) .list-tools, html:not(.js) .essays-head { display: none; }
+.list-tools { display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: space-between; gap: .75rem 1.5rem; margin: 0 0 clamp(1.5rem, 3vw, 2rem); }
+.list-tools .chips { margin-block: 0; flex: 1 1 28rem; min-width: 0; }
+.list-search { position: relative; flex: 0 1 19rem; min-width: 0; display: block; }
+.list-search svg { position: absolute; left: 1rem; top: 50%; width: 1.15rem; height: 1.15rem; translate: 0 -50%; fill: none; stroke: var(--muted); stroke-width: 2.2; stroke-linecap: round; pointer-events: none; }
+.list-search input {
+  width: 100%; min-height: 44px; padding: .6rem 1rem .6rem 2.75rem; font: 500 1rem/1.2 var(--font-text); color: var(--ink);
+  background: var(--bg); border: 2px solid var(--line); border-radius: 999px;
+  transition: border-color .2s var(--ease), box-shadow .2s var(--ease);
+}
+.list-search input::placeholder { color: var(--muted); opacity: 1; }
+.list-search input:hover { border-color: var(--muted); }
+.list-search input:focus-visible { outline: none; border-color: var(--ink); box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 70%, transparent); }
+.essays-head { margin-bottom: .75rem; }
 .chip:disabled { opacity: .4; cursor: default; transform: none; }
 .chip:disabled:hover { background: transparent; color: var(--ink); }
-.note-grid > li[hidden] { display: none; }
+.note-grid > li[hidden], .article-grid > li[hidden], .article-lead[hidden], .list-empty[hidden] { display: none; }
+.list-empty { display: grid; justify-items: start; gap: 1rem; padding: clamp(1.5rem, 4vw, 2.5rem); background: var(--surface); border-radius: var(--radius); }
+.list-empty p { font: 700 1.25rem/1.3 var(--font-display); letter-spacing: -0.015em; }
 
 /* Phones: rows flush with the page edge, filter chips in one sideways row, a compact paper list */
 @media (max-width: 560px) {
@@ -1310,6 +1324,7 @@ html:not(.js) .note-filter { display: none; }
   }
   .chips::-webkit-scrollbar { display: none; }
   .chip { flex-shrink: 0; white-space: nowrap; }
+  .list-search { flex-basis: 100%; order: -1; }
   .course-grid { gap: 0; border-top: 1px solid var(--line); }
   .course-grid li { grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: .15rem .75rem; padding: .8rem 0; border: 0; border-bottom: 1px solid var(--line); border-radius: 0; background: none; }
   .course-grid .cg-sem { grid-column: 1; order: 2; font-size: .8rem; }

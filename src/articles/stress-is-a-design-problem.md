@@ -3,6 +3,7 @@ title: "Workplace stress is a design problem, not a personal failing"
 seoTitle: "Workplace stress is a design problem, not a failing"
 description: "Three classic models of occupational stress point the same way: the fix lies less in yoga sessions and more in how jobs are built."
 related: ["/articles/quality-of-work-life-audit/", "/resources/herzberg-two-factor-theory/"]
+topic: "HR and work life"
 date: 2026-11-02
 figure: "karasek"
 keywords: ["occupational stress", "workplace stress causes", "job demands-resources model", "Karasek demand-control model", "effort-reward imbalance", "burnout prevention"]

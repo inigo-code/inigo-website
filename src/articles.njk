@@ -3,6 +3,7 @@ layout: layouts/base.njk
 title: Articles
 permalink: /articles/
 description: "Essays on management, work and organisations by Inigo Papu Vinodhan, followed by his published research."
+pageScript: /assets/list-filter.js
 ---
 <div class="wrap page">
   <header class="page-head">
@@ -12,9 +13,23 @@ description: "Essays on management, work and organisations by Inigo Papu Vinodha
     <span class="head-motif">{% include "motifs/book.svg" %}</span>
   </header>
 
+  {#- Search and topic filter: shown only when scripts run (without them every essay is listed). Kept in ?topic= and ?q= -#}
+  {% set topics = ["HR and work life", "Leadership", "For students"] %}
+  <div class="section-head essays-head">
+    <h2 class="sr-only">Essays</h2>
+    <p class="section-note" id="essays-count" aria-live="polite">{{ collections.articles.length }} essays, newest first</p>
+  </div>
+  <div class="list-tools" data-list-filter data-items=".article-lead, .article-grid > li" data-param="topic" data-count="#essays-count" data-empty="#essays-empty" data-noun="essay,essays">
+    <div class="chips" role="group" aria-label="Show essays by topic">
+      <button type="button" class="chip" data-value="all" aria-pressed="true">All <span>{{ collections.articles.length }}</span></button>
+      {% for t in topics %}{% set k = collections.articles | byTopic(t) %}<button type="button" class="chip" data-value="{{ t | slugify }}" aria-pressed="false"{% if not k.length %} disabled{% endif %}>{{ t }} <span>{{ k.length }}</span></button>{% endfor %}
+    </div>
+    {% set searchLabel = "Search the essays" %}{% set searchHint = "Search essays…" %}{% include "list-search.njk" %}
+  </div>
+
   {% set lead = collections.articles | first %}
   {% if lead %}
-  <article class="article-lead">
+  <article class="article-lead" data-value="{{ lead.data.topic | slugify }}" data-search="{{ lead.data.title }} {{ lead.data.description }} {{ lead.data.topic }} {{ (lead.data.keywords or []) | join(' ') }}">
     <div class="article-media">{% set d = lead.data %}{% set decor = true %}{% include "media.njk" %}</div>
     <div class="article-lead-text">
       <p class="card-meta"><time datetime="{{ lead.date | isoDate }}">{{ lead.date | readableDate }}</time><span>{{ lead.content | readingTime }} min read</span></p>
@@ -30,7 +45,7 @@ description: "Essays on management, work and organisations by Inigo Papu Vinodha
   <h2 class="sr-only">More articles</h2>
   <ul class="article-grid">
     {% for item in rest %}
-      <li class="article-card">
+      <li class="article-card" data-value="{{ item.data.topic | slugify }}" data-search="{{ item.data.title }} {{ item.data.description }} {{ item.data.topic }} {{ (item.data.keywords or []) | join(' ') }}">
         <div class="article-media">{% set d = item.data %}{% set decor = true %}{% include "media.njk" %}</div>
         <p class="card-meta"><time datetime="{{ item.date | isoDate }}">{{ item.date | readableDate }}</time><span>{{ item.content | readingTime }} min read</span></p>
         <h3><a href="{{ item.url }}">{{ item.data.title }}</a></h3>
@@ -39,6 +54,10 @@ description: "Essays on management, work and organisations by Inigo Papu Vinodha
     {% endfor %}
   </ul>
   {% endif %}
+  <div class="list-empty" id="essays-empty" hidden>
+    <p>No essays match that yet.</p>
+    <button type="button" class="chip">Show all essays</button>
+  </div>
 
   <section class="pubs" aria-labelledby="pubs-title">
     <div class="section-head">

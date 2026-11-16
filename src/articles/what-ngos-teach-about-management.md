@@ -3,6 +3,7 @@ title: "What running a volunteer organisation teaches about management"
 seoTitle: "Management lessons from running an NGO"
 description: "Seventeen years with TOSS Charitable Trust have taught me management lessons no textbook quite captures. Most of them apply just as well to companies."
 related: ["/resources/ngo-legal-forms-india/"]
+topic: "Leadership"
 date: 2026-08-30
 image: "/assets/photos/isr-seminar-2025.webp"
 imageAlt: "A speaker addressing B.B.A. students at a social responsibility seminar run with TOSS Charitable Trust, 2025"

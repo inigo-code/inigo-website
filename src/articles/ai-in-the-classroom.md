@@ -2,6 +2,7 @@
 title: "Using AI to learn, not to skip the learning: a guide for business students"
 seoTitle: "Using AI to learn: a guide for business students"
 description: "Generative AI can make a student sharper or lazier. Four habits that keep you the author of your own work, what to ask an AI and what never to trust it with."
+topic: "For students"
 date: 2026-11-13
 figure: "ai-loop"
 keywords: ["AI in education", "generative AI for students", "ChatGPT for studying", "prompt engineering", "academic integrity", "AI in higher education India"]

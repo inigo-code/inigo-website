@@ -3,6 +3,7 @@ layout: layouts/base.njk
 title: Resources
 permalink: /resources/
 description: "Study notes, diagrams and free step-by-step tools (OR Lab and Stats Lab) for B.B.A. students, from the papers Inigo Papu Vinodhan teaches at St. Joseph's College."
+pageScript: /assets/list-filter.js
 ---
 <div class="wrap page">
   <header class="page-head">
@@ -17,15 +18,18 @@ description: "Study notes, diagrams and free step-by-step tools (OR Lab and Stat
       <h2 id="notes-title">Study notes</h2>
       <p class="section-note" id="notes-count" aria-live="polite">{{ collections.resources.length }} notes, newest first</p>
     </div>
-    {#- Area filter: shown only when scripts run (without them every note is listed). The choice is kept in ?area= -#}
-    <div class="chips note-filter" role="group" aria-label="Show notes by area">
-      <button type="button" class="chip" data-area="all" aria-pressed="true">All <span>{{ collections.resources.length }}</span></button>
-      {% for a in cv.teaching %}{% set inArea = collections.resources | byArea(a) %}<button type="button" class="chip" data-area="{{ a.id }}" data-label="{{ a.area }}" aria-pressed="false"{% if not inArea.length %} disabled{% endif %}>{{ a.area }} <span>{{ inArea.length }}</span></button>{% endfor %}
+    {#- Search and area filter: shown only when scripts run (without them every note is listed). Kept in ?area= and ?q= -#}
+    <div class="list-tools" data-list-filter data-items=".note-grid > li" data-param="area" data-count="#notes-count" data-empty="#notes-empty" data-noun="note,notes">
+      <div class="chips" role="group" aria-label="Show notes by area">
+        <button type="button" class="chip" data-value="all" aria-pressed="true">All <span>{{ collections.resources.length }}</span></button>
+        {% for a in cv.teaching %}{% set inArea = collections.resources | byArea(a) %}<button type="button" class="chip" data-value="{{ a.id }}" aria-pressed="false"{% if not inArea.length %} disabled{% endif %}>{{ a.area }} <span>{{ inArea.length }}</span></button>{% endfor %}
+      </div>
+      {% set searchLabel = "Search the notes" %}{% set searchHint = "Search notes…" %}{% include "list-search.njk" %}
     </div>
     <ul class="note-grid">
       {% for item in collections.resources %}
         {% set c = item.data.course | course(cv.teaching) %}
-        <li class="note-card" data-area="{{ c.areaId }}">
+        <li class="note-card" data-value="{{ c.areaId }}" data-search="{{ item.data.title }} {{ item.data.description }} {{ c.title }} {{ (item.data.keywords or []) | join(' ') }}">
           <div class="note-media">{% set d = item.data %}{% set decor = true %}{% include "media.njk" %}</div>
           <div class="note-body">
             <p class="card-meta"><span class="tag">{{ c.title }}</span>{% if c.sem %}<span>Semester {{ c.sem }}</span>{% endif %}</p>
@@ -35,6 +39,10 @@ description: "Study notes, diagrams and free step-by-step tools (OR Lab and Stat
         </li>
       {% endfor %}
     </ul>
+    <div class="list-empty" id="notes-empty" hidden>
+      <p>No study notes match that yet.</p>
+      <button type="button" class="chip">Show all notes</button>
+    </div>
   </section>
 
   <section class="notes-section" aria-labelledby="tools-title">
@@ -98,26 +106,3 @@ description: "Study notes, diagrams and free step-by-step tools (OR Lab and Stat
   {% endif %}
 </div>
 
-<script>
-  // Study notes: filter the cards by teaching area, and keep the choice in the address (?area=numbers).
-  (() => {
-    const chips = [...document.querySelectorAll(".note-filter .chip")];
-    const cards = [...document.querySelectorAll(".note-grid > li")];
-    const count = document.getElementById("notes-count"), all = count.textContent;
-    const show = (area, push) => {
-      const chip = chips.find((c) => c.dataset.area === area && !c.disabled) || chips[0];
-      area = chip.dataset.area;
-      chips.forEach((c) => c.setAttribute("aria-pressed", String(c === chip)));
-      let n = 0;
-      cards.forEach((li) => { li.hidden = area !== "all" && li.dataset.area !== area; if (!li.hidden) n++; });
-      count.textContent = area === "all" ? all : `${n} ${n === 1 ? "note" : "notes"} in ${chip.dataset.label.toLowerCase()}`;
-      if (push) {
-        const url = new URL(location.href);
-        if (area === "all") url.searchParams.delete("area"); else url.searchParams.set("area", area);
-        history.replaceState(history.state, "", url);
-      }
-    };
-    chips.forEach((c) => c.addEventListener("click", () => show(c.dataset.area, true)));
-    show(new URL(location.href).searchParams.get("area") || "all", false);
-  })();
-</script>

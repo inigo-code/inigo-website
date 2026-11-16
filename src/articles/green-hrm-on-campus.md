@@ -2,6 +2,7 @@
 title: "Green HRM on campus: where an Indian college can start"
 seoTitle: "Green HRM on campus: where an Indian college can start"
 description: "Sustainability on campus is usually treated as a facilities project. It works better as a people project, built into how we hire, train, appraise and involve staff."
+topic: "HR and work life"
 date: 2026-10-12
 image: "/assets/photos/bba-tree-planting-2025.webp"
 imageAlt: "B.B.A. students with residents at a tree-planting event in a Tiruchirappalli park, 2025"

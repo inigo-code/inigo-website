@@ -3,6 +3,7 @@ title: "A quality of work life audit for managers: Walton's eight questions"
 seoTitle: "Quality of work life audit: Walton's eight criteria"
 description: "Quality of work life is more than salary. Walton's eight criteria as questions any manager can ask about their own team, and what to do with the answers."
 related: ["/resources/herzberg-two-factor-theory/", "/articles/stress-is-a-design-problem/"]
+topic: "HR and work life"
 date: 2026-11-09
 figure: "walton"
 keywords: ["quality of work life", "QWL", "Walton's eight criteria", "employee well-being", "occupational stress", "human resource management"]

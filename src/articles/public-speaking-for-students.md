@@ -2,6 +2,7 @@
 title: "Public speaking for students: a method you can practise"
 seoTitle: "Public speaking for students: a method to practise"
 description: "Confident speakers are made, not born. A method students can practise: one message, a simple structure, rehearsal aloud, and handling nerves and questions."
+topic: "For students"
 date: 2026-11-11
 image: "/assets/photos/bhc-talk-2026.webp"
 imageAlt: "Inigo speaking with slides behind him at Bishop Heber College, Tiruchirappalli, September 2026"
