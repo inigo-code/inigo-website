@@ -1,6 +1,26 @@
 /* OR Lab: interactive Operations Research tools. Uses the site's tokens from style.css. */
 
 .lab { display: grid; gap: clamp(2rem, 5vw, 3.5rem); }
+
+/* While the tool's script loads, the empty lab shows a small loader. It goes the moment the tool draws itself. */
+.js .lab:not(:has(> :not(noscript))) {
+  min-height: 18rem; place-content: center; justify-items: center; gap: 1.1rem;
+  background: var(--surface); border-radius: var(--radius);
+}
+.js .lab:not(:has(> :not(noscript)))::before {
+  content: ""; width: 3rem; height: 3rem; border-radius: 50%;
+  border: 3px solid var(--line); border-top-color: var(--accent); border-right-color: var(--accent);
+  animation: lab-spin .9s linear infinite;
+}
+.js .lab:not(:has(> :not(noscript)))::after {
+  content: "Loading the tool…"; font-weight: 600; color: var(--muted);
+  animation: lab-fade 1.6s ease-in-out infinite;
+}
+@keyframes lab-spin { to { rotate: 360deg; } }
+@keyframes lab-fade { 50% { opacity: .45; } }
+@media (prefers-reduced-motion: reduce) {
+  .js .lab:not(:has(> :not(noscript)))::before { animation: lab-fade 1.6s ease-in-out infinite; }
+}
 .lab-panel { background: var(--surface); border-radius: var(--radius); padding: clamp(1.1rem, 3vw, 2rem); display: grid; gap: 1.25rem; min-width: 0; }
 .lab-panel > h2, .lab-h { font: 700 clamp(1.35rem, 2.4vw, 1.75rem)/1.15 var(--font-display); letter-spacing: -0.025em; }
 .lab-h { margin-bottom: 1rem; }
