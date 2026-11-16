@@ -35,6 +35,14 @@ layout: layouts/base.njk
   </aside>
   {% endif %}
   {% set sections = content | toc %}
+  {% if sections.length >= 3 %}
+  <aside class="entry-rail" aria-label="On this page">
+    <div class="rail-box">
+      <p class="rail-label">On this page</p>
+      <ol>{% for s in sections %}<li><a href="#{{ s.id }}">{{ s.text | safe }}</a></li>{% endfor %}</ol>
+    </div>
+  </aside>
+  {% endif %}
   {% if section.label == "Resources" and sections.length >= 4 %}
   <nav class="toc" aria-labelledby="toc-title">
     <details open>
@@ -79,3 +87,22 @@ layout: layouts/base.njk
   {% endif %}
   <p class="back"><a href="{{ section.url }}">← All {{ section.label | lower }}</a></p>
 </article>
+<script>
+  // Side column on wide screens: mark the section being read.
+  (() => {
+    const links = [...document.querySelectorAll(".entry-rail a")];
+    const heads = links.map((a) => document.getElementById(decodeURIComponent(a.hash.slice(1))));
+    if (!links.length || heads.includes(null)) return;
+    let queued = false, current = -1;
+    const mark = () => {
+      queued = false;
+      let i = -1;
+      heads.forEach((h, k) => { if (h.getBoundingClientRect().top < innerHeight * 0.3) i = k; });
+      if (i === current) return;
+      current = i;
+      links.forEach((l, k) => (k === i ? l.setAttribute("aria-current", "location") : l.removeAttribute("aria-current")));
+    };
+    addEventListener("scroll", () => { if (!queued) { queued = true; requestAnimationFrame(mark); } }, { passive: true });
+    mark();
+  })();
+</script>

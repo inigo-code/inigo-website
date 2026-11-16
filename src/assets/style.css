@@ -448,7 +448,18 @@ html.reveal-on .in.in { opacity: 1; translate: none; }
 
 /* Closing */
 .closing { background: var(--brand-bg); color: var(--brand-ink); padding-block: var(--section) calc(var(--section) * .8); }
-.closing h2 { font-size: clamp(2.25rem, 5.5vw, 4.5rem); font-weight: 800; max-width: 18ch; }
+.closing h2 { font-size: clamp(2.25rem, 4.6vw, 4rem); font-weight: 800; max-width: 18ch; }
+.closing-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 25rem); gap: clamp(2.5rem, 6vw, 5rem); align-items: end; }
+.invite-list { list-style: none; margin: 0; padding: 0; border-top: 2px solid var(--brand-ink); }
+.invite-list a { display: grid; grid-template-columns: minmax(0, 1fr) auto; column-gap: 1.25rem; align-items: center; padding-block: 1.2rem; border-bottom: 1px solid var(--brand-line); color: inherit; text-decoration: none; }
+.invite-word { font: 800 clamp(1.4rem, 2.2vw, 1.75rem)/1.1 var(--font-display); letter-spacing: -0.03em; transition: color .25s var(--ease); }
+.invite-note { grid-column: 1; margin-top: .35rem; font-size: 1rem; line-height: 1.4; color: var(--brand-muted); }
+.invite-go { grid-column: 2; grid-row: 1 / span 2; width: 2.75rem; height: 2.75rem; border-radius: 50%; border: 1.5px solid var(--brand-line); display: grid; place-items: center; font-size: 1.15rem;
+  transition: background-color .25s var(--ease), color .25s var(--ease), border-color .25s var(--ease), translate .25s var(--ease); }
+.invite-list a:hover .invite-word { color: var(--accent); }
+.invite-list a:hover .invite-go { background: var(--accent); border-color: var(--accent); color: var(--brand-bg); translate: 3px 0; }
+.invite-list a:focus-visible { outline: 3px solid var(--accent); outline-offset: 4px; border-radius: 4px; }
+@media (max-width: 900px) { .closing-grid { grid-template-columns: minmax(0, 1fr); } }
 
 /* ===== Inner pages ===== */
 .page { padding-bottom: var(--section); }
@@ -920,7 +931,8 @@ html.reveal-on .in.in { opacity: 1; translate: none; }
 
 @media (max-width: 900px) {
   .hero-grid, .writing-grid, .brand-inner, .about-head, .about-photo-row, .toss-head { grid-template-columns: minmax(0, 1fr); }
-  .hero-portrait { justify-self: start; max-width: 22rem; margin-left: 2.75rem; }
+  /* Stacked: the portrait sits in the middle, nudged right so the plate and seal on its left balance it */
+  .hero-portrait { justify-self: center; max-width: 22rem; margin-left: 0; left: 1rem; }
   .about-photo-wrap { justify-self: start; max-width: 20rem; }
   .cv-section, .about-story, .about-teaching, .about-roles, .about-facts { grid-template-columns: minmax(0, 1fr); gap: 1.25rem; }
   .about-trio ul { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -980,13 +992,13 @@ html.reveal-on .in.in { opacity: 1; translate: none; }
   .big-stats-row { grid-template-columns: minmax(0, 1fr); }
   .brand-socials a { grid-template-columns: minmax(0, 1fr) auto; row-gap: .2rem; }
   .brand-socials .handle { grid-row: 2; text-align: left; }
-  .hero-portrait { margin-left: 1.75rem; width: calc(100% - 1.75rem); max-width: 18rem; }
+  .hero-portrait { width: calc(100% - 1.75rem); max-width: 18rem; }
 }
 
 /* On phones the photo comes first and smaller, so the face shows without scrolling. */
 @media (max-width: 600px) {
   .hero-grid { gap: 2.75rem; }
-  .hero-portrait { order: -1; margin-left: 1.75rem; width: calc(100% - 1.75rem); max-width: 13rem; }
+  .hero-portrait { order: -1; width: calc(100% - 1.75rem); max-width: 13rem; left: .9rem; }
   .hero-portrait::before { inset: .9rem .9rem -.9rem -.9rem; }
   .seal { width: 5.75rem; height: 5.75rem; left: -1.75rem; bottom: 1.5rem; }
 }
@@ -1203,6 +1215,23 @@ html:has(.lightbox[open]) { overflow: hidden; }
 .toc li::marker { color: var(--muted); font-variant-numeric: tabular-nums; }
 .toc a { text-decoration: none; background: linear-gradient(currentColor, currentColor) 0 100% / 0 2px no-repeat; transition: background-size .35s var(--ease); }
 .toc a:hover { background-size: 100% 2px; }
+
+/* Wide screens: the reading column keeps its measure, and the space beside it holds a sticky "On this page" list */
+.entry-rail { display: none; }
+@media (min-width: 75em) {
+  .entry:has(> .entry-rail) { display: grid; grid-template-columns: minmax(0, 48rem) minmax(0, 1fr); column-gap: clamp(3rem, 5vw, 5rem); align-items: start; }
+  .entry:has(> .entry-rail) > * { grid-column: 1; }
+  .entry:has(> .entry-rail) > .entry-head { grid-column: 1 / -1; }
+  .entry:has(> .entry-rail) > .toc { display: none; }
+  .entry:has(> .entry-rail) > .entry-rail { display: block; grid-column: 2; grid-row: 2 / span 40; align-self: stretch; max-width: 18rem; }
+  .rail-box { position: sticky; top: 7rem; border-top: 2px solid var(--ink); padding-top: 1rem; }
+  .rail-label { font-weight: 700; margin-bottom: .6rem; }
+  .rail-box ol { list-style: none; margin: 0; padding: 0; }
+  .rail-box a { display: block; padding: .45rem 0 .45rem 1rem; border-left: 2px solid var(--line); color: var(--muted); font-size: .95rem; line-height: 1.35; text-decoration: none;
+    transition: color .2s var(--ease), border-color .2s var(--ease); }
+  .rail-box a:hover { color: var(--ink); }
+  .rail-box a[aria-current] { color: var(--ink); font-weight: 600; border-left-color: var(--accent); }
+}
 
 /* Home: the three newest study notes, under the teaching areas */
 /* (rows and bottom padding tighten a little so the section keeps roughly its old height) */
