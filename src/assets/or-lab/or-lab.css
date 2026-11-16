@@ -209,10 +209,55 @@
   .lab-actions .button { flex: 1 1 auto; }
 }
 @media (prefers-reduced-motion: reduce) { .lab-tools li, .lab-tools li:hover { transition: none; transform: none; } }
+/* Print: black on white with no dark bands, the problem first, every table at full width (nothing
+   cut off at the edge), no sticky headers printing over other rows, and no heading left alone at
+   the foot of a page. Yellow highlights still print, so critical rows and regions stay marked. */
 @media print {
-  .lab-panel, .lab-actions, .lab-x, .lab-crumb { display: none !important; }
-  .lab-steps { break-inside: avoid; }
+  .lab-crumb, .lab-actions, .lab-x, .lab-remove, .lab-msgs, .lab-panel .button, .lab-panel .lab-hint { display: none !important; }
+  .page > .page-head { border-image: none; color: #000; padding: 0 0 4mm; margin-bottom: 6mm; border-bottom: 2px solid #000; }
+  .page-head > .head-motif { display: none !important; }
+  .page-head h1 { font-size: 22pt; }
+  .page-head .lead, .page-head .eyebrow, .page-head .eyebrow a { color: #333; }
+  .lab, .lab-results { gap: 7mm; }
+  .lab-results, .lab-panel { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+  /* The problem as entered: the chosen method and the inputs, without the buttons */
+  .lab-panel { background: none; border: 1px solid #999; padding: 4mm 5mm; gap: 3mm; break-inside: avoid; }
+  .lab-panel > h2 { font-size: 13pt; }
+  .lab-seg label:not(:has(input:checked)) { display: none; }
+  .lab-seg span { min-height: 0; padding: 0; border: 0; background: none !important; color: #000 !important; font-weight: 700; }
+  .lab-field input, .lab-field select, .lab-input input, .lab-input select { min-height: 0; padding: 1mm 2mm; border: 1px solid #999; border-radius: 3px; background: none; color: #000; appearance: none; }
+  .lab-input input { min-width: 0; }
+
+  /* Results */
+  .lab-block + .lab-block { padding-top: 5mm; border-top-width: 1.5px; }
+  .lab-h, .lab-step h3, .lab-steps summary { break-after: avoid; }
+  .lab-h { font-size: 14pt; }
+  .lab-answer { background: none; color: #000; border: 2px solid #000; padding: 4mm 5mm; break-inside: avoid; }
+  .lab-answer .label, .lab-answer p, .lab-routes { color: #000; }
+  .lab-answer .big { font-size: 18pt; }
+  .lab-kv div { background: none; border: 1px solid #999; break-inside: avoid; }
+  .lab-kv dd { font-size: 14pt; }
+
+  .lab-scroll, .lab-formula, .lab-figure, .lab-figure.wide { overflow: visible !important; }
+  .lab-figure.wide svg { min-width: 0; max-width: 100%; }
+  .lab-figure, .lab-answer, .lab-legend { break-inside: avoid; }
+  .lab-table { width: 100%; min-width: 0; font-size: 9pt; }
+  .lab-table th, .lab-table td { padding: 1.2mm 1.8mm; }
+  .lab-table thead { display: table-header-group; }
+  .lab-table thead th { position: static; background: none; color: #000; border-bottom: 2px solid #000; white-space: normal; border-radius: 0 !important; }
+  .lab-table tr { break-inside: avoid; }
+  .lab-table .is-alloc .amt, .lab-table .is-pick { background: none; color: #000; outline: 1.5px solid #000; outline-offset: -1px; }
+  .lab-formula { background: none; border-left-width: 3px; padding: 2mm 4mm; }
+  .lab-formula p { break-inside: avoid; }
+
+  /* Worked steps print open, as plain sections */
+  .lab-steps { border: 0; background: none; }
+  .lab-steps summary { list-style: none; padding: 0 0 2mm; min-height: 0; border: 0 !important; font-size: 12pt; }
+  .lab-steps summary::-webkit-details-marker { display: none; }
+  .lab-steps::details-content { content-visibility: visible; display: block; height: auto; }
   .lab-steps:not([open]) > .lab-steps-body { display: grid; }
+  .lab-steps-body { padding: 0; }
 }
 
 /* LPP inputs */
