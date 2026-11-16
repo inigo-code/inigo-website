@@ -133,15 +133,33 @@
   <script>
     const toggle = document.querySelector(".menu-toggle");
     const nav = document.getElementById("nav");
-    const setMenu = (open) => {
+    const label = (open) => {
       toggle.setAttribute("aria-expanded", String(open));
       toggle.textContent = open ? "Close" : "Menu";
-      nav.classList.toggle("open", open);
     };
-    toggle.addEventListener("click", () => setMenu(toggle.getAttribute("aria-expanded") !== "true"));
-    document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape" && nav.classList.contains("open")) { setMenu(false); toggle.focus(); }
-    });
+    if (Object.hasOwn(HTMLElement.prototype, "popover")) {
+      // Below laptop width the menu is a native popover: Esc, a tap outside it and the Back gesture close it,
+      // and focus goes back to the button. At laptop width it is the plain row of links again.
+      const narrow = matchMedia("(max-width: 1080px)");
+      const bar = toggle.closest(".topbar");
+      const place = () => nav.style.setProperty("--menu-top", Math.max(0, bar.getBoundingClientRect().bottom) + "px");
+      toggle.setAttribute("popovertarget", "nav");
+      const sync = () => {
+        if (narrow.matches) nav.setAttribute("popover", "auto");
+        else { nav.removeAttribute("popover"); label(false); }
+      };
+      nav.addEventListener("beforetoggle", (e) => { if (e.newState === "open") place(); });
+      nav.addEventListener("toggle", (e) => label(e.newState === "open"));
+      addEventListener("scroll", () => { if (nav.matches(":popover-open")) place(); }, { passive: true });
+      narrow.addEventListener("change", sync);
+      sync();
+    } else {
+      const setMenu = (open) => { label(open); nav.classList.toggle("open", open); };
+      toggle.addEventListener("click", () => setMenu(toggle.getAttribute("aria-expanded") !== "true"));
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && nav.classList.contains("open")) { setMenu(false); toggle.focus(); }
+      });
+    }
 
     const calm = matchMedia("(prefers-reduced-motion: reduce)");
 

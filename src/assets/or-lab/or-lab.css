@@ -86,7 +86,7 @@
 .lab-table .is-alloc .cost { margin-top: .15rem; }
 .lab-table .is-enter { outline: 3px solid var(--accent); outline-offset: -3px; }
 .lab-table .is-plus .sign, .lab-table .is-minus .sign { font-weight: 800; margin-left: .25rem; }
-.lab-table .is-neg { color: #a12a1a; font-weight: 700; }
+.lab-table .is-neg { color: var(--danger); font-weight: 700; }
 .lab-table .is-line { background: color-mix(in srgb, var(--accent) 45%, transparent); }
 .lab-table .is-line2 { background: var(--accent); color: var(--accent-ink); }
 .lab-table .is-zero { font-weight: 800; }
@@ -94,7 +94,6 @@
 .lab-table .is-muted { color: var(--muted); }
 .lab-table .is-gone { color: var(--muted); text-decoration: line-through; }
 .lab-table td.left, .lab-table th.left { text-align: left; }
-@media (prefers-color-scheme: dark) { .lab-table .is-neg { color: #ff9b85; } }
 
 /* Grids (transportation, assignment, games): centred cells, totals set apart */
 .lab-grid td, .lab-grid thead th:not(:first-child) { text-align: center; }
@@ -113,7 +112,7 @@
   color: var(--ink); background: var(--bg); border: 1.5px solid var(--line); border-radius: 8px; padding: .55rem .55rem; min-height: 44px;
 }
 .lab-input td:first-child input, .lab-input input.txt { text-align: left; }
-.lab-input input[aria-invalid="true"] { border-color: #a12a1a; }
+.lab-input input[aria-invalid="true"] { border-color: var(--danger); }
 .lab-input .is-total input, .lab-input .is-total { font-weight: 700; }
 .lab-remove { width: 2.5rem; }
 .lab-x {
@@ -125,7 +124,7 @@
 /* Messages */
 .lab-msg { border-radius: var(--radius-sm); padding: .9rem 1.1rem; font-size: .975rem; border: 2px solid; }
 .lab-msg ul { margin: .35rem 0 0; padding-left: 1.2rem; }
-.lab-msg.is-error { border-color: #a12a1a; background: color-mix(in srgb, #a12a1a 8%, var(--bg)); }
+.lab-msg.is-error { border-color: var(--danger); background: color-mix(in srgb, var(--danger) 8%, var(--bg)); }
 .lab-msg.is-warn { border-color: var(--ink); background: color-mix(in srgb, var(--accent) 30%, var(--bg)); }
 .lab-msg + .lab-msg { margin-top: .6rem; }
 .lab-msgs:empty { display: none; }
@@ -194,13 +193,12 @@
 .g-node-text { fill: var(--ink); font-size: 12px; text-anchor: middle; }
 .g-node-crit + .g-node-text, .g-on-accent { fill: var(--accent-ink); }
 .g-label-bg { fill: var(--bg); }
-.g-region { fill: var(--accent); fill-opacity: .45; stroke: none; }
+.g-region { fill: var(--accent); fill-opacity: var(--region-opacity); stroke: none; }
 .g-halo { paint-order: stroke; stroke: var(--bg); stroke-width: 4px; stroke-linejoin: round; }
 .g-opt { fill: var(--ink); stroke: var(--accent); stroke-width: 3; }
 .g-pt { fill: var(--bg); stroke: var(--ink); stroke-width: 2; }
 .g-head { fill: var(--muted); }
 .g-head-crit { fill: var(--ink); }
-@media (prefers-color-scheme: dark) { .g-region { fill-opacity: .28; } }
 
 .lab-legend { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; color: var(--muted); font-size: .875rem; margin-top: .6rem; padding: 0 .25rem; }
 .lab-legend span { display: inline-flex; align-items: center; gap: .45rem; }
