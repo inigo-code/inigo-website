@@ -14,37 +14,43 @@ eleventyExcludeFromCollections: true
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@500..900&family=Red+Hat+Text:wght@400..600&display=block" rel="stylesheet">
   <style>
-    @page { size: A4; margin: 11mm 0 10mm; }
-    @page :first { margin-top: 0; }
+    @page {
+      size: A4; margin: 12.5mm 0 10.5mm;
+      @top-left { content: "J. Inigo Papu Vinodhan"; padding: 0 0 3.2mm 15mm; vertical-align: bottom; font: 700 7.6pt "Red Hat Display", sans-serif; color: #0d2a1c; }
+      @top-right { content: "Curriculum vitae"; padding: 0 15mm 3.2mm 0; vertical-align: bottom; font: 600 7.4pt "Red Hat Text", sans-serif; color: #4f5d54; }
+      @bottom-left { content: "inigo.co.in/cv  ·  Updated {{ build.month }}"; padding: 3mm 0 0 15mm; vertical-align: top; font: 400 7.2pt "Red Hat Text", sans-serif; color: #4f5d54; }
+      @bottom-right { content: "Page " counter(page) " of " counter(pages); padding: 3mm 15mm 0 0; vertical-align: top; font: 600 7.2pt "Red Hat Text", sans-serif; color: #4f5d54; }
+    }
+    @page :first { margin-top: 0; @top-left { content: none; } @top-right { content: none; } }
     :root { --ink: #0d2a1c; --muted: #4f5d54; --line: #d9ddd5; --green: #0d2a1c; --yellow: #f6e016; --soft: #f3f3ee; }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-    body { font: 400 8.6pt/1.38 "Red Hat Text", sans-serif; color: var(--ink); background: #fff; width: 210mm; margin: 0 auto; }
+    body { font: 400 8.5pt/1.34 "Red Hat Text", sans-serif; color: var(--ink); background: #fff; width: 210mm; margin: 0 auto; }
     a { color: inherit; text-decoration: none; }
     h1, h2, h3, strong { font-family: "Red Hat Display", sans-serif; }
 
-    .head { background: var(--green); color: #f4f6f2; padding: 11mm 15mm 9mm; display: grid; grid-template-columns: 1fr 34mm; gap: 10mm; align-items: center; }
+    .head { background: var(--green); color: #f4f6f2; padding: 10mm 15mm 8mm; display: grid; grid-template-columns: 1fr 34mm; gap: 10mm; align-items: center; }
     .head-kicker { font-weight: 600; font-size: 8.6pt; color: #a9b8ae; display: flex; align-items: center; gap: 2mm; }
     .head-kicker::before { content: ""; width: 2.2mm; height: 2.2mm; border-radius: 50%; background: var(--yellow); }
     h1 { font-size: 30pt; font-weight: 900; letter-spacing: -0.045em; line-height: .95; margin-top: 3mm; }
     h1 span { color: var(--yellow); }
     .head-role { margin-top: 3.5mm; font-size: 10.5pt; font-weight: 500; }
     .head-cred { margin-top: 1mm; color: var(--yellow); font-weight: 600; font-size: 9pt; }
-    .head-contact { margin-top: 4.5mm; display: flex; flex-wrap: wrap; gap: 1mm 5mm; font-size: 8.4pt; color: #d6ded8; }
-    .head-contact b { color: #a9b8ae; font-weight: 600; margin-right: 1mm; }
+    .head-contact { margin-top: 4.5mm; display: grid; grid-template-columns: auto auto; justify-content: start; gap: 1.2mm 7mm; font-size: 8.4pt; color: #d6ded8; }
+    .head-contact b { display: inline-block; width: 13mm; color: #a9b8ae; font-weight: 600; }
     .photo { position: relative; }
     .photo::before { content: ""; position: absolute; inset: 2.5mm -2.5mm -2.5mm 2.5mm; background: var(--yellow); border-radius: 4mm; }
     .photo img { position: relative; display: block; width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 4mm; background: var(--yellow); }
 
-    .summary { padding: 6mm 15mm 0; font-size: 9pt; line-height: 1.48; }
-    .cols { display: grid; grid-template-columns: minmax(0, 1fr) 60mm; gap: 9mm; padding: 5mm 15mm 0; }
-    section { margin-bottom: 5mm; }
+    .summary { padding: 5mm 15mm 0; font-size: 8.9pt; line-height: 1.45; }
+    .cols { display: grid; grid-template-columns: minmax(0, 1fr) 57mm; gap: 8mm; padding: 5mm 15mm 0; }
+    section { margin-bottom: 4.4mm; }
     h2 { font-size: 10.5pt; font-weight: 800; letter-spacing: -0.02em; display: flex; align-items: center; gap: 2.5mm; padding-bottom: 1.4mm; border-bottom: .5mm solid var(--ink); margin-bottom: 2.6mm; break-after: avoid; }
     h2::before { content: ""; width: 3mm; height: 3mm; background: var(--yellow); border: .35mm solid var(--ink); border-radius: 50%; }
-    .row { display: grid; grid-template-columns: 17mm minmax(0, 1fr); gap: 3mm; margin-bottom: 2mm; break-inside: avoid; }
+    .row { display: grid; grid-template-columns: 17mm minmax(0, 1fr); gap: 3mm; margin-bottom: 1.7mm; break-inside: avoid; }
     .side .row { grid-template-columns: 11mm minmax(0, 1fr); gap: 2mm; }
     .yr { font-weight: 600; color: var(--muted); font-variant-numeric: tabular-nums; font-size: 8pt; padding-top: .3mm; }
-    .t { font-weight: 600; }
+    .t { font-weight: 600; text-wrap: pretty; }
     .p { color: var(--muted); font-size: 8pt; }
     .tag { display: inline-block; font-size: 7.2pt; font-weight: 700; background: var(--yellow); padding: .5mm 1.6mm; border-radius: 3mm; margin-right: 1.5mm; vertical-align: .2mm; }
     .cite { break-inside: avoid; margin-bottom: 2.2mm; padding-left: 3mm; border-left: .8mm solid var(--yellow); }
@@ -52,12 +58,16 @@ eleventyExcludeFromCollections: true
     .cite .p a { font-weight: 600; color: var(--ink); border-bottom: .25mm solid var(--ink); }
     .area { break-inside: avoid; margin-bottom: 2.2mm; }
     .area strong { font-size: 8.8pt; }
-    .tool { break-inside: avoid; background: var(--soft); border-radius: 2mm; padding: 2.6mm 3mm; margin-top: 3mm; }
+    .labs { display: grid; grid-template-columns: 1fr 1fr; gap: 3mm; }
+    .lab { break-inside: avoid; background: var(--soft); border-radius: 2mm; padding: 2.6mm 3.2mm 2.8mm; display: flex; flex-direction: column; gap: .8mm; }
+    .lab strong { font-size: 10pt; font-weight: 800; letter-spacing: -0.02em; }
+    .lab .p { flex: 1; }
+    .lab a { font-weight: 600; font-size: 8pt; align-self: start; border-bottom: .25mm solid var(--ink); }
     .side section { break-inside: auto; }
     .plain { font-size: 8.2pt; }
     .plain li { list-style: none; margin-bottom: 1.4mm; padding-left: 3mm; position: relative; break-inside: avoid; }
     .plain li::before { content: ""; position: absolute; left: 0; top: 1.9mm; width: 1.3mm; height: 1.3mm; border-radius: 50%; background: var(--ink); }
-    .foot { margin: 2mm 15mm 0; padding-top: 3mm; border-top: .3mm solid var(--line); font-size: 7.8pt; color: var(--muted); display: flex; justify-content: space-between; }
+
     @media screen { body { box-shadow: 0 0 0 1px var(--line); margin-block: 10mm; } }
   </style>
 </head>
@@ -69,10 +79,10 @@ eleventyExcludeFromCollections: true
       <p class="head-role">{{ site.role }}, {{ site.department }}<br>{{ site.institution }}</p>
       <p class="head-cred">{{ site.credentials }}</p>
       <p class="head-contact">
-        <span><b>Email</b>{{ site.personalEmail }}</span>
-        {% if site.email %}<span><b>College</b>{{ site.email }}</span>{% endif %}
-        <span><b>Web</b>inigo.co.in</span>
-        <span><b>LinkedIn</b>linkedin.com/in/inigojoseph</span>
+        <span><b>Email</b><a href="mailto:{{ site.personalEmail }}">{{ site.personalEmail }}</a></span>
+        <span><b>Web</b><a href="{{ site.url }}">inigo.co.in</a></span>
+        {% if site.email %}<span><b>College</b><a href="mailto:{{ site.email }}">{{ site.email }}</a></span>{% endif %}
+        <span><b>LinkedIn</b><a href="https://www.linkedin.com/in/inigojoseph">linkedin.com/in/inigojoseph</a></span>
       </p>
     </div>
     <div class="photo"><img src="/assets/files/inigo-print.jpg" alt=""></div>
@@ -97,6 +107,21 @@ eleventyExcludeFromCollections: true
         {% endfor %}
       </section>
 
+      {% if cv.tools.length %}
+      <section>
+        <h2>Teaching tools</h2>
+        <div class="labs">
+          {% for t in cv.tools %}
+            <div class="lab">
+              <strong>{{ t.title }}</strong>
+              <p class="p">Every unit of {{ t.paper }}, worked step by step.</p>
+              <a href="{{ site.url }}{{ t.url }}">inigo.co.in{{ t.url | replace(r/\/$/, "") }}</a>
+            </div>
+          {% endfor %}
+        </div>
+      </section>
+      {% endif %}
+
       <section>
         <h2>Invited lectures</h2>
         {% for t in cv.talks | whereNot("pdf", false) %}<div class="row"><span class="yr">{{ t.years }}</span><div><p class="t">{{ t.title }}</p><p class="p">{{ t.role }} · {{ t.place }}</p></div></div>{% endfor %}
@@ -104,12 +129,8 @@ eleventyExcludeFromCollections: true
 
       <section>
         <h2>Teaching</h2>
-        <p class="p" style="margin-bottom:2mm">Core B.B.A. papers I teach, by area:</p>
         {% for a in cv.teaching %}
           <p class="area"><strong>{{ a.area }}:</strong> {% for c in a.courses %}{{ c.title }}{% if not loop.last %}; {% endif %}{% endfor %}</p>
-        {% endfor %}
-        {% for t in cv.tools %}
-          <p class="area"><strong>Teaching tool:</strong> built {{ t.title }}, free step-by-step tools for every unit of {{ t.paper }} (inigo.co.in{{ t.url }}).</p>
         {% endfor %}
       </section>
 
@@ -133,7 +154,7 @@ eleventyExcludeFromCollections: true
       <section>
         <h2>Training</h2>
         {% for r in cv.development | whereNot("pdf", false) %}<div class="row"><span class="yr">{{ r.years }}</span><div><p class="t" style="font-weight:500">{{ r.title }}</p><p class="p">{{ r.place }}</p></div></div>{% endfor %}
-        {% set more = cv.development | where("pdf", false) %}{% if more.length %}<p class="p" style="margin-top:1.5mm">And {{ more.length }} more programmes, workshops and seminars since 2020, listed at inigo.co.in/cv.</p>{% endif %}
+        {% set more = cv.development | where("pdf", false) %}{% if more.length %}<p class="p" style="margin-top:1.5mm">And {{ more.length }} more programmes, workshops and seminars since 2020, listed at <a class="u" href="{{ site.url }}/cv/#development">inigo.co.in/cv</a>.</p>{% endif %}
       </section>
 
       <section>
@@ -154,9 +175,9 @@ eleventyExcludeFromCollections: true
       <section>
         <h2>Online</h2>
         <ul class="plain">
-          <li>heartapps.github.io</li>
-          <li>github.com/daprofezza</li>
-          <li>tosstheworld.org</li>
+          <li><a href="https://heartapps.github.io/">heartapps.github.io</a></li>
+          <li><a href="https://github.com/daprofezza">github.com/daprofezza</a></li>
+          <li><a href="https://tosstheworld.org/">tosstheworld.org</a></li>
         </ul>
       </section>
     </aside>
