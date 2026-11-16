@@ -227,7 +227,12 @@
   .page-head > .head-motif { display: none !important; }
   .page-head h1 { font-size: 22pt; }
   .page-head .lead, .page-head .eyebrow, .page-head .eyebrow a { color: #333; }
-  .lab, .lab-results { gap: 7mm; }
+  /* Chrome does not grow a grid row when something inside it jumps to the next page, so the next
+     section prints on top of it. On paper the page is laid out as plain blocks with margins. */
+  .lab, .lab-results, .lab-steps-body, .lab-step, .lab-answer, .lab-panel, .mx-list { display: block; }
+  .lab > * + *, .lab-results > * + * { margin-top: 7mm; }
+  .lab-steps-body > * + *, .lab-step > * + *, .lab-answer > * + *, .lab-panel > * + *, .mx-list > * + * { margin-top: 3mm; }
+  .lab-step + .lab-step { padding-top: 3mm; }
   .lab-results, .lab-panel { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
 
   /* The problem as entered: the chosen method and the inputs, without the buttons */
@@ -245,7 +250,8 @@
   .lab-answer { background: none; color: #000; border: 2px solid #000; padding: 4mm 5mm; break-inside: avoid; }
   .lab-answer .label, .lab-answer p, .lab-routes { color: #000; }
   .lab-answer .big { font-size: 18pt; }
-  .lab-kv div { background: none; border: 1px solid #999; break-inside: avoid; }
+  .lab-kv, .stat-grid { break-inside: avoid; }
+  .lab-kv div { background: none; border: 1px solid #999; }
   .lab-kv dd { font-size: 14pt; }
 
   .lab-scroll, .lab-formula, .lab-figure, .lab-figure.wide { overflow: visible !important; }
@@ -258,7 +264,13 @@
   .lab-table tr { break-inside: avoid; }
   .lab-table .is-alloc .amt, .lab-table .is-pick { background: none; color: #000; outline: 1.5px solid #000; outline-offset: -1px; }
   .lab-formula { background: none; border-left-width: 3px; padding: 2mm 4mm; }
-  .lab-formula p, .lab-where { break-inside: avoid; }
+  .lab-formula, .lab-where { break-inside: avoid; }
+  .lab-formula:has(+ .lab-where) { break-after: avoid; }
+  .lab-where-h { break-after: avoid; }
+  .lab-scroll:has(+ .lab-formula), .lab-scroll:has(+ .lab-where) { break-after: avoid; }
+  .lab-where dl { display: table; border-collapse: collapse; }
+  .lab-where dl > div { display: table-row; }
+  .lab-where dt, .lab-where dd { display: table-cell; padding: .5mm 4mm .5mm 0; vertical-align: top; }
   .lab-where dd { color: #333; }
 
   /* Worked steps print open, as plain sections */
