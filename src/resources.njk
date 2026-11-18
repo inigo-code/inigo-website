@@ -13,6 +13,23 @@ pageScript: /assets/list-filter.js
     <span class="head-motif">{% include "motifs/notes.svg" %}</span>
   </header>
 
+  {%- set mh = site.mentorHeart %}
+  <section class="heart-band mh-band" aria-labelledby="mh-title">
+    <div class="heart-intro">
+      <img class="heart-logo mh-logo" src="{{ mh.icon }}" alt="" width="72" height="72">
+      <p class="kicker">For B.B.A. students</p>
+      <h2 id="mh-title">{{ mh.name }}</h2>
+      <p class="heart-line">{{ mh.line }}</p>
+      <p>{{ mh.text }}</p>
+      <p class="actions"><a class="button" href="{{ mh.url }}" rel="noopener">Open {{ mh.short }} ↗</a></p>
+    </div>
+    <ol class="mh-steps">
+      <li><span class="ha-name">On an iPhone</span><span class="ha-tag">Open {{ mh.short }} in Safari, tap Share, then Add to Home Screen. Open it from there and sign in.</span></li>
+      <li><span class="ha-name">On Android</span><span class="ha-tag">Open {{ mh.short }} and tap Download the app, for class reminders and notifications.</span></li>
+      <li><span class="ha-name">New here?</span><span class="ha-tag">Tap Register and use your D.No. If it says your number isn't on the list, tell your class's professor.</span></li>
+    </ol>
+  </section>
+
   <section class="notes-section" aria-labelledby="notes-title">
     <div class="section-head">
       <h2 id="notes-title">Study notes</h2>

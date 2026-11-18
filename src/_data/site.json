@@ -132,6 +132,14 @@
   "formKey": "e93033ec23190c41b3dc78908accf9e2",
   "formEndpoint": "https://script.google.com/macros/s/AKfycbwfpmnEVhhz5BN1elhbPfnErhZvXo6H9sA_TkFAlFRkN9eUsEAn-sjWHl6yFjDiIUo_/exec",
   "indexNowKey": "0228bd446af3b8e28e49da1ae24e3274",
+  "mentorHeart": {
+    "name": "Mentor Heart",
+    "url": "https://mh.inigo.co.in",
+    "short": "mh.inigo.co.in",
+    "icon": "/assets/heart-apps/mentor-heart.png",
+    "line": "Your department, in one place",
+    "text": "The B.B.A. department's app at St. Joseph's: today's classes and day order, the timetable and calendar, your mentor, events, leave, goals and a calm space. Sign in with your D.No."
+  },
   "heartApps": {
     "name": "Heart Apps",
     "url": "https://heartapps.github.io/",
