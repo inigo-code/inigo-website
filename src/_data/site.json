@@ -137,6 +137,7 @@
     "url": "https://mh.inigo.co.in",
     "short": "mh.inigo.co.in",
     "icon": "/assets/heart-apps/mentor-heart.png",
+    "site": "https://heartapps.github.io/mentor-heart/",
     "line": "Your department, in one place",
     "text": "The B.B.A. department's app at St. Joseph's: today's classes and day order, the timetable and calendar, your mentor, events, leave, goals and a calm space. Sign in with your D.No."
   },
@@ -145,7 +146,7 @@
     "url": "https://heartapps.github.io/",
     "logo": "/assets/heart-apps/heart-apps.svg",
     "line": "Free apps, made with heart",
-    "text": "Outside the classroom I make free apps for Android and Windows under the name Heart Apps. No ads, nothing to buy, and your data stays on your own device. I build the apps I want on my own phone and computer.",
+    "text": "Outside the classroom I make free apps for Android, iPhone and Windows under the name Heart Apps, Mentor Heart for my own department among them. No ads, nothing to buy, and no tracking. I build the apps I want on my own phone and computer.",
     "apps": [
       {
         "name": "Prompt Heart",
@@ -167,6 +168,13 @@
         "tagline": "A private journal with Thiruvalluvar",
         "icon": "/assets/heart-apps/kural-heart-144.png",
         "url": "https://heartapps.github.io/kural-heart/"
+      },
+      {
+        "name": "Mentor Heart",
+        "platform": "Android, iPhone",
+        "tagline": "Your department's day, timetable and mentoring",
+        "icon": "/assets/heart-apps/mentor-heart.png",
+        "url": "https://heartapps.github.io/mentor-heart/"
       },
       {
         "name": "Frame Heart",
